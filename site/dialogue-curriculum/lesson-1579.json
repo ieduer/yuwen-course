@@ -2182,7 +2182,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：一年。語境義：庄稼成熟一次，引申为一年。古语中常以庄稼一熟为一年。",
+      "rule": "沿用原題準據：一年。語境義：庄稼成熟一次，引申为一年。稔，本指谷物成熟，也可用来计年；「一稔」指庄稼成熟一次，引申为一年。本题取其计年义，故选B。",
       "sourcePassages": [
         "lesson-1579:p1"
       ],
@@ -2494,10 +2494,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1579:vocab:lesson-1579:v03",
         "canonicalUnitId": "yw:lesson-1579:vocabulary:lesson-1579:v03",
-        "resourceVersion": "sha256:121578136811d9846b1f831502197075dbf09f31d0936a2ebb4b65eff1ffddf0",
+        "resourceVersion": "sha256:b11d4b712a4adc3f10257f29bfdb8bba41dd6118a496df66c5ed4b1bcad6124d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2512,10 +2512,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1579:vocab:lesson-1579:v04",
         "canonicalUnitId": "yw:lesson-1579:vocabulary:lesson-1579:v04",
-        "resourceVersion": "sha256:529d8c7a17cb53bf12649a8fe261e5398dfc8bf798ea5f1434a3121298d51d98",
+        "resourceVersion": "sha256:9c96f66491cd0bf2fa683f2c5a50d72875fb1325553f1244053ae76a923ab539",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2832,12 +2832,12 @@
       "word": "稔",
       "sourceSentence": "犹望一稔,当敛裳宵逝",
       "meaning": "庄稼成熟一次，引申为一年",
-      "explanation": "古语中常以庄稼一熟为一年。",
+      "explanation": "稔，本指谷物成熟，也可用来计年；「一稔」指庄稼成熟一次，引申为一年。本题取其计年义，故选B。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「犹望一稔，当敛裳宵逝」中「稔」的意思是",
       "options": [
-        "成熟",
+        "熟悉",
         "一年",
         "收获",
         "庄稼"
@@ -2850,7 +2850,7 @@
       "version": "vocab-set-52fc76fe44a4a189",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「犹望一稔,当敛裳宵逝」\n「犹望一稔，当敛裳宵逝」中「稔」的意思是\nA. 成熟\nB. 一年\nC. 收获\nD. 庄稼\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「犹望一稔,当敛裳宵逝」\n「犹望一稔，当敛裳宵逝」中「稔」的意思是\nA. 熟悉\nB. 一年\nC. 收获\nD. 庄稼\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「犹望一稔,当敛裳宵逝」中「稔」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2867,7 +2867,7 @@
         "哪里",
         "为什么",
         "什么",
-        "怎么"
+        "何时"
       ],
       "answerIndex": 1,
       "sourceAnswer": "为什么",
@@ -2877,7 +2877,7 @@
       "version": "vocab-set-52fc76fe44a4a189",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「既自以心为形役,奚惆怅而独悲」\n「奚惆怅而独悲」中「奚」的意思是\nA. 哪里\nB. 为什么\nC. 什么\nD. 怎么\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「既自以心为形役,奚惆怅而独悲」\n「奚惆怅而独悲」中「奚」的意思是\nA. 哪里\nB. 为什么\nC. 什么\nD. 何时\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「既自以心为形役,奚惆怅而独悲」中「奚」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -3217,19 +3217,19 @@
       {
         "resourceKey": "effect:lesson-1579:vocab:lesson-1579:v03",
         "canonicalUnitId": "yw:lesson-1579:vocabulary:lesson-1579:v03",
-        "resourceVersion": "sha256:121578136811d9846b1f831502197075dbf09f31d0936a2ebb4b65eff1ffddf0",
+        "resourceVersion": "sha256:b11d4b712a4adc3f10257f29bfdb8bba41dd6118a496df66c5ed4b1bcad6124d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1579:vocab:lesson-1579:v04",
         "canonicalUnitId": "yw:lesson-1579:vocabulary:lesson-1579:v04",
-        "resourceVersion": "sha256:529d8c7a17cb53bf12649a8fe261e5398dfc8bf798ea5f1434a3121298d51d98",
+        "resourceVersion": "sha256:9c96f66491cd0bf2fa683f2c5a50d72875fb1325553f1244053ae76a923ab539",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3847,7 +3847,7 @@
       },
       {
         "requirementId": "effect:lesson-1579:vocab:lesson-1579:v03",
-        "sourceVersion": "sha256:121578136811d9846b1f831502197075dbf09f31d0936a2ebb4b65eff1ffddf0",
+        "sourceVersion": "sha256:b11d4b712a4adc3f10257f29bfdb8bba41dd6118a496df66c5ed4b1bcad6124d",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3857,7 +3857,7 @@
       },
       {
         "requirementId": "effect:lesson-1579:vocab:lesson-1579:v04",
-        "sourceVersion": "sha256:529d8c7a17cb53bf12649a8fe261e5398dfc8bf798ea5f1434a3121298d51d98",
+        "sourceVersion": "sha256:9c96f66491cd0bf2fa683f2c5a50d72875fb1325553f1244053ae76a923ab539",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4584,7 +4584,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-92e01fc2446a7389d633",
+  "curriculumVersion": "yw-dialogue-c6d7586eb0e8541414d6",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

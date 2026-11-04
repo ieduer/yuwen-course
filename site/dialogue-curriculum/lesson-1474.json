@@ -1367,7 +1367,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：约束自我，使言行符合礼。語境義：约束自我，使言行归复于先王之礼。克己，即约束自我，使言行归复于先王之礼。",
+      "rule": "沿用原題準據：约束自己。語境義：约束自己。克己，即约束自己；复礼，即使言行回归于礼。「克己复礼」意为约束自己，使言行符合礼。",
       "sourcePassages": [
         "lesson-1474:p15"
       ],
@@ -1387,7 +1387,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：回虽不敏，请事斯语矣。語境義：聪明、灵敏。A项指勤勉，其他项指聪明、反应快。",
+      "rule": "沿用原題準據：敏于事而慎于言。語境義：聪明、灵敏。A项的「敏」指勤勉；B、C两项指聪明，D项指灵敏、反应快。后三项均属聪敏、灵敏一类，与A项的勤勉义不同，故选A。",
       "sourcePassages": [
         "lesson-1474:p5",
         "lesson-1474:p15"
@@ -1651,10 +1651,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1474:vocab:lesson-1474:v07",
         "canonicalUnitId": "yw:lesson-1474:vocabulary:lesson-1474:v07",
-        "resourceVersion": "sha256:98622a049221d5998ddeb7bd5225446e921197639f4ef1e13d8ee9639caf552b",
+        "resourceVersion": "sha256:a23c31a0b9f4659b9497de209e716b0a7844f600bb19b1518e858e8fa358bf9c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1669,10 +1669,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1474:vocab:lesson-1474:v08",
         "canonicalUnitId": "yw:lesson-1474:vocabulary:lesson-1474:v08",
-        "resourceVersion": "sha256:1b66ea1355ae16d8f2f023327423731219c556b6bd1811ec2452c7ca359da0f8",
+        "resourceVersion": "sha256:764c5eba97d5816ed58faa6e92f26eccf2d4ab24c1be537b43787a399388e6be",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2106,26 +2106,26 @@
       "id": "lesson-1474:v07",
       "word": "克己",
       "sourceSentence": "克己复礼为仁。一日克己复礼,天下归仁焉",
-      "meaning": "约束自我，使言行归复于先王之礼",
-      "explanation": "克己，即约束自我，使言行归复于先王之礼。",
+      "meaning": "约束自己",
+      "explanation": "克己，即约束自己；复礼，即使言行回归于礼。「克己复礼」意为约束自己，使言行符合礼。",
       "type": "interpretation",
       "difficulty": 2,
       "question": "「克己复礼」中的「克己」最准确的含义是",
       "options": [
-        "克制自己的欲望",
-        "约束自我，使言行符合礼",
+        "克制别人的欲望",
+        "约束自己",
         "克服自己的缺点",
         "赢得自己"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "约束自我，使言行符合礼",
+      "sourceAnswer": "约束自己",
       "sourceRefs": [
         "《论语注疏》"
       ],
       "version": "vocab-set-f0078205afe7428d",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「克己复礼为仁。一日克己复礼,天下归仁焉」\n「克己复礼」中的「克己」最准确的含义是\nA. 克制自己的欲望\nB. 约束自我，使言行符合礼\nC. 克服自己的缺点\nD. 赢得自己\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「克己复礼为仁。一日克己复礼,天下归仁焉」\n「克己复礼」中的「克己」最准确的含义是\nA. 克制别人的欲望\nB. 约束自己\nC. 克服自己的缺点\nD. 赢得自己\n請選出答案，並用自己的話說明判斷依據。",
         "「克己复礼为仁。一日克己复礼,天下归仁焉」中的「克己」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -2134,7 +2134,7 @@
       "word": "敏",
       "sourceSentence": "回虽不敏,请事斯语矣",
       "meaning": "聪明、灵敏",
-      "explanation": "A项指勤勉，其他项指聪明、反应快。",
+      "explanation": "A项的「敏」指勤勉；B、C两项指聪明，D项指灵敏、反应快。后三项均属聪敏、灵敏一类，与A项的勤勉义不同，故选A。",
       "type": "discrimination",
       "difficulty": 2,
       "question": "下列句中「敏」字含义与其他三项不同的是",
@@ -2144,8 +2144,8 @@
         "敏而好学",
         "反应敏捷"
       ],
-      "answerIndex": 1,
-      "sourceAnswer": "回虽不敏，请事斯语矣",
+      "answerIndex": 0,
+      "sourceAnswer": "敏于事而慎于言",
       "sourceRefs": [
         "《汉语大词典》"
       ],
@@ -2393,19 +2393,19 @@
       {
         "resourceKey": "effect:lesson-1474:vocab:lesson-1474:v07",
         "canonicalUnitId": "yw:lesson-1474:vocabulary:lesson-1474:v07",
-        "resourceVersion": "sha256:98622a049221d5998ddeb7bd5225446e921197639f4ef1e13d8ee9639caf552b",
+        "resourceVersion": "sha256:a23c31a0b9f4659b9497de209e716b0a7844f600bb19b1518e858e8fa358bf9c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1474:vocab:lesson-1474:v08",
         "canonicalUnitId": "yw:lesson-1474:vocabulary:lesson-1474:v08",
-        "resourceVersion": "sha256:1b66ea1355ae16d8f2f023327423731219c556b6bd1811ec2452c7ca359da0f8",
+        "resourceVersion": "sha256:764c5eba97d5816ed58faa6e92f26eccf2d4ab24c1be537b43787a399388e6be",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3237,7 +3237,7 @@
       },
       {
         "requirementId": "effect:lesson-1474:vocab:lesson-1474:v07",
-        "sourceVersion": "sha256:98622a049221d5998ddeb7bd5225446e921197639f4ef1e13d8ee9639caf552b",
+        "sourceVersion": "sha256:a23c31a0b9f4659b9497de209e716b0a7844f600bb19b1518e858e8fa358bf9c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3247,7 +3247,7 @@
       },
       {
         "requirementId": "effect:lesson-1474:vocab:lesson-1474:v08",
-        "sourceVersion": "sha256:1b66ea1355ae16d8f2f023327423731219c556b6bd1811ec2452c7ca359da0f8",
+        "sourceVersion": "sha256:764c5eba97d5816ed58faa6e92f26eccf2d4ab24c1be537b43787a399388e6be",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4158,7 +4158,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-cda6914d04a44c8f90f9",
+  "curriculumVersion": "yw-dialogue-99d3b4a1d7b36e7b5590",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

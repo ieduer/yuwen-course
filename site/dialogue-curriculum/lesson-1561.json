@@ -625,10 +625,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1561:vocab:lesson-1561:v11",
         "canonicalUnitId": "yw:lesson-1561:vocabulary:lesson-1561:v11",
-        "resourceVersion": "sha256:4c17f97aaacf7a062d38f834ce2950830e1841056e80ecaf205c5bb2a8e85191",
+        "resourceVersion": "sha256:3e50c0a81b343c217edf6fd9fbbfe58ac9f7ebdf428a510a016e9d9e8a41f5be",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -852,7 +852,7 @@
       "difficulty": 2,
       "question": "「羌管弄晴,菱歌泛夜」中「泛」的意思是",
       "options": [
-        "漂浮",
+        "乘船游览",
         "泛滥",
         "飘荡、回荡",
         "泛指"
@@ -863,7 +863,7 @@
       "version": "vocab-set-a0ad4ccd9d932bbc",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「羌管弄晴,菱歌泛夜,嬉嬉钓叟莲娃」\n「羌管弄晴,菱歌泛夜」中「泛」的意思是\nA. 漂浮\nB. 泛滥\nC. 飘荡、回荡\nD. 泛指\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「羌管弄晴,菱歌泛夜,嬉嬉钓叟莲娃」\n「羌管弄晴,菱歌泛夜」中「泛」的意思是\nA. 乘船游览\nB. 泛滥\nC. 飘荡、回荡\nD. 泛指\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「羌管弄晴,菱歌泛夜,嬉嬉钓叟莲娃」中「泛」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
@@ -1028,10 +1028,10 @@
       {
         "resourceKey": "effect:lesson-1561:vocab:lesson-1561:v11",
         "canonicalUnitId": "yw:lesson-1561:vocabulary:lesson-1561:v11",
-        "resourceVersion": "sha256:4c17f97aaacf7a062d38f834ce2950830e1841056e80ecaf205c5bb2a8e85191",
+        "resourceVersion": "sha256:3e50c0a81b343c217edf6fd9fbbfe58ac9f7ebdf428a510a016e9d9e8a41f5be",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1315,7 +1315,7 @@
       },
       {
         "requirementId": "effect:lesson-1561:vocab:lesson-1561:v11",
-        "sourceVersion": "sha256:4c17f97aaacf7a062d38f834ce2950830e1841056e80ecaf205c5bb2a8e85191",
+        "sourceVersion": "sha256:3e50c0a81b343c217edf6fd9fbbfe58ac9f7ebdf428a510a016e9d9e8a41f5be",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1812,7 +1812,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-562c65e5aebff923b927",
+  "curriculumVersion": "yw-dialogue-6b60a4b57ca9364fc3c7",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

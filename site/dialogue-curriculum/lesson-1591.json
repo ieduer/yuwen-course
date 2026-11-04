@@ -660,10 +660,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1591:vocab:lesson-1591:v11",
         "canonicalUnitId": "yw:lesson-1591:vocabulary:lesson-1591:v11",
-        "resourceVersion": "sha256:1587e179825981fc2383ac39586600f9f45be07096ff856b6e8873df56d7cf7e",
+        "resourceVersion": "sha256:697216d94517610b5e38b823afcafbd82173fb7746614fd8e9ef2313655777c4",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -867,7 +867,7 @@
       "difficulty": 1,
       "question": "「犹及清明可到家」中「犹」的意思是",
       "options": [
-        "依然",
+        "已经",
         "如同",
         "还，尚且",
         "尤其"
@@ -878,7 +878,7 @@
       "version": "vocab-set-948f3ce0bea32113",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「犹及清明可到家」\n「犹及清明可到家」中「犹」的意思是\nA. 依然\nB. 如同\nC. 还，尚且\nD. 尤其\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「犹及清明可到家」\n「犹及清明可到家」中「犹」的意思是\nA. 已经\nB. 如同\nC. 还，尚且\nD. 尤其\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「犹及清明可到家」的句意，解釋「犹」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     }
@@ -1043,10 +1043,10 @@
       {
         "resourceKey": "effect:lesson-1591:vocab:lesson-1591:v11",
         "canonicalUnitId": "yw:lesson-1591:vocabulary:lesson-1591:v11",
-        "resourceVersion": "sha256:1587e179825981fc2383ac39586600f9f45be07096ff856b6e8873df56d7cf7e",
+        "resourceVersion": "sha256:697216d94517610b5e38b823afcafbd82173fb7746614fd8e9ef2313655777c4",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1330,7 +1330,7 @@
       },
       {
         "requirementId": "effect:lesson-1591:vocab:lesson-1591:v11",
-        "sourceVersion": "sha256:1587e179825981fc2383ac39586600f9f45be07096ff856b6e8873df56d7cf7e",
+        "sourceVersion": "sha256:697216d94517610b5e38b823afcafbd82173fb7746614fd8e9ef2313655777c4",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1736,7 +1736,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-e948e771eeaa1cc5778f",
+  "curriculumVersion": "yw-dialogue-97f959cf20f9a9bf9356",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

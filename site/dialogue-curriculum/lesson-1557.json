@@ -1557,7 +1557,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：何方圜之能周兮。語境義：不等待我。「不吾与」为否定句中代词宾语前置，「何方圜之能周」同为疑问句中代词宾语前置。",
+      "rule": "沿用原題準據：不吾知其亦已兮。語境義：不等待我。「不吾与」即「不与吾」，意为不等待我；「不吾知」即「不知吾」，意为不了解我。两者均为否定句中代词宾语前置，故选A。",
       "sourcePassages": [
         "lesson-1557:p10"
       ],
@@ -1617,7 +1617,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：伏清白以死直：死亡。語境義：违背。「伏清白以死直」中的「死」是使动用法，意为「为……而死」或「献身于……」。",
+      "rule": "沿用原題準據：伏清白以死直：死亡。語境義：违背。「伏清白以死直」中的「死」是为动用法，意为「为……而死」；「死直」即为正道而死，不能仅释为一般的「死亡」，故选D。",
       "sourcePassages": [
         "lesson-1557:p12"
       ],
@@ -1806,10 +1806,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1557:vocab:lesson-1557:v03",
         "canonicalUnitId": "yw:lesson-1557:vocabulary:lesson-1557:v03",
-        "resourceVersion": "sha256:224e8a7ed7ef1e068944ff5f8ba1a90a3bc6bc9bd23b309149b1a31b951dd53f",
+        "resourceVersion": "sha256:ff31803e7f67b4efc500ad9cb7395d4e5e7b333658f05727c4d7bceb56c91898",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1860,10 +1860,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1557:vocab:lesson-1557:v06",
         "canonicalUnitId": "yw:lesson-1557:vocabulary:lesson-1557:v06",
-        "resourceVersion": "sha256:85503a25ebc166ad89edb172dac6d36a811e7cabf98e6e73bf32f56ff04188f8",
+        "resourceVersion": "sha256:17a663469e24da2d094ce4542ea70215a257fcefdfa640a59f150c4827ff5b47",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1914,10 +1914,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1557:vocab:lesson-1557:v09",
         "canonicalUnitId": "yw:lesson-1557:vocabulary:lesson-1557:v09",
-        "resourceVersion": "sha256:1569927f27836ec920c8c8f7d9b28904fbf92563aee3dfd42c4316f480a434fe",
+        "resourceVersion": "sha256:f70940db5895e12e0546b2740be35d5629af63ceafee930672790c92516404b8",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1993,25 +1993,25 @@
       "word": "不吾与",
       "sourceSentence": "恐年岁之不吾与。",
       "meaning": "不等待我",
-      "explanation": "「不吾与」为否定句中代词宾语前置，「何方圜之能周」同为疑问句中代词宾语前置。",
+      "explanation": "「不吾与」即「不与吾」，意为不等待我；「不吾知」即「不知吾」，意为不了解我。两者均为否定句中代词宾语前置，故选A。",
       "type": "usage",
       "difficulty": 2,
       "question": "「恐年岁之不吾与」的句式特点与下列哪项相同？",
       "options": [
-        "何方圜之能周兮",
+        "不吾知其亦已兮",
         "背绳墨以追曲兮",
         "固前圣之所厚",
         "民生各有所乐兮"
       ],
       "answerIndex": 0,
-      "sourceAnswer": "何方圜之能周兮",
+      "sourceAnswer": "不吾知其亦已兮",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-a025ed08e601fd38",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「恐年岁之不吾与。」\n「恐年岁之不吾与」的句式特点与下列哪项相同？\nA. 何方圜之能周兮\nB. 背绳墨以追曲兮\nC. 固前圣之所厚\nD. 民生各有所乐兮\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「恐年岁之不吾与。」\n「恐年岁之不吾与」的句式特点与下列哪项相同？\nA. 不吾知其亦已兮\nB. 背绳墨以追曲兮\nC. 固前圣之所厚\nD. 民生各有所乐兮\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「恐年岁之不吾与。」的句意，解釋「不吾与」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -2074,7 +2074,7 @@
       "word": "偭",
       "sourceSentence": "固时俗之工巧兮,偭规矩而改错。",
       "meaning": "违背",
-      "explanation": "「伏清白以死直」中的「死」是使动用法，意为「为……而死」或「献身于……」。",
+      "explanation": "「伏清白以死直」中的「死」是为动用法，意为「为……而死」；「死直」即为正道而死，不能仅释为一般的「死亡」，故选D。",
       "type": "discrimination",
       "difficulty": 3,
       "question": "下列句中加点词解释不正确的一项是",
@@ -2162,7 +2162,7 @@
       "options": [
         "难道我的心可以被惩罚吗？",
         "难道我的心会因为受挫而戒止（爱美好、从正道）吗？",
-        "难道我的心是能够被改变的吗？",
+        "难道我能使别人改变心意吗？",
         "难道我的心会因为受到处罚而感到羞耻吗？"
       ],
       "answerIndex": 1,
@@ -2173,7 +2173,7 @@
       "version": "vocab-set-a025ed08e601fd38",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「岂余心之可惩?」\n「岂余心之可惩？」的意思是\nA. 难道我的心可以被惩罚吗？\nB. 难道我的心会因为受挫而戒止（爱美好、从正道）吗？\nC. 难道我的心是能够被改变的吗？\nD. 难道我的心会因为受到处罚而感到羞耻吗？\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「岂余心之可惩?」\n「岂余心之可惩？」的意思是\nA. 难道我的心可以被惩罚吗？\nB. 难道我的心会因为受挫而戒止（爱美好、从正道）吗？\nC. 难道我能使别人改变心意吗？\nD. 难道我的心会因为受到处罚而感到羞耻吗？\n請選出答案，並用自己的話說明判斷依據。",
         "「岂余心之可惩?」中的「惩」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     }
@@ -2293,10 +2293,10 @@
       {
         "resourceKey": "effect:lesson-1557:vocab:lesson-1557:v03",
         "canonicalUnitId": "yw:lesson-1557:vocabulary:lesson-1557:v03",
-        "resourceVersion": "sha256:224e8a7ed7ef1e068944ff5f8ba1a90a3bc6bc9bd23b309149b1a31b951dd53f",
+        "resourceVersion": "sha256:ff31803e7f67b4efc500ad9cb7395d4e5e7b333658f05727c4d7bceb56c91898",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2320,10 +2320,10 @@
       {
         "resourceKey": "effect:lesson-1557:vocab:lesson-1557:v06",
         "canonicalUnitId": "yw:lesson-1557:vocabulary:lesson-1557:v06",
-        "resourceVersion": "sha256:85503a25ebc166ad89edb172dac6d36a811e7cabf98e6e73bf32f56ff04188f8",
+        "resourceVersion": "sha256:17a663469e24da2d094ce4542ea70215a257fcefdfa640a59f150c4827ff5b47",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2347,10 +2347,10 @@
       {
         "resourceKey": "effect:lesson-1557:vocab:lesson-1557:v09",
         "canonicalUnitId": "yw:lesson-1557:vocabulary:lesson-1557:v09",
-        "resourceVersion": "sha256:1569927f27836ec920c8c8f7d9b28904fbf92563aee3dfd42c4316f480a434fe",
+        "resourceVersion": "sha256:f70940db5895e12e0546b2740be35d5629af63ceafee930672790c92516404b8",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2597,7 +2597,7 @@
       },
       {
         "requirementId": "effect:lesson-1557:vocab:lesson-1557:v03",
-        "sourceVersion": "sha256:224e8a7ed7ef1e068944ff5f8ba1a90a3bc6bc9bd23b309149b1a31b951dd53f",
+        "sourceVersion": "sha256:ff31803e7f67b4efc500ad9cb7395d4e5e7b333658f05727c4d7bceb56c91898",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2627,7 +2627,7 @@
       },
       {
         "requirementId": "effect:lesson-1557:vocab:lesson-1557:v06",
-        "sourceVersion": "sha256:85503a25ebc166ad89edb172dac6d36a811e7cabf98e6e73bf32f56ff04188f8",
+        "sourceVersion": "sha256:17a663469e24da2d094ce4542ea70215a257fcefdfa640a59f150c4827ff5b47",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2657,7 +2657,7 @@
       },
       {
         "requirementId": "effect:lesson-1557:vocab:lesson-1557:v09",
-        "sourceVersion": "sha256:1569927f27836ec920c8c8f7d9b28904fbf92563aee3dfd42c4316f480a434fe",
+        "sourceVersion": "sha256:f70940db5895e12e0546b2740be35d5629af63ceafee930672790c92516404b8",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3090,7 +3090,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-5a61af7cea27a9c0611b",
+  "curriculumVersion": "yw-dialogue-f89a79ac123c44f8f205",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

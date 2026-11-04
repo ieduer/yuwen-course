@@ -1792,10 +1792,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1577:vocab:lesson-1577:v04",
         "canonicalUnitId": "yw:lesson-1577:vocabulary:lesson-1577:v04",
-        "resourceVersion": "sha256:8d4abd470854c67f18645dd344f2ae2b201e8714a27c1cdaef7f23e6adb06d48",
+        "resourceVersion": "sha256:b37db29ad82c24854fec0471b1375f63dc6b9f6a0f8a19d18aebd0116568bc95",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1900,10 +1900,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1577:vocab:lesson-1577:v10",
         "canonicalUnitId": "yw:lesson-1577:vocabulary:lesson-1577:v10",
-        "resourceVersion": "sha256:6d28c55407d1e5a4d246f055f8a421761ef0744f14d811ef0e6274c277b16edb",
+        "resourceVersion": "sha256:f852570057286a37e2916b99a96ed22f2723af8bcbc6a04e61dcd6941bea0c75",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1918,10 +1918,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1577:vocab:lesson-1577:v11",
         "canonicalUnitId": "yw:lesson-1577:vocabulary:lesson-1577:v11",
-        "resourceVersion": "sha256:c856fe4f8f434ce0ef6551bdcef8fd1078e0f3f5efebc32238691743ee95a658",
+        "resourceVersion": "sha256:a8ef5fcebab6377928e1bf3ee1918e1bbab3e2e08000b6fbf9855d41c13d6a29",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2153,7 +2153,7 @@
       "question": "“冥然兀坐”中“冥然”的意思是",
       "options": [
         "昏暗的样子",
-        "深沉的样子",
+        "熟睡的样子",
         "静静的样子",
         "专注的样子"
       ],
@@ -2165,7 +2165,7 @@
       "version": "vocab-set-49f064856720a72d",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「冥然兀坐」\n“冥然兀坐”中“冥然”的意思是\nA. 昏暗的样子\nB. 深沉的样子\nC. 静静的样子\nD. 专注的样子\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「冥然兀坐」\n“冥然兀坐”中“冥然”的意思是\nA. 昏暗的样子\nB. 熟睡的样子\nC. 静静的样子\nD. 专注的样子\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「冥然兀坐」中「冥然」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2314,7 +2314,7 @@
       "difficulty": 3,
       "question": "“吾家读书久不效”中“不效”是指",
       "options": [
-        "没有效果",
+        "不肯用功",
         "不听从教导",
         "科举没有成就",
         "不模仿古人"
@@ -2327,7 +2327,7 @@
       "version": "vocab-set-49f064856720a72d",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「吾家读书久不效」\n“吾家读书久不效”中“不效”是指\nA. 没有效果\nB. 不听从教导\nC. 科举没有成就\nD. 不模仿古人\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「吾家读书久不效」\n“吾家读书久不效”中“不效”是指\nA. 不肯用功\nB. 不听从教导\nC. 科举没有成就\nD. 不模仿古人\n請選出答案，並用自己的話說明判斷依據。",
         "「吾家读书久不效」中的「不效」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -2344,7 +2344,7 @@
         "危险",
         "几乎",
         "大概",
-        "大概率"
+        "必定"
       ],
       "answerIndex": 2,
       "sourceAnswer": "大概",
@@ -2354,7 +2354,7 @@
       "version": "vocab-set-49f064856720a72d",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「得不焚,殆有神护者」\n“殆有神护者”中“殆”的意思是\nA. 危险\nB. 几乎\nC. 大概\nD. 大概率\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「得不焚,殆有神护者」\n“殆有神护者”中“殆”的意思是\nA. 危险\nB. 几乎\nC. 大概\nD. 必定\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「得不焚,殆有神护者」中「殆」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2541,10 +2541,10 @@
       {
         "resourceKey": "effect:lesson-1577:vocab:lesson-1577:v04",
         "canonicalUnitId": "yw:lesson-1577:vocabulary:lesson-1577:v04",
-        "resourceVersion": "sha256:8d4abd470854c67f18645dd344f2ae2b201e8714a27c1cdaef7f23e6adb06d48",
+        "resourceVersion": "sha256:b37db29ad82c24854fec0471b1375f63dc6b9f6a0f8a19d18aebd0116568bc95",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2595,19 +2595,19 @@
       {
         "resourceKey": "effect:lesson-1577:vocab:lesson-1577:v10",
         "canonicalUnitId": "yw:lesson-1577:vocabulary:lesson-1577:v10",
-        "resourceVersion": "sha256:6d28c55407d1e5a4d246f055f8a421761ef0744f14d811ef0e6274c277b16edb",
+        "resourceVersion": "sha256:f852570057286a37e2916b99a96ed22f2723af8bcbc6a04e61dcd6941bea0c75",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1577:vocab:lesson-1577:v11",
         "canonicalUnitId": "yw:lesson-1577:vocabulary:lesson-1577:v11",
-        "resourceVersion": "sha256:c856fe4f8f434ce0ef6551bdcef8fd1078e0f3f5efebc32238691743ee95a658",
+        "resourceVersion": "sha256:a8ef5fcebab6377928e1bf3ee1918e1bbab3e2e08000b6fbf9855d41c13d6a29",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3160,7 +3160,7 @@
       },
       {
         "requirementId": "effect:lesson-1577:vocab:lesson-1577:v04",
-        "sourceVersion": "sha256:8d4abd470854c67f18645dd344f2ae2b201e8714a27c1cdaef7f23e6adb06d48",
+        "sourceVersion": "sha256:b37db29ad82c24854fec0471b1375f63dc6b9f6a0f8a19d18aebd0116568bc95",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3220,7 +3220,7 @@
       },
       {
         "requirementId": "effect:lesson-1577:vocab:lesson-1577:v10",
-        "sourceVersion": "sha256:6d28c55407d1e5a4d246f055f8a421761ef0744f14d811ef0e6274c277b16edb",
+        "sourceVersion": "sha256:f852570057286a37e2916b99a96ed22f2723af8bcbc6a04e61dcd6941bea0c75",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3230,7 +3230,7 @@
       },
       {
         "requirementId": "effect:lesson-1577:vocab:lesson-1577:v11",
-        "sourceVersion": "sha256:c856fe4f8f434ce0ef6551bdcef8fd1078e0f3f5efebc32238691743ee95a658",
+        "sourceVersion": "sha256:a8ef5fcebab6377928e1bf3ee1918e1bbab3e2e08000b6fbf9855d41c13d6a29",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3863,7 +3863,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-f2ce9640fb9984118391",
+  "curriculumVersion": "yw-dialogue-73ad743612ffc571d982",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

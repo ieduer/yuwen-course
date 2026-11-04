@@ -624,7 +624,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：回头看。語境義：回头看。「相顾」意为互相看着、对视，故选B。",
+      "rule": "沿用原題準據：看、注视。語境義：看、注视。「顾」在此指看；「相顾」即彼此相视，故选B。",
       "sourcePassages": [
         "lesson-1500:p5"
       ],
@@ -829,10 +829,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v09",
         "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v09",
-        "resourceVersion": "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc",
+        "resourceVersion": "sha256:f312ec929dec16995fb4b32d66f3e90ecad8444ef8676dc5d338c347c393ca6f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -847,10 +847,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v10",
         "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v10",
-        "resourceVersion": "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede",
+        "resourceVersion": "sha256:4dc574100d74c42892305e837853951000f2b9c90eb72d77deb5e7b8e7ce9672",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1036,7 +1036,7 @@
       "difficulty": 2,
       "question": "「纵使相逢应不识」中「应」字的意思是",
       "options": [
-        "应当",
+        "回应",
         "答应",
         "大概",
         "反应"
@@ -1047,7 +1047,7 @@
       "version": "vocab-set-a11ff7cb2cec4993",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「纵使相逢应不识」\n「纵使相逢应不识」中「应」字的意思是\nA. 应当\nB. 答应\nC. 大概\nD. 反应\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「纵使相逢应不识」\n「纵使相逢应不识」中「应」字的意思是\nA. 回应\nB. 答应\nC. 大概\nD. 反应\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「纵使相逢应不识」中「应」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1055,24 +1055,24 @@
       "id": "lesson-1500:v10",
       "word": "顾",
       "sourceSentence": "相顾无言,惟有泪千行",
-      "meaning": "回头看",
-      "explanation": "「相顾」意为互相看着、对视，故选B。",
+      "meaning": "看、注视",
+      "explanation": "「顾」在此指看；「相顾」即彼此相视，故选B。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「相顾无言，惟有泪千行」中「顾」的意思是",
       "options": [
         "照顾",
-        "回头看",
+        "看、注视",
         "顾虑",
         "拜访"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "回头看",
+      "sourceAnswer": "看、注视",
       "sourceRefs": [],
       "version": "vocab-set-a11ff7cb2cec4993",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「相顾无言,惟有泪千行」\n「相顾无言，惟有泪千行」中「顾」的意思是\nA. 照顾\nB. 回头看\nC. 顾虑\nD. 拜访\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「相顾无言,惟有泪千行」\n「相顾无言，惟有泪千行」中「顾」的意思是\nA. 照顾\nB. 看、注视\nC. 顾虑\nD. 拜访\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「相顾无言,惟有泪千行」中「顾」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1260,19 +1260,19 @@
       {
         "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v09",
         "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v09",
-        "resourceVersion": "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc",
+        "resourceVersion": "sha256:f312ec929dec16995fb4b32d66f3e90ecad8444ef8676dc5d338c347c393ca6f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v10",
         "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v10",
-        "resourceVersion": "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede",
+        "resourceVersion": "sha256:4dc574100d74c42892305e837853951000f2b9c90eb72d77deb5e7b8e7ce9672",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1544,7 +1544,7 @@
       },
       {
         "requirementId": "effect:lesson-1500:vocab:lesson-1500:v09",
-        "sourceVersion": "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc",
+        "sourceVersion": "sha256:f312ec929dec16995fb4b32d66f3e90ecad8444ef8676dc5d338c347c393ca6f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1554,7 +1554,7 @@
       },
       {
         "requirementId": "effect:lesson-1500:vocab:lesson-1500:v10",
-        "sourceVersion": "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede",
+        "sourceVersion": "sha256:4dc574100d74c42892305e837853951000f2b9c90eb72d77deb5e7b8e7ce9672",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2114,7 +2114,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-4d90bbb92cf082bab25d",
+  "curriculumVersion": "yw-dialogue-efce2f0f89b647abd4a7",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

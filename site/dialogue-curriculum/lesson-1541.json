@@ -901,10 +901,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1541:vocab:lesson-1541:v02",
         "canonicalUnitId": "yw:lesson-1541:vocabulary:lesson-1541:v02",
-        "resourceVersion": "sha256:8ade806e9c22fcaf1f014b78985b25f0ca6efb3fdbe15cd07c3785d6f678acb7",
+        "resourceVersion": "sha256:52496117ef98b465fb1d40f3ba9748a57a6f670110bd712a93d8c08333dc113c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1031,7 +1031,7 @@
         "使人感到舒服",
         "应当，应该",
         "像人一样",
-        "适合人的心意"
+        "使人感到寒冷"
       ],
       "answerIndex": 0,
       "sourceAnswer": "使人感到舒服",
@@ -1039,7 +1039,7 @@
       "version": "vocab-set-20fcf6fb14396e42",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「蓝天上送来宜人的和风」\n「蓝天上送来宜人的和风」中「宜人」的意思是\nA. 使人感到舒服\nB. 应当，应该\nC. 像人一样\nD. 适合人的心意\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「蓝天上送来宜人的和风」\n「蓝天上送来宜人的和风」中「宜人」的意思是\nA. 使人感到舒服\nB. 应当，应该\nC. 像人一样\nD. 使人感到寒冷\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「蓝天上送来宜人的和风」中「宜人」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1275,10 +1275,10 @@
       {
         "resourceKey": "effect:lesson-1541:vocab:lesson-1541:v02",
         "canonicalUnitId": "yw:lesson-1541:vocabulary:lesson-1541:v02",
-        "resourceVersion": "sha256:8ade806e9c22fcaf1f014b78985b25f0ca6efb3fdbe15cd07c3785d6f678acb7",
+        "resourceVersion": "sha256:52496117ef98b465fb1d40f3ba9748a57a6f670110bd712a93d8c08333dc113c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1534,7 +1534,7 @@
       },
       {
         "requirementId": "effect:lesson-1541:vocab:lesson-1541:v02",
-        "sourceVersion": "sha256:8ade806e9c22fcaf1f014b78985b25f0ca6efb3fdbe15cd07c3785d6f678acb7",
+        "sourceVersion": "sha256:52496117ef98b465fb1d40f3ba9748a57a6f670110bd712a93d8c08333dc113c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1865,7 +1865,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-9f1b885782302aed0168",
+  "curriculumVersion": "yw-dialogue-8ceffbebd02f56d7be35",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

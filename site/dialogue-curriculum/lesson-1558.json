@@ -3695,7 +3695,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：慈父见背。語境義：我。“见”用在动词前，表示对自己怎么样，此处指录用/收留我。",
+      "rule": "沿用原題準據：慈父见背。語境義：我。「见」用在动词前，表示对自己怎么样，此处指「我」；「见录」即记取我、记挂我。C项「慈父见背」中的「见」用法相同，「见背」指背离我而去，是父亲去世的委婉说法。",
       "sourcePassages": [
         "lesson-1558:p6"
       ],
@@ -3735,7 +3735,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：十七为君妇，适得府君书。語境義：出嫁。AC项中“适”指出嫁，B、D项中“适”指刚才。",
+      "rule": "沿用原題準據：十七为君妇，适得府君书。語境義：出嫁。A、C、D项的「适」均指出嫁；B项的「适」指刚才，故选B。",
       "sourcePassages": [
         "lesson-1558:p6"
       ],
@@ -3918,10 +3918,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v06",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v06",
-        "resourceVersion": "sha256:c2ce3eadc60ef12bad0ad328a488d6c1bb8f7ee81755487b2c1c8818fcb124aa",
+        "resourceVersion": "sha256:ecac5fe2c9b1220a93a5abb497fb1c97466137019587b92a093b05838fcf9e0f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -3936,10 +3936,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v07",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v07",
-        "resourceVersion": "sha256:9b7a7fd4e5d4c04343ce3399417411de87418ac92f9aa3a22ae3e95e66066a5f",
+        "resourceVersion": "sha256:a6ce4488404ac592354a7223b951e591fe227a2ed7c33c244e28cb75f5bbc88a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -3972,10 +3972,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v09",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v09",
-        "resourceVersion": "sha256:d9a5c70124512c3b436ab1fd6b35e184b708d9798b13c237ef3e23bf8e475517",
+        "resourceVersion": "sha256:10afa4b3788452c254c48049b47de4c5d3bb9eb02cd21737c7e925d865b391b5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -4008,10 +4008,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v11",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v11",
-        "resourceVersion": "sha256:e0018fb43bbb03677006c8d2fb990dca247fae90bd0d0177d94aefe6048f49f0",
+        "resourceVersion": "sha256:48fbadd08fd832ecedecf83317660e0d35b598ee89dbd81a6439a88777aac1db",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -4044,10 +4044,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v13",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v13",
-        "resourceVersion": "sha256:95b36d414c9e8479b0746ee793c6ad86566f2ea2f87b977d8708fdc21b8209f1",
+        "resourceVersion": "sha256:b4b06d4103df475d16d7f56772afad9d458340e854fe48bfbbbb3a7fa6a7a7c5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -4199,7 +4199,7 @@
       "explanation": "A项指愚拙，B项指情意深挚，C、D项均指微小、数量少。",
       "type": "discrimination",
       "difficulty": 3,
-      "question": "下列句中「区区」的含义，与其他三项不同的一项是",
+      "question": "下列句中「区区」形容情意深挚的一项是",
       "options": [
         "何乃太区区",
         "感君区区怀",
@@ -4212,8 +4212,8 @@
       "version": "vocab-set-17c038e781dd78ec",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「感君区区怀」\n下列句中「区区」的含义，与其他三项不同的一项是\nA. 何乃太区区\nB. 感君区区怀\nC. 区区之众，难与敌也\nD. 区区小事，不足挂齿\n請選出答案，並用自己的話說明判斷依據。",
-        "請比較以下各項在原句中的意思：\nA. 何乃太区区\nB. 感君区区怀\nC. 区区之众，难与敌也\nD. 区区小事，不足挂齿\n下列句中「区区」的含义，与其他三项不同的一项是。選出一項後逐一說明比較依據，不能只報字母。"
+        "語境：「感君区区怀」\n下列句中「区区」形容情意深挚的一项是\nA. 何乃太区区\nB. 感君区区怀\nC. 区区之众，难与敌也\nD. 区区小事，不足挂齿\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 何乃太区区\nB. 感君区区怀\nC. 区区之众，难与敌也\nD. 区区小事，不足挂齿\n下列句中「区区」形容情意深挚的一项是。選出一項後逐一說明比較依據，不能只報字母。"
       ]
     },
     {
@@ -4226,7 +4226,7 @@
       "difficulty": 2,
       "question": "「汝岂得自由」中「自由」的意思是",
       "options": [
-        "随心所欲",
+        "悠闲自在",
         "独立自主",
         "自作主张",
         "解放思想"
@@ -4237,7 +4237,7 @@
       "version": "vocab-set-17c038e781dd78ec",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「汝岂得自由」\n「汝岂得自由」中「自由」的意思是\nA. 随心所欲\nB. 独立自主\nC. 自作主张\nD. 解放思想\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「汝岂得自由」\n「汝岂得自由」中「自由」的意思是\nA. 悠闲自在\nB. 独立自主\nC. 自作主张\nD. 解放思想\n請選出答案，並用自己的話說明判斷依據。",
         "回到「汝岂得自由」：「自由」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -4278,7 +4278,7 @@
       "options": [
         "「举言谓新妇」中的新妇指妻子",
         "「新妇初来时」中的新妇指兰芝自称",
-        "文中新妇一词在不同语境下指代对象不同",
+        "文中「新妇」一词既用于丈夫称妻子，也用于兰芝向夫家人自称",
         "新妇在文中均指代新婚不久的妇女"
       ],
       "answerIndex": 3,
@@ -4287,7 +4287,7 @@
       "version": "vocab-set-17c038e781dd78ec",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「举言谓新妇」\n下列对「新妇」一词的理解，错误的一项是\nA. 「举言谓新妇」中的新妇指妻子\nB. 「新妇初来时」中的新妇指兰芝自称\nC. 文中新妇一词在不同语境下指代对象不同\nD. 新妇在文中均指代新婚不久的妇女\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「举言谓新妇」\n下列对「新妇」一词的理解，错误的一项是\nA. 「举言谓新妇」中的新妇指妻子\nB. 「新妇初来时」中的新妇指兰芝自称\nC. 文中「新妇」一词既用于丈夫称妻子，也用于兰芝向夫家人自称\nD. 新妇在文中均指代新婚不久的妇女\n請選出答案，並用自己的話說明判斷依據。",
         "「举言谓新妇」中的「新妇」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -4321,7 +4321,7 @@
       "word": "见",
       "sourceSentence": "君既若见录",
       "meaning": "我",
-      "explanation": "“见”用在动词前，表示对自己怎么样，此处指录用/收留我。",
+      "explanation": "「见」用在动词前，表示对自己怎么样，此处指「我」；「见录」即记取我、记挂我。C项「慈父见背」中的「见」用法相同，「见背」指背离我而去，是父亲去世的委婉说法。",
       "type": "usage",
       "difficulty": 3,
       "question": "「君既若见录」中「见」的用法与下列哪项相同",
@@ -4371,7 +4371,7 @@
       "word": "适",
       "sourceSentence": "始适还家门",
       "meaning": "出嫁",
-      "explanation": "AC项中“适”指出嫁，B、D项中“适”指刚才。",
+      "explanation": "A、C、D项的「适」均指出嫁；B项的「适」指刚才，故选B。",
       "type": "discrimination",
       "difficulty": 2,
       "question": "下列句中「适」的含义，与其他三项不同的一项是",
@@ -4379,7 +4379,7 @@
         "始适还家门",
         "十七为君妇，适得府君书",
         "贫贱有此女，始适还家门",
-        "适得府君书"
+        "其女已适人"
       ],
       "answerIndex": 1,
       "sourceAnswer": "十七为君妇，适得府君书",
@@ -4387,8 +4387,8 @@
       "version": "vocab-set-17c038e781dd78ec",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「始适还家门」\n下列句中「适」的含义，与其他三项不同的一项是\nA. 始适还家门\nB. 十七为君妇，适得府君书\nC. 贫贱有此女，始适还家门\nD. 适得府君书\n請選出答案，並用自己的話說明判斷依據。",
-        "請比較以下各項在原句中的意思：\nA. 始适还家门\nB. 十七为君妇，适得府君书\nC. 贫贱有此女，始适还家门\nD. 适得府君书\n下列句中「适」的含义，与其他三项不同的一项是。選出一項後逐一說明比較依據，不能只報字母。"
+        "語境：「始适还家门」\n下列句中「适」的含义，与其他三项不同的一项是\nA. 始适还家门\nB. 十七为君妇，适得府君书\nC. 贫贱有此女，始适还家门\nD. 其女已适人\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 始适还家门\nB. 十七为君妇，适得府君书\nC. 贫贱有此女，始适还家门\nD. 其女已适人\n下列句中「适」的含义，与其他三项不同的一项是。選出一項後逐一說明比較依據，不能只報字母。"
       ]
     }
   ],
@@ -4534,19 +4534,19 @@
       {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v06",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v06",
-        "resourceVersion": "sha256:c2ce3eadc60ef12bad0ad328a488d6c1bb8f7ee81755487b2c1c8818fcb124aa",
+        "resourceVersion": "sha256:ecac5fe2c9b1220a93a5abb497fb1c97466137019587b92a093b05838fcf9e0f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v07",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v07",
-        "resourceVersion": "sha256:9b7a7fd4e5d4c04343ce3399417411de87418ac92f9aa3a22ae3e95e66066a5f",
+        "resourceVersion": "sha256:a6ce4488404ac592354a7223b951e591fe227a2ed7c33c244e28cb75f5bbc88a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4561,10 +4561,10 @@
       {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v09",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v09",
-        "resourceVersion": "sha256:d9a5c70124512c3b436ab1fd6b35e184b708d9798b13c237ef3e23bf8e475517",
+        "resourceVersion": "sha256:10afa4b3788452c254c48049b47de4c5d3bb9eb02cd21737c7e925d865b391b5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4579,10 +4579,10 @@
       {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v11",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v11",
-        "resourceVersion": "sha256:e0018fb43bbb03677006c8d2fb990dca247fae90bd0d0177d94aefe6048f49f0",
+        "resourceVersion": "sha256:48fbadd08fd832ecedecf83317660e0d35b598ee89dbd81a6439a88777aac1db",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4597,10 +4597,10 @@
       {
         "resourceKey": "effect:lesson-1558:vocab:lesson-1558:v13",
         "canonicalUnitId": "yw:lesson-1558:vocabulary:lesson-1558:v13",
-        "resourceVersion": "sha256:95b36d414c9e8479b0746ee793c6ad86566f2ea2f87b977d8708fdc21b8209f1",
+        "resourceVersion": "sha256:b4b06d4103df475d16d7f56772afad9d458340e854fe48bfbbbb3a7fa6a7a7c5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4929,7 +4929,7 @@
       },
       {
         "requirementId": "effect:lesson-1558:vocab:lesson-1558:v06",
-        "sourceVersion": "sha256:c2ce3eadc60ef12bad0ad328a488d6c1bb8f7ee81755487b2c1c8818fcb124aa",
+        "sourceVersion": "sha256:ecac5fe2c9b1220a93a5abb497fb1c97466137019587b92a093b05838fcf9e0f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4939,7 +4939,7 @@
       },
       {
         "requirementId": "effect:lesson-1558:vocab:lesson-1558:v07",
-        "sourceVersion": "sha256:9b7a7fd4e5d4c04343ce3399417411de87418ac92f9aa3a22ae3e95e66066a5f",
+        "sourceVersion": "sha256:a6ce4488404ac592354a7223b951e591fe227a2ed7c33c244e28cb75f5bbc88a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4959,7 +4959,7 @@
       },
       {
         "requirementId": "effect:lesson-1558:vocab:lesson-1558:v09",
-        "sourceVersion": "sha256:d9a5c70124512c3b436ab1fd6b35e184b708d9798b13c237ef3e23bf8e475517",
+        "sourceVersion": "sha256:10afa4b3788452c254c48049b47de4c5d3bb9eb02cd21737c7e925d865b391b5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4979,7 +4979,7 @@
       },
       {
         "requirementId": "effect:lesson-1558:vocab:lesson-1558:v11",
-        "sourceVersion": "sha256:e0018fb43bbb03677006c8d2fb990dca247fae90bd0d0177d94aefe6048f49f0",
+        "sourceVersion": "sha256:48fbadd08fd832ecedecf83317660e0d35b598ee89dbd81a6439a88777aac1db",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4999,7 +4999,7 @@
       },
       {
         "requirementId": "effect:lesson-1558:vocab:lesson-1558:v13",
-        "sourceVersion": "sha256:95b36d414c9e8479b0746ee793c6ad86566f2ea2f87b977d8708fdc21b8209f1",
+        "sourceVersion": "sha256:b4b06d4103df475d16d7f56772afad9d458340e854fe48bfbbbb3a7fa6a7a7c5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -5459,7 +5459,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-4aac9d5e3e5969cc0fde",
+  "curriculumVersion": "yw-dialogue-e31ada601f74e004d297",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

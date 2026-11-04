@@ -679,7 +679,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：假舆马者，非利足也，而致千里。語境義：推极、达到。C项“致”指到达，A、D项“致”指送达、招致。B项“致知”指将认识推到极致。",
+      "rule": "沿用原題準據：致知在格物。語境義：推极、达到。B项与题干中的「致」均指推极、使达到极致。A项指取得、得到；C项指到达；D项指招致、招来。故选B。",
       "sourcePassages": [
         "lesson-1476:p2"
       ],
@@ -699,7 +699,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：古义：一律；今义：一件事。語境義：一律、全部。“壹是”在古代是“一律”、“全部”的意思，现代汉语中已不用此词。",
+      "rule": "沿用原題準據：一律、全部。語境義：一律、全部。「壹是」意为「一律、全部」，全句意为「一律把修养自身作为根本」。",
       "sourcePassages": [
         "lesson-1476:p2"
       ],
@@ -739,7 +739,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：动词的使动用法，使……整齐。語境義：使……整齐有序。“齐”在此处为使动用法，意为使家族关系整齐有序。",
+      "rule": "沿用原題準據：形容词的使动用法，使……整齐有序。語境義：使……整齐有序。「齐」在此为形容词的使动用法，意为使家族中的各种关系整齐有序。",
       "sourcePassages": [
         "lesson-1476:p2"
       ],
@@ -852,10 +852,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v02",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v02",
-        "resourceVersion": "sha256:88cd5c6883270f6009b9e350000fd1c1c34bae5d8cc087eaed85384d327299e2",
+        "resourceVersion": "sha256:d206e5f588355cf19b9c3adf210d9e4afc136266997dedb04ba7750256b7d05b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -924,10 +924,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v06",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v06",
-        "resourceVersion": "sha256:463a59836650b19cfa4cdb9d5ac20d635a5c227cf5c42e89dc1a519a7467ec49",
+        "resourceVersion": "sha256:f43d442c9743c7745ebacc9b1bd109b4b9a2b72f9db5831e54c0c7086bc69996",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -942,10 +942,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v07",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v07",
-        "resourceVersion": "sha256:f1217b3c2a9422f547a78e57b5915a9a3da3c9db346d61081671e1713a0f9ade",
+        "resourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -978,10 +978,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v09",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v09",
-        "resourceVersion": "sha256:8ed6b718b68d9e95d6b6c00f52586b5f0cf8f0ea06c1100c96fcd3bf717ba26b",
+        "resourceVersion": "sha256:8b728024f4e72dc5c2d290e7fa85196de53fb1d743aa205f2802b74dcf7fb52c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1204,7 +1204,7 @@
       "options": [
         "“亲”指亲属，即治理家族",
         "“亲”是动词，意为亲近爱抚民众",
-        "“亲”通“新”，意为更新民众的思想",
+        "“亲”指亲自，意为君主亲自处理所有政务",
         "“亲”指亲身实践，即修身"
       ],
       "answerIndex": 1,
@@ -1215,7 +1215,7 @@
       "version": "vocab-set-d06bb159e8fd011a",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「在亲民」\n关于「在亲民」的理解，下列说法正确的是\nA. “亲”指亲属，即治理家族\nB. “亲”是动词，意为亲近爱抚民众\nC. “亲”通“新”，意为更新民众的思想\nD. “亲”指亲身实践，即修身\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「在亲民」\n关于「在亲民」的理解，下列说法正确的是\nA. “亲”指亲属，即治理家族\nB. “亲”是动词，意为亲近爱抚民众\nC. “亲”指亲自，意为君主亲自处理所有政务\nD. “亲”指亲身实践，即修身\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「在亲民」中「亲」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1305,7 +1305,7 @@
       "word": "致",
       "sourceSentence": "先致其知",
       "meaning": "推极、达到",
-      "explanation": "C项“致”指到达，A、D项“致”指送达、招致。B项“致知”指将认识推到极致。",
+      "explanation": "B项与题干中的「致」均指推极、使达到极致。A项指取得、得到；C项指到达；D项指招致、招来。故选B。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "下列句中「致」的意义与「先致其知」中的「致」相同的一项是",
@@ -1315,8 +1315,8 @@
         "假舆马者，非利足也，而致千里",
         "此人可就见，不可屈致也"
       ],
-      "answerIndex": 2,
-      "sourceAnswer": "假舆马者，非利足也，而致千里",
+      "answerIndex": 1,
+      "sourceAnswer": "致知在格物",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
@@ -1332,26 +1332,26 @@
       "word": "壹是",
       "sourceSentence": "壹是皆以修身为本",
       "meaning": "一律、全部",
-      "explanation": "“壹是”在古代是“一律”、“全部”的意思，现代汉语中已不用此词。",
-      "type": "gu-jin",
+      "explanation": "「壹是」意为「一律、全部」，全句意为「一律把修养自身作为根本」。",
+      "type": "contextual-choice",
       "difficulty": 3,
-      "question": "「壹是皆以修身为本」中「壹是」的古今意义差异，表述正确的是",
+      "question": "「壹是皆以修身为本」中「壹是」的意思是",
       "options": [
-        "古义：一件事；今义：一律",
-        "古义：一律；今义：一件事",
-        "古义：统一；今义：唯一",
-        "古义：一律；今义：一律"
+        "一件事",
+        "一律、全部",
+        "统一",
+        "唯一"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "古义：一律；今义：一件事",
+      "sourceAnswer": "一律、全部",
       "sourceRefs": [
         "《漢語大詞典》"
       ],
       "version": "vocab-set-d06bb159e8fd011a",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「壹是皆以修身为本」\n「壹是皆以修身为本」中「壹是」的古今意义差异，表述正确的是\nA. 古义：一件事；今义：一律\nB. 古义：一律；今义：一件事\nC. 古义：统一；今义：唯一\nD. 古义：一律；今义：一律\n請選出答案，並用自己的話說明判斷依據。",
-        "回到「壹是皆以修身为本」：「壹是」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+        "語境：「壹是皆以修身为本」\n「壹是皆以修身为本」中「壹是」的意思是\nA. 一件事\nB. 一律、全部\nC. 统一\nD. 唯一\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「壹是皆以修身为本」中「壹是」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1386,25 +1386,25 @@
       "word": "齐",
       "sourceSentence": "欲齐其家者",
       "meaning": "使……整齐有序",
-      "explanation": "“齐”在此处为使动用法，意为使家族关系整齐有序。",
+      "explanation": "「齐」在此为形容词的使动用法，意为使家族中的各种关系整齐有序。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「欲齐其家者」中「齐」字的用法是",
       "options": [
         "形容词，整齐",
         "名词，整齐的家",
-        "动词的使动用法，使……整齐",
+        "形容词的使动用法，使……整齐有序",
         "副词，一起"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "动词的使动用法，使……整齐",
+      "sourceAnswer": "形容词的使动用法，使……整齐有序",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
       "version": "vocab-set-d06bb159e8fd011a",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「欲齐其家者」\n「欲齐其家者」中「齐」字的用法是\nA. 形容词，整齐\nB. 名词，整齐的家\nC. 动词的使动用法，使……整齐\nD. 副词，一起\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「欲齐其家者」\n「欲齐其家者」中「齐」字的用法是\nA. 形容词，整齐\nB. 名词，整齐的家\nC. 形容词的使动用法，使……整齐有序\nD. 副词，一起\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「欲齐其家者」中「齐」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1519,10 +1519,10 @@
       {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v02",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v02",
-        "resourceVersion": "sha256:88cd5c6883270f6009b9e350000fd1c1c34bae5d8cc087eaed85384d327299e2",
+        "resourceVersion": "sha256:d206e5f588355cf19b9c3adf210d9e4afc136266997dedb04ba7750256b7d05b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1555,19 +1555,19 @@
       {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v06",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v06",
-        "resourceVersion": "sha256:463a59836650b19cfa4cdb9d5ac20d635a5c227cf5c42e89dc1a519a7467ec49",
+        "resourceVersion": "sha256:f43d442c9743c7745ebacc9b1bd109b4b9a2b72f9db5831e54c0c7086bc69996",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v07",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v07",
-        "resourceVersion": "sha256:f1217b3c2a9422f547a78e57b5915a9a3da3c9db346d61081671e1713a0f9ade",
+        "resourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1582,10 +1582,10 @@
       {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v09",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v09",
-        "resourceVersion": "sha256:8ed6b718b68d9e95d6b6c00f52586b5f0cf8f0ea06c1100c96fcd3bf717ba26b",
+        "resourceVersion": "sha256:8b728024f4e72dc5c2d290e7fa85196de53fb1d743aa205f2802b74dcf7fb52c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2233,7 +2233,7 @@
       },
       {
         "requirementId": "effect:lesson-1476:vocab:lesson-1476:v02",
-        "sourceVersion": "sha256:88cd5c6883270f6009b9e350000fd1c1c34bae5d8cc087eaed85384d327299e2",
+        "sourceVersion": "sha256:d206e5f588355cf19b9c3adf210d9e4afc136266997dedb04ba7750256b7d05b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2273,7 +2273,7 @@
       },
       {
         "requirementId": "effect:lesson-1476:vocab:lesson-1476:v06",
-        "sourceVersion": "sha256:463a59836650b19cfa4cdb9d5ac20d635a5c227cf5c42e89dc1a519a7467ec49",
+        "sourceVersion": "sha256:f43d442c9743c7745ebacc9b1bd109b4b9a2b72f9db5831e54c0c7086bc69996",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2283,7 +2283,7 @@
       },
       {
         "requirementId": "effect:lesson-1476:vocab:lesson-1476:v07",
-        "sourceVersion": "sha256:f1217b3c2a9422f547a78e57b5915a9a3da3c9db346d61081671e1713a0f9ade",
+        "sourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2303,7 +2303,7 @@
       },
       {
         "requirementId": "effect:lesson-1476:vocab:lesson-1476:v09",
-        "sourceVersion": "sha256:8ed6b718b68d9e95d6b6c00f52586b5f0cf8f0ea06c1100c96fcd3bf717ba26b",
+        "sourceVersion": "sha256:8b728024f4e72dc5c2d290e7fa85196de53fb1d743aa205f2802b74dcf7fb52c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3058,7 +3058,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-31bdfb012565c2a44dd4",
+  "curriculumVersion": "yw-dialogue-97c0511733de6d350e06",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

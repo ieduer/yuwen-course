@@ -4058,17 +4058,46 @@
     {
       "id": "lesson-1535:v01",
       "domain": "vocabulary",
-      "label": "字詞：任",
+      "label": "字詞：以",
       "criteria": [
         "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：凭藉。語境義：凭藉。此处指凭借父亲的职位关系。",
+      "rule": "沿用原題準據：凭藉。語境義：凭借。以，凭借。「少以父任」指年轻时凭借父亲的职位而获任用。",
       "sourcePassages": [
+        "lesson-1535:p3",
+        "lesson-1535:p4",
+        "lesson-1535:p5",
+        "lesson-1535:p6",
+        "lesson-1535:p7",
+        "lesson-1535:p8",
+        "lesson-1535:p9",
+        "lesson-1535:p10",
+        "lesson-1535:p11",
+        "lesson-1535:p12",
+        "lesson-1535:p13",
+        "lesson-1535:p14",
+        "lesson-1535:p16",
+        "lesson-1535:p17",
+        "lesson-1535:p18",
+        "lesson-1535:p19",
+        "lesson-1535:p20",
+        "lesson-1535:p21",
+        "lesson-1535:p22",
+        "lesson-1535:p24",
+        "lesson-1535:p25",
         "lesson-1535:p26",
-        "lesson-1535:p29"
+        "lesson-1535:p28",
+        "lesson-1535:p29",
+        "lesson-1535:p30",
+        "lesson-1535:p31",
+        "lesson-1535:p32",
+        "lesson-1535:p36",
+        "lesson-1535:p37",
+        "lesson-1535:p38",
+        "lesson-1535:p39"
       ],
       "prerequisites": [],
       "misconceptions": [
@@ -4383,10 +4412,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1535:vocab:lesson-1535:v01",
         "canonicalUnitId": "yw:lesson-1535:vocabulary:lesson-1535:v01",
-        "resourceVersion": "sha256:15c6b4b0f80e07cc3dc82fb99247b7ebb248eeb53ea0c8c8ddf01072fa676c3e",
+        "resourceVersion": "sha256:fd1aed0fb7f256ea31c70e8fc7fb1d9bb1be0ddbbb77bcc94c82bfe79d479929",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -4437,10 +4466,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1535:vocab:lesson-1535:v04",
         "canonicalUnitId": "yw:lesson-1535:vocabulary:lesson-1535:v04",
-        "resourceVersion": "sha256:a99e99c3ef44bcdb51b629ca55db9c0743092803710aaee8497cc41782d6e5c5",
+        "resourceVersion": "sha256:8e6eda31490a617d160ffffc18e592c86233aa187f9ea0c0b70eea8595f97191",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -4473,10 +4502,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1535:vocab:lesson-1535:v06",
         "canonicalUnitId": "yw:lesson-1535:vocabulary:lesson-1535:v06",
-        "resourceVersion": "sha256:6615edcc3154a9eeeb0684a64765f0c391f4e02d421b222a3f15b20d242884bd",
+        "resourceVersion": "sha256:1bb439e5a7dbc5d147d82936f148769df15293d83c17eb2ed6511ccc16d5a7a5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -4712,13 +4741,13 @@
   "vocabulary": [
     {
       "id": "lesson-1535:v01",
-      "word": "任",
+      "word": "以",
       "sourceSentence": "少以父任,兄弟并为郎",
-      "meaning": "凭藉",
-      "explanation": "此处指凭借父亲的职位关系。",
+      "meaning": "凭借",
+      "explanation": "以，凭借。「少以父任」指年轻时凭借父亲的职位而获任用。",
       "type": "contextual-choice",
       "difficulty": 1,
-      "question": "“少以父任”中“任”的意思是",
+      "question": "“少以父任”中“以”的意思是",
       "options": [
         "任用",
         "职位",
@@ -4733,8 +4762,8 @@
       "version": "vocab-set-cb1442ac0c07d080",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「少以父任,兄弟并为郎」\n“少以父任”中“任”的意思是\nA. 任用\nB. 职位\nC. 凭藉\nD. 担任\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「少以父任,兄弟并为郎」中「任」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "語境：「少以父任,兄弟并为郎」\n“少以父任”中“以”的意思是\nA. 任用\nB. 职位\nC. 凭藉\nD. 担任\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「少以父任,兄弟并为郎」中「以」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -4801,7 +4830,7 @@
       "difficulty": 1,
       "question": "“汉使张胜谋杀单于近臣，当死”中“当”的意思是",
       "options": [
-        "应当",
+        "抵挡",
         "判处",
         "抵押",
         "面对"
@@ -4814,7 +4843,7 @@
       "version": "vocab-set-cb1442ac0c07d080",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「当死」\n“汉使张胜谋杀单于近臣，当死”中“当”的意思是\nA. 应当\nB. 判处\nC. 抵押\nD. 面对\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「当死」\n“汉使张胜谋杀单于近臣，当死”中“当”的意思是\nA. 抵挡\nB. 判处\nC. 抵押\nD. 面对\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「当死」中「当」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -4858,7 +4887,7 @@
         "雨水",
         "下",
         "像雨一样",
-        "降落"
+        "淋湿"
       ],
       "answerIndex": 1,
       "sourceAnswer": "下",
@@ -4868,7 +4897,7 @@
       "version": "vocab-set-cb1442ac0c07d080",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「天雨雪」\n“天雨雪”中“雨”的意思是\nA. 雨水\nB. 下\nC. 像雨一样\nD. 降落\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「天雨雪」\n“天雨雪”中“雨”的意思是\nA. 雨水\nB. 下\nC. 像雨一样\nD. 淋湿\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「天雨雪」中「雨」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -5109,10 +5138,10 @@
       {
         "resourceKey": "effect:lesson-1535:vocab:lesson-1535:v01",
         "canonicalUnitId": "yw:lesson-1535:vocabulary:lesson-1535:v01",
-        "resourceVersion": "sha256:15c6b4b0f80e07cc3dc82fb99247b7ebb248eeb53ea0c8c8ddf01072fa676c3e",
+        "resourceVersion": "sha256:fd1aed0fb7f256ea31c70e8fc7fb1d9bb1be0ddbbb77bcc94c82bfe79d479929",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -5136,10 +5165,10 @@
       {
         "resourceKey": "effect:lesson-1535:vocab:lesson-1535:v04",
         "canonicalUnitId": "yw:lesson-1535:vocabulary:lesson-1535:v04",
-        "resourceVersion": "sha256:a99e99c3ef44bcdb51b629ca55db9c0743092803710aaee8497cc41782d6e5c5",
+        "resourceVersion": "sha256:8e6eda31490a617d160ffffc18e592c86233aa187f9ea0c0b70eea8595f97191",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -5154,10 +5183,10 @@
       {
         "resourceKey": "effect:lesson-1535:vocab:lesson-1535:v06",
         "canonicalUnitId": "yw:lesson-1535:vocabulary:lesson-1535:v06",
-        "resourceVersion": "sha256:6615edcc3154a9eeeb0684a64765f0c391f4e02d421b222a3f15b20d242884bd",
+        "resourceVersion": "sha256:1bb439e5a7dbc5d147d82936f148769df15293d83c17eb2ed6511ccc16d5a7a5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -5798,7 +5827,7 @@
       },
       {
         "requirementId": "effect:lesson-1535:vocab:lesson-1535:v01",
-        "sourceVersion": "sha256:15c6b4b0f80e07cc3dc82fb99247b7ebb248eeb53ea0c8c8ddf01072fa676c3e",
+        "sourceVersion": "sha256:fd1aed0fb7f256ea31c70e8fc7fb1d9bb1be0ddbbb77bcc94c82bfe79d479929",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -5828,7 +5857,7 @@
       },
       {
         "requirementId": "effect:lesson-1535:vocab:lesson-1535:v04",
-        "sourceVersion": "sha256:a99e99c3ef44bcdb51b629ca55db9c0743092803710aaee8497cc41782d6e5c5",
+        "sourceVersion": "sha256:8e6eda31490a617d160ffffc18e592c86233aa187f9ea0c0b70eea8595f97191",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -5848,7 +5877,7 @@
       },
       {
         "requirementId": "effect:lesson-1535:vocab:lesson-1535:v06",
-        "sourceVersion": "sha256:6615edcc3154a9eeeb0684a64765f0c391f4e02d421b222a3f15b20d242884bd",
+        "sourceVersion": "sha256:1bb439e5a7dbc5d147d82936f148769df15293d83c17eb2ed6511ccc16d5a7a5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -6638,7 +6667,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-d180eb8a3fcb12949f3f",
+  "curriculumVersion": "yw-dialogue-7503f5b9bd195d696df7",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -960,7 +960,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：以有声的乐器反衬「悄悄」的寂静与离别的深沉。語境義：乐器，此处借指离别的声音或氛围。诗人运用通感手法，以乐器之声反衬此时的无声与内心的沉重。",
+      "rule": "沿用原題準據：以有声的乐器反衬「悄悄」的寂静与离别的深沉。語境義：乐器，此处借指离别的声音或氛围。诗人运用暗喻，将离别时的「悄悄」比作「笙箫」，借有声与无声的对照，突出环境的寂静与离情的深沉。",
       "sourcePassages": [
         "lesson-1568:p22"
       ],
@@ -1163,10 +1163,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1568:vocab:lesson-1568:v05",
         "canonicalUnitId": "yw:lesson-1568:vocabulary:lesson-1568:v05",
-        "resourceVersion": "sha256:52c6f16f03871ebbc4e4121812c0e74c5d7cb2337d12dae09746b300ec3f6849",
+        "resourceVersion": "sha256:afcdbff0eabe095a71acc8514ac20f0e08a334e5565d356dc077ff69142a77d9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1321,7 +1321,7 @@
       "word": "笙箫",
       "sourceSentence": "悄悄是别离的笙箫;",
       "meaning": "乐器，此处借指离别的声音或氛围",
-      "explanation": "诗人运用通感手法，以乐器之声反衬此时的无声与内心的沉重。",
+      "explanation": "诗人运用暗喻，将离别时的「悄悄」比作「笙箫」，借有声与无声的对照，突出环境的寂静与离情的深沉。",
       "type": "interpretation",
       "difficulty": 3,
       "question": "对「悄悄是别离的笙箫」一句的理解，正确的是",
@@ -1509,10 +1509,10 @@
       {
         "resourceKey": "effect:lesson-1568:vocab:lesson-1568:v05",
         "canonicalUnitId": "yw:lesson-1568:vocabulary:lesson-1568:v05",
-        "resourceVersion": "sha256:52c6f16f03871ebbc4e4121812c0e74c5d7cb2337d12dae09746b300ec3f6849",
+        "resourceVersion": "sha256:afcdbff0eabe095a71acc8514ac20f0e08a334e5565d356dc077ff69142a77d9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1772,7 +1772,7 @@
       },
       {
         "requirementId": "effect:lesson-1568:vocab:lesson-1568:v05",
-        "sourceVersion": "sha256:52c6f16f03871ebbc4e4121812c0e74c5d7cb2337d12dae09746b300ec3f6849",
+        "sourceVersion": "sha256:afcdbff0eabe095a71acc8514ac20f0e08a334e5565d356dc077ff69142a77d9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2063,7 +2063,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-7be2916affc6a65428cf",
+  "curriculumVersion": "yw-dialogue-445cd567a8e541574ba5",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

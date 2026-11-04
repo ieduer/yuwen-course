@@ -402,7 +402,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：茂盛的樣子。語境義：茂盛的样子。「采采」在詩中形容芣苢長勢良好，非動作描述。",
+      "rule": "沿用原題準據：茂盛的樣子。語境義：茂盛的样子。本題取「采采」的通行解釋，指芣苢茂盛的樣子，故選B；另有「采而又采」一說。",
       "sourcePassages": [
         "lesson-1701-p1:p2"
       ],
@@ -422,7 +422,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：「薄」為副詞，「言」為語助詞，合用無實義。語境義：助詞，無實義。「薄言」為《詩經》中常見的發語詞或助詞組合，起調節音節作用。",
+      "rule": "沿用原題準據：「薄」「言」均為助詞，無實義，起調節音節的作用。語境義：助詞，無實義。「薄言」為《詩經》中常見的發語詞或助詞組合，起調節音節作用。",
       "sourcePassages": [
         "lesson-1701-p1:p2"
       ],
@@ -658,10 +658,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1701-p1:vocab:lesson-1701-p1:v01",
         "canonicalUnitId": "yw:lesson-1701-p1:vocabulary:lesson-1701-p1:v01",
-        "resourceVersion": "sha256:6d85ccb73ae4a21877a05046135b7586313a56d819f7636b902cf2dc76896062",
+        "resourceVersion": "sha256:25bb9d1732bdb360980171948d3fff747b782b2fa99c0a4b74abb50008ede573",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -677,10 +677,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1701-p1:vocab:lesson-1701-p1:v02",
         "canonicalUnitId": "yw:lesson-1701-p1:vocabulary:lesson-1701-p1:v02",
-        "resourceVersion": "sha256:127f757a14684c5a1fb209b7e8f61971c09b1f586280f974550e0b0f05d2ab7d",
+        "resourceVersion": "sha256:2e5b7072f6e377da3e411664f1c92b2a886dbf200ac9ed54eab613de002c7f1c",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -845,12 +845,12 @@
       "word": "采采",
       "sourceSentence": "采采 芣苢，薄言 采之",
       "meaning": "茂盛的样子",
-      "explanation": "「采采」在詩中形容芣苢長勢良好，非動作描述。",
+      "explanation": "本題取「采采」的通行解釋，指芣苢茂盛的樣子，故選B；另有「采而又采」一說。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「采采芣苢」中「采采」的意思是",
       "options": [
-        "采摘的樣子",
+        "稀疏的樣子",
         "茂盛的樣子",
         "色彩斑斕的樣子",
         "急促的樣子"
@@ -861,7 +861,7 @@
       "version": "vocab-set-366ee9ccd387ca31",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「采采 芣苢，薄言 采之」\n「采采芣苢」中「采采」的意思是\nA. 采摘的樣子\nB. 茂盛的樣子\nC. 色彩斑斕的樣子\nD. 急促的樣子\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「采采 芣苢，薄言 采之」\n「采采芣苢」中「采采」的意思是\nA. 稀疏的樣子\nB. 茂盛的樣子\nC. 色彩斑斕的樣子\nD. 急促的樣子\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「采采 芣苢，薄言 采之」中「采采」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -876,17 +876,17 @@
       "question": "下列關於「薄言」的用法說明，正確的是",
       "options": [
         "「薄」意為輕微，「言」為語言",
-        "「薄」為副詞，「言」為語助詞，合用無實義",
+        "「薄」「言」均為助詞，無實義，起調節音節的作用",
         "「薄」為動詞，「言」為代詞",
         "「薄言」指代采摘的工具"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "「薄」為副詞，「言」為語助詞，合用無實義",
+      "sourceAnswer": "「薄」「言」均為助詞，無實義，起調節音節的作用",
       "sourceRefs": [],
       "version": "vocab-set-366ee9ccd387ca31",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「采采 芣苢，薄言 采之」\n下列關於「薄言」的用法說明，正確的是\nA. 「薄」意為輕微，「言」為語言\nB. 「薄」為副詞，「言」為語助詞，合用無實義\nC. 「薄」為動詞，「言」為代詞\nD. 「薄言」指代采摘的工具\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「采采 芣苢，薄言 采之」\n下列關於「薄言」的用法說明，正確的是\nA. 「薄」意為輕微，「言」為語言\nB. 「薄」「言」均為助詞，無實義，起調節音節的作用\nC. 「薄」為動詞，「言」為代詞\nD. 「薄言」指代采摘的工具\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「采采 芣苢，薄言 采之」的句意，解釋「薄言」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1152,20 +1152,20 @@
       {
         "resourceKey": "effect:lesson-1701-p1:vocab:lesson-1701-p1:v01",
         "canonicalUnitId": "yw:lesson-1701-p1:vocabulary:lesson-1701-p1:v01",
-        "resourceVersion": "sha256:6d85ccb73ae4a21877a05046135b7586313a56d819f7636b902cf2dc76896062",
+        "resourceVersion": "sha256:25bb9d1732bdb360980171948d3fff747b782b2fa99c0a4b74abb50008ede573",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1701-p1:vocab:lesson-1701-p1:v02",
         "canonicalUnitId": "yw:lesson-1701-p1:vocabulary:lesson-1701-p1:v02",
-        "resourceVersion": "sha256:127f757a14684c5a1fb209b7e8f61971c09b1f586280f974550e0b0f05d2ab7d",
+        "resourceVersion": "sha256:2e5b7072f6e377da3e411664f1c92b2a886dbf200ac9ed54eab613de002c7f1c",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1464,7 +1464,7 @@
       },
       {
         "requirementId": "effect:lesson-1701-p1:vocab:lesson-1701-p1:v01",
-        "sourceVersion": "sha256:6d85ccb73ae4a21877a05046135b7586313a56d819f7636b902cf2dc76896062",
+        "sourceVersion": "sha256:25bb9d1732bdb360980171948d3fff747b782b2fa99c0a4b74abb50008ede573",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1474,7 +1474,7 @@
       },
       {
         "requirementId": "effect:lesson-1701-p1:vocab:lesson-1701-p1:v02",
-        "sourceVersion": "sha256:127f757a14684c5a1fb209b7e8f61971c09b1f586280f974550e0b0f05d2ab7d",
+        "sourceVersion": "sha256:2e5b7072f6e377da3e411664f1c92b2a886dbf200ac9ed54eab613de002c7f1c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2001,7 +2001,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-20cce2d7dd884994e272",
+  "curriculumVersion": "yw-dialogue-3156fbb75460ee58ef31",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

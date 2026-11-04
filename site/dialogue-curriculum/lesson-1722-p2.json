@@ -353,7 +353,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：是以先帝简拔以遗陛下。語境義：赠送。「遗」在古文中常作「赠送」讲，C项「以遗陛下」指送给陛下。",
+      "rule": "沿用原題準據：是以先帝简拔以遗陛下。語境義：赠送。「遗」在古文中常作「赠送」讲，读wèi，C项「以遗陛下」指送给陛下。A项「路不拾遗」的「遗」指遗失的东西，B项「大遗」的「遗」指遗漏，D项「遗镞」的「遗」指丢失，均不同。",
       "sourcePassages": [
         "lesson-1722-p2:p3"
       ],
@@ -568,10 +568,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v04",
         "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v04",
-        "resourceVersion": "sha256:85e36f539ef185579f742c06dc57fbad5626c2c31e8648dd824cf81fbc515ccb",
+        "resourceVersion": "sha256:92d165696d468f6b4948b572a6e41a998012d6f09c95f18a118c7059c87eded9",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -644,10 +644,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v08",
         "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v08",
-        "resourceVersion": "sha256:e7128a3d19dcfe0c2075116f19e7a5b97a66ea4be04f5e05c1faa21917609faa",
+        "resourceVersion": "sha256:4871dace4548bfaf9cc64128dfcc518fce2d5740664f7fd030e57f305f48ed21",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -723,15 +723,15 @@
       "word": "遗",
       "sourceSentence": "采之欲遗 谁",
       "meaning": "赠送",
-      "explanation": "「遗」在古文中常作「赠送」讲，C项「以遗陛下」指送给陛下。",
+      "explanation": "「遗」在古文中常作「赠送」讲，读wèi，C项「以遗陛下」指送给陛下。A项「路不拾遗」的「遗」指遗失的东西，B项「大遗」的「遗」指遗漏，D项「遗镞」的「遗」指丢失，均不同。",
       "type": "gu-jin",
       "difficulty": 2,
       "question": "下列选项中「遗」的古今意义用法与「采之欲遗谁」一致的是",
       "options": [
         "路不拾遗",
-        "以先国家之急而后私仇也，此其所以为遗也",
+        "小学而大遗，吾未见其明也",
         "是以先帝简拔以遗陛下",
-        "门前冷落鞍马稀，老大嫁作商人妇，商人重利轻别离，前月浮梁买茶去，去来江口守空船，绕船月明江水寒，夜深忽梦少年事，梦啼妆泪红阑干"
+        "秦无亡矢遗镞之费，而天下诸侯已困矣"
       ],
       "answerIndex": 2,
       "sourceAnswer": "是以先帝简拔以遗陛下",
@@ -739,7 +739,7 @@
       "version": "vocab-set-a1f96426bdfcce7b",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「采之欲遗 谁」\n下列选项中「遗」的古今意义用法与「采之欲遗谁」一致的是\nA. 路不拾遗\nB. 以先国家之急而后私仇也，此其所以为遗也\nC. 是以先帝简拔以遗陛下\nD. 门前冷落鞍马稀，老大嫁作商人妇，商人重利轻别离，前月浮梁买茶去，去来江口守空船，绕船月明江水寒，夜深忽梦少年事，梦啼妆泪红阑干\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「采之欲遗 谁」\n下列选项中「遗」的古今意义用法与「采之欲遗谁」一致的是\nA. 路不拾遗\nB. 小学而大遗，吾未见其明也\nC. 是以先帝简拔以遗陛下\nD. 秦无亡矢遗镞之费，而天下诸侯已困矣\n請選出答案，並用自己的話說明判斷依據。",
         "回到「采之欲遗 谁」：「遗」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -830,7 +830,7 @@
       "options": [
         "心脏相同",
         "志同道合的人",
-        "同样的心思",
+        "同情怜悯的心情",
         "同一个中心"
       ],
       "answerIndex": 1,
@@ -839,7 +839,7 @@
       "version": "vocab-set-a1f96426bdfcce7b",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「同心而离居」\n「同心而离居」中「同心」的意思是\nA. 心脏相同\nB. 志同道合的人\nC. 同样的心思\nD. 同一个中心\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「同心而离居」\n「同心而离居」中「同心」的意思是\nA. 心脏相同\nB. 志同道合的人\nC. 同情怜悯的心情\nD. 同一个中心\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「同心而离居」中「同心」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
@@ -965,10 +965,10 @@
       {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v04",
         "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v04",
-        "resourceVersion": "sha256:85e36f539ef185579f742c06dc57fbad5626c2c31e8648dd824cf81fbc515ccb",
+        "resourceVersion": "sha256:92d165696d468f6b4948b572a6e41a998012d6f09c95f18a118c7059c87eded9",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1005,10 +1005,10 @@
       {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v08",
         "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v08",
-        "resourceVersion": "sha256:e7128a3d19dcfe0c2075116f19e7a5b97a66ea4be04f5e05c1faa21917609faa",
+        "resourceVersion": "sha256:4871dace4548bfaf9cc64128dfcc518fce2d5740664f7fd030e57f305f48ed21",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1231,7 +1231,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v04",
-        "sourceVersion": "sha256:85e36f539ef185579f742c06dc57fbad5626c2c31e8648dd824cf81fbc515ccb",
+        "sourceVersion": "sha256:92d165696d468f6b4948b572a6e41a998012d6f09c95f18a118c7059c87eded9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1271,7 +1271,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v08",
-        "sourceVersion": "sha256:e7128a3d19dcfe0c2075116f19e7a5b97a66ea4be04f5e05c1faa21917609faa",
+        "sourceVersion": "sha256:4871dace4548bfaf9cc64128dfcc518fce2d5740664f7fd030e57f305f48ed21",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1682,7 +1682,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-b71e90f6a1eceb850ca4",
+  "curriculumVersion": "yw-dialogue-36057c50620dc73705a7",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

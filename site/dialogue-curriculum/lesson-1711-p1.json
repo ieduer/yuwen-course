@@ -1288,7 +1288,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：圣心备焉。語境義：于此，从这里。文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
+      "rule": "沿用原題準據：积水成渊，蛟龙生焉。語境義：于此，从这里。「风雨兴焉」与B项「蛟龙生焉」中的「焉」均为兼词，相当于「于此」。A项「焉」为疑问代词，相当于「何」，意为「什么」；C项「焉」为疑问代词，意为「哪里」；D项「焉」为句末语气词。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1502,10 +1502,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v05",
         "canonicalUnitId": "yw:lesson-1711-p1:vocabulary:lesson-1711-p1:v05",
-        "resourceVersion": "sha256:54a2bec798f54320ceb7055a74e6378fcefaaaad525ee5f1cb5660dc36a80459",
+        "resourceVersion": "sha256:f06969a71715d63dea57be858e8fc3ad7c68176464112b718af0b7b43e2095e8",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1578,10 +1578,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v09",
         "canonicalUnitId": "yw:lesson-1711-p1:vocabulary:lesson-1711-p1:v09",
-        "resourceVersion": "sha256:a578e4f250cd9670731bbd96db3094eabe113aa95c9b6bcb6ca1938d8dd97e1a",
+        "resourceVersion": "sha256:750013aad71859a832a8be0570d32ef5c2c86a9bf075bd1e653f559632c1e4b1",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1635,10 +1635,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v12",
         "canonicalUnitId": "yw:lesson-1711-p1:vocabulary:lesson-1711-p1:v12",
-        "resourceVersion": "sha256:c122611444071015293e85c8ba91d191efc04bd7047b1b8a1e806ab6d8bd2726",
+        "resourceVersion": "sha256:90c12910aa26d4a47bf5955495184b4749f53692805944cb97c442ede301cd19",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1882,7 +1882,7 @@
     {
       "id": "lesson-1711-p1:v05",
       "word": "假",
-      "sourceSentence": " 舆马 者，非利足 也，而致 千里；",
+      "sourceSentence": "假 舆马 者，非利足 也，而致 千里；",
       "meaning": "借助",
       "explanation": "此处“假”意为借助、利用。",
       "type": "contextual-choice",
@@ -1902,8 +1902,8 @@
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「 舆马 者，非利足 也，而致 千里；」\n“假舆马者”中“假”的意思是\nA. 不真\nB. 凭借、利用\nC. 假期\nD. 宽恕\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「 舆马 者，非利足 也，而致 千里；」中「假」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "語境：「假 舆马 者，非利足 也，而致 千里；」\n“假舆马者”中“假”的意思是\nA. 不真\nB. 凭借、利用\nC. 假期\nD. 宽恕\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「假 舆马 者，非利足 也，而致 千里；」中「假」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1992,25 +1992,25 @@
       "word": "焉",
       "sourceSentence": "积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；",
       "meaning": "于此，从这里",
-      "explanation": "文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
+      "explanation": "「风雨兴焉」与B项「蛟龙生焉」中的「焉」均为兼词，相当于「于此」。A项「焉」为疑问代词，相当于「何」，意为「什么」；C项「焉」为疑问代词，意为「哪里」；D项「焉」为句末语气词。",
       "type": "usage",
       "difficulty": 3,
       "question": "下列各句中“焉”的用法与“风雨兴焉”中的“焉”相同的一项是",
       "options": [
         "复驾言兮焉求",
-        "圣心备焉",
+        "积水成渊，蛟龙生焉",
         "且焉置土石",
         "寒暑易节，始一反焉"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "圣心备焉",
+      "sourceAnswer": "积水成渊，蛟龙生焉",
       "sourceRefs": [
         "《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」\n下列各句中“焉”的用法与“风雨兴焉”中的“焉”相同的一项是\nA. 复驾言兮焉求\nB. 圣心备焉\nC. 且焉置土石\nD. 寒暑易节，始一反焉\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」\n下列各句中“焉”的用法与“风雨兴焉”中的“焉”相同的一项是\nA. 复驾言兮焉求\nB. 积水成渊，蛟龙生焉\nC. 且焉置土石\nD. 寒暑易节，始一反焉\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」的句意，解釋「焉」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -2071,7 +2071,7 @@
     {
       "id": "lesson-1711-p1:v12",
       "word": "锲",
-      "sourceSentence": " 而舍之，朽木不折；锲而不舍，金石可镂 。",
+      "sourceSentence": "锲 而舍之，朽木不折；锲而不舍，金石可镂 。",
       "meaning": "刻",
       "explanation": "“锲”意为刻。",
       "type": "contextual-choice",
@@ -2081,7 +2081,7 @@
         "坚持",
         "刻",
         "放弃",
-        "雕琢"
+        "磨砺"
       ],
       "answerIndex": 1,
       "sourceAnswer": "刻",
@@ -2091,8 +2091,8 @@
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「 而舍之，朽木不折；锲而不舍，金石可镂 。」\n“锲而舍之”中“锲”的意思是\nA. 坚持\nB. 刻\nC. 放弃\nD. 雕琢\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「 而舍之，朽木不折；锲而不舍，金石可镂 。」中「锲」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "語境：「锲 而舍之，朽木不折；锲而不舍，金石可镂 。」\n“锲而舍之”中“锲”的意思是\nA. 坚持\nB. 刻\nC. 放弃\nD. 磨砺\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「锲 而舍之，朽木不折；锲而不舍，金石可镂 。」中「锲」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
   ],
@@ -2213,10 +2213,10 @@
       {
         "resourceKey": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v05",
         "canonicalUnitId": "yw:lesson-1711-p1:vocabulary:lesson-1711-p1:v05",
-        "resourceVersion": "sha256:54a2bec798f54320ceb7055a74e6378fcefaaaad525ee5f1cb5660dc36a80459",
+        "resourceVersion": "sha256:f06969a71715d63dea57be858e8fc3ad7c68176464112b718af0b7b43e2095e8",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2253,10 +2253,10 @@
       {
         "resourceKey": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v09",
         "canonicalUnitId": "yw:lesson-1711-p1:vocabulary:lesson-1711-p1:v09",
-        "resourceVersion": "sha256:a578e4f250cd9670731bbd96db3094eabe113aa95c9b6bcb6ca1938d8dd97e1a",
+        "resourceVersion": "sha256:750013aad71859a832a8be0570d32ef5c2c86a9bf075bd1e653f559632c1e4b1",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2283,10 +2283,10 @@
       {
         "resourceKey": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v12",
         "canonicalUnitId": "yw:lesson-1711-p1:vocabulary:lesson-1711-p1:v12",
-        "resourceVersion": "sha256:c122611444071015293e85c8ba91d191efc04bd7047b1b8a1e806ab6d8bd2726",
+        "resourceVersion": "sha256:90c12910aa26d4a47bf5955495184b4749f53692805944cb97c442ede301cd19",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2575,7 +2575,7 @@
       },
       {
         "requirementId": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v05",
-        "sourceVersion": "sha256:54a2bec798f54320ceb7055a74e6378fcefaaaad525ee5f1cb5660dc36a80459",
+        "sourceVersion": "sha256:f06969a71715d63dea57be858e8fc3ad7c68176464112b718af0b7b43e2095e8",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2615,7 +2615,7 @@
       },
       {
         "requirementId": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v09",
-        "sourceVersion": "sha256:a578e4f250cd9670731bbd96db3094eabe113aa95c9b6bcb6ca1938d8dd97e1a",
+        "sourceVersion": "sha256:750013aad71859a832a8be0570d32ef5c2c86a9bf075bd1e653f559632c1e4b1",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2645,7 +2645,7 @@
       },
       {
         "requirementId": "effect:lesson-1711-p1:vocab:lesson-1711-p1:v12",
-        "sourceVersion": "sha256:c122611444071015293e85c8ba91d191efc04bd7047b1b8a1e806ab6d8bd2726",
+        "sourceVersion": "sha256:90c12910aa26d4a47bf5955495184b4749f53692805944cb97c442ede301cd19",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3380,7 +3380,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
+  "curriculumVersion": "yw-dialogue-8527c313533b60a5cd6e",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -402,7 +402,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：极短的瞬间。語境義：极短的时间。瞬息指极短的时间，在诗中指代树木等待的那个转折时刻。",
+      "rule": "沿用原題準據：极短的瞬间。語境義：极短的时间。「瞬息」意为极短的时间，故选C。原诗中「那瞬息」具体指下句所说的雪花在空中绽开的时刻。",
       "sourcePassages": [
         "lesson-1544:p7"
       ],
@@ -476,7 +476,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：他在文中详细阐述了诗歌的中心意蕴。。語境義：内在的含义、韵味。选项A、B、C中的「意蕴」均指内在的韵味或深意，D项中「中心意蕴」虽可通，但在语境中更偏向「中心思想」，语义色彩稍有差异。",
+      "rule": "沿用原題準據：这首诗共有二十行，因此它的意蕴比十行的诗多一倍。。語境義：内在的含义、韵味。「意蕴」指内在的含义、韵味。A、B、C均使用恰当；D仅凭诗行数量便断定意蕴多一倍，把意蕴当作可按行数直接计算的量，使用不当，故选D。",
       "sourcePassages": [],
       "prerequisites": [],
       "misconceptions": [
@@ -639,10 +639,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1544:vocab:lesson-1544:v02",
         "canonicalUnitId": "yw:lesson-1544:vocabulary:lesson-1544:v02",
-        "resourceVersion": "sha256:66961aa001f1d41c863c94498c08861de8668dc3049ac26785d3eebad5812be4",
+        "resourceVersion": "sha256:4936a76c43ac393e4a0274f15e51d124fee2ceb34687b2665b96adb5688acef9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -711,10 +711,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1544:vocab:lesson-1544:v07",
         "canonicalUnitId": "yw:lesson-1544:vocabulary:lesson-1544:v07",
-        "resourceVersion": "sha256:89114717fb00e3ffa42a7cf81c94c7db95e63303498ce816a5e5bbeb61d09f47",
+        "resourceVersion": "sha256:536b6ef65164d65f1371c512c60096071ed8a84d47e0a0ffd52a1b13a72126f2",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -804,10 +804,10 @@
       "word": "瞬息",
       "sourceSentence": "和我们一样它在等待那瞬息",
       "meaning": "极短的时间",
-      "explanation": "瞬息指极短的时间，在诗中指代树木等待的那个转折时刻。",
+      "explanation": "「瞬息」意为极短的时间，故选C。原诗中「那瞬息」具体指下句所说的雪花在空中绽开的时刻。",
       "type": "contextual-choice",
       "difficulty": 2,
-      "question": "「和我们一样它在等待那瞬息」中的「瞬息」指代的是",
+      "question": "「和我们一样它在等待那瞬息」中「瞬息」一词的意思是",
       "options": [
         "漫长的黑夜",
         "雨停的时刻",
@@ -820,7 +820,7 @@
       "version": "vocab-set-df11e2cdbeee3511",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「和我们一样它在等待那瞬息」\n「和我们一样它在等待那瞬息」中的「瞬息」指代的是\nA. 漫长的黑夜\nB. 雨停的时刻\nC. 极短的瞬间\nD. 未来的终点\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「和我们一样它在等待那瞬息」\n「和我们一样它在等待那瞬息」中「瞬息」一词的意思是\nA. 漫长的黑夜\nB. 雨停的时刻\nC. 极短的瞬间\nD. 未来的终点\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「和我们一样它在等待那瞬息」中「瞬息」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -904,24 +904,24 @@
       "word": "意蕴",
       "sourceSentence": "短短几行诗,却蕴藏着丰富的意蕴",
       "meaning": "内在的含义、韵味",
-      "explanation": "选项A、B、C中的「意蕴」均指内在的韵味或深意，D项中「中心意蕴」虽可通，但在语境中更偏向「中心思想」，语义色彩稍有差异。",
+      "explanation": "「意蕴」指内在的含义、韵味。A、B、C均使用恰当；D仅凭诗行数量便断定意蕴多一倍，把意蕴当作可按行数直接计算的量，使用不当，故选D。",
       "type": "discrimination",
       "difficulty": 3,
-      "question": "下列选项中，「意蕴」一词用法与其他三项不同的是",
+      "question": "下列选项中，「意蕴」一词使用不恰当的是",
       "options": [
         "这首诗蕴藏着丰富的意蕴。",
         "他这番话语重心长，意蕴深远。",
         "这幅画的画面简单，但意蕴无穷。",
-        "他在文中详细阐述了诗歌的中心意蕴。"
+        "这首诗共有二十行，因此它的意蕴比十行的诗多一倍。"
       ],
       "answerIndex": 3,
-      "sourceAnswer": "他在文中详细阐述了诗歌的中心意蕴。",
+      "sourceAnswer": "这首诗共有二十行，因此它的意蕴比十行的诗多一倍。",
       "sourceRefs": [],
       "version": "vocab-set-df11e2cdbeee3511",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「短短几行诗,却蕴藏着丰富的意蕴」\n下列选项中，「意蕴」一词用法与其他三项不同的是\nA. 这首诗蕴藏着丰富的意蕴。\nB. 他这番话语重心长，意蕴深远。\nC. 这幅画的画面简单，但意蕴无穷。\nD. 他在文中详细阐述了诗歌的中心意蕴。\n請選出答案，並用自己的話說明判斷依據。",
-        "請比較以下各項在原句中的意思：\nA. 这首诗蕴藏着丰富的意蕴。\nB. 他这番话语重心长，意蕴深远。\nC. 这幅画的画面简单，但意蕴无穷。\nD. 他在文中详细阐述了诗歌的中心意蕴。\n下列选项中，「意蕴」一词用法与其他三项不同的是。選出一項後逐一說明比較依據，不能只報字母。"
+        "語境：「短短几行诗,却蕴藏着丰富的意蕴」\n下列选项中，「意蕴」一词使用不恰当的是\nA. 这首诗蕴藏着丰富的意蕴。\nB. 他这番话语重心长，意蕴深远。\nC. 这幅画的画面简单，但意蕴无穷。\nD. 这首诗共有二十行，因此它的意蕴比十行的诗多一倍。\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 这首诗蕴藏着丰富的意蕴。\nB. 他这番话语重心长，意蕴深远。\nC. 这幅画的画面简单，但意蕴无穷。\nD. 这首诗共有二十行，因此它的意蕴比十行的诗多一倍。\n下列选项中，「意蕴」一词使用不恰当的是。選出一項後逐一說明比較依據，不能只報字母。"
       ]
     },
     {
@@ -1090,10 +1090,10 @@
       {
         "resourceKey": "effect:lesson-1544:vocab:lesson-1544:v02",
         "canonicalUnitId": "yw:lesson-1544:vocabulary:lesson-1544:v02",
-        "resourceVersion": "sha256:66961aa001f1d41c863c94498c08861de8668dc3049ac26785d3eebad5812be4",
+        "resourceVersion": "sha256:4936a76c43ac393e4a0274f15e51d124fee2ceb34687b2665b96adb5688acef9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1126,10 +1126,10 @@
       {
         "resourceKey": "effect:lesson-1544:vocab:lesson-1544:v07",
         "canonicalUnitId": "yw:lesson-1544:vocabulary:lesson-1544:v07",
-        "resourceVersion": "sha256:89114717fb00e3ffa42a7cf81c94c7db95e63303498ce816a5e5bbeb61d09f47",
+        "resourceVersion": "sha256:536b6ef65164d65f1371c512c60096071ed8a84d47e0a0ffd52a1b13a72126f2",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1394,7 +1394,7 @@
       },
       {
         "requirementId": "effect:lesson-1544:vocab:lesson-1544:v02",
-        "sourceVersion": "sha256:66961aa001f1d41c863c94498c08861de8668dc3049ac26785d3eebad5812be4",
+        "sourceVersion": "sha256:4936a76c43ac393e4a0274f15e51d124fee2ceb34687b2665b96adb5688acef9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1434,7 +1434,7 @@
       },
       {
         "requirementId": "effect:lesson-1544:vocab:lesson-1544:v07",
-        "sourceVersion": "sha256:89114717fb00e3ffa42a7cf81c94c7db95e63303498ce816a5e5bbeb61d09f47",
+        "sourceVersion": "sha256:536b6ef65164d65f1371c512c60096071ed8a84d47e0a0ffd52a1b13a72126f2",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1757,7 +1757,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-60c4ea7c44d7448b6ffd",
+  "curriculumVersion": "yw-dialogue-e3693d5ca1e94d1146c8",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

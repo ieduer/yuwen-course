@@ -1072,10 +1072,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1543:vocab:lesson-1543:v03",
         "canonicalUnitId": "yw:lesson-1543:vocabulary:lesson-1543:v03",
-        "resourceVersion": "sha256:07fe21090386ae749ecfa136c6a56138fab21b4ccb7c675e593a6214a73571a1",
+        "resourceVersion": "sha256:3e9ba9f5b496f098bb60f6f0a11d1babbe3ed8a3b2177eca540fe0b5047974c8",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1224,7 +1224,7 @@
       "difficulty": 2,
       "question": "「母牛低头啮草的样子超越了任何的石像」中「啮」的意思是",
       "options": [
-        "咀嚼",
+        "嗅闻",
         "吞咽",
         "啃",
         "舔"
@@ -1235,7 +1235,7 @@
       "version": "vocab-set-f7b0f642a1630a4c",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「母牛低头啮草的样子超越了任何的石像」\n「母牛低头啮草的样子超越了任何的石像」中「啮」的意思是\nA. 咀嚼\nB. 吞咽\nC. 啃\nD. 舔\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「母牛低头啮草的样子超越了任何的石像」\n「母牛低头啮草的样子超越了任何的石像」中「啮」的意思是\nA. 嗅闻\nB. 吞咽\nC. 啃\nD. 舔\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「母牛低头啮草的样子超越了任何的石像」中「啮」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1480,10 +1480,10 @@
       {
         "resourceKey": "effect:lesson-1543:vocab:lesson-1543:v03",
         "canonicalUnitId": "yw:lesson-1543:vocabulary:lesson-1543:v03",
-        "resourceVersion": "sha256:07fe21090386ae749ecfa136c6a56138fab21b4ccb7c675e593a6214a73571a1",
+        "resourceVersion": "sha256:3e9ba9f5b496f098bb60f6f0a11d1babbe3ed8a3b2177eca540fe0b5047974c8",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1762,7 +1762,7 @@
       },
       {
         "requirementId": "effect:lesson-1543:vocab:lesson-1543:v03",
-        "sourceVersion": "sha256:07fe21090386ae749ecfa136c6a56138fab21b4ccb7c675e593a6214a73571a1",
+        "sourceVersion": "sha256:3e9ba9f5b496f098bb60f6f0a11d1babbe3ed8a3b2177eca540fe0b5047974c8",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2104,7 +2104,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-0b5a607046552617ac9a",
+  "curriculumVersion": "yw-dialogue-c1eacf0487915454173c",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

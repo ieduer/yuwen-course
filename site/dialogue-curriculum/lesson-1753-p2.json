@@ -943,7 +943,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：几乎、大概。語境義：大概、几乎。殆，副词，几乎、将近。",
+      "rule": "沿用原題準據：几乎、将近。語境義：几乎、将近。殆，副词，几乎、将近。",
       "sourcePassages": [
         "lesson-1753-p2:p1"
       ],
@@ -1041,10 +1041,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v01",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v01",
-        "resourceVersion": "sha256:bb6270b366e93b255411820671af344f0bd8ba06fbc068042719d2fd6d507a1c",
+        "resourceVersion": "sha256:df5aa43a432e7fdb2fab5ea78e2f35d9afe22ffe0b26a5296368e8438b2f4ee1",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1117,10 +1117,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v05",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v05",
-        "resourceVersion": "sha256:2bff63b95279e2c6917a781453294fcb3e14a4cf71e5d7d637146cada4b497bc",
+        "resourceVersion": "sha256:db76f8ccc3960b9dc8f2d24bbff6d1d178953c1442038e7ab00ee5ac32614470",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1136,10 +1136,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v06",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v06",
-        "resourceVersion": "sha256:7436c026308b9a7c7b4e32fe9e0106ad7e2e3694a6d2e737926da18ec0f0c135",
+        "resourceVersion": "sha256:8308310e0af60918f69233a01efa37caeecceab322d9d9562c487ab32e539d1b",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1193,10 +1193,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v09",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v09",
-        "resourceVersion": "sha256:30a5d876545219035b2e31cff5ebde2dd5123e8722cb5fb9b9fcd5041bd00a31",
+        "resourceVersion": "sha256:ba330900221295202f2c3a12b611612d69a1bfea3c33582ed62fc8bd15a12232",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1272,7 +1272,7 @@
       "difficulty": 1,
       "question": "「弊在赂秦」中「赂」的意思是",
       "options": [
-        "贿赂",
+        "劫掠",
         "赠送财物",
         "讨好",
         "出卖"
@@ -1285,7 +1285,7 @@
       "version": "vocab-set-063fbb804db6bc69",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「弊在赂秦」\n「弊在赂秦」中「赂」的意思是\nA. 贿赂\nB. 赠送财物\nC. 讨好\nD. 出卖\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「弊在赂秦」\n「弊在赂秦」中「赂」的意思是\nA. 劫掠\nB. 赠送财物\nC. 讨好\nD. 出卖\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「弊在赂秦」中「赂」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1383,7 +1383,7 @@
         "所以不战而强弱胜负已经判决了。",
         "所以不战而强弱胜负的局势已经确定了。",
         "所以不战而强弱胜负已经被法官裁定了。",
-        "所以不战而强弱胜负已经分出高下了。"
+        "所以不必交战，弱国便已转弱为强、转败为胜了。"
       ],
       "answerIndex": 1,
       "sourceAnswer": "所以不战而强弱胜负的局势已经确定了。",
@@ -1393,7 +1393,7 @@
       "version": "vocab-set-063fbb804db6bc69",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「故不战而强弱胜负已判 矣」\n「故不战而强弱胜负已判矣」句意理解正确的是\nA. 所以不战而强弱胜负已经判决了。\nB. 所以不战而强弱胜负的局势已经确定了。\nC. 所以不战而强弱胜负已经被法官裁定了。\nD. 所以不战而强弱胜负已经分出高下了。\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「故不战而强弱胜负已判 矣」\n「故不战而强弱胜负已判矣」句意理解正确的是\nA. 所以不战而强弱胜负已经判决了。\nB. 所以不战而强弱胜负的局势已经确定了。\nC. 所以不战而强弱胜负已经被法官裁定了。\nD. 所以不必交战，弱国便已转弱为强、转败为胜了。\n請選出答案，並用自己的話說明判斷依據。",
         "「故不战而强弱胜负已判 矣」中的「判」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1410,7 +1410,7 @@
         "虚构的传说",
         "有情节的叙事",
         "旧事、先例",
-        "经历的事情"
+        "事情的缘由"
       ],
       "answerIndex": 2,
       "sourceAnswer": "旧事、先例",
@@ -1420,7 +1420,7 @@
       "version": "vocab-set-063fbb804db6bc69",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「下 而从六国破亡之故事」\n「下而从六国破亡之故事」中「故事」的古义是\nA. 虚构的传说\nB. 有情节的叙事\nC. 旧事、先例\nD. 经历的事情\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「下 而从六国破亡之故事」\n「下而从六国破亡之故事」中「故事」的古义是\nA. 虚构的传说\nB. 有情节的叙事\nC. 旧事、先例\nD. 事情的缘由\n請選出答案，並用自己的話說明判斷依據。",
         "回到「下 而从六国破亡之故事」：「故事」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1482,26 +1482,26 @@
       "id": "lesson-1753-p2:v09",
       "word": "殆",
       "sourceSentence": "处秦革灭殆尽之际",
-      "meaning": "大概、几乎",
+      "meaning": "几乎、将近",
       "explanation": "殆，副词，几乎、将近。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「处秦革灭殆尽之际」中「殆」的意思是",
       "options": [
         "危险",
-        "几乎、大概",
+        "几乎、将近",
         "怠慢",
         "导致"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "几乎、大概",
+      "sourceAnswer": "几乎、将近",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-063fbb804db6bc69",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「处秦革灭殆尽之际」\n「处秦革灭殆尽之际」中「殆」的意思是\nA. 危险\nB. 几乎、大概\nC. 怠慢\nD. 导致\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「处秦革灭殆尽之际」\n「处秦革灭殆尽之际」中「殆」的意思是\nA. 危险\nB. 几乎、将近\nC. 怠慢\nD. 导致\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「处秦革灭殆尽之际」中「殆」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1610,10 +1610,10 @@
       {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v01",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v01",
-        "resourceVersion": "sha256:bb6270b366e93b255411820671af344f0bd8ba06fbc068042719d2fd6d507a1c",
+        "resourceVersion": "sha256:df5aa43a432e7fdb2fab5ea78e2f35d9afe22ffe0b26a5296368e8438b2f4ee1",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1650,20 +1650,20 @@
       {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v05",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v05",
-        "resourceVersion": "sha256:2bff63b95279e2c6917a781453294fcb3e14a4cf71e5d7d637146cada4b497bc",
+        "resourceVersion": "sha256:db76f8ccc3960b9dc8f2d24bbff6d1d178953c1442038e7ab00ee5ac32614470",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v06",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v06",
-        "resourceVersion": "sha256:7436c026308b9a7c7b4e32fe9e0106ad7e2e3694a6d2e737926da18ec0f0c135",
+        "resourceVersion": "sha256:8308310e0af60918f69233a01efa37caeecceab322d9d9562c487ab32e539d1b",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1690,10 +1690,10 @@
       {
         "resourceKey": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v09",
         "canonicalUnitId": "yw:lesson-1753-p2:vocabulary:lesson-1753-p2:v09",
-        "resourceVersion": "sha256:30a5d876545219035b2e31cff5ebde2dd5123e8722cb5fb9b9fcd5041bd00a31",
+        "resourceVersion": "sha256:ba330900221295202f2c3a12b611612d69a1bfea3c33582ed62fc8bd15a12232",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1926,7 +1926,7 @@
       },
       {
         "requirementId": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v01",
-        "sourceVersion": "sha256:bb6270b366e93b255411820671af344f0bd8ba06fbc068042719d2fd6d507a1c",
+        "sourceVersion": "sha256:df5aa43a432e7fdb2fab5ea78e2f35d9afe22ffe0b26a5296368e8438b2f4ee1",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1966,7 +1966,7 @@
       },
       {
         "requirementId": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v05",
-        "sourceVersion": "sha256:2bff63b95279e2c6917a781453294fcb3e14a4cf71e5d7d637146cada4b497bc",
+        "sourceVersion": "sha256:db76f8ccc3960b9dc8f2d24bbff6d1d178953c1442038e7ab00ee5ac32614470",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1976,7 +1976,7 @@
       },
       {
         "requirementId": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v06",
-        "sourceVersion": "sha256:7436c026308b9a7c7b4e32fe9e0106ad7e2e3694a6d2e737926da18ec0f0c135",
+        "sourceVersion": "sha256:8308310e0af60918f69233a01efa37caeecceab322d9d9562c487ab32e539d1b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2006,7 +2006,7 @@
       },
       {
         "requirementId": "effect:lesson-1753-p2:vocab:lesson-1753-p2:v09",
-        "sourceVersion": "sha256:30a5d876545219035b2e31cff5ebde2dd5123e8722cb5fb9b9fcd5041bd00a31",
+        "sourceVersion": "sha256:ba330900221295202f2c3a12b611612d69a1bfea3c33582ed62fc8bd15a12232",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2539,7 +2539,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-677a7e2b8e1a0cf72cc8",
+  "curriculumVersion": "yw-dialogue-44bd14656f1f613396f6",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

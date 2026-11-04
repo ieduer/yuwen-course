@@ -582,7 +582,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：祖国。語境義：故都，这里指金陵。。词中「故国」指代旧日都城金陵，与现代汉语中指称国家的「祖国」含义不同。",
+      "rule": "沿用原題準據：祖国。語境義：故都，这里指金陵。。句中「故国」意为故都，这里指金陵。B、C、D均表示昔日的都城，只有A「祖国」指自己的国家，与句中「故国」的含义不同。",
       "sourcePassages": [
         "lesson-1755-p2:p3"
       ],
@@ -818,10 +818,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1755-p2:vocab:lesson-1755-p2:v01",
         "canonicalUnitId": "yw:lesson-1755-p2:vocabulary:lesson-1755-p2:v01",
-        "resourceVersion": "sha256:3112e5965bbf5f1c67a9fd357e7606f68675767157fd7c637e996eee4c6aec45",
+        "resourceVersion": "sha256:88aaa82922cf681d06ea680168748335fd54cc2ad720c4f989f4691474625bc0",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -837,10 +837,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1755-p2:vocab:lesson-1755-p2:v02",
         "canonicalUnitId": "yw:lesson-1755-p2:vocabulary:lesson-1755-p2:v02",
-        "resourceVersion": "sha256:f3a7d1d194e7462997d3b33c514c4bdf124b9bf56335c0d1e1c6ccce6be0c67f",
+        "resourceVersion": "sha256:64add3e9052654da2b904d265d686f729a61933935c5f7dc7adb09fc07095948",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1033,7 +1033,7 @@
         "登高望远，放眼视察",
         "登上高处，寄送目光",
         "登山临水，放眼远眺",
-        "登高凭栏，极目远望"
+        "登高凭栏，目送友人"
       ],
       "answerIndex": 2,
       "sourceAnswer": "登山临水，放眼远眺",
@@ -1041,7 +1041,7 @@
       "version": "vocab-set-2484d584b9dd96c9",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「登临送目 ，正故国 晚秋，天气初肃」\n「登临送目」在词中的意思是\nA. 登高望远，放眼视察\nB. 登上高处，寄送目光\nC. 登山临水，放眼远眺\nD. 登高凭栏，极目远望\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「登临送目 ，正故国 晚秋，天气初肃」\n「登临送目」在词中的意思是\nA. 登高望远，放眼视察\nB. 登上高处，寄送目光\nC. 登山临水，放眼远眺\nD. 登高凭栏，目送友人\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「登临送目 ，正故国 晚秋，天气初肃」中「登临送目」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1050,15 +1050,15 @@
       "word": "故国",
       "sourceSentence": "登临送目 ，正故国 晚秋，天气初肃",
       "meaning": "故都，这里指金陵。",
-      "explanation": "词中「故国」指代旧日都城金陵，与现代汉语中指称国家的「祖国」含义不同。",
+      "explanation": "句中「故国」意为故都，这里指金陵。B、C、D均表示昔日的都城，只有A「祖国」指自己的国家，与句中「故国」的含义不同。",
       "type": "gu-jin",
       "difficulty": 1,
       "question": "「故国」一词在句中的含义与现代汉语中哪个词的用法不同？",
       "options": [
         "祖国",
-        "旧国",
+        "昔日的都城",
         "故都",
-        "故乡"
+        "旧都"
       ],
       "answerIndex": 0,
       "sourceAnswer": "祖国",
@@ -1066,7 +1066,7 @@
       "version": "vocab-set-2484d584b9dd96c9",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「登临送目 ，正故国 晚秋，天气初肃」\n「故国」一词在句中的含义与现代汉语中哪个词的用法不同？\nA. 祖国\nB. 旧国\nC. 故都\nD. 故乡\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「登临送目 ，正故国 晚秋，天气初肃」\n「故国」一词在句中的含义与现代汉语中哪个词的用法不同？\nA. 祖国\nB. 昔日的都城\nC. 故都\nD. 旧都\n請選出答案，並用自己的話說明判斷依據。",
         "回到「登临送目 ，正故国 晚秋，天气初肃」：「故国」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1332,20 +1332,20 @@
       {
         "resourceKey": "effect:lesson-1755-p2:vocab:lesson-1755-p2:v01",
         "canonicalUnitId": "yw:lesson-1755-p2:vocabulary:lesson-1755-p2:v01",
-        "resourceVersion": "sha256:3112e5965bbf5f1c67a9fd357e7606f68675767157fd7c637e996eee4c6aec45",
+        "resourceVersion": "sha256:88aaa82922cf681d06ea680168748335fd54cc2ad720c4f989f4691474625bc0",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1755-p2:vocab:lesson-1755-p2:v02",
         "canonicalUnitId": "yw:lesson-1755-p2:vocabulary:lesson-1755-p2:v02",
-        "resourceVersion": "sha256:f3a7d1d194e7462997d3b33c514c4bdf124b9bf56335c0d1e1c6ccce6be0c67f",
+        "resourceVersion": "sha256:64add3e9052654da2b904d265d686f729a61933935c5f7dc7adb09fc07095948",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1644,7 +1644,7 @@
       },
       {
         "requirementId": "effect:lesson-1755-p2:vocab:lesson-1755-p2:v01",
-        "sourceVersion": "sha256:3112e5965bbf5f1c67a9fd357e7606f68675767157fd7c637e996eee4c6aec45",
+        "sourceVersion": "sha256:88aaa82922cf681d06ea680168748335fd54cc2ad720c4f989f4691474625bc0",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1654,7 +1654,7 @@
       },
       {
         "requirementId": "effect:lesson-1755-p2:vocab:lesson-1755-p2:v02",
-        "sourceVersion": "sha256:f3a7d1d194e7462997d3b33c514c4bdf124b9bf56335c0d1e1c6ccce6be0c67f",
+        "sourceVersion": "sha256:64add3e9052654da2b904d265d686f729a61933935c5f7dc7adb09fc07095948",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2222,7 +2222,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-03be5f15a002127ba571",
+  "curriculumVersion": "yw-dialogue-632c2ffd9804b8676c4a",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

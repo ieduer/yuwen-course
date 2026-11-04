@@ -486,7 +486,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：难道，表反问。語境義：怎么。「岂」在诗经中常作反问语气词，意为“怎么、难道”。",
+      "rule": "沿用原題準據：难道，表反问。語境義：怎么。「岂」在本句中是副词，表示反问，意为「怎么、难道」。",
       "sourcePassages": [
         "lesson-1497:p1",
         "lesson-1497:p3",
@@ -508,7 +508,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：与子偕行。語境義：和、跟。「与」在此处作介词，意为“和、跟”。选项A、B、D皆为介词，但语境含义不同，C项与例句完全一致。",
+      "rule": "沿用原題準據：与子偕行。語境義：和、跟。例句与C项中的「与」均为介词，意为「和、跟」。A项「与人为善」本指赞助别人做好事，其中「与」意为赞助、赞许；B项「与其」用于比较取舍；D项「与」为动词，意为给予。故选C。",
       "sourcePassages": [
         "lesson-1497:p1",
         "lesson-1497:p2",
@@ -726,10 +726,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1497:vocab:lesson-1497:v01",
         "canonicalUnitId": "yw:lesson-1497:vocabulary:lesson-1497:v01",
-        "resourceVersion": "sha256:ddcbc7ad3d8d5829dd7766570d212d6ac534a3d99a7cd69f3b0ace2ad2cf132a",
+        "resourceVersion": "sha256:ef0cf8f9ab8ea24fe97602d22408ad7f64dd7887bff2ec15fc455867e775ca08",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -744,10 +744,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1497:vocab:lesson-1497:v02",
         "canonicalUnitId": "yw:lesson-1497:vocabulary:lesson-1497:v02",
-        "resourceVersion": "sha256:236f04c8ef5bf75d623f4343bf4f06371a42f205acad7a03fa8d9750ad9340fe",
+        "resourceVersion": "sha256:0ae8e91e03b0322fb0ffc4bca1a42a4a59c9fc23d16baf64839b354affb888b7",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -798,10 +798,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1497:vocab:lesson-1497:v05",
         "canonicalUnitId": "yw:lesson-1497:vocabulary:lesson-1497:v05",
-        "resourceVersion": "sha256:189c5bca121fd9f64b5e277692a7c5f66489c745bda9963278f554dc1f1fc764",
+        "resourceVersion": "sha256:931c9effe08379dc579ce696d58a898f5583a639607f1403b392a5ec7dc99b96",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -888,7 +888,7 @@
       "word": "岂",
       "sourceSentence": "岂曰无衣?",
       "meaning": "怎么",
-      "explanation": "「岂」在诗经中常作反问语气词，意为“怎么、难道”。",
+      "explanation": "「岂」在本句中是副词，表示反问，意为「怎么、难道」。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「岂曰无衣」中「岂」的用法与含义是",
@@ -915,15 +915,15 @@
       "word": "与",
       "sourceSentence": "与子同袍。",
       "meaning": "和、跟",
-      "explanation": "「与」在此处作介词，意为“和、跟”。选项A、B、D皆为介词，但语境含义不同，C项与例句完全一致。",
+      "explanation": "例句与C项中的「与」均为介词，意为「和、跟」。A项「与人为善」本指赞助别人做好事，其中「与」意为赞助、赞许；B项「与其」用于比较取舍；D项「与」为动词，意为给予。故选C。",
       "type": "usage",
       "difficulty": 2,
       "question": "下列选项中「与」的用法与「与子同袍」中的「与」一致的是",
       "options": [
         "与人为善",
-        "与日俱增",
+        "与其坐待，不如力行",
         "与子偕行",
-        "与虎谋皮"
+        "玉斗一双，欲与亚父"
       ],
       "answerIndex": 2,
       "sourceAnswer": "与子偕行",
@@ -933,7 +933,7 @@
       "version": "vocab-set-b7c9d3cbba00c225",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「与子同袍。」\n下列选项中「与」的用法与「与子同袍」中的「与」一致的是\nA. 与人为善\nB. 与日俱增\nC. 与子偕行\nD. 与虎谋皮\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「与子同袍。」\n下列选项中「与」的用法与「与子同袍」中的「与」一致的是\nA. 与人为善\nB. 与其坐待，不如力行\nC. 与子偕行\nD. 玉斗一双，欲与亚父\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「与子同袍。」的句意，解釋「与」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -997,7 +997,7 @@
       "difficulty": 2,
       "question": "下列词语替换「修我戈矛」中「修」字后，句意最准确的是",
       "options": [
-        "修理",
+        "修饰",
         "学习",
         "整备",
         "修改"
@@ -1008,7 +1008,7 @@
       "version": "vocab-set-b7c9d3cbba00c225",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「修我戈矛」\n下列词语替换「修我戈矛」中「修」字后，句意最准确的是\nA. 修理\nB. 学习\nC. 整备\nD. 修改\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「修我戈矛」\n下列词语替换「修我戈矛」中「修」字后，句意最准确的是\nA. 修饰\nB. 学习\nC. 整备\nD. 修改\n請選出答案，並用自己的話說明判斷依據。",
         "請用恰當的現代說法替換「修我戈矛」中的「修」，並解釋這個替換如何保留原句的意思。"
       ]
     },
@@ -1171,19 +1171,19 @@
       {
         "resourceKey": "effect:lesson-1497:vocab:lesson-1497:v01",
         "canonicalUnitId": "yw:lesson-1497:vocabulary:lesson-1497:v01",
-        "resourceVersion": "sha256:ddcbc7ad3d8d5829dd7766570d212d6ac534a3d99a7cd69f3b0ace2ad2cf132a",
+        "resourceVersion": "sha256:ef0cf8f9ab8ea24fe97602d22408ad7f64dd7887bff2ec15fc455867e775ca08",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1497:vocab:lesson-1497:v02",
         "canonicalUnitId": "yw:lesson-1497:vocabulary:lesson-1497:v02",
-        "resourceVersion": "sha256:236f04c8ef5bf75d623f4343bf4f06371a42f205acad7a03fa8d9750ad9340fe",
+        "resourceVersion": "sha256:0ae8e91e03b0322fb0ffc4bca1a42a4a59c9fc23d16baf64839b354affb888b7",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1207,10 +1207,10 @@
       {
         "resourceKey": "effect:lesson-1497:vocab:lesson-1497:v05",
         "canonicalUnitId": "yw:lesson-1497:vocabulary:lesson-1497:v05",
-        "resourceVersion": "sha256:189c5bca121fd9f64b5e277692a7c5f66489c745bda9963278f554dc1f1fc764",
+        "resourceVersion": "sha256:931c9effe08379dc579ce696d58a898f5583a639607f1403b392a5ec7dc99b96",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1452,7 +1452,7 @@
       },
       {
         "requirementId": "effect:lesson-1497:vocab:lesson-1497:v01",
-        "sourceVersion": "sha256:ddcbc7ad3d8d5829dd7766570d212d6ac534a3d99a7cd69f3b0ace2ad2cf132a",
+        "sourceVersion": "sha256:ef0cf8f9ab8ea24fe97602d22408ad7f64dd7887bff2ec15fc455867e775ca08",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1462,7 +1462,7 @@
       },
       {
         "requirementId": "effect:lesson-1497:vocab:lesson-1497:v02",
-        "sourceVersion": "sha256:236f04c8ef5bf75d623f4343bf4f06371a42f205acad7a03fa8d9750ad9340fe",
+        "sourceVersion": "sha256:0ae8e91e03b0322fb0ffc4bca1a42a4a59c9fc23d16baf64839b354affb888b7",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1492,7 +1492,7 @@
       },
       {
         "requirementId": "effect:lesson-1497:vocab:lesson-1497:v05",
-        "sourceVersion": "sha256:189c5bca121fd9f64b5e277692a7c5f66489c745bda9963278f554dc1f1fc764",
+        "sourceVersion": "sha256:931c9effe08379dc579ce696d58a898f5583a639607f1403b392a5ec7dc99b96",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1919,7 +1919,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-e86e1e481afc3d13c8d4",
+  "curriculumVersion": "yw-dialogue-b0889e2f619dcc7785bb",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

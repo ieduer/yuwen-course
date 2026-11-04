@@ -572,7 +572,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：同「樽」，酒杯。語境義：酒杯。「尊」通「樽」，是古代盛酒的器具，在此作量词指代一杯酒。",
+      "rule": "沿用原題準據：同「樽」，酒杯。語境義：酒杯。「尊」同「樽」，酒杯。「一尊」在此指一杯酒；「酹」指把酒洒在地上，表示凭吊。此句写以酒祭月，寄托感慨。",
       "sourcePassages": [
         "lesson-1706-p1:p1"
       ],
@@ -823,10 +823,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1706-p1:vocab:lesson-1706-p1:v06",
         "canonicalUnitId": "yw:lesson-1706-p1:vocabulary:lesson-1706-p1:v06",
-        "resourceVersion": "sha256:dc7871d6b3349c382c34cb64fffe5b4e8077193086edae618918fac3affe4707",
+        "resourceVersion": "sha256:2d0a4ea5dcc44245c4497eaeab802f547301b8240544f652beeb0d56a4741656",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1040,15 +1040,15 @@
       "word": "尊",
       "sourceSentence": "一尊 还酹 江月",
       "meaning": "酒杯",
-      "explanation": "「尊」通「樽」，是古代盛酒的器具，在此作量词指代一杯酒。",
+      "explanation": "「尊」同「樽」，酒杯。「一尊」在此指一杯酒；「酹」指把酒洒在地上，表示凭吊。此句写以酒祭月，寄托感慨。",
       "type": "usage",
       "difficulty": 1,
-      "question": "「一尊还酹江月」中「尊」的用法是",
+      "question": "「一尊还酹江月」中「尊」的意思是",
       "options": [
         "尊敬",
         "同「樽」，酒杯",
         "高贵",
-        "量词"
+        "地位尊贵的人"
       ],
       "answerIndex": 1,
       "sourceAnswer": "同「樽」，酒杯",
@@ -1056,7 +1056,7 @@
       "version": "vocab-set-9fbc28ac9e9ed235",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「一尊 还酹 江月」\n「一尊还酹江月」中「尊」的用法是\nA. 尊敬\nB. 同「樽」，酒杯\nC. 高贵\nD. 量词\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「一尊 还酹 江月」\n「一尊还酹江月」中「尊」的意思是\nA. 尊敬\nB. 同「樽」，酒杯\nC. 高贵\nD. 地位尊贵的人\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「一尊 还酹 江月」的句意，解釋「尊」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1272,10 +1272,10 @@
       {
         "resourceKey": "effect:lesson-1706-p1:vocab:lesson-1706-p1:v06",
         "canonicalUnitId": "yw:lesson-1706-p1:vocabulary:lesson-1706-p1:v06",
-        "resourceVersion": "sha256:dc7871d6b3349c382c34cb64fffe5b4e8077193086edae618918fac3affe4707",
+        "resourceVersion": "sha256:2d0a4ea5dcc44245c4497eaeab802f547301b8240544f652beeb0d56a4741656",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1584,7 +1584,7 @@
       },
       {
         "requirementId": "effect:lesson-1706-p1:vocab:lesson-1706-p1:v06",
-        "sourceVersion": "sha256:dc7871d6b3349c382c34cb64fffe5b4e8077193086edae618918fac3affe4707",
+        "sourceVersion": "sha256:2d0a4ea5dcc44245c4497eaeab802f547301b8240544f652beeb0d56a4741656",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2020,7 +2020,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-0683ac6161e6994a165b",
+  "curriculumVersion": "yw-dialogue-76909fb6d628bf4c838b",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

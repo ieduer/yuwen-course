@@ -250,7 +250,7 @@ export function validateAPlusCompatibilityContract(registry, manifest = null) {
       || excludedItems !== Number(compatibility.excludedItemCount)
       || eligibleItems.length !== Number(compatibility.eligibleItemCount)
       || items.some((item) => (
-        (item.sourceReleaseId !== compatibility.sourceReleaseId && !(expansion && item.sourceReleaseId === ORIGINAL_FORMAL_RELEASE.sourceReleaseId && !item.formalScopePolicyVersion))
+        (item.sourceReleaseId !== compatibility.sourceReleaseId && !(expansion && (manifest.priorReleases || []).some((release) => release.sourceReleaseId === item.sourceReleaseId)))
         || item.mappingVersion !== compatibility.mappingVersion
         || !/^yw:lesson-[a-z0-9-]+:(?:interaction:[A-Za-z]+|vocabulary:[A-Za-z0-9:-]+)$/.test(String(item.canonicalUnitId || ""))
         || !/^sha256:[a-f0-9]{64}$/.test(String(item.resourceVersion || ""))

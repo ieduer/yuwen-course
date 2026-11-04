@@ -826,7 +826,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：抛弃。語境義：抛弃、丢弃。「摈弃」侧重于抛弃、丢掉（不好的思想或事物），「抛弃」与之语义最接近，且符合语境。",
+      "rule": "沿用原題準據：抛弃。語境義：抛弃、丢弃。「摈弃」指抛弃，本句指舍去憎恨、傲慢和恐惧等负面心理。「克制」只是抑制、控制，并不表示将其舍去；「遗弃」「废弃」也不适合此处的搭配，因此选B。",
       "sourcePassages": [
         "lesson-1692-p4:p20"
       ],
@@ -1077,10 +1077,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1692-p4:vocab:lesson-1692-p4:v11",
         "canonicalUnitId": "yw:lesson-1692-p4:vocabulary:lesson-1692-p4:v11",
-        "resourceVersion": "sha256:ab7a3ec0072aef99011fee9906cd201ad02b937778697e8bd6983e33c5eb314b",
+        "resourceVersion": "sha256:c02f49f8c052bdf6f6653ef45ef397c46155295fdd874907bfb1ea81dd1ade4f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1276,12 +1276,12 @@
       "word": "摈弃",
       "sourceSentence": "可是，即使我们能摈弃 憎恨、傲慢和恐惧，",
       "meaning": "抛弃、丢弃",
-      "explanation": "「摈弃」侧重于抛弃、丢掉（不好的思想或事物），「抛弃」与之语义最接近，且符合语境。",
+      "explanation": "「摈弃」指抛弃，本句指舍去憎恨、傲慢和恐惧等负面心理。「克制」只是抑制、控制，并不表示将其舍去；「遗弃」「废弃」也不适合此处的搭配，因此选B。",
       "type": "discrimination",
       "difficulty": 2,
       "question": "在「即使我们能摈弃憎恨、傲慢和恐惧」句中，下列哪个词最适合替换「摈弃」？",
       "options": [
-        "放弃",
+        "克制",
         "抛弃",
         "遗弃",
         "废弃"
@@ -1292,8 +1292,8 @@
       "version": "vocab-set-5434a58ca349ed61",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「可是，即使我们能摈弃 憎恨、傲慢和恐惧，」\n在「即使我们能摈弃憎恨、傲慢和恐惧」句中，下列哪个词最适合替换「摈弃」？\nA. 放弃\nB. 抛弃\nC. 遗弃\nD. 废弃\n請選出答案，並用自己的話說明判斷依據。",
-        "請比較以下各項在原句中的意思：\nA. 放弃\nB. 抛弃\nC. 遗弃\nD. 废弃\n在「即使我们能摈弃憎恨、傲慢和恐惧」句中，下列哪个词最适合替换「摈弃」？。選出一項後逐一說明比較依據，不能只報字母。"
+        "語境：「可是，即使我们能摈弃 憎恨、傲慢和恐惧，」\n在「即使我们能摈弃憎恨、傲慢和恐惧」句中，下列哪个词最适合替换「摈弃」？\nA. 克制\nB. 抛弃\nC. 遗弃\nD. 废弃\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 克制\nB. 抛弃\nC. 遗弃\nD. 废弃\n在「即使我们能摈弃憎恨、傲慢和恐惧」句中，下列哪个词最适合替换「摈弃」？。選出一項後逐一說明比較依據，不能只報字母。"
       ]
     },
     {
@@ -1508,10 +1508,10 @@
       {
         "resourceKey": "effect:lesson-1692-p4:vocab:lesson-1692-p4:v11",
         "canonicalUnitId": "yw:lesson-1692-p4:vocabulary:lesson-1692-p4:v11",
-        "resourceVersion": "sha256:ab7a3ec0072aef99011fee9906cd201ad02b937778697e8bd6983e33c5eb314b",
+        "resourceVersion": "sha256:c02f49f8c052bdf6f6653ef45ef397c46155295fdd874907bfb1ea81dd1ade4f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1820,7 +1820,7 @@
       },
       {
         "requirementId": "effect:lesson-1692-p4:vocab:lesson-1692-p4:v11",
-        "sourceVersion": "sha256:ab7a3ec0072aef99011fee9906cd201ad02b937778697e8bd6983e33c5eb314b",
+        "sourceVersion": "sha256:c02f49f8c052bdf6f6653ef45ef397c46155295fdd874907bfb1ea81dd1ade4f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2143,7 +2143,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-59f273866ac1994654a9",
+  "curriculumVersion": "yw-dialogue-ebc9f7a5459793c304a3",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

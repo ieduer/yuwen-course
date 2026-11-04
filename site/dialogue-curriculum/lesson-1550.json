@@ -494,7 +494,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：清晨。語境義：清晨的，或在清晨。此处“晓梦”指清晨做的梦，形容梦境在晨光中变得模糊迷离。",
+      "rule": "沿用原題準據：清晨。語境義：清晨的，或在清晨。「晓」指清晨，「晓梦」即清晨的梦。此句用庄周梦蝶的典故，表现梦中物我难分的迷惘。",
       "sourcePassages": [
         "lesson-1550:p1"
       ],
@@ -554,7 +554,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：只是当时已惘然，往事不可追。。語境義：只不过是。诗中“只是”意为“只不过是”，带有转折和感叹意，选项B句与诗句用法一致。",
+      "rule": "沿用原題準據：只是当时已惘然，往事不可追。。語境義：只不过是。诗句及B中的「只是」意为「只不过是」，带有转折意味；A、C、D中的「只是」均表示限定，意为「仅仅」，故选B。",
       "sourcePassages": [
         "lesson-1550:p1"
       ],
@@ -701,10 +701,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1550:vocab:lesson-1550:v05",
         "canonicalUnitId": "yw:lesson-1550:vocabulary:lesson-1550:v05",
-        "resourceVersion": "sha256:7cdad48e198d54902913434cd13e39d96cd3b35e32ec3655c1f204a3c1112dd0",
+        "resourceVersion": "sha256:b655f8cb5cbd8eab3bb042b2b0179da5a7031f55e22781edfbbd50128025c395",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -755,10 +755,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1550:vocab:lesson-1550:v08",
         "canonicalUnitId": "yw:lesson-1550:vocabulary:lesson-1550:v08",
-        "resourceVersion": "sha256:ac6a28c48077d9e8c714d4ca5be2c0343c01cc096a60079c1ba1c0e899cbaf58",
+        "resourceVersion": "sha256:d6115f524a69b8805ed3baaf503738576363530e0e4f1b674e55aca781506127",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -881,14 +881,14 @@
       "word": "晓",
       "sourceSentence": "庄生晓梦迷蝴蝶",
       "meaning": "清晨的，或在清晨",
-      "explanation": "此处“晓梦”指清晨做的梦，形容梦境在晨光中变得模糊迷离。",
+      "explanation": "「晓」指清晨，「晓梦」即清晨的梦。此句用庄周梦蝶的典故，表现梦中物我难分的迷惘。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「庄生晓梦迷蝴蝶」中「晓」的意思是",
       "options": [
         "知道",
         "清晨",
-        "破晓时分",
+        "告知",
         "通晓"
       ],
       "answerIndex": 1,
@@ -899,7 +899,7 @@
       "version": "vocab-set-854c34711b6e69cd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「庄生晓梦迷蝴蝶」\n「庄生晓梦迷蝴蝶」中「晓」的意思是\nA. 知道\nB. 清晨\nC. 破晓时分\nD. 通晓\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「庄生晓梦迷蝴蝶」\n「庄生晓梦迷蝴蝶」中「晓」的意思是\nA. 知道\nB. 清晨\nC. 告知\nD. 通晓\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「庄生晓梦迷蝴蝶」中「晓」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -962,14 +962,14 @@
       "word": "只是",
       "sourceSentence": "只是当时已惘然",
       "meaning": "只不过是",
-      "explanation": "诗中“只是”意为“只不过是”，带有转折和感叹意，选项B句与诗句用法一致。",
+      "explanation": "诗句及B中的「只是」意为「只不过是」，带有转折意味；A、C、D中的「只是」均表示限定，意为「仅仅」，故选B。",
       "type": "gu-jin",
       "difficulty": 2,
       "question": "下列句中「只是」的用法与「只是当时已惘然」一致的是",
       "options": [
-        "他什么都好，只是性格太急。",
+        "他只是这次活动的旁观者，并未参与筹备。",
         "只是当时已惘然，往事不可追。",
-        "这件衣服很漂亮，只是贵了点。",
+        "这只是我的猜测，还没有证据。",
         "我只是随口说说，你别放在心上。"
       ],
       "answerIndex": 1,
@@ -980,7 +980,7 @@
       "version": "vocab-set-854c34711b6e69cd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「只是当时已惘然」\n下列句中「只是」的用法与「只是当时已惘然」一致的是\nA. 他什么都好，只是性格太急。\nB. 只是当时已惘然，往事不可追。\nC. 这件衣服很漂亮，只是贵了点。\nD. 我只是随口说说，你别放在心上。\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「只是当时已惘然」\n下列句中「只是」的用法与「只是当时已惘然」一致的是\nA. 他只是这次活动的旁观者，并未参与筹备。\nB. 只是当时已惘然，往事不可追。\nC. 这只是我的猜测，还没有证据。\nD. 我只是随口说说，你别放在心上。\n請選出答案，並用自己的話說明判斷依據。",
         "回到「只是当时已惘然」：「只是」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     }
@@ -1109,10 +1109,10 @@
       {
         "resourceKey": "effect:lesson-1550:vocab:lesson-1550:v05",
         "canonicalUnitId": "yw:lesson-1550:vocabulary:lesson-1550:v05",
-        "resourceVersion": "sha256:7cdad48e198d54902913434cd13e39d96cd3b35e32ec3655c1f204a3c1112dd0",
+        "resourceVersion": "sha256:b655f8cb5cbd8eab3bb042b2b0179da5a7031f55e22781edfbbd50128025c395",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1136,10 +1136,10 @@
       {
         "resourceKey": "effect:lesson-1550:vocab:lesson-1550:v08",
         "canonicalUnitId": "yw:lesson-1550:vocabulary:lesson-1550:v08",
-        "resourceVersion": "sha256:ac6a28c48077d9e8c714d4ca5be2c0343c01cc096a60079c1ba1c0e899cbaf58",
+        "resourceVersion": "sha256:d6115f524a69b8805ed3baaf503738576363530e0e4f1b674e55aca781506127",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1370,7 +1370,7 @@
       },
       {
         "requirementId": "effect:lesson-1550:vocab:lesson-1550:v05",
-        "sourceVersion": "sha256:7cdad48e198d54902913434cd13e39d96cd3b35e32ec3655c1f204a3c1112dd0",
+        "sourceVersion": "sha256:b655f8cb5cbd8eab3bb042b2b0179da5a7031f55e22781edfbbd50128025c395",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1400,7 +1400,7 @@
       },
       {
         "requirementId": "effect:lesson-1550:vocab:lesson-1550:v08",
-        "sourceVersion": "sha256:ac6a28c48077d9e8c714d4ca5be2c0343c01cc096a60079c1ba1c0e899cbaf58",
+        "sourceVersion": "sha256:d6115f524a69b8805ed3baaf503738576363530e0e4f1b674e55aca781506127",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1881,7 +1881,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-9d93213225969b1e2485",
+  "curriculumVersion": "yw-dialogue-cd5063a796397f90db09",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

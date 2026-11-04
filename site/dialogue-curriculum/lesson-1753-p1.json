@@ -1371,7 +1371,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：灭族。語境義：灭族。族，灭族，使动用法。",
+      "rule": "沿用原題準據：灭族。語境義：灭族。族，灭族，名词用作动词，此处指灭亡秦朝。",
       "sourcePassages": [
         "lesson-1753-p1:p4"
       ],
@@ -1391,7 +1391,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：依次。語境義：依次。递，依次。",
+      "rule": "沿用原題準據：依次传递。語境義：依次传递。递，依次传递，这里指帝位一代代传下去。",
       "sourcePassages": [
         "lesson-1753-p1:p4"
       ],
@@ -1621,10 +1621,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v09",
         "canonicalUnitId": "yw:lesson-1753-p1:vocabulary:lesson-1753-p1:v09",
-        "resourceVersion": "sha256:a900ffc6576d32929d2e3dca99a7957b5502351e342c1bd649f7388c66c831a2",
+        "resourceVersion": "sha256:dcbe349246bfd2662579d26cb780fb240e737b87754f1e50c361976a5f5b861e",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1640,10 +1640,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v10",
         "canonicalUnitId": "yw:lesson-1753-p1:vocabulary:lesson-1753-p1:v10",
-        "resourceVersion": "sha256:d5a518e61bd45838ac1a5c6bec68a3f4496b16253b1e2d524764f81c416f58f0",
+        "resourceVersion": "sha256:697e22925353698dc9a71f8805ca1dc9f65b83d6c4a213633741dcd428ea8b76",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1891,7 +1891,7 @@
       "word": "族",
       "sourceSentence": "族 秦者秦也，非天下也",
       "meaning": "灭族",
-      "explanation": "族，灭族，使动用法。",
+      "explanation": "族，灭族，名词用作动词，此处指灭亡秦朝。",
       "type": "usage",
       "difficulty": 2,
       "question": "“族秦者秦也”中“族”的意思是",
@@ -1917,26 +1917,26 @@
       "id": "lesson-1753-p1:v10",
       "word": "递",
       "sourceSentence": "使秦复爱六国之人，则递 三世可至万世而为君，谁得而族灭也",
-      "meaning": "依次",
-      "explanation": "递，依次。",
+      "meaning": "依次传递",
+      "explanation": "递，依次传递，这里指帝位一代代传下去。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "“则递三世可至万世而为君”中“递”的意思是",
       "options": [
         "递送",
-        "传递",
-        "依次",
+        "交替",
+        "依次传递",
         "推移"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "依次",
+      "sourceAnswer": "依次传递",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-f74d59c2d8dcb607",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「使秦复爱六国之人，则递 三世可至万世而为君，谁得而族灭也」\n“则递三世可至万世而为君”中“递”的意思是\nA. 递送\nB. 传递\nC. 依次\nD. 推移\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「使秦复爱六国之人，则递 三世可至万世而为君，谁得而族灭也」\n“则递三世可至万世而为君”中“递”的意思是\nA. 递送\nB. 交替\nC. 依次传递\nD. 推移\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「使秦复爱六国之人，则递 三世可至万世而为君，谁得而族灭也」中「递」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
@@ -2098,20 +2098,20 @@
       {
         "resourceKey": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v09",
         "canonicalUnitId": "yw:lesson-1753-p1:vocabulary:lesson-1753-p1:v09",
-        "resourceVersion": "sha256:a900ffc6576d32929d2e3dca99a7957b5502351e342c1bd649f7388c66c831a2",
+        "resourceVersion": "sha256:dcbe349246bfd2662579d26cb780fb240e737b87754f1e50c361976a5f5b861e",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v10",
         "canonicalUnitId": "yw:lesson-1753-p1:vocabulary:lesson-1753-p1:v10",
-        "resourceVersion": "sha256:d5a518e61bd45838ac1a5c6bec68a3f4496b16253b1e2d524764f81c416f58f0",
+        "resourceVersion": "sha256:697e22925353698dc9a71f8805ca1dc9f65b83d6c4a213633741dcd428ea8b76",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2414,7 +2414,7 @@
       },
       {
         "requirementId": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v09",
-        "sourceVersion": "sha256:a900ffc6576d32929d2e3dca99a7957b5502351e342c1bd649f7388c66c831a2",
+        "sourceVersion": "sha256:dcbe349246bfd2662579d26cb780fb240e737b87754f1e50c361976a5f5b861e",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2424,7 +2424,7 @@
       },
       {
         "requirementId": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v10",
-        "sourceVersion": "sha256:d5a518e61bd45838ac1a5c6bec68a3f4496b16253b1e2d524764f81c416f58f0",
+        "sourceVersion": "sha256:697e22925353698dc9a71f8805ca1dc9f65b83d6c4a213633741dcd428ea8b76",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2846,7 +2846,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-024d0f7e7d80f0b4e973",
+  "curriculumVersion": "yw-dialogue-abccd7a14af58c5e2767",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -2565,7 +2565,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：秘密地。語境義：秘密地。指秘密地、抄小路行走。",
+      "rule": "沿用原題準據：从小路。語境義：从小路。间，从小路，名词作状语。「道芷阳间行」意为取道芷阳，从小路走。",
       "sourcePassages": [
         "lesson-1728:p7",
         "lesson-1728:p8"
@@ -2664,10 +2664,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1728:vocab:lesson-1728:v01",
         "canonicalUnitId": "yw:lesson-1728:vocabulary:lesson-1728:v01",
-        "resourceVersion": "sha256:d6d68ffd42cda2fb66ba48d24925cba89b51a6d2e9d83783ca2a48592d025347",
+        "resourceVersion": "sha256:818da562d07e27cf22b883342090eeaf6f68fd4c44cb0a26ec72476731fa5d5d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2702,10 +2702,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1728:vocab:lesson-1728:v03",
         "canonicalUnitId": "yw:lesson-1728:vocabulary:lesson-1728:v03",
-        "resourceVersion": "sha256:a6c6ddde0b70576c29b42c385e3b0d45394b5ccfc1fd31f6f62d240089b69952",
+        "resourceVersion": "sha256:bb64d102db6afab14219f10f38ee35df309edf44bed3e02d30e0ae0ae6b644b1",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2854,10 +2854,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1728:vocab:lesson-1728:v11",
         "canonicalUnitId": "yw:lesson-1728:vocabulary:lesson-1728:v11",
-        "resourceVersion": "sha256:5ddeaac9f8ce2aa8244e01566578621b2575bab6c936b4db11e06fcdc39c09a2",
+        "resourceVersion": "sha256:28b97d110ddab2be8afc06b67e3ac662d2ed0910d6ab909f1df280301674aac5",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2916,7 +2916,7 @@
         "享用",
         "犒劳",
         "祭祀",
-        "款待"
+        "赏赐钱财"
       ],
       "answerIndex": 1,
       "sourceAnswer": "犒劳",
@@ -2926,7 +2926,7 @@
       "version": "vocab-set-7a0e05303bf2da66",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「旦日飨士卒,为击破沛公军」\n「旦日飨士卒」中「飨」的意思是\nA. 享用\nB. 犒劳\nC. 祭祀\nD. 款待\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「旦日飨士卒,为击破沛公军」\n「旦日飨士卒」中「飨」的意思是\nA. 享用\nB. 犒劳\nC. 祭祀\nD. 赏赐钱财\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「旦日飨士卒,为击破沛公军」中「飨」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2969,7 +2969,7 @@
       "options": [
         "幸运",
         "宠爱",
-        "临幸",
+        "侥幸",
         "希望"
       ],
       "answerIndex": 1,
@@ -2980,7 +2980,7 @@
       "version": "vocab-set-7a0e05303bf2da66",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「妇女无所幸,此其志不在小」\n「妇女无所幸」中「幸」的古义是\nA. 幸运\nB. 宠爱\nC. 临幸\nD. 希望\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「妇女无所幸,此其志不在小」\n「妇女无所幸」中「幸」的古义是\nA. 幸运\nB. 宠爱\nC. 侥幸\nD. 希望\n請選出答案，並用自己的話說明判斷依據。",
         "回到「妇女无所幸,此其志不在小」：「幸」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -3177,26 +3177,26 @@
       "id": "lesson-1728:v11",
       "word": "间",
       "sourceSentence": "道芷阳间行。",
-      "meaning": "秘密地",
-      "explanation": "指秘密地、抄小路行走。",
+      "meaning": "从小路",
+      "explanation": "间，从小路，名词作状语。「道芷阳间行」意为取道芷阳，从小路走。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「道芷阳间行」中「间」的意思是",
       "options": [
         "间隔",
         "中间",
-        "秘密地",
+        "从小路",
         "参与"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "秘密地",
+      "sourceAnswer": "从小路",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-7a0e05303bf2da66",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「道芷阳间行。」\n「道芷阳间行」中「间」的意思是\nA. 间隔\nB. 中间\nC. 秘密地\nD. 参与\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「道芷阳间行。」\n「道芷阳间行」中「间」的意思是\nA. 间隔\nB. 中间\nC. 从小路\nD. 参与\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「道芷阳间行。」中「间」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -3305,10 +3305,10 @@
       {
         "resourceKey": "effect:lesson-1728:vocab:lesson-1728:v01",
         "canonicalUnitId": "yw:lesson-1728:vocabulary:lesson-1728:v01",
-        "resourceVersion": "sha256:d6d68ffd42cda2fb66ba48d24925cba89b51a6d2e9d83783ca2a48592d025347",
+        "resourceVersion": "sha256:818da562d07e27cf22b883342090eeaf6f68fd4c44cb0a26ec72476731fa5d5d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3325,10 +3325,10 @@
       {
         "resourceKey": "effect:lesson-1728:vocab:lesson-1728:v03",
         "canonicalUnitId": "yw:lesson-1728:vocabulary:lesson-1728:v03",
-        "resourceVersion": "sha256:a6c6ddde0b70576c29b42c385e3b0d45394b5ccfc1fd31f6f62d240089b69952",
+        "resourceVersion": "sha256:bb64d102db6afab14219f10f38ee35df309edf44bed3e02d30e0ae0ae6b644b1",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3405,10 +3405,10 @@
       {
         "resourceKey": "effect:lesson-1728:vocab:lesson-1728:v11",
         "canonicalUnitId": "yw:lesson-1728:vocabulary:lesson-1728:v11",
-        "resourceVersion": "sha256:5ddeaac9f8ce2aa8244e01566578621b2575bab6c936b4db11e06fcdc39c09a2",
+        "resourceVersion": "sha256:28b97d110ddab2be8afc06b67e3ac662d2ed0910d6ab909f1df280301674aac5",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3667,7 +3667,7 @@
       },
       {
         "requirementId": "effect:lesson-1728:vocab:lesson-1728:v01",
-        "sourceVersion": "sha256:d6d68ffd42cda2fb66ba48d24925cba89b51a6d2e9d83783ca2a48592d025347",
+        "sourceVersion": "sha256:818da562d07e27cf22b883342090eeaf6f68fd4c44cb0a26ec72476731fa5d5d",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3687,7 +3687,7 @@
       },
       {
         "requirementId": "effect:lesson-1728:vocab:lesson-1728:v03",
-        "sourceVersion": "sha256:a6c6ddde0b70576c29b42c385e3b0d45394b5ccfc1fd31f6f62d240089b69952",
+        "sourceVersion": "sha256:bb64d102db6afab14219f10f38ee35df309edf44bed3e02d30e0ae0ae6b644b1",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3767,7 +3767,7 @@
       },
       {
         "requirementId": "effect:lesson-1728:vocab:lesson-1728:v11",
-        "sourceVersion": "sha256:5ddeaac9f8ce2aa8244e01566578621b2575bab6c936b4db11e06fcdc39c09a2",
+        "sourceVersion": "sha256:28b97d110ddab2be8afc06b67e3ac662d2ed0910d6ab909f1df280301674aac5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4206,7 +4206,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-903578c6bb958bd4f44b",
+  "curriculumVersion": "yw-dialogue-1d043a24229d52a10876",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -2020,7 +2020,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：没有。語境義：没有。此处“鲜”通“少”，但在语境中引申为“没有”。",
+      "rule": "沿用原題準據：没有。語境義：没有。「鲜」读xiǎn，有「少」的意思；此处依教材注释解作「没有」。「终鲜兄弟」意为又没有兄弟。",
       "sourcePassages": [
         "lesson-1576:p1"
       ],
@@ -2121,7 +2121,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：被动标志。語境義：被。此处“见”作被动标志，与“所”构成被动结构。",
+      "rule": "沿用原題準據：看见。語境義：看见。此处「见」是实义动词，意为「看见」。「所见明知」指所看见并清楚知道的；「所」与后面的动词性成分构成所字结构，「见」不是被动标志。",
       "sourcePassages": [
         "lesson-1576:p1",
         "lesson-1576:p4"
@@ -2315,10 +2315,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1576:vocab:lesson-1576:v03",
         "canonicalUnitId": "yw:lesson-1576:vocabulary:lesson-1576:v03",
-        "resourceVersion": "sha256:be023f605b0a7dd7662ed3dc36098a7502a83cfe5461d601606c854b3b6c5b3c",
+        "resourceVersion": "sha256:167a513dd605d6e1c8e2255a2817799d9ca72fa4651c3811a41ce9ddd8ff2ede",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2405,10 +2405,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1576:vocab:lesson-1576:v08",
         "canonicalUnitId": "yw:lesson-1576:vocabulary:lesson-1576:v08",
-        "resourceVersion": "sha256:4fb4fbc7964b5c45869a518f13a25807c2d48291bcadbb7661d36071032dc22c",
+        "resourceVersion": "sha256:8851e0fbf5db75033c2463dd2f37f192dda8cd3d8431556e0cf0420d4373244d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2459,10 +2459,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1576:vocab:lesson-1576:v11",
         "canonicalUnitId": "yw:lesson-1576:vocabulary:lesson-1576:v11",
-        "resourceVersion": "sha256:de909a3b33c15fe0d9947254759f6969a2ec75d991d3ab41bf3f425487f95ab1",
+        "resourceVersion": "sha256:3e037412e2092ef7b838934eba204ecd2b90c8ceb581b4019f364415dc3dc1f9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2635,13 +2635,13 @@
       "word": "鲜",
       "sourceSentence": "既无伯叔,终鲜兄弟,门衰祚薄,晚有儿息",
       "meaning": "没有",
-      "explanation": "此处“鲜”通“少”，但在语境中引申为“没有”。",
+      "explanation": "「鲜」读xiǎn，有「少」的意思；此处依教材注释解作「没有」。「终鲜兄弟」意为又没有兄弟。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「终鲜兄弟」中「鲜」的意思是",
       "options": [
         "新鲜",
-        "少",
+        "众多",
         "没有",
         "鲜明"
       ],
@@ -2653,7 +2653,7 @@
       "version": "vocab-set-d2639c9b8c321500",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「既无伯叔,终鲜兄弟,门衰祚薄,晚有儿息」\n「终鲜兄弟」中「鲜」的意思是\nA. 新鲜\nB. 少\nC. 没有\nD. 鲜明\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「既无伯叔,终鲜兄弟,门衰祚薄,晚有儿息」\n「终鲜兄弟」中「鲜」的意思是\nA. 新鲜\nB. 众多\nC. 没有\nD. 鲜明\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「既无伯叔,终鲜兄弟,门衰祚薄,晚有儿息」中「鲜」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2769,8 +2769,8 @@
       "id": "lesson-1576:v08",
       "word": "见",
       "sourceSentence": "非独蜀之人士及二州牧伯所见明知",
-      "meaning": "被",
-      "explanation": "此处“见”作被动标志，与“所”构成被动结构。",
+      "meaning": "看见",
+      "explanation": "此处「见」是实义动词，意为「看见」。「所见明知」指所看见并清楚知道的；「所」与后面的动词性成分构成所字结构，「见」不是被动标志。",
       "type": "usage",
       "difficulty": 2,
       "question": "「所见明知」中「见」的用法是",
@@ -2780,8 +2780,8 @@
         "见识",
         "拜见"
       ],
-      "answerIndex": 1,
-      "sourceAnswer": "被动标志",
+      "answerIndex": 0,
+      "sourceAnswer": "看见",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
@@ -2857,7 +2857,7 @@
       "question": "「听臣微志」中「听」的意思是",
       "options": [
         "听见",
-        "听从",
+        "审断",
         "准许",
         "聆听"
       ],
@@ -2869,7 +2869,7 @@
       "version": "vocab-set-d2639c9b8c321500",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「愿陛下矜愍愚诚。 听臣微志」\n「听臣微志」中「听」的意思是\nA. 听见\nB. 听从\nC. 准许\nD. 聆听\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「愿陛下矜愍愚诚。 听臣微志」\n「听臣微志」中「听」的意思是\nA. 听见\nB. 审断\nC. 准许\nD. 聆听\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「愿陛下矜愍愚诚。 听臣微志」中「听」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2993,10 +2993,10 @@
       {
         "resourceKey": "effect:lesson-1576:vocab:lesson-1576:v03",
         "canonicalUnitId": "yw:lesson-1576:vocabulary:lesson-1576:v03",
-        "resourceVersion": "sha256:be023f605b0a7dd7662ed3dc36098a7502a83cfe5461d601606c854b3b6c5b3c",
+        "resourceVersion": "sha256:167a513dd605d6e1c8e2255a2817799d9ca72fa4651c3811a41ce9ddd8ff2ede",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3038,10 +3038,10 @@
       {
         "resourceKey": "effect:lesson-1576:vocab:lesson-1576:v08",
         "canonicalUnitId": "yw:lesson-1576:vocabulary:lesson-1576:v08",
-        "resourceVersion": "sha256:4fb4fbc7964b5c45869a518f13a25807c2d48291bcadbb7661d36071032dc22c",
+        "resourceVersion": "sha256:8851e0fbf5db75033c2463dd2f37f192dda8cd3d8431556e0cf0420d4373244d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3065,10 +3065,10 @@
       {
         "resourceKey": "effect:lesson-1576:vocab:lesson-1576:v11",
         "canonicalUnitId": "yw:lesson-1576:vocabulary:lesson-1576:v11",
-        "resourceVersion": "sha256:de909a3b33c15fe0d9947254759f6969a2ec75d991d3ab41bf3f425487f95ab1",
+        "resourceVersion": "sha256:3e037412e2092ef7b838934eba204ecd2b90c8ceb581b4019f364415dc3dc1f9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3580,7 +3580,7 @@
       },
       {
         "requirementId": "effect:lesson-1576:vocab:lesson-1576:v03",
-        "sourceVersion": "sha256:be023f605b0a7dd7662ed3dc36098a7502a83cfe5461d601606c854b3b6c5b3c",
+        "sourceVersion": "sha256:167a513dd605d6e1c8e2255a2817799d9ca72fa4651c3811a41ce9ddd8ff2ede",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3630,7 +3630,7 @@
       },
       {
         "requirementId": "effect:lesson-1576:vocab:lesson-1576:v08",
-        "sourceVersion": "sha256:4fb4fbc7964b5c45869a518f13a25807c2d48291bcadbb7661d36071032dc22c",
+        "sourceVersion": "sha256:8851e0fbf5db75033c2463dd2f37f192dda8cd3d8431556e0cf0420d4373244d",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3660,7 +3660,7 @@
       },
       {
         "requirementId": "effect:lesson-1576:vocab:lesson-1576:v11",
-        "sourceVersion": "sha256:de909a3b33c15fe0d9947254759f6969a2ec75d991d3ab41bf3f425487f95ab1",
+        "sourceVersion": "sha256:3e037412e2092ef7b838934eba204ecd2b90c8ceb581b4019f364415dc3dc1f9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4257,7 +4257,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-fb5b61d225e57cc01b27",
+  "curriculumVersion": "yw-dialogue-01989a343801a4412869",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

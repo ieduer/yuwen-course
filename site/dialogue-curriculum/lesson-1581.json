@@ -1279,10 +1279,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v01",
         "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v01",
-        "resourceVersion": "sha256:1bf3ca630381d4cc144da7165480d294ccca0d8c8b69d83d3f7ad82433f037b8",
+        "resourceVersion": "sha256:3055c800c7f5ac5b1a7b1ffdf56ad44db80e70ccf7bdef3f529213a3a930e432",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1387,10 +1387,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v08",
         "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v08",
-        "resourceVersion": "sha256:112b8f70bf4c86db0c6a528af3cc70fd5efdc34e36567949239bf69e0da4c040",
+        "resourceVersion": "sha256:047603ab6f37b6fa54759c711bb73f453ec1e6633b50c8d6d72c06cd43d65315",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1532,7 +1532,7 @@
       "options": [
         "敲擊",
         "激盪",
-        "鼓起",
+        "振奮",
         "發動"
       ],
       "answerIndex": 1,
@@ -1543,7 +1543,7 @@
       "version": "vocab-set-9f76377843dd3cf2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「微风鼓浪」\n「微风鼓浪」中「鼓」的意思是\nA. 敲擊\nB. 激盪\nC. 鼓起\nD. 發動\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「微风鼓浪」\n「微风鼓浪」中「鼓」的意思是\nA. 敲擊\nB. 激盪\nC. 振奮\nD. 發動\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「微风鼓浪」中「鼓」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1692,7 +1692,7 @@
       "difficulty": 1,
       "question": "「汝识之乎」中「识」的意思是",
       "options": [
-        "認識",
+        "賞識",
         "標識",
         "知道",
         "記憶"
@@ -1705,7 +1705,7 @@
       "version": "vocab-set-9f76377843dd3cf2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「汝识之乎」\n「汝识之乎」中「识」的意思是\nA. 認識\nB. 標識\nC. 知道\nD. 記憶\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「汝识之乎」\n「汝识之乎」中「识」的意思是\nA. 賞識\nB. 標識\nC. 知道\nD. 記憶\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「汝识之乎」中「識」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1865,10 +1865,10 @@
       {
         "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v01",
         "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v01",
-        "resourceVersion": "sha256:1bf3ca630381d4cc144da7165480d294ccca0d8c8b69d83d3f7ad82433f037b8",
+        "resourceVersion": "sha256:3055c800c7f5ac5b1a7b1ffdf56ad44db80e70ccf7bdef3f529213a3a930e432",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1919,10 +1919,10 @@
       {
         "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v08",
         "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v08",
-        "resourceVersion": "sha256:112b8f70bf4c86db0c6a528af3cc70fd5efdc34e36567949239bf69e0da4c040",
+        "resourceVersion": "sha256:047603ab6f37b6fa54759c711bb73f453ec1e6633b50c8d6d72c06cd43d65315",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2330,7 +2330,7 @@
       },
       {
         "requirementId": "effect:lesson-1581:vocab:lesson-1581:v01",
-        "sourceVersion": "sha256:1bf3ca630381d4cc144da7165480d294ccca0d8c8b69d83d3f7ad82433f037b8",
+        "sourceVersion": "sha256:3055c800c7f5ac5b1a7b1ffdf56ad44db80e70ccf7bdef3f529213a3a930e432",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2390,7 +2390,7 @@
       },
       {
         "requirementId": "effect:lesson-1581:vocab:lesson-1581:v08",
-        "sourceVersion": "sha256:112b8f70bf4c86db0c6a528af3cc70fd5efdc34e36567949239bf69e0da4c040",
+        "sourceVersion": "sha256:047603ab6f37b6fa54759c711bb73f453ec1e6633b50c8d6d72c06cd43d65315",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3053,7 +3053,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-d0e15f35a17e60ac42df",
+  "curriculumVersion": "yw-dialogue-d5a1ef390d1166c54e45",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

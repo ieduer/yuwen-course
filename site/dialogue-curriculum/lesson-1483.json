@@ -1020,7 +1020,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：明智、洞察力。語境義：明智、智慧。在老子语境中，指主体具备的智慧和洞察力。",
+      "rule": "沿用原題準據：显明。語境義：显明。明，显明。「自见者不明」意为自我显露的反而不能显明，故选B。",
       "sourcePassages": [
         "lesson-1483:p5",
         "lesson-1483:p6"
@@ -1081,7 +1081,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：强行者有志（强行：勤勉而行）。語境義：勤勉而行。A项古今义不同，A项强行指勤勉。",
+      "rule": "沿用原題準據：民之从事（从事：做事）。語境義：勤勉而行。D项「从事」古今均可指做事。A项「强行」古义为勤勉而行，现代常用义为强制进行；B项「过」此处指过错，不是经过；C项「谋」此处指图谋、谋划，不是阴谋。古今意义相同的是D。",
       "sourcePassages": [
         "lesson-1483:p6"
       ],
@@ -1201,7 +1201,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：借。語境義：借。假道，即借路。",
+      "rule": "沿用原題準據：借。語境義：借。假道，即借路。（此句出自《韩非子·喻老》，为本课所附阅读材料，并非《老子》原文。）",
       "sourcePassages": [],
       "prerequisites": [],
       "misconceptions": [
@@ -1292,10 +1292,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v03",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v03",
-        "resourceVersion": "sha256:c48f657c37befcc41d07f986d2f9487bd2efd93a699184d7bb54b1910a2304d2",
+        "resourceVersion": "sha256:5b5f83c7c75aafedaf649b284d535024cbe1f70639e9ecc4d4043138b25ea4d3",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1346,10 +1346,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v06",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v06",
-        "resourceVersion": "sha256:cc67e5f54d009587e59534c1a02bf71c14526f1b9cdec09ea70981807d48aca5",
+        "resourceVersion": "sha256:b0e76dceea0422bfa390c985bfbc52d66727e64cb53a8c425d465ead38e3a668",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1400,10 +1400,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v09",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v09",
-        "resourceVersion": "sha256:2854add460334ffae9f7a1f0d6bf5ed7f999e5930024268d1e6aab88e2fcb63c",
+        "resourceVersion": "sha256:6c8d937541d036715c6b4346e40b0d19bb6f59d1974f3d733ddc4be707655f14",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1454,10 +1454,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v12",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v12",
-        "resourceVersion": "sha256:93ac9b1e84ebf630e6358ca7ccdc10a7f7ee83db0d78cf66d2dedf743eb3c2bc",
+        "resourceVersion": "sha256:eb83692ed7029adbdc8a4433f125373934d594be4ece81c74468bd4c1ea1ac3c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1594,8 +1594,8 @@
       "id": "lesson-1483:v03",
       "word": "明",
       "sourceSentence": "自见者不明,自是者不彰",
-      "meaning": "明智、智慧",
-      "explanation": "在老子语境中，指主体具备的智慧和洞察力。",
+      "meaning": "显明",
+      "explanation": "明，显明。「自见者不明」意为自我显露的反而不能显明，故选B。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「自见者不明」中「明」的意思是",
@@ -1605,8 +1605,8 @@
         "明智、洞察力",
         "公开"
       ],
-      "answerIndex": 2,
-      "sourceAnswer": "明智、洞察力",
+      "answerIndex": 1,
+      "sourceAnswer": "显明",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
@@ -1676,7 +1676,7 @@
       "word": "强行",
       "sourceSentence": "知足者富,强行者有志",
       "meaning": "勤勉而行",
-      "explanation": "A项古今义不同，A项强行指勤勉。",
+      "explanation": "D项「从事」古今均可指做事。A项「强行」古义为勤勉而行，现代常用义为强制进行；B项「过」此处指过错，不是经过；C项「谋」此处指图谋、谋划，不是阴谋。古今意义相同的是D。",
       "type": "gu-jin",
       "difficulty": 2,
       "question": "下列句中加点词语古今意义相同的一项是",
@@ -1684,17 +1684,17 @@
         "强行者有志（强行：勤勉而行）",
         "众人之所过（过：经过）",
         "其未兆易谋（谋：阴谋）",
-        "民之从事（从事：做官）"
+        "民之从事（从事：做事）"
       ],
-      "answerIndex": 0,
-      "sourceAnswer": "强行者有志（强行：勤勉而行）",
+      "answerIndex": 3,
+      "sourceAnswer": "民之从事（从事：做事）",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-700f7a340c8f22b9",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「知足者富,强行者有志」\n下列句中加点词语古今意义相同的一项是\nA. 强行者有志（强行：勤勉而行）\nB. 众人之所过（过：经过）\nC. 其未兆易谋（谋：阴谋）\nD. 民之从事（从事：做官）\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「知足者富,强行者有志」\n下列句中加点词语古今意义相同的一项是\nA. 强行者有志（强行：勤勉而行）\nB. 众人之所过（过：经过）\nC. 其未兆易谋（谋：阴谋）\nD. 民之从事（从事：做事）\n請選出答案，並用自己的話說明判斷依據。",
         "回到「知足者富,强行者有志」：「强行」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1764,7 +1764,7 @@
       "options": [
         "多少",
         "接近",
-        "几乎",
+        "屡次",
         "哪里"
       ],
       "answerIndex": 1,
@@ -1775,7 +1775,7 @@
       "version": "vocab-set-700f7a340c8f22b9",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「民之从事,常于几成而败之」\n「常于几成而败之」中「几」的意思是\nA. 多少\nB. 接近\nC. 几乎\nD. 哪里\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「民之从事,常于几成而败之」\n「常于几成而败之」中「几」的意思是\nA. 多少\nB. 接近\nC. 屡次\nD. 哪里\n請選出答案，並用自己的話說明判斷依據。",
         "「民之从事,常于几成而败之」中的「几」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1838,7 +1838,7 @@
       "word": "假",
       "sourceSentence": "晉獻公以垂棘之璧假道於虞而伐虢",
       "meaning": "借",
-      "explanation": "假道，即借路。",
+      "explanation": "假道，即借路。（此句出自《韩非子·喻老》，为本课所附阅读材料，并非《老子》原文。）",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「晉獻公以垂棘之璧假道於虞而伐虢」中「假」的意思是",
@@ -1944,10 +1944,10 @@
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v03",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v03",
-        "resourceVersion": "sha256:c48f657c37befcc41d07f986d2f9487bd2efd93a699184d7bb54b1910a2304d2",
+        "resourceVersion": "sha256:5b5f83c7c75aafedaf649b284d535024cbe1f70639e9ecc4d4043138b25ea4d3",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1971,10 +1971,10 @@
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v06",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v06",
-        "resourceVersion": "sha256:cc67e5f54d009587e59534c1a02bf71c14526f1b9cdec09ea70981807d48aca5",
+        "resourceVersion": "sha256:b0e76dceea0422bfa390c985bfbc52d66727e64cb53a8c425d465ead38e3a668",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1998,10 +1998,10 @@
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v09",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v09",
-        "resourceVersion": "sha256:2854add460334ffae9f7a1f0d6bf5ed7f999e5930024268d1e6aab88e2fcb63c",
+        "resourceVersion": "sha256:6c8d937541d036715c6b4346e40b0d19bb6f59d1974f3d733ddc4be707655f14",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2025,10 +2025,10 @@
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v12",
         "canonicalUnitId": "yw:lesson-1483:vocabulary:lesson-1483:v12",
-        "resourceVersion": "sha256:93ac9b1e84ebf630e6358ca7ccdc10a7f7ee83db0d78cf66d2dedf743eb3c2bc",
+        "resourceVersion": "sha256:eb83692ed7029adbdc8a4433f125373934d594be4ece81c74468bd4c1ea1ac3c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     ],
@@ -2545,7 +2545,7 @@
       },
       {
         "requirementId": "effect:lesson-1483:vocab:lesson-1483:v03",
-        "sourceVersion": "sha256:c48f657c37befcc41d07f986d2f9487bd2efd93a699184d7bb54b1910a2304d2",
+        "sourceVersion": "sha256:5b5f83c7c75aafedaf649b284d535024cbe1f70639e9ecc4d4043138b25ea4d3",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2575,7 +2575,7 @@
       },
       {
         "requirementId": "effect:lesson-1483:vocab:lesson-1483:v06",
-        "sourceVersion": "sha256:cc67e5f54d009587e59534c1a02bf71c14526f1b9cdec09ea70981807d48aca5",
+        "sourceVersion": "sha256:b0e76dceea0422bfa390c985bfbc52d66727e64cb53a8c425d465ead38e3a668",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2605,7 +2605,7 @@
       },
       {
         "requirementId": "effect:lesson-1483:vocab:lesson-1483:v09",
-        "sourceVersion": "sha256:2854add460334ffae9f7a1f0d6bf5ed7f999e5930024268d1e6aab88e2fcb63c",
+        "sourceVersion": "sha256:6c8d937541d036715c6b4346e40b0d19bb6f59d1974f3d733ddc4be707655f14",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2635,7 +2635,7 @@
       },
       {
         "requirementId": "effect:lesson-1483:vocab:lesson-1483:v12",
-        "sourceVersion": "sha256:93ac9b1e84ebf630e6358ca7ccdc10a7f7ee83db0d78cf66d2dedf743eb3c2bc",
+        "sourceVersion": "sha256:eb83692ed7029adbdc8a4433f125373934d594be4ece81c74468bd4c1ea1ac3c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3250,7 +3250,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-7799906016ed046e101f",
+  "curriculumVersion": "yw-dialogue-786cf411eb347c8eb076",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

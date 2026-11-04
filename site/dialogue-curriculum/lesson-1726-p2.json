@@ -2435,7 +2435,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：齐桓、晋文之事可得闻乎。語境義：行王道以統一天下。前三項均為動詞，意為行王道；第四項為名詞，指齊桓公。",
+      "rule": "沿用原題準據：王坐于堂上。語境義：行王道以統一天下。A、B及C中後一個「王」均為動詞，意為行王道以統一天下；D中的「王」為名詞，指齊宣王。C中前一個「王」也是名詞，指齊宣王；本題考查的是後一個「王」。",
       "sourcePassages": [
         "lesson-1726-p2:p2"
       ],
@@ -2516,7 +2516,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：君子使廚房遠離自己（不忍見其死）。語境義：使……遠離。「远」在此處為使動用法，即「使……遠離」。",
+      "rule": "沿用原題準據：因此君子遠離廚房，因為不忍見禽獸被宰殺，也不忍聽到它們臨死的聲音。語境義：遠離、不接近。「是以」意為「因此」；「遠」是形容詞用作動詞，意為「遠離、不接近」。全句意為「因此君子遠離廚房」，承接上文不忍見禽獸被宰殺、不忍聽到其臨死聲音的心理。",
       "sourcePassages": [
         "lesson-1726-p2:p2"
       ],
@@ -2556,7 +2556,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：信而見疑，忠而被謗。語境義：被。選項C中的「見」皆為被動標誌，選項A為看見，B、D為其他用法。",
+      "rule": "沿用原題準據：信而見疑，忠而被謗。語境義：被。題句與C中的「見」均為被動標誌，意為「被」；A中的「見」意為「看見」；B中的「見」用在動詞前，表示對自己如何，這裡指「我」；D中的「見」意為察看，「見機行事」指看具體情況靈活辦事。",
       "sourcePassages": [
         "lesson-1726-p2:p2"
       ],
@@ -2714,10 +2714,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v01",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v01",
-        "resourceVersion": "sha256:bc365d367e59296368e33732c676160233724899e9060ba070ffcbcb7567cd6b",
+        "resourceVersion": "sha256:8a37fc58fbc57ee04403a0fa07f1ddcd5d091bc2e5c14b88ec617fa6433cb0bd",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2771,10 +2771,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v04",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v04",
-        "resourceVersion": "sha256:3aad6b08564a84a675b02fd11c1b3ecd5b94dcda35d62a0e5c9ae1612cac9d70",
+        "resourceVersion": "sha256:3787c62983d5f4644aefa0604022d10c04b9d937033e490ee29e8da7335e9d19",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2790,10 +2790,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v05",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v05",
-        "resourceVersion": "sha256:9da6791cb8841252c8612b1642616b1dd92a7e01a25bd106c1fa95b97ed73821",
+        "resourceVersion": "sha256:542e724cbd70f76a4c88732b73a70c6781795d436c59ad5a746deec83858d644",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2828,10 +2828,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v07",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v07",
-        "resourceVersion": "sha256:95f201c95616d8ece80311b7a64b9cd60f151484b4249fb1684d0b3130ba56fe",
+        "resourceVersion": "sha256:198ee66c787697a0888fb5b6bd35873c4288db4a5603c0defaff415e07d1b306",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2847,10 +2847,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v08",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v08",
-        "resourceVersion": "sha256:fdd2b0ca3b7331ae1d50a3d13f83cd3afc82adc5eaccf61a540904d68fe64bed",
+        "resourceVersion": "sha256:1a8961b108f6edc5700ed08b9ad855c865ba6c766ccde5d599b475a2a49762a7",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2939,25 +2939,25 @@
       "word": "王",
       "sourceSentence": "无以，则王乎",
       "meaning": "行王道以統一天下",
-      "explanation": "前三項均為動詞，意為行王道；第四項為名詞，指齊桓公。",
+      "explanation": "A、B及C中後一個「王」均為動詞，意為行王道以統一天下；D中的「王」為名詞，指齊宣王。C中前一個「王」也是名詞，指齊宣王；本題考查的是後一個「王」。",
       "type": "contextual-choice",
       "difficulty": 2,
-      "question": "下列句中「王」字的含義與其他三項不同的是",
+      "question": "下列句中「王」字（C項指後一個「王」）的含義與其他三項不同的是",
       "options": [
         "无以则王乎",
         "保民而王，莫之能御也",
         "故王之不王，不为也",
-        "齐桓、晋文之事可得闻乎"
+        "王坐于堂上"
       ],
       "answerIndex": 3,
-      "sourceAnswer": "齐桓、晋文之事可得闻乎",
+      "sourceAnswer": "王坐于堂上",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
       "version": "vocab-set-2fbf0250cc2ca6bb",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「无以，则王乎」\n下列句中「王」字的含義與其他三項不同的是\nA. 无以则王乎\nB. 保民而王，莫之能御也\nC. 故王之不王，不为也\nD. 齐桓、晋文之事可得闻乎\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「无以，则王乎」\n下列句中「王」字（C項指後一個「王」）的含義與其他三項不同的是\nA. 无以则王乎\nB. 保民而王，莫之能御也\nC. 故王之不王，不为也\nD. 王坐于堂上\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「无以，则王乎」中「王」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -3028,7 +3028,7 @@
         "討厭",
         "怎麼",
         "壞的",
-        "哪裡"
+        "憎恨"
       ],
       "answerIndex": 1,
       "sourceAnswer": "怎麼",
@@ -3038,7 +3038,7 @@
       "version": "vocab-set-2fbf0250cc2ca6bb",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「彼恶知之」\n「彼恶知之」中「恶」的意思是\nA. 討厭\nB. 怎麼\nC. 壞的\nD. 哪裡\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「彼恶知之」\n「彼恶知之」中「恶」的意思是\nA. 討厭\nB. 怎麼\nC. 壞的\nD. 憎恨\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「彼恶知之」的句意，解釋「恶」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -3046,26 +3046,26 @@
       "id": "lesson-1726-p2:v05",
       "word": "远",
       "sourceSentence": "是以君子远庖厨 也",
-      "meaning": "使……遠離",
-      "explanation": "「远」在此處為使動用法，即「使……遠離」。",
+      "meaning": "遠離、不接近",
+      "explanation": "「是以」意為「因此」；「遠」是形容詞用作動詞，意為「遠離、不接近」。全句意為「因此君子遠離廚房」，承接上文不忍見禽獸被宰殺、不忍聽到其臨死聲音的心理。",
       "type": "interpretation",
       "difficulty": 2,
       "question": "對「是以君子远庖厨也」一句理解正確的是",
       "options": [
-        "君子走得離廚房很遠",
-        "君子故意讓廚房遠離自己",
-        "君子使廚房遠離自己（不忍見其死）",
+        "因此君子讓人把廚房建在遠離住處的地方",
+        "因此君子認為廚師身分卑下",
+        "因此君子遠離廚房，因為不忍見禽獸被宰殺，也不忍聽到它們臨死的聲音",
         "廚房對於君子來說太遙遠了"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "君子使廚房遠離自己（不忍見其死）",
+      "sourceAnswer": "因此君子遠離廚房，因為不忍見禽獸被宰殺，也不忍聽到它們臨死的聲音",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
       "version": "vocab-set-2fbf0250cc2ca6bb",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「是以君子远庖厨 也」\n對「是以君子远庖厨也」一句理解正確的是\nA. 君子走得離廚房很遠\nB. 君子故意讓廚房遠離自己\nC. 君子使廚房遠離自己（不忍見其死）\nD. 廚房對於君子來說太遙遠了\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「是以君子远庖厨 也」\n對「是以君子远庖厨也」一句理解正確的是\nA. 因此君子讓人把廚房建在遠離住處的地方\nB. 因此君子認為廚師身分卑下\nC. 因此君子遠離廚房，因為不忍見禽獸被宰殺，也不忍聽到它們臨死的聲音\nD. 廚房對於君子來說太遙遠了\n請選出答案，並用自己的話說明判斷依據。",
         "「是以君子远庖厨 也」中的「远」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -3101,13 +3101,13 @@
       "word": "见",
       "sourceSentence": "百姓之不见保",
       "meaning": "被",
-      "explanation": "選項C中的「見」皆為被動標誌，選項A為看見，B、D為其他用法。",
+      "explanation": "題句與C中的「見」均為被動標誌，意為「被」；A中的「見」意為「看見」；B中的「見」用在動詞前，表示對自己如何，這裡指「我」；D中的「見」意為察看，「見機行事」指看具體情況靈活辦事。",
       "type": "usage",
       "difficulty": 2,
       "question": "下列句中「见」字用法與「百姓之不见保」相同的是",
       "options": [
         "見其生，不忍見其死",
-        "從此替爺征",
+        "府吏見丁寧",
         "信而見疑，忠而被謗",
         "見機行事"
       ],
@@ -3119,7 +3119,7 @@
       "version": "vocab-set-2fbf0250cc2ca6bb",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「百姓之不见保」\n下列句中「见」字用法與「百姓之不见保」相同的是\nA. 見其生，不忍見其死\nB. 從此替爺征\nC. 信而見疑，忠而被謗\nD. 見機行事\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「百姓之不见保」\n下列句中「见」字用法與「百姓之不见保」相同的是\nA. 見其生，不忍見其死\nB. 府吏見丁寧\nC. 信而見疑，忠而被謗\nD. 見機行事\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「百姓之不见保」的句意，解釋「见」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -3135,7 +3135,7 @@
       "options": [
         "危險的",
         "使……危險",
-        "危害",
+        "高聳",
         "恐嚇"
       ],
       "answerIndex": 1,
@@ -3146,7 +3146,7 @@
       "version": "vocab-set-2fbf0250cc2ca6bb",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「危士臣」\n「危士臣」中「危」的意思是\nA. 危險的\nB. 使……危險\nC. 危害\nD. 恐嚇\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「危士臣」\n「危士臣」中「危」的意思是\nA. 危險的\nB. 使……危險\nC. 高聳\nD. 恐嚇\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「危士臣」中「危」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -3309,10 +3309,10 @@
       {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v01",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v01",
-        "resourceVersion": "sha256:bc365d367e59296368e33732c676160233724899e9060ba070ffcbcb7567cd6b",
+        "resourceVersion": "sha256:8a37fc58fbc57ee04403a0fa07f1ddcd5d091bc2e5c14b88ec617fa6433cb0bd",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3339,20 +3339,20 @@
       {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v04",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v04",
-        "resourceVersion": "sha256:3aad6b08564a84a675b02fd11c1b3ecd5b94dcda35d62a0e5c9ae1612cac9d70",
+        "resourceVersion": "sha256:3787c62983d5f4644aefa0604022d10c04b9d937033e490ee29e8da7335e9d19",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v05",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v05",
-        "resourceVersion": "sha256:9da6791cb8841252c8612b1642616b1dd92a7e01a25bd106c1fa95b97ed73821",
+        "resourceVersion": "sha256:542e724cbd70f76a4c88732b73a70c6781795d436c59ad5a746deec83858d644",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3369,20 +3369,20 @@
       {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v07",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v07",
-        "resourceVersion": "sha256:95f201c95616d8ece80311b7a64b9cd60f151484b4249fb1684d0b3130ba56fe",
+        "resourceVersion": "sha256:198ee66c787697a0888fb5b6bd35873c4288db4a5603c0defaff415e07d1b306",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v08",
         "canonicalUnitId": "yw:lesson-1726-p2:vocabulary:lesson-1726-p2:v08",
-        "resourceVersion": "sha256:fdd2b0ca3b7331ae1d50a3d13f83cd3afc82adc5eaccf61a540904d68fe64bed",
+        "resourceVersion": "sha256:1a8961b108f6edc5700ed08b9ad855c865ba6c766ccde5d599b475a2a49762a7",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3648,7 +3648,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v01",
-        "sourceVersion": "sha256:bc365d367e59296368e33732c676160233724899e9060ba070ffcbcb7567cd6b",
+        "sourceVersion": "sha256:8a37fc58fbc57ee04403a0fa07f1ddcd5d091bc2e5c14b88ec617fa6433cb0bd",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3678,7 +3678,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v04",
-        "sourceVersion": "sha256:3aad6b08564a84a675b02fd11c1b3ecd5b94dcda35d62a0e5c9ae1612cac9d70",
+        "sourceVersion": "sha256:3787c62983d5f4644aefa0604022d10c04b9d937033e490ee29e8da7335e9d19",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3688,7 +3688,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v05",
-        "sourceVersion": "sha256:9da6791cb8841252c8612b1642616b1dd92a7e01a25bd106c1fa95b97ed73821",
+        "sourceVersion": "sha256:542e724cbd70f76a4c88732b73a70c6781795d436c59ad5a746deec83858d644",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3708,7 +3708,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v07",
-        "sourceVersion": "sha256:95f201c95616d8ece80311b7a64b9cd60f151484b4249fb1684d0b3130ba56fe",
+        "sourceVersion": "sha256:198ee66c787697a0888fb5b6bd35873c4288db4a5603c0defaff415e07d1b306",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3718,7 +3718,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p2:vocab:lesson-1726-p2:v08",
-        "sourceVersion": "sha256:fdd2b0ca3b7331ae1d50a3d13f83cd3afc82adc5eaccf61a540904d68fe64bed",
+        "sourceVersion": "sha256:1a8961b108f6edc5700ed08b9ad855c865ba6c766ccde5d599b475a2a49762a7",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4182,7 +4182,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-4065fcf3602e0ed11757",
+  "curriculumVersion": "yw-dialogue-a341f89165208ef3f53f",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

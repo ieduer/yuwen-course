@@ -955,7 +955,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：信手拈来。語境義：确实。“信”在句中作副词，意为“确实、实在”。“信手拈来”中的“信”意为随手，与句中用法一致（此处指随心，引申为确实/随便）；“信誓旦旦”指誓言，“欲信”意为通“伸”，“休信”意为相信。",
+      "rule": "沿用原題準據：信知生男恶，反是生女好。語境義：确实。题干与B中的「信」均为副词，意为「确实、实在」。A中的「信」意为诚实、可信，「信誓」指诚恳可信的誓言；C中的「信」通「伸」，意为伸张；D中的「信」意为相信。因此选B。",
       "sourcePassages": [
         "lesson-1705-p1:p1"
       ],
@@ -995,7 +995,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：因人之力而敝之。語境義：依据。原文“因”意为依据、凭借。A项“因人之力”意为凭借，相同；B项意为趁着；C项意为接续；D项意为趁此。",
+      "rule": "沿用原題準據：因人之力而敝之。語境義：依据。原文“因”意为依据、凭借。A项“因人之力”意为凭借，相同；B项意为于是、就，表示动作承接，与题干不同；C项意为接续；D项意为趁此。",
       "sourcePassages": [
         "lesson-1705-p1:p1"
       ],
@@ -1211,10 +1211,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p1:vocab:lesson-1705-p1:v01",
         "canonicalUnitId": "yw:lesson-1705-p1:vocabulary:lesson-1705-p1:v01",
-        "resourceVersion": "sha256:39aa153006d0f105af01e5bfc8fde573859e041111fce1433ba09304c116e094",
+        "resourceVersion": "sha256:765f766dbf820e46d656f880807172e3de1e5227da3483333535f3f00d49dd56",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1249,10 +1249,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p1:vocab:lesson-1705-p1:v03",
         "canonicalUnitId": "yw:lesson-1705-p1:vocabulary:lesson-1705-p1:v03",
-        "resourceVersion": "sha256:56b4bda63a105a877e3b98732595015c8ce70730233e63b747e789ab4cb30601",
+        "resourceVersion": "sha256:27b4dac452d969821080d1a954de2faf4737665e5c687b30a32f8beb2723d0a9",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1398,23 +1398,23 @@
       "word": "信",
       "sourceSentence": "烟涛微茫信难求",
       "meaning": "确实",
-      "explanation": "“信”在句中作副词，意为“确实、实在”。“信手拈来”中的“信”意为随手，与句中用法一致（此处指随心，引申为确实/随便）；“信誓旦旦”指誓言，“欲信”意为通“伸”，“休信”意为相信。",
+      "explanation": "题干与B中的「信」均为副词，意为「确实、实在」。A中的「信」意为诚实、可信，「信誓」指诚恳可信的誓言；C中的「信」通「伸」，意为伸张；D中的「信」意为相信。因此选B。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "下列选项中“信”字的含义与“烟涛微茫信难求”中的“信”相同的一项是",
       "options": [
         "信誓旦旦",
-        "信手拈来",
+        "信知生男恶，反是生女好",
         "欲信大义于天下",
         "休信其言"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "信手拈来",
+      "sourceAnswer": "信知生男恶，反是生女好",
       "sourceRefs": [],
       "version": "vocab-set-e998245b08256282",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「烟涛微茫信难求」\n下列选项中“信”字的含义与“烟涛微茫信难求”中的“信”相同的一项是\nA. 信誓旦旦\nB. 信手拈来\nC. 欲信大义于天下\nD. 休信其言\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「烟涛微茫信难求」\n下列选项中“信”字的含义与“烟涛微茫信难求”中的“信”相同的一项是\nA. 信誓旦旦\nB. 信知生男恶，反是生女好\nC. 欲信大义于天下\nD. 休信其言\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「烟涛微茫信难求」中「信」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1448,13 +1448,13 @@
       "word": "因",
       "sourceSentence": "我欲因之 梦吴越",
       "meaning": "依据",
-      "explanation": "原文“因”意为依据、凭借。A项“因人之力”意为凭借，相同；B项意为趁着；C项意为接续；D项意为趁此。",
+      "explanation": "原文“因”意为依据、凭借。A项“因人之力”意为凭借，相同；B项意为于是、就，表示动作承接，与题干不同；C项意为接续；D项意为趁此。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "下列句中“因”字的用法与“我欲因之梦吴越”相同的一项是",
       "options": [
         "因人之力而敝之",
-        "因宾客至蔺相如门谢罪",
+        "因拔刀斫前奏案",
         "因之以饥馑",
         "不如因而厚遇之"
       ],
@@ -1464,7 +1464,7 @@
       "version": "vocab-set-e998245b08256282",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「我欲因之 梦吴越」\n下列句中“因”字的用法与“我欲因之梦吴越”相同的一项是\nA. 因人之力而敝之\nB. 因宾客至蔺相如门谢罪\nC. 因之以饥馑\nD. 不如因而厚遇之\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「我欲因之 梦吴越」\n下列句中“因”字的用法与“我欲因之梦吴越”相同的一项是\nA. 因人之力而敝之\nB. 因拔刀斫前奏案\nC. 因之以饥馑\nD. 不如因而厚遇之\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「我欲因之 梦吴越」中「因」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1705,10 +1705,10 @@
       {
         "resourceKey": "effect:lesson-1705-p1:vocab:lesson-1705-p1:v01",
         "canonicalUnitId": "yw:lesson-1705-p1:vocabulary:lesson-1705-p1:v01",
-        "resourceVersion": "sha256:39aa153006d0f105af01e5bfc8fde573859e041111fce1433ba09304c116e094",
+        "resourceVersion": "sha256:765f766dbf820e46d656f880807172e3de1e5227da3483333535f3f00d49dd56",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1725,10 +1725,10 @@
       {
         "resourceKey": "effect:lesson-1705-p1:vocab:lesson-1705-p1:v03",
         "canonicalUnitId": "yw:lesson-1705-p1:vocabulary:lesson-1705-p1:v03",
-        "resourceVersion": "sha256:56b4bda63a105a877e3b98732595015c8ce70730233e63b747e789ab4cb30601",
+        "resourceVersion": "sha256:27b4dac452d969821080d1a954de2faf4737665e5c687b30a32f8beb2723d0a9",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2017,7 +2017,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p1:vocab:lesson-1705-p1:v01",
-        "sourceVersion": "sha256:39aa153006d0f105af01e5bfc8fde573859e041111fce1433ba09304c116e094",
+        "sourceVersion": "sha256:765f766dbf820e46d656f880807172e3de1e5227da3483333535f3f00d49dd56",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2037,7 +2037,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p1:vocab:lesson-1705-p1:v03",
-        "sourceVersion": "sha256:56b4bda63a105a877e3b98732595015c8ce70730233e63b747e789ab4cb30601",
+        "sourceVersion": "sha256:27b4dac452d969821080d1a954de2faf4737665e5c687b30a32f8beb2723d0a9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2520,7 +2520,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-8327d5cb8ea1bc93e682",
+  "curriculumVersion": "yw-dialogue-505c6096477a0259b30c",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

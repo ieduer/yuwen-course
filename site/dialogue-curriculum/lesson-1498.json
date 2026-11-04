@@ -1332,10 +1332,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v08",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v08",
-        "resourceVersion": "sha256:b5f8579039ece9428c84bc92ccfa8fbfb54ea9ad08a6dce5aafd99608c987e89",
+        "resourceVersion": "sha256:14a91c93fc1324765f7fa540ae7552a9b40f3937985f73789cb927b2152df77a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1557,9 +1557,9 @@
       "difficulty": 3,
       "question": "对「落月摇情满江树」的理解，最恰当的一项是",
       "options": [
-        "落月把情思摇动，洒满了江边的树木。",
+        "落月牵动游子的情思，表现他即将归家的欢欣。",
         "落月摇晃着，把深情全部倾注在江边的树木上。",
-        "月光在树影间摇曳，使人产生离别的愁绪。",
+        "月光在树影间摇曳，表现诗人忘却离愁、悠然赏景的闲适。",
         "落月的光辉与江树交织，引起了离人无限的别愁。"
       ],
       "answerIndex": 3,
@@ -1568,7 +1568,7 @@
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「落月摇情满江树」\n对「落月摇情满江树」的理解，最恰当的一项是\nA. 落月把情思摇动，洒满了江边的树木。\nB. 落月摇晃着，把深情全部倾注在江边的树木上。\nC. 月光在树影间摇曳，使人产生离别的愁绪。\nD. 落月的光辉与江树交织，引起了离人无限的别愁。\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「落月摇情满江树」\n对「落月摇情满江树」的理解，最恰当的一项是\nA. 落月牵动游子的情思，表现他即将归家的欢欣。\nB. 落月摇晃着，把深情全部倾注在江边的树木上。\nC. 月光在树影间摇曳，表现诗人忘却离愁、悠然赏景的闲适。\nD. 落月的光辉与江树交织，引起了离人无限的别愁。\n請選出答案，並用自己的話說明判斷依據。",
         "「落月摇情满江树」中的「摇」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     }
@@ -1724,10 +1724,10 @@
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v08",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v08",
-        "resourceVersion": "sha256:b5f8579039ece9428c84bc92ccfa8fbfb54ea9ad08a6dce5aafd99608c987e89",
+        "resourceVersion": "sha256:14a91c93fc1324765f7fa540ae7552a9b40f3937985f73789cb927b2152df77a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1988,7 +1988,7 @@
       },
       {
         "requirementId": "effect:lesson-1498:vocab:lesson-1498:v08",
-        "sourceVersion": "sha256:b5f8579039ece9428c84bc92ccfa8fbfb54ea9ad08a6dce5aafd99608c987e89",
+        "sourceVersion": "sha256:14a91c93fc1324765f7fa540ae7552a9b40f3937985f73789cb927b2152df77a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2460,7 +2460,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
+  "curriculumVersion": "yw-dialogue-c2f66c995fee1bdba13f",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -430,7 +430,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：弄玉吹箫（吹奏/摆弄）。語境義：吹奏，摆弄。此处「弄」为动词，指吹奏长笛，表现诗人的闲适与豪迈。",
+      "rule": "沿用原題準據：弄管调弦（吹奏）。語境義：吹奏，摆弄。此处「弄」为动词，指吹奏长笛，表现诗人的闲适与豪迈。",
       "sourcePassages": [
         "lesson-1590:p4"
       ],
@@ -631,10 +631,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1590:vocab:lesson-1590:v07",
         "canonicalUnitId": "yw:lesson-1590:vocabulary:lesson-1590:v07",
-        "resourceVersion": "sha256:f0821b4b806b11821fd9ab2523b423df0f6772509a7899fdc34d04bed576d8d4",
+        "resourceVersion": "sha256:82b2f963874c645e5b62face6b11685455708aea9acd071754e172b48c3abe7a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -825,18 +825,18 @@
       "options": [
         "弄巧成拙（制造）",
         "弄潮儿（从事）",
-        "弄玉吹箫（吹奏/摆弄）",
-        "耍弄权术（戏弄）"
+        "弄管调弦（吹奏）",
+        "耍弄权术（施展、运用）"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "弄玉吹箫（吹奏/摆弄）",
+      "sourceAnswer": "弄管调弦（吹奏）",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-866b89f513ba9e95",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「万里归船弄长笛」\n「弄」在句中的用法与下列哪项一致？\nA. 弄巧成拙（制造）\nB. 弄潮儿（从事）\nC. 弄玉吹箫（吹奏/摆弄）\nD. 耍弄权术（戏弄）\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「万里归船弄长笛」\n「弄」在句中的用法与下列哪项一致？\nA. 弄巧成拙（制造）\nB. 弄潮儿（从事）\nC. 弄管调弦（吹奏）\nD. 耍弄权术（施展、运用）\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「万里归船弄长笛」的句意，解釋「弄」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     }
@@ -992,10 +992,10 @@
       {
         "resourceKey": "effect:lesson-1590:vocab:lesson-1590:v07",
         "canonicalUnitId": "yw:lesson-1590:vocabulary:lesson-1590:v07",
-        "resourceVersion": "sha256:f0821b4b806b11821fd9ab2523b423df0f6772509a7899fdc34d04bed576d8d4",
+        "resourceVersion": "sha256:82b2f963874c645e5b62face6b11685455708aea9acd071754e172b48c3abe7a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1256,7 +1256,7 @@
       },
       {
         "requirementId": "effect:lesson-1590:vocab:lesson-1590:v07",
-        "sourceVersion": "sha256:f0821b4b806b11821fd9ab2523b423df0f6772509a7899fdc34d04bed576d8d4",
+        "sourceVersion": "sha256:82b2f963874c645e5b62face6b11685455708aea9acd071754e172b48c3abe7a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1650,7 +1650,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-d1a6a39ecea90de21260",
+  "curriculumVersion": "yw-dialogue-58f511232869b104227a",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

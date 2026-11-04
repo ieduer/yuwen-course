@@ -3182,10 +3182,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1534:vocab:lesson-1534:v03",
         "canonicalUnitId": "yw:lesson-1534:vocabulary:lesson-1534:v03",
-        "resourceVersion": "sha256:341ccc5fe5671368f4127b44599fd152447bd0e0b8235c5125c0c8539c62b3f8",
+        "resourceVersion": "sha256:f47f46fb669ee12366337bc6965a1f470ec16c13d0a6836b2027c1fb73402b7b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -3308,10 +3308,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1534:vocab:lesson-1534:v10",
         "canonicalUnitId": "yw:lesson-1534:vocabulary:lesson-1534:v10",
-        "resourceVersion": "sha256:a9720ec9d3eb563ed7c381c8997d3f14276e0dc2b630239abe1a7d6451f8e99e",
+        "resourceVersion": "sha256:16076f7fbc4c6bdc4ac81116b207e13b6a69d8ac2c9eb04916b0a8221cd222ce",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -3626,7 +3626,7 @@
         "疾病",
         "痛心",
         "快",
-        "恨"
+        "嫉妒"
       ],
       "answerIndex": 1,
       "sourceAnswer": "痛心",
@@ -3636,7 +3636,7 @@
       "version": "vocab-set-7c7b876632373a83",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「屈平疾王听之不聪也」\n「屈平疾王听之不聪也」中「疾」的意思是\nA. 疾病\nB. 痛心\nC. 快\nD. 恨\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「屈平疾王听之不聪也」\n「屈平疾王听之不聪也」中「疾」的意思是\nA. 疾病\nB. 痛心\nC. 快\nD. 嫉妒\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「屈平疾王听之不聪也」中「疾」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -3814,7 +3814,7 @@
       "options": [
         "形体和容貌",
         "描写叙述",
-        "形状样貌",
+        "言谈举止",
         "精神状态"
       ],
       "answerIndex": 0,
@@ -3825,7 +3825,7 @@
       "version": "vocab-set-7c7b876632373a83",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「颜色憔悴,形容枯槁」\n「形容枯槁」中「形容」在现代汉语中通常指「外貌描述」，但在文中指\nA. 形体和容貌\nB. 描写叙述\nC. 形状样貌\nD. 精神状态\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「颜色憔悴,形容枯槁」\n「形容枯槁」中「形容」在现代汉语中通常指「外貌描述」，但在文中指\nA. 形体和容貌\nB. 描写叙述\nC. 言谈举止\nD. 精神状态\n請選出答案，並用自己的話說明判斷依據。",
         "回到「颜色憔悴,形容枯槁」：「形容」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -4030,10 +4030,10 @@
       {
         "resourceKey": "effect:lesson-1534:vocab:lesson-1534:v03",
         "canonicalUnitId": "yw:lesson-1534:vocabulary:lesson-1534:v03",
-        "resourceVersion": "sha256:341ccc5fe5671368f4127b44599fd152447bd0e0b8235c5125c0c8539c62b3f8",
+        "resourceVersion": "sha256:f47f46fb669ee12366337bc6965a1f470ec16c13d0a6836b2027c1fb73402b7b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4093,10 +4093,10 @@
       {
         "resourceKey": "effect:lesson-1534:vocab:lesson-1534:v10",
         "canonicalUnitId": "yw:lesson-1534:vocabulary:lesson-1534:v10",
-        "resourceVersion": "sha256:a9720ec9d3eb563ed7c381c8997d3f14276e0dc2b630239abe1a7d6451f8e99e",
+        "resourceVersion": "sha256:16076f7fbc4c6bdc4ac81116b207e13b6a69d8ac2c9eb04916b0a8221cd222ce",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4885,7 +4885,7 @@
       },
       {
         "requirementId": "effect:lesson-1534:vocab:lesson-1534:v03",
-        "sourceVersion": "sha256:341ccc5fe5671368f4127b44599fd152447bd0e0b8235c5125c0c8539c62b3f8",
+        "sourceVersion": "sha256:f47f46fb669ee12366337bc6965a1f470ec16c13d0a6836b2027c1fb73402b7b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4955,7 +4955,7 @@
       },
       {
         "requirementId": "effect:lesson-1534:vocab:lesson-1534:v10",
-        "sourceVersion": "sha256:a9720ec9d3eb563ed7c381c8997d3f14276e0dc2b630239abe1a7d6451f8e99e",
+        "sourceVersion": "sha256:16076f7fbc4c6bdc4ac81116b207e13b6a69d8ac2c9eb04916b0a8221cd222ce",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -5875,7 +5875,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-63ff51c2f0d9fef2fab2",
+  "curriculumVersion": "yw-dialogue-3def0fee50a352eea5fe",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -876,7 +876,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：背负。語境義：背。古义为背，今义多为辜负、失败等。",
+      "rule": "沿用原題準據：背负。語境義：背。「负而前驱」的「负」意为背、背负，指背着装有三支箭的锦囊走在前面，故选A。现代汉语「负重」中的「负」也保留此义。",
       "sourcePassages": [
         "lesson-1537:p1"
       ],
@@ -1165,10 +1165,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1537:vocab:lesson-1537:v04",
         "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v04",
-        "resourceVersion": "sha256:f162ef7d79c599815ea7369c7fa29b71e6e6f54cb0cc9b2076588420642e9256",
+        "resourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1237,10 +1237,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1537:vocab:lesson-1537:v08",
         "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v08",
-        "resourceVersion": "sha256:353212ed3f79519d108a35dc1ae733e435bc032afe01146735f2a9ed759c31fe",
+        "resourceVersion": "sha256:ed8730ea0fbea71f8d541c268a1d9b92822ba6cf591428a39cd7ec4b9208c2a0",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1464,10 +1464,10 @@
       "word": "负",
       "sourceSentence": "负而前驱",
       "meaning": "背",
-      "explanation": "古义为背，今义多为辜负、失败等。",
-      "type": "gu-jin",
+      "explanation": "「负而前驱」的「负」意为背、背负，指背着装有三支箭的锦囊走在前面，故选A。现代汉语「负重」中的「负」也保留此义。",
+      "type": "contextual-choice",
       "difficulty": 1,
-      "question": "「负而前驱」中「负」与现代汉语意思不同的是",
+      "question": "「负而前驱」中「负」的意思是",
       "options": [
         "背负",
         "辜负",
@@ -1482,8 +1482,8 @@
       "version": "vocab-set-db96a14e61128c90",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「负而前驱」\n「负而前驱」中「负」与现代汉语意思不同的是\nA. 背负\nB. 辜负\nC. 失败\nD. 亏欠\n請選出答案，並用自己的話說明判斷依據。",
-        "回到「负而前驱」：「负」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+        "語境：「负而前驱」\n「负而前驱」中「负」的意思是\nA. 背负\nB. 辜负\nC. 失败\nD. 亏欠\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「负而前驱」中「负」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1580,7 +1580,7 @@
         "祸患总是从微小的细节中积累起来的",
         "祸患总是让人感到忽然之间就微不足道了",
         "祸患往往是因为忽略了微小的事物",
-        "祸患的产生是因为微小的事物积累过多"
+        "祸患一旦产生，便会逐渐缩小为微不足道的小事"
       ],
       "answerIndex": 0,
       "sourceAnswer": "祸患总是从微小的细节中积累起来的",
@@ -1590,7 +1590,7 @@
       "version": "vocab-set-db96a14e61128c90",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「夫祸患常积于忽微」\n「夫祸患常积于忽微」这句话的含义是\nA. 祸患总是从微小的细节中积累起来的\nB. 祸患总是让人感到忽然之间就微不足道了\nC. 祸患往往是因为忽略了微小的事物\nD. 祸患的产生是因为微小的事物积累过多\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「夫祸患常积于忽微」\n「夫祸患常积于忽微」这句话的含义是\nA. 祸患总是从微小的细节中积累起来的\nB. 祸患总是让人感到忽然之间就微不足道了\nC. 祸患往往是因为忽略了微小的事物\nD. 祸患一旦产生，便会逐渐缩小为微不足道的小事\n請選出答案，並用自己的話說明判斷依據。",
         "「夫祸患常积于忽微」中的「忽微」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1804,10 +1804,10 @@
       {
         "resourceKey": "effect:lesson-1537:vocab:lesson-1537:v04",
         "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v04",
-        "resourceVersion": "sha256:f162ef7d79c599815ea7369c7fa29b71e6e6f54cb0cc9b2076588420642e9256",
+        "resourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1840,10 +1840,10 @@
       {
         "resourceKey": "effect:lesson-1537:vocab:lesson-1537:v08",
         "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v08",
-        "resourceVersion": "sha256:353212ed3f79519d108a35dc1ae733e435bc032afe01146735f2a9ed759c31fe",
+        "resourceVersion": "sha256:ed8730ea0fbea71f8d541c268a1d9b92822ba6cf591428a39cd7ec4b9208c2a0",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2285,7 +2285,7 @@
       },
       {
         "requirementId": "effect:lesson-1537:vocab:lesson-1537:v04",
-        "sourceVersion": "sha256:f162ef7d79c599815ea7369c7fa29b71e6e6f54cb0cc9b2076588420642e9256",
+        "sourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2325,7 +2325,7 @@
       },
       {
         "requirementId": "effect:lesson-1537:vocab:lesson-1537:v08",
-        "sourceVersion": "sha256:353212ed3f79519d108a35dc1ae733e435bc032afe01146735f2a9ed759c31fe",
+        "sourceVersion": "sha256:ed8730ea0fbea71f8d541c268a1d9b92822ba6cf591428a39cd7ec4b9208c2a0",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2954,7 +2954,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-926249217825e9389876",
+  "curriculumVersion": "yw-dialogue-91d6dc8197f142b92822",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -834,14 +834,14 @@
     {
       "id": "lesson-1743-p2:v04",
       "domain": "vocabulary",
-      "label": "字詞：察",
+      "label": "字詞：心电感应",
       "criteria": [
         "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：今人又言心电感应有道。語境義：理解、体察。A项“察”古义为体察，今义为观察；B项“心电感应”古今义基本一致；C项“偶”古义为婚配，今义为偶尔；D项为典故。",
+      "rule": "沿用原題準據：今人又言「心电感应」有道。語境義：心灵相通的感应（古今义基本一致）。B项「心电感应」古今意义基本一致。A项「以及」在此指进而推及，现代汉语通常用作连词；C项「偶」在此指婚配，现代汉语常用义为偶然、偶尔；D项「充」在此指扩充，现代汉语常用义为充满、充当。故选B。",
       "sourcePassages": [
         "lesson-1743-p2:p3"
       ],
@@ -881,7 +881,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：最终。語境義：最终。“卒”通“终”，意为最终。",
+      "rule": "沿用原題準據：最终。語境義：最终。「卒」意为「终于、终究」。句意是：「谁知道我终究会比你先死呢？」",
       "sourcePassages": [
         "lesson-1743-p2:p3"
       ],
@@ -1021,7 +1021,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：指白居易在江州伤感流泪，借以形容自己的极度悲伤。語境義：比喻极度悲伤。语出白居易《琵琶行》，此处借指极度悲伤。",
+      "rule": "沿用原題準據：指白居易在江州伤感流泪，借以形容自己的极度悲伤。語境義：比喻极度悲伤。典出白居易《琵琶行》「座中泣下谁最多？江州司马青衫湿」，借白居易泪湿青衫之事表达自己的极度悲伤。本站课文此处作「司马春衫」，「春」当作「青」，据统编教材及《琵琶行》原句。",
       "sourcePassages": [
         "lesson-1743-p2:p3"
       ],
@@ -1099,10 +1099,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v03",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v03",
-        "resourceVersion": "sha256:0d3cb102f4ce3afacecd7625648fb4b4c89f2f356b5bec8814d67e827309b9d8",
+        "resourceVersion": "sha256:c8bee2750d0bace819e39a37fe6c8807b2c2258111e56d102a4fa1bd0b8cd0da",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1118,10 +1118,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v04",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v04",
-        "resourceVersion": "sha256:a5afe8801f0877c75ba97c0b998fe315d75e787071aecbac8e7d4287fdf7a5f3",
+        "resourceVersion": "sha256:6b9da156bb855cd8d66a59c09e7eebe125c6df75e3860c8264e5240ed4ab7ca6",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1156,10 +1156,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v06",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v06",
-        "resourceVersion": "sha256:ed6cf85860dec228f8acb0982af44b66d4a6a0ad983908771807c3e9e23b788e",
+        "resourceVersion": "sha256:c672763bf17d54e39c23cbe293e020fc2642f07155d8a1b30967eaf8685e4678",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1251,10 +1251,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v11",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v11",
-        "resourceVersion": "sha256:ddff6f7282191a88bc0b24a5ba7d7516edf534d1c493e88274ed522bb72adadd",
+        "resourceVersion": "sha256:64d9e180616421214e641e52c7d9f169d0cf847ee1277ffc05e2a05004d3197d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1289,10 +1289,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v14",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v14",
-        "resourceVersion": "sha256:423926ac1282b85c8dcb9a85fa5743df5aa53bf046de56ea75271c29e22cf249",
+        "resourceVersion": "sha256:9ad72b4fb0041a3c5e0c5383dfd4d92ec3f96695975af3e10f99f76557d8c1e2",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1330,7 +1330,7 @@
       "question": "「不能竟书而欲搁笔」中「竟」的意思是",
       "options": [
         "竟然",
-        "结束",
+        "穷究",
         "完成",
         "到底"
       ],
@@ -1342,35 +1342,35 @@
       "version": "vocab-set-d90d67feaeb41848",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「不能竟 书而欲搁笔」\n「不能竟书而欲搁笔」中「竟」的意思是\nA. 竟然\nB. 结束\nC. 完成\nD. 到底\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「不能竟 书而欲搁笔」\n「不能竟书而欲搁笔」中「竟」的意思是\nA. 竟然\nB. 穷究\nC. 完成\nD. 到底\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「不能竟 书而欲搁笔」中「竟」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
       "id": "lesson-1743-p2:v04",
-      "word": "察",
-      "sourceSentence": "又恐汝不察吾衷",
-      "meaning": "理解、体察",
-      "explanation": "A项“察”古义为体察，今义为观察；B项“心电感应”古今义基本一致；C项“偶”古义为婚配，今义为偶尔；D项为典故。",
+      "word": "心电感应",
+      "sourceSentence": "今人又言心电感应有道",
+      "meaning": "心灵相通的感应（古今义基本一致）",
+      "explanation": "B项「心电感应」古今意义基本一致。A项「以及」在此指进而推及，现代汉语通常用作连词；C项「偶」在此指婚配，现代汉语常用义为偶然、偶尔；D项「充」在此指扩充，现代汉语常用义为充满、充当。故选B。",
       "type": "gu-jin",
       "difficulty": 2,
-      "question": "下列句中加点词的含义与现代汉语相同的一项是",
+      "question": "下列句中「」标出的词语，含义与现代汉语相同的一项是",
       "options": [
-        "又恐汝不察吾衷",
-        "今人又言心电感应有道",
-        "汝幸而偶我",
-        "司马春衫"
+        "老吾老，「以及」人之老",
+        "今人又言「心电感应」有道",
+        "汝幸而「偶」我",
+        "吾「充」吾爱汝之心"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "今人又言心电感应有道",
+      "sourceAnswer": "今人又言「心电感应」有道",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-d90d67feaeb41848",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「又恐汝不察吾衷」\n下列句中加点词的含义与现代汉语相同的一项是\nA. 又恐汝不察吾衷\nB. 今人又言心电感应有道\nC. 汝幸而偶我\nD. 司马春衫\n請選出答案，並用自己的話說明判斷依據。",
-        "回到「又恐汝不察吾衷」：「察」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+        "語境：「今人又言心电感应有道」\n下列句中「」标出的词语，含义与现代汉语相同的一项是\nA. 老吾老，「以及」人之老\nB. 今人又言「心电感应」有道\nC. 汝幸而「偶」我\nD. 吾「充」吾爱汝之心\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「今人又言心电感应有道」：「心电感应」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1405,7 +1405,7 @@
       "word": "卒",
       "sourceSentence": "谁知吾卒先汝而死乎",
       "meaning": "最终",
-      "explanation": "“卒”通“终”，意为最终。",
+      "explanation": "「卒」意为「终于、终究」。句意是：「谁知道我终究会比你先死呢？」",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「谁知吾卒先汝而死乎」中「卒」的意思是",
@@ -1545,7 +1545,7 @@
       "difficulty": 2,
       "question": "「的的非吾所忍」中「的的」的意思是",
       "options": [
-        "分明",
+        "特意",
         "确实",
         "点点",
         "忧虑"
@@ -1558,7 +1558,7 @@
       "version": "vocab-set-d90d67feaeb41848",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「的的 非吾所忍」\n「的的非吾所忍」中「的的」的意思是\nA. 分明\nB. 确实\nC. 点点\nD. 忧虑\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「的的 非吾所忍」\n「的的非吾所忍」中「的的」的意思是\nA. 特意\nB. 确实\nC. 点点\nD. 忧虑\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「的的 非吾所忍」中「的的」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1594,10 +1594,10 @@
       "word": "司马春衫",
       "sourceSentence": "司马春衫 ，吾不能学太上之忘情 也",
       "meaning": "比喻极度悲伤",
-      "explanation": "语出白居易《琵琶行》，此处借指极度悲伤。",
+      "explanation": "典出白居易《琵琶行》「座中泣下谁最多？江州司马青衫湿」，借白居易泪湿青衫之事表达自己的极度悲伤。本站课文此处作「司马春衫」，「春」当作「青」，据统编教材及《琵琶行》原句。",
       "type": "interpretation",
       "difficulty": 3,
-      "question": "对「司马春衫」典故的理解，最恰当的一项是",
+      "question": "对「司马青衫」典故的理解，最恰当的一项是",
       "options": [
         "指司马迁穿的春装",
         "指作者怀念司马迁",
@@ -1612,7 +1612,7 @@
       "version": "vocab-set-d90d67feaeb41848",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「司马春衫 ，吾不能学太上之忘情 也」\n对「司马春衫」典故的理解，最恰当的一项是\nA. 指司马迁穿的春装\nB. 指作者怀念司马迁\nC. 指白居易在江州伤感流泪，借以形容自己的极度悲伤\nD. 指作者因春天的衣服而感到伤感\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「司马春衫 ，吾不能学太上之忘情 也」\n对「司马青衫」典故的理解，最恰当的一项是\nA. 指司马迁穿的春装\nB. 指作者怀念司马迁\nC. 指白居易在江州伤感流泪，借以形容自己的极度悲伤\nD. 指作者因春天的衣服而感到伤感\n請選出答案，並用自己的話說明判斷依據。",
         "「司马春衫 ，吾不能学太上之忘情 也」中的「司马春衫」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     }
@@ -1694,20 +1694,20 @@
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v03",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v03",
-        "resourceVersion": "sha256:0d3cb102f4ce3afacecd7625648fb4b4c89f2f356b5bec8814d67e827309b9d8",
+        "resourceVersion": "sha256:c8bee2750d0bace819e39a37fe6c8807b2c2258111e56d102a4fa1bd0b8cd0da",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v04",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v04",
-        "resourceVersion": "sha256:a5afe8801f0877c75ba97c0b998fe315d75e787071aecbac8e7d4287fdf7a5f3",
+        "resourceVersion": "sha256:6b9da156bb855cd8d66a59c09e7eebe125c6df75e3860c8264e5240ed4ab7ca6",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1724,10 +1724,10 @@
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v06",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v06",
-        "resourceVersion": "sha256:ed6cf85860dec228f8acb0982af44b66d4a6a0ad983908771807c3e9e23b788e",
+        "resourceVersion": "sha256:c672763bf17d54e39c23cbe293e020fc2642f07155d8a1b30967eaf8685e4678",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1774,10 +1774,10 @@
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v11",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v11",
-        "resourceVersion": "sha256:ddff6f7282191a88bc0b24a5ba7d7516edf534d1c493e88274ed522bb72adadd",
+        "resourceVersion": "sha256:64d9e180616421214e641e52c7d9f169d0cf847ee1277ffc05e2a05004d3197d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1794,10 +1794,10 @@
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v14",
         "canonicalUnitId": "yw:lesson-1743-p2:vocabulary:lesson-1743-p2:v14",
-        "resourceVersion": "sha256:423926ac1282b85c8dcb9a85fa5743df5aa53bf046de56ea75271c29e22cf249",
+        "resourceVersion": "sha256:9ad72b4fb0041a3c5e0c5383dfd4d92ec3f96695975af3e10f99f76557d8c1e2",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2033,7 +2033,7 @@
       },
       {
         "requirementId": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v03",
-        "sourceVersion": "sha256:0d3cb102f4ce3afacecd7625648fb4b4c89f2f356b5bec8814d67e827309b9d8",
+        "sourceVersion": "sha256:c8bee2750d0bace819e39a37fe6c8807b2c2258111e56d102a4fa1bd0b8cd0da",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2043,7 +2043,7 @@
       },
       {
         "requirementId": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v04",
-        "sourceVersion": "sha256:a5afe8801f0877c75ba97c0b998fe315d75e787071aecbac8e7d4287fdf7a5f3",
+        "sourceVersion": "sha256:6b9da156bb855cd8d66a59c09e7eebe125c6df75e3860c8264e5240ed4ab7ca6",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2063,7 +2063,7 @@
       },
       {
         "requirementId": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v06",
-        "sourceVersion": "sha256:ed6cf85860dec228f8acb0982af44b66d4a6a0ad983908771807c3e9e23b788e",
+        "sourceVersion": "sha256:c672763bf17d54e39c23cbe293e020fc2642f07155d8a1b30967eaf8685e4678",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2113,7 +2113,7 @@
       },
       {
         "requirementId": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v11",
-        "sourceVersion": "sha256:ddff6f7282191a88bc0b24a5ba7d7516edf534d1c493e88274ed522bb72adadd",
+        "sourceVersion": "sha256:64d9e180616421214e641e52c7d9f169d0cf847ee1277ffc05e2a05004d3197d",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2133,7 +2133,7 @@
       },
       {
         "requirementId": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v14",
-        "sourceVersion": "sha256:423926ac1282b85c8dcb9a85fa5743df5aa53bf046de56ea75271c29e22cf249",
+        "sourceVersion": "sha256:9ad72b4fb0041a3c5e0c5383dfd4d92ec3f96695975af3e10f99f76557d8c1e2",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2599,7 +2599,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-29b2fa1dcae9643304d7",
+  "curriculumVersion": "yw-dialogue-8ac0b3c174cb4ed39bd4",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

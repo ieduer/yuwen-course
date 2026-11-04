@@ -294,7 +294,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：依依墟里烟，舍舍見炊烟。語境義：房屋、居所。「舍」在句中指房屋，B項亦指房屋；A項指古代軍隊行軍三十里，C、D項為「捨棄」之意。",
+      "rule": "沿用原題準據：依依墟里烟，舍舍見炊烟。語境義：房屋、居所。「舍」在句中指房屋，B項亦指房屋；A項指古代軍隊行軍三十里，C項為「停止」之意，D項為「捨棄」之意。",
       "sourcePassages": [
         "lesson-1589:p1"
       ],
@@ -525,10 +525,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1589:vocab:lesson-1589:v01",
         "canonicalUnitId": "yw:lesson-1589:vocabulary:lesson-1589:v01",
-        "resourceVersion": "sha256:52b776c4e2877a949e67de2c628cc3fc462a1aa9a3f5187833876946e7c4c1e5",
+        "resourceVersion": "sha256:ef1f5c092579f21e633eee21a827a7e0c16be47be4e3a931d7d9a5e5ed7f388f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -685,7 +685,7 @@
       "word": "舍",
       "sourceSentence": "舍南舍北皆春水",
       "meaning": "房屋、居所",
-      "explanation": "「舍」在句中指房屋，B項亦指房屋；A項指古代軍隊行軍三十里，C、D項為「捨棄」之意。",
+      "explanation": "「舍」在句中指房屋，B項亦指房屋；A項指古代軍隊行軍三十里，C項為「停止」之意，D項為「捨棄」之意。",
       "type": "gu-jin",
       "difficulty": 2,
       "question": "下列選項中「舍」字的含義與「舍南舍北皆春水」中的「舍」相同的一項是",
@@ -966,10 +966,10 @@
       {
         "resourceKey": "effect:lesson-1589:vocab:lesson-1589:v01",
         "canonicalUnitId": "yw:lesson-1589:vocabulary:lesson-1589:v01",
-        "resourceVersion": "sha256:52b776c4e2877a949e67de2c628cc3fc462a1aa9a3f5187833876946e7c4c1e5",
+        "resourceVersion": "sha256:ef1f5c092579f21e633eee21a827a7e0c16be47be4e3a931d7d9a5e5ed7f388f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1247,7 +1247,7 @@
       },
       {
         "requirementId": "effect:lesson-1589:vocab:lesson-1589:v01",
-        "sourceVersion": "sha256:52b776c4e2877a949e67de2c628cc3fc462a1aa9a3f5187833876946e7c4c1e5",
+        "sourceVersion": "sha256:ef1f5c092579f21e633eee21a827a7e0c16be47be4e3a931d7d9a5e5ed7f388f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1712,7 +1712,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-27875238bd1124394002",
+  "curriculumVersion": "yw-dialogue-b0f1372c8ffc0d03e580",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

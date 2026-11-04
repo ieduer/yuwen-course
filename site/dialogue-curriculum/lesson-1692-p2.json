@@ -461,7 +461,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：指蜡烛对自我牺牲价值的怀疑与矛盾。語境義：指蜡烛燃烧过程中的自我怀疑或矛盾状态。。诗人通过「一误再误」表现蜡烛在燃烧过程中产生的内心冲突，随后又否定了这种怀疑，体现了牺牲的自觉性。",
+      "rule": "沿用原題準據：指诗人起初不理解红烛为何必须燃烧自身才能放出光明，因而感到矛盾。語境義：指诗人对红烛必须燃烧自身才能放出光明的疑惑与矛盾感。。诗人起初不理解红烛为何必须烧蜡成灰才能放出光明，因而感到矛盾；随后以「不误，不误」否定先前的疑惑，领悟到燃烧自身、照亮世界的奉献意义。",
       "sourcePassages": [
         "lesson-1692-p2:p2",
         "lesson-1692-p2:p3"
@@ -677,10 +677,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1692-p2:vocab:lesson-1692-p2:v06",
         "canonicalUnitId": "yw:lesson-1692-p2:vocabulary:lesson-1692-p2:v06",
-        "resourceVersion": "sha256:86013e5f6c3423247dcf1fa50115ec6c45160c493d103afceabf1def8a73ecf4",
+        "resourceVersion": "sha256:838089205f8ac5386239da4da82894f2d2efb8da0ed108cb9bf468726aa3f28b",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -811,24 +811,24 @@
       "id": "lesson-1692-p2:v06",
       "word": "误",
       "sourceSentence": "一误再误； 矛盾！冲突",
-      "meaning": "指蜡烛燃烧过程中的自我怀疑或矛盾状态。",
-      "explanation": "诗人通过「一误再误」表现蜡烛在燃烧过程中产生的内心冲突，随后又否定了这种怀疑，体现了牺牲的自觉性。",
+      "meaning": "指诗人对红烛必须燃烧自身才能放出光明的疑惑与矛盾感。",
+      "explanation": "诗人起初不理解红烛为何必须烧蜡成灰才能放出光明，因而感到矛盾；随后以「不误，不误」否定先前的疑惑，领悟到燃烧自身、照亮世界的奉献意义。",
       "type": "interpretation",
       "difficulty": 2,
       "question": "结合全文，诗人为什么说「一误再误」？",
       "options": [
         "指蜡烛制造的工艺有瑕疵",
-        "指蜡烛对自我牺牲价值的怀疑与矛盾",
+        "指诗人起初不理解红烛为何必须燃烧自身才能放出光明，因而感到矛盾",
         "指诗人对蜡烛的描写出现错误",
         "指残风破坏了蜡烛燃烧"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "指蜡烛对自我牺牲价值的怀疑与矛盾",
+      "sourceAnswer": "指诗人起初不理解红烛为何必须燃烧自身才能放出光明，因而感到矛盾",
       "sourceRefs": [],
       "version": "vocab-set-a9cd0e99ee34136b",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「一误再误； 矛盾！冲突」\n结合全文，诗人为什么说「一误再误」？\nA. 指蜡烛制造的工艺有瑕疵\nB. 指蜡烛对自我牺牲价值的怀疑与矛盾\nC. 指诗人对蜡烛的描写出现错误\nD. 指残风破坏了蜡烛燃烧\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「一误再误； 矛盾！冲突」\n结合全文，诗人为什么说「一误再误」？\nA. 指蜡烛制造的工艺有瑕疵\nB. 指诗人起初不理解红烛为何必须燃烧自身才能放出光明，因而感到矛盾\nC. 指诗人对蜡烛的描写出现错误\nD. 指残风破坏了蜡烛燃烧\n請選出答案，並用自己的話說明判斷依據。",
         "「一误再误； 矛盾！冲突」中的「误」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1054,10 +1054,10 @@
       {
         "resourceKey": "effect:lesson-1692-p2:vocab:lesson-1692-p2:v06",
         "canonicalUnitId": "yw:lesson-1692-p2:vocabulary:lesson-1692-p2:v06",
-        "resourceVersion": "sha256:86013e5f6c3423247dcf1fa50115ec6c45160c493d103afceabf1def8a73ecf4",
+        "resourceVersion": "sha256:838089205f8ac5386239da4da82894f2d2efb8da0ed108cb9bf468726aa3f28b",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1320,7 +1320,7 @@
       },
       {
         "requirementId": "effect:lesson-1692-p2:vocab:lesson-1692-p2:v06",
-        "sourceVersion": "sha256:86013e5f6c3423247dcf1fa50115ec6c45160c493d103afceabf1def8a73ecf4",
+        "sourceVersion": "sha256:838089205f8ac5386239da4da82894f2d2efb8da0ed108cb9bf468726aa3f28b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1641,7 +1641,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-42be1d76af956bd2abe2",
+  "curriculumVersion": "yw-dialogue-28829a8af9825e084a4a",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

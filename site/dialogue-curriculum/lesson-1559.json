@@ -1393,10 +1393,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1559:vocab:lesson-1559:v09",
         "canonicalUnitId": "yw:lesson-1559:vocabulary:lesson-1559:v09",
-        "resourceVersion": "sha256:21583ece4aa865531930a529deaa5a05236a18e9e3a077625d14a123ca383bcc",
+        "resourceVersion": "sha256:605329b5062526abb9eb1bdd75a71440c0f0bb07fdaa108bbb782a0fb1047483",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1627,7 +1627,7 @@
       "difficulty": 1,
       "question": "「连峰去天不盈尺」中「盈」的意思是？",
       "options": [
-        "超过",
+        "增长",
         "满，达到",
         "亏损",
         "剩余"
@@ -1638,7 +1638,7 @@
       "version": "vocab-set-5eb53c1970c3c37c",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「连峰去天不盈尺」\n「连峰去天不盈尺」中「盈」的意思是？\nA. 超过\nB. 满，达到\nC. 亏损\nD. 剩余\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「连峰去天不盈尺」\n「连峰去天不盈尺」中「盈」的意思是？\nA. 增长\nB. 满，达到\nC. 亏损\nD. 剩余\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「连峰去天不盈尺」中「盈」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
@@ -1812,10 +1812,10 @@
       {
         "resourceKey": "effect:lesson-1559:vocab:lesson-1559:v09",
         "canonicalUnitId": "yw:lesson-1559:vocabulary:lesson-1559:v09",
-        "resourceVersion": "sha256:21583ece4aa865531930a529deaa5a05236a18e9e3a077625d14a123ca383bcc",
+        "resourceVersion": "sha256:605329b5062526abb9eb1bdd75a71440c0f0bb07fdaa108bbb782a0fb1047483",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2122,7 +2122,7 @@
       },
       {
         "requirementId": "effect:lesson-1559:vocab:lesson-1559:v09",
-        "sourceVersion": "sha256:21583ece4aa865531930a529deaa5a05236a18e9e3a077625d14a123ca383bcc",
+        "sourceVersion": "sha256:605329b5062526abb9eb1bdd75a71440c0f0bb07fdaa108bbb782a0fb1047483",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2574,7 +2574,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-84d0e1b0555f85176733",
+  "curriculumVersion": "yw-dialogue-6a008a76f24cefc7665c",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

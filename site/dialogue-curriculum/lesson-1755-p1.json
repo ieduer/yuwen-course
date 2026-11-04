@@ -439,7 +439,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：昔人已乘黄鹤去。語境義：过去。「昔」在文中是「过去」的意思，「昔人」指过去的人，用法一致。",
+      "rule": "沿用原題準據：「昔」人已乘黄鹤去。語境義：过去。「昔闻洞庭水」的「昔」意为从前、过去；「昔人」指从前的人，其中「昔」也意为从前，故选D。A的「释」意为放开，B、C的「惜」意为爱惜，均不符合。",
       "sourcePassages": [
         "lesson-1755-p1:p3"
       ],
@@ -670,10 +670,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1755-p1:vocab:lesson-1755-p1:v04",
         "canonicalUnitId": "yw:lesson-1755-p1:vocabulary:lesson-1755-p1:v04",
-        "resourceVersion": "sha256:987b879bbc6b232f3497d4fffb8038e78dc94dd335a542670560a64dafc97320",
+        "resourceVersion": "sha256:68fd551b866cfa0e61fa67fb20bea96351983dbcb90bbe74e3d7a5039d470e50",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -876,23 +876,23 @@
       "word": "昔",
       "sourceSentence": "昔闻洞庭水",
       "meaning": "过去",
-      "explanation": "「昔」在文中是「过去」的意思，「昔人」指过去的人，用法一致。",
+      "explanation": "「昔闻洞庭水」的「昔」意为从前、过去；「昔人」指从前的人，其中「昔」也意为从前，故选D。A的「释」意为放开，B、C的「惜」意为爱惜，均不符合。",
       "type": "gu-jin",
       "difficulty": 1,
-      "question": "下列词语中，与「昔」在「昔闻洞庭水」中的用法一致的是",
+      "question": "下列各项中，「」标出的字与「昔闻洞庭水」中的「昔」意思相同的是",
       "options": [
-        "昔日重现",
-        "今非昔比",
-        "惜墨如金",
-        "昔人已乘黄鹤去"
+        "爱不「释」手",
+        "「惜」时如金",
+        "「惜」墨如金",
+        "「昔」人已乘黄鹤去"
       ],
       "answerIndex": 3,
-      "sourceAnswer": "昔人已乘黄鹤去",
+      "sourceAnswer": "「昔」人已乘黄鹤去",
       "sourceRefs": [],
       "version": "vocab-set-3f05dec5b0c18c5f",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「昔闻洞庭水」\n下列词语中，与「昔」在「昔闻洞庭水」中的用法一致的是\nA. 昔日重现\nB. 今非昔比\nC. 惜墨如金\nD. 昔人已乘黄鹤去\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「昔闻洞庭水」\n下列各项中，「」标出的字与「昔闻洞庭水」中的「昔」意思相同的是\nA. 爱不「释」手\nB. 「惜」时如金\nC. 「惜」墨如金\nD. 「昔」人已乘黄鹤去\n請選出答案，並用自己的話說明判斷依據。",
         "回到「昔闻洞庭水」：「昔」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1113,10 +1113,10 @@
       {
         "resourceKey": "effect:lesson-1755-p1:vocab:lesson-1755-p1:v04",
         "canonicalUnitId": "yw:lesson-1755-p1:vocabulary:lesson-1755-p1:v04",
-        "resourceVersion": "sha256:987b879bbc6b232f3497d4fffb8038e78dc94dd335a542670560a64dafc97320",
+        "resourceVersion": "sha256:68fd551b866cfa0e61fa67fb20bea96351983dbcb90bbe74e3d7a5039d470e50",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1402,7 +1402,7 @@
       },
       {
         "requirementId": "effect:lesson-1755-p1:vocab:lesson-1755-p1:v04",
-        "sourceVersion": "sha256:987b879bbc6b232f3497d4fffb8038e78dc94dd335a542670560a64dafc97320",
+        "sourceVersion": "sha256:68fd551b866cfa0e61fa67fb20bea96351983dbcb90bbe74e3d7a5039d470e50",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1921,7 +1921,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-b838b0c24f5797c92c8a",
+  "curriculumVersion": "yw-dialogue-115ad895acc2468ef8fc",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

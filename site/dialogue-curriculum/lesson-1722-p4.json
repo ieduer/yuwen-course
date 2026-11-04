@@ -425,7 +425,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：编织出巧妙的图案。語境義：制作巧妙的图案。词中描写云彩在天空中变幻出巧妙的形状，比喻织女手艺高超，故选2。",
+      "rule": "沿用原題準據：编织出巧妙的图案。語境義：制作巧妙的图案。词中描写云彩在天空中变幻出巧妙的形状，比喻织女手艺高超，故选C。",
       "sourcePassages": [
         "lesson-1722-p4:p3"
       ],
@@ -681,10 +681,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p4:vocab:lesson-1722-p4:v01",
         "canonicalUnitId": "yw:lesson-1722-p4:vocabulary:lesson-1722-p4:v01",
-        "resourceVersion": "sha256:e0c3c209e881aaeec3426f91933b71d0bbd2252b2efab338c21f3449d7be1b07",
+        "resourceVersion": "sha256:804aa5aea0b268413f43eacdd9c46f615e95d543c3e53a96afc5cf3240560d81",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -757,10 +757,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p4:vocab:lesson-1722-p4:v05",
         "canonicalUnitId": "yw:lesson-1722-p4:vocabulary:lesson-1722-p4:v05",
-        "resourceVersion": "sha256:69b81e0b4915a347e53e27b28a24ad0adfcffda44c2d13d5d4dd6f12a5031877",
+        "resourceVersion": "sha256:2002f49fa339bbff1bbc4f9b3e3328c65d6a7d7e1d44d2342dbc4b3fd1ad1e37",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -868,7 +868,7 @@
       "word": "弄巧",
       "sourceSentence": "纤云弄巧",
       "meaning": "制作巧妙的图案",
-      "explanation": "词中描写云彩在天空中变幻出巧妙的形状，比喻织女手艺高超，故选2。",
+      "explanation": "词中描写云彩在天空中变幻出巧妙的形状，比喻织女手艺高超，故选C。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「纤云弄巧」中「弄巧」的意思是",
@@ -975,7 +975,7 @@
       "options": [
         "多于",
         "超过",
-        "优于",
+        "不如",
         "等于"
       ],
       "answerIndex": 1,
@@ -984,7 +984,7 @@
       "version": "vocab-set-1e673eb3401dba1d",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「便胜却 人间无数」\n「便胜却人间无数」中「胜却」可以替换为\nA. 多于\nB. 超过\nC. 优于\nD. 等于\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「便胜却 人间无数」\n「便胜却人间无数」中「胜却」可以替换为\nA. 多于\nB. 超过\nC. 不如\nD. 等于\n請選出答案，並用自己的話說明判斷依據。",
         "請用恰當的現代說法替換「便胜却 人间无数」中的「胜却」，並解釋這個替換如何保留原句的意思。"
       ]
     },
@@ -1175,10 +1175,10 @@
       {
         "resourceKey": "effect:lesson-1722-p4:vocab:lesson-1722-p4:v01",
         "canonicalUnitId": "yw:lesson-1722-p4:vocabulary:lesson-1722-p4:v01",
-        "resourceVersion": "sha256:e0c3c209e881aaeec3426f91933b71d0bbd2252b2efab338c21f3449d7be1b07",
+        "resourceVersion": "sha256:804aa5aea0b268413f43eacdd9c46f615e95d543c3e53a96afc5cf3240560d81",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1215,10 +1215,10 @@
       {
         "resourceKey": "effect:lesson-1722-p4:vocab:lesson-1722-p4:v05",
         "canonicalUnitId": "yw:lesson-1722-p4:vocabulary:lesson-1722-p4:v05",
-        "resourceVersion": "sha256:69b81e0b4915a347e53e27b28a24ad0adfcffda44c2d13d5d4dd6f12a5031877",
+        "resourceVersion": "sha256:2002f49fa339bbff1bbc4f9b3e3328c65d6a7d7e1d44d2342dbc4b3fd1ad1e37",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1487,7 +1487,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p4:vocab:lesson-1722-p4:v01",
-        "sourceVersion": "sha256:e0c3c209e881aaeec3426f91933b71d0bbd2252b2efab338c21f3449d7be1b07",
+        "sourceVersion": "sha256:804aa5aea0b268413f43eacdd9c46f615e95d543c3e53a96afc5cf3240560d81",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1527,7 +1527,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p4:vocab:lesson-1722-p4:v05",
-        "sourceVersion": "sha256:69b81e0b4915a347e53e27b28a24ad0adfcffda44c2d13d5d4dd6f12a5031877",
+        "sourceVersion": "sha256:2002f49fa339bbff1bbc4f9b3e3328c65d6a7d7e1d44d2342dbc4b3fd1ad1e37",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1973,7 +1973,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-ad1e996f9edd7a089b5e",
+  "curriculumVersion": "yw-dialogue-e1243354f9bcb387641f",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

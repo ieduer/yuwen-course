@@ -1067,7 +1067,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：他那沉郁的嗓音在空旷的礼堂回荡。語境義：低沉而郁闷，形容声音或情绪。文中形容大海的声音，对应选项C中形容嗓音低沉。A项形容文学作品风格，B项形容脸色，D项形容气候，均不合语境。",
+      "rule": "沿用原題準據：他那沉郁的嗓音在空旷的礼堂回荡。語境義：低沉而郁闷，形容声音或情绪。文中的「沉郁」修饰大海的「吐诉」，形容其声音低沉而带有郁闷意味。C项同样用来形容声音；A项形容诗歌格调，B项形容脸色，D项形容乌云，均不符合题干限定的修饰对象。",
       "sourcePassages": [
         "lesson-1542:p3"
       ],
@@ -1336,10 +1336,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1542:vocab:lesson-1542:v03",
         "canonicalUnitId": "yw:lesson-1542:vocabulary:lesson-1542:v03",
-        "resourceVersion": "sha256:3dacb9a658e0b49b0b6f8af98d01df99e534ba6440a1b18a9053e04e7581d5aa",
+        "resourceVersion": "sha256:e98b8049b9aeb95612e97e2ab8c549fc60187dfbc2a2bda7ea148e329b20e1ce",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1426,10 +1426,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1542:vocab:lesson-1542:v09",
         "canonicalUnitId": "yw:lesson-1542:vocabulary:lesson-1542:v09",
-        "resourceVersion": "sha256:837ba7b973612760aff7a9efe000744c7c22970ae770cd16be7f23c5d6eabf87",
+        "resourceVersion": "sha256:1c1d565e49941cccbf57f2fac98836dad941e6ca71cd77fae694bd6c1686a368",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1521,10 +1521,10 @@
       "word": "沉郁",
       "sourceSentence": "最后一次了,我听着你的 喧声呼唤,你的沉郁的吐诉。",
       "meaning": "低沉而郁闷，形容声音或情绪",
-      "explanation": "文中形容大海的声音，对应选项C中形容嗓音低沉。A项形容文学作品风格，B项形容脸色，D项形容气候，均不合语境。",
+      "explanation": "文中的「沉郁」修饰大海的「吐诉」，形容其声音低沉而带有郁闷意味。C项同样用来形容声音；A项形容诗歌格调，B项形容脸色，D项形容乌云，均不符合题干限定的修饰对象。",
       "type": "discrimination",
       "difficulty": 2,
-      "question": "下列诗句中「沉郁」的含义与文中一致的是",
+      "question": "下列句子中，「沉郁」与文中一样用来形容声音的一项是",
       "options": [
         "这首诗格调沉郁，读来令人压抑",
         "由于长期营养不良，他的脸色十分沉郁",
@@ -1539,8 +1539,8 @@
       "version": "vocab-set-341b1a629fbc86c3",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「最后一次了,我听着你的 喧声呼唤,你的沉郁的吐诉。」\n下列诗句中「沉郁」的含义与文中一致的是\nA. 这首诗格调沉郁，读来令人压抑\nB. 由于长期营养不良，他的脸色十分沉郁\nC. 他那沉郁的嗓音在空旷的礼堂回荡\nD. 沉郁的乌云预示着一场大雨即将来临\n請選出答案，並用自己的話說明判斷依據。",
-        "請比較以下各項在原句中的意思：\nA. 这首诗格调沉郁，读来令人压抑\nB. 由于长期营养不良，他的脸色十分沉郁\nC. 他那沉郁的嗓音在空旷的礼堂回荡\nD. 沉郁的乌云预示着一场大雨即将来临\n下列诗句中「沉郁」的含义与文中一致的是。選出一項後逐一說明比較依據，不能只報字母。"
+        "語境：「最后一次了,我听着你的 喧声呼唤,你的沉郁的吐诉。」\n下列句子中，「沉郁」与文中一样用来形容声音的一项是\nA. 这首诗格调沉郁，读来令人压抑\nB. 由于长期营养不良，他的脸色十分沉郁\nC. 他那沉郁的嗓音在空旷的礼堂回荡\nD. 沉郁的乌云预示着一场大雨即将来临\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 这首诗格调沉郁，读来令人压抑\nB. 由于长期营养不良，他的脸色十分沉郁\nC. 他那沉郁的嗓音在空旷的礼堂回荡\nD. 沉郁的乌云预示着一场大雨即将来临\n下列句子中，「沉郁」与文中一样用来形容声音的一项是。選出一項後逐一說明比較依據，不能只報字母。"
       ]
     },
     {
@@ -1657,8 +1657,8 @@
       "difficulty": 2,
       "question": "「主宰」在文中的含义是",
       "options": [
-        "统治者",
-        "领导者",
+        "掌握国家政权的君主",
+        "指挥海上作战的将领",
         "精神上的引领者",
         "神灵"
       ],
@@ -1668,7 +1668,7 @@
       "version": "vocab-set-341b1a629fbc86c3",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「啊,我们心灵的另一个主宰。」\n「主宰」在文中的含义是\nA. 统治者\nB. 领导者\nC. 精神上的引领者\nD. 神灵\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「啊,我们心灵的另一个主宰。」\n「主宰」在文中的含义是\nA. 掌握国家政权的君主\nB. 指挥海上作战的将领\nC. 精神上的引领者\nD. 神灵\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「啊,我们心灵的另一个主宰。」中「主宰」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1838,10 +1838,10 @@
       {
         "resourceKey": "effect:lesson-1542:vocab:lesson-1542:v03",
         "canonicalUnitId": "yw:lesson-1542:vocabulary:lesson-1542:v03",
-        "resourceVersion": "sha256:3dacb9a658e0b49b0b6f8af98d01df99e534ba6440a1b18a9053e04e7581d5aa",
+        "resourceVersion": "sha256:e98b8049b9aeb95612e97e2ab8c549fc60187dfbc2a2bda7ea148e329b20e1ce",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1883,10 +1883,10 @@
       {
         "resourceKey": "effect:lesson-1542:vocab:lesson-1542:v09",
         "canonicalUnitId": "yw:lesson-1542:vocabulary:lesson-1542:v09",
-        "resourceVersion": "sha256:837ba7b973612760aff7a9efe000744c7c22970ae770cd16be7f23c5d6eabf87",
+        "resourceVersion": "sha256:1c1d565e49941cccbf57f2fac98836dad941e6ca71cd77fae694bd6c1686a368",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2164,7 +2164,7 @@
       },
       {
         "requirementId": "effect:lesson-1542:vocab:lesson-1542:v03",
-        "sourceVersion": "sha256:3dacb9a658e0b49b0b6f8af98d01df99e534ba6440a1b18a9053e04e7581d5aa",
+        "sourceVersion": "sha256:e98b8049b9aeb95612e97e2ab8c549fc60187dfbc2a2bda7ea148e329b20e1ce",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2214,7 +2214,7 @@
       },
       {
         "requirementId": "effect:lesson-1542:vocab:lesson-1542:v09",
-        "sourceVersion": "sha256:837ba7b973612760aff7a9efe000744c7c22970ae770cd16be7f23c5d6eabf87",
+        "sourceVersion": "sha256:1c1d565e49941cccbf57f2fac98836dad941e6ca71cd77fae694bd6c1686a368",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2548,7 +2548,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-2ea3f5ccf86cffea74d9",
+  "curriculumVersion": "yw-dialogue-b1f41fa2191af2c35aa3",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -1853,10 +1853,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1743-p1:vocab:lesson-1743-p1:v01",
         "canonicalUnitId": "yw:lesson-1743-p1:vocabulary:lesson-1743-p1:v01",
-        "resourceVersion": "sha256:9cb7c095cd3bdf4fdff2c6f83a603e71b5e775acff82dd2b76c87c0742c765c5",
+        "resourceVersion": "sha256:1cc2418efd04b32a1a25c1c44eb2880c9533ab68d6440ff7f2c1362803ed197f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2143,7 +2143,7 @@
         "经过",
         "错误",
         "超过",
-        "过失行为"
+        "责备"
       ],
       "answerIndex": 1,
       "sourceAnswer": "错误",
@@ -2153,7 +2153,7 @@
       "version": "vocab-set-f64ef7a737b06fac",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「窃以为过矣」\n「窃以为过矣」中「过」的意思是\nA. 经过\nB. 错误\nC. 超过\nD. 过失行为\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「窃以为过矣」\n「窃以为过矣」中「过」的意思是\nA. 经过\nB. 错误\nC. 超过\nD. 责备\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「窃以为过矣」中「过」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2586,10 +2586,10 @@
       {
         "resourceKey": "effect:lesson-1743-p1:vocab:lesson-1743-p1:v01",
         "canonicalUnitId": "yw:lesson-1743-p1:vocabulary:lesson-1743-p1:v01",
-        "resourceVersion": "sha256:9cb7c095cd3bdf4fdff2c6f83a603e71b5e775acff82dd2b76c87c0742c765c5",
+        "resourceVersion": "sha256:1cc2418efd04b32a1a25c1c44eb2880c9533ab68d6440ff7f2c1362803ed197f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2994,7 +2994,7 @@
       },
       {
         "requirementId": "effect:lesson-1743-p1:vocab:lesson-1743-p1:v01",
-        "sourceVersion": "sha256:9cb7c095cd3bdf4fdff2c6f83a603e71b5e775acff82dd2b76c87c0742c765c5",
+        "sourceVersion": "sha256:1cc2418efd04b32a1a25c1c44eb2880c9533ab68d6440ff7f2c1362803ed197f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3589,7 +3589,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-1b13895b2967cb6fe7e2",
+  "curriculumVersion": "yw-dialogue-4c3d9ae6267946613e08",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

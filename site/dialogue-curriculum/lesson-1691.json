@@ -743,7 +743,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：遍布。語境義：遍布。漫，遍布之意，指湘江满江碧透。",
+      "rule": "沿用原題準據：满、全。語境義：满、全。漫，满、全之意；「漫江碧透」指满江碧绿澄澈。",
       "sourcePassages": [
         "lesson-1691:p2"
       ],
@@ -823,7 +823,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：游泳。語境義：游泳。此处借指游泳，语出《庄子》相关典故。",
+      "rule": "沿用原題準據：游泳。語境義：游泳。「击水」在此指游泳。「到中流击水」回忆青年时代到江心游泳的情景。",
       "sourcePassages": [
         "lesson-1691:p3"
       ],
@@ -1038,10 +1038,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1691:vocab:lesson-1691:v03",
         "canonicalUnitId": "yw:lesson-1691:vocabulary:lesson-1691:v03",
-        "resourceVersion": "sha256:ef6a704312cf8d1e8dcdd5acad5fae46d5fa9b423e1184ae457618d251f62386",
+        "resourceVersion": "sha256:83bb7faf13d1243bf7288c4d8561917ad8ec1ec9691d670dc605c6324eef7880",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1114,10 +1114,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1691:vocab:lesson-1691:v07",
         "canonicalUnitId": "yw:lesson-1691:vocabulary:lesson-1691:v07",
-        "resourceVersion": "sha256:e0dfc0473cb00f9b4c53ac1a282551c979eabd12c5889d1dbb6fd69d2ca77a6a",
+        "resourceVersion": "sha256:58c4a359c44f9094439d37955c6ea84cadf4ba4ac8df0e03126bf0096c2a58ec",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1268,24 +1268,24 @@
       "id": "lesson-1691:v03",
       "word": "漫",
       "sourceSentence": "漫江碧透",
-      "meaning": "遍布",
-      "explanation": "漫，遍布之意，指湘江满江碧透。",
+      "meaning": "满、全",
+      "explanation": "漫，满、全之意；「漫江碧透」指满江碧绿澄澈。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "“漫江碧透”中“漫”的意思是：",
       "options": [
         "随意",
-        "充满",
-        "遍布",
+        "水势浩大",
+        "满、全",
         "漫长"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "遍布",
+      "sourceAnswer": "满、全",
       "sourceRefs": [],
       "version": "vocab-set-d4b196a4cd81780a",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「漫江碧透」\n“漫江碧透”中“漫”的意思是：\nA. 随意\nB. 充满\nC. 遍布\nD. 漫长\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「漫江碧透」\n“漫江碧透”中“漫”的意思是：\nA. 随意\nB. 水势浩大\nC. 满、全\nD. 漫长\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「漫江碧透」中「漫」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1369,7 +1369,7 @@
       "word": "击水",
       "sourceSentence": "到中流击水",
       "meaning": "游泳",
-      "explanation": "此处借指游泳，语出《庄子》相关典故。",
+      "explanation": "「击水」在此指游泳。「到中流击水」回忆青年时代到江心游泳的情景。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "“到中流击水”中“击水”的意思是：",
@@ -1611,10 +1611,10 @@
       {
         "resourceKey": "effect:lesson-1691:vocab:lesson-1691:v03",
         "canonicalUnitId": "yw:lesson-1691:vocabulary:lesson-1691:v03",
-        "resourceVersion": "sha256:ef6a704312cf8d1e8dcdd5acad5fae46d5fa9b423e1184ae457618d251f62386",
+        "resourceVersion": "sha256:83bb7faf13d1243bf7288c4d8561917ad8ec1ec9691d670dc605c6324eef7880",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1651,10 +1651,10 @@
       {
         "resourceKey": "effect:lesson-1691:vocab:lesson-1691:v07",
         "canonicalUnitId": "yw:lesson-1691:vocabulary:lesson-1691:v07",
-        "resourceVersion": "sha256:e0dfc0473cb00f9b4c53ac1a282551c979eabd12c5889d1dbb6fd69d2ca77a6a",
+        "resourceVersion": "sha256:58c4a359c44f9094439d37955c6ea84cadf4ba4ac8df0e03126bf0096c2a58ec",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1969,7 +1969,7 @@
       },
       {
         "requirementId": "effect:lesson-1691:vocab:lesson-1691:v03",
-        "sourceVersion": "sha256:ef6a704312cf8d1e8dcdd5acad5fae46d5fa9b423e1184ae457618d251f62386",
+        "sourceVersion": "sha256:83bb7faf13d1243bf7288c4d8561917ad8ec1ec9691d670dc605c6324eef7880",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2009,7 +2009,7 @@
       },
       {
         "requirementId": "effect:lesson-1691:vocab:lesson-1691:v07",
-        "sourceVersion": "sha256:e0dfc0473cb00f9b4c53ac1a282551c979eabd12c5889d1dbb6fd69d2ca77a6a",
+        "sourceVersion": "sha256:58c4a359c44f9094439d37955c6ea84cadf4ba4ac8df0e03126bf0096c2a58ec",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2487,7 +2487,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-3a75e100eb37e2767044",
+  "curriculumVersion": "yw-dialogue-d586e9669cc7061220d7",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

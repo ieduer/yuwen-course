@@ -701,7 +701,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：表现云朵因琴声而停滞。語境義：凝结，停滞。诗人运用夸张手法，写出琴声之美使云朵凝结不动。",
+      "rule": "沿用原題準據：表现云朵因箜篌声而停滞。語境義：凝结，停滞。诗人运用夸张手法，写出箜篌声之美使云朵凝结不动。",
       "sourcePassages": [
         "lesson-1548:p1"
       ],
@@ -741,7 +741,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：比喻。語境義：美玉碎裂（形容声音清脆悦耳）。诗人将听觉上的琴声比作视觉上的美玉碎裂声，是典型的比喻与通感。",
+      "rule": "沿用原題準據：比喻。語境義：美玉碎裂（形容声音清脆悦耳）。诗人以昆山美玉碎裂声和凤凰鸣叫声比喻箜篌声，表现乐声的清脆与和美，运用了比喻。此处是以声喻声，并未发生不同感官之间的转换，故选B，不选D。",
       "sourcePassages": [
         "lesson-1548:p1"
       ],
@@ -970,10 +970,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1548:vocab:lesson-1548:v04",
         "canonicalUnitId": "yw:lesson-1548:vocabulary:lesson-1548:v04",
-        "resourceVersion": "sha256:8befdc79aeb6901105f709c3c62f40a2d11e7e1cdb7dac24c2a5737195eccdce",
+        "resourceVersion": "sha256:0717f450092ad8eb8fabf2e16f0363b933c7c8a2f7b69255b5cfec41c2590e8c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -988,10 +988,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1548:vocab:lesson-1548:v05",
         "canonicalUnitId": "yw:lesson-1548:vocabulary:lesson-1548:v05",
-        "resourceVersion": "sha256:b8253a730f9f48658645420a991cd882750c2a01646caf03adb9e41f532fa987",
+        "resourceVersion": "sha256:ffc5ebef3f60285bb1f37eba563dc52f1fee1892e080e4a76f0eb6c0dd47fc4f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1024,10 +1024,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1548:vocab:lesson-1548:v07",
         "canonicalUnitId": "yw:lesson-1548:vocabulary:lesson-1548:v07",
-        "resourceVersion": "sha256:1e268ca50be804b3f86aaa8316a278d4b9c825a546156b16fbddd018045dd64a",
+        "resourceVersion": "sha256:93bdedd722e7b85aa688a742ca619d5a4f335cfcabfae14aca92dcb36886b3ed",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1219,7 +1219,7 @@
         "败坏",
         "下垂",
         "消失",
-        "聚集"
+        "飘散"
       ],
       "answerIndex": 1,
       "sourceAnswer": "下垂",
@@ -1227,7 +1227,7 @@
       "version": "vocab-set-576013bdb1c18924",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「空山凝云颓不流」\n「空山凝云颓不流」中「颓」的意思是\nA. 败坏\nB. 下垂\nC. 消失\nD. 聚集\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「空山凝云颓不流」\n「空山凝云颓不流」中「颓」的意思是\nA. 败坏\nB. 下垂\nC. 消失\nD. 飘散\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「空山凝云颓不流」中「颓」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1236,23 +1236,23 @@
       "word": "凝",
       "sourceSentence": "空山凝云颓不流",
       "meaning": "凝结，停滞",
-      "explanation": "诗人运用夸张手法，写出琴声之美使云朵凝结不动。",
+      "explanation": "诗人运用夸张手法，写出箜篌声之美使云朵凝结不动。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「空山凝云颓不流」中「凝」的作用是",
       "options": [
         "描写山势险峻",
-        "表现云朵因琴声而停滞",
+        "表现云朵因箜篌声而停滞",
         "形容天气寒冷",
         "暗示山中潮湿"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "表现云朵因琴声而停滞",
+      "sourceAnswer": "表现云朵因箜篌声而停滞",
       "sourceRefs": [],
       "version": "vocab-set-576013bdb1c18924",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「空山凝云颓不流」\n「空山凝云颓不流」中「凝」的作用是\nA. 描写山势险峻\nB. 表现云朵因琴声而停滞\nC. 形容天气寒冷\nD. 暗示山中潮湿\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「空山凝云颓不流」\n「空山凝云颓不流」中「凝」的作用是\nA. 描写山势险峻\nB. 表现云朵因箜篌声而停滞\nC. 形容天气寒冷\nD. 暗示山中潮湿\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「空山凝云颓不流」中「凝」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1286,10 +1286,10 @@
       "word": "玉碎",
       "sourceSentence": "昆山玉碎凤凰叫",
       "meaning": "美玉碎裂（形容声音清脆悦耳）",
-      "explanation": "诗人将听觉上的琴声比作视觉上的美玉碎裂声，是典型的比喻与通感。",
+      "explanation": "诗人以昆山美玉碎裂声和凤凰鸣叫声比喻箜篌声，表现乐声的清脆与和美，运用了比喻。此处是以声喻声，并未发生不同感官之间的转换，故选B，不选D。",
       "type": "interpretation",
       "difficulty": 2,
-      "question": "「昆山玉碎凤凰叫」运用了什么修辞手法来描写琴声？",
+      "question": "「昆山玉碎凤凰叫」运用了什么修辞手法来描写箜篌声？",
       "options": [
         "夸张",
         "比喻",
@@ -1302,7 +1302,7 @@
       "version": "vocab-set-576013bdb1c18924",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「昆山玉碎凤凰叫」\n「昆山玉碎凤凰叫」运用了什么修辞手法来描写琴声？\nA. 夸张\nB. 比喻\nC. 拟人\nD. 通感\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「昆山玉碎凤凰叫」\n「昆山玉碎凤凰叫」运用了什么修辞手法来描写箜篌声？\nA. 夸张\nB. 比喻\nC. 拟人\nD. 通感\n請選出答案，並用自己的話說明判斷依據。",
         "「昆山玉碎凤凰叫」中的「玉碎」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1547,19 +1547,19 @@
       {
         "resourceKey": "effect:lesson-1548:vocab:lesson-1548:v04",
         "canonicalUnitId": "yw:lesson-1548:vocabulary:lesson-1548:v04",
-        "resourceVersion": "sha256:8befdc79aeb6901105f709c3c62f40a2d11e7e1cdb7dac24c2a5737195eccdce",
+        "resourceVersion": "sha256:0717f450092ad8eb8fabf2e16f0363b933c7c8a2f7b69255b5cfec41c2590e8c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1548:vocab:lesson-1548:v05",
         "canonicalUnitId": "yw:lesson-1548:vocabulary:lesson-1548:v05",
-        "resourceVersion": "sha256:b8253a730f9f48658645420a991cd882750c2a01646caf03adb9e41f532fa987",
+        "resourceVersion": "sha256:ffc5ebef3f60285bb1f37eba563dc52f1fee1892e080e4a76f0eb6c0dd47fc4f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1574,10 +1574,10 @@
       {
         "resourceKey": "effect:lesson-1548:vocab:lesson-1548:v07",
         "canonicalUnitId": "yw:lesson-1548:vocabulary:lesson-1548:v07",
-        "resourceVersion": "sha256:1e268ca50be804b3f86aaa8316a278d4b9c825a546156b16fbddd018045dd64a",
+        "resourceVersion": "sha256:93bdedd722e7b85aa688a742ca619d5a4f335cfcabfae14aca92dcb36886b3ed",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1895,7 +1895,7 @@
       },
       {
         "requirementId": "effect:lesson-1548:vocab:lesson-1548:v04",
-        "sourceVersion": "sha256:8befdc79aeb6901105f709c3c62f40a2d11e7e1cdb7dac24c2a5737195eccdce",
+        "sourceVersion": "sha256:0717f450092ad8eb8fabf2e16f0363b933c7c8a2f7b69255b5cfec41c2590e8c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1905,7 +1905,7 @@
       },
       {
         "requirementId": "effect:lesson-1548:vocab:lesson-1548:v05",
-        "sourceVersion": "sha256:b8253a730f9f48658645420a991cd882750c2a01646caf03adb9e41f532fa987",
+        "sourceVersion": "sha256:ffc5ebef3f60285bb1f37eba563dc52f1fee1892e080e4a76f0eb6c0dd47fc4f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1925,7 +1925,7 @@
       },
       {
         "requirementId": "effect:lesson-1548:vocab:lesson-1548:v07",
-        "sourceVersion": "sha256:1e268ca50be804b3f86aaa8316a278d4b9c825a546156b16fbddd018045dd64a",
+        "sourceVersion": "sha256:93bdedd722e7b85aa688a742ca619d5a4f335cfcabfae14aca92dcb36886b3ed",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2515,7 +2515,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-3f1814e5b17ef398b0fe",
+  "curriculumVersion": "yw-dialogue-88dfce50ae45a3d63dfb",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

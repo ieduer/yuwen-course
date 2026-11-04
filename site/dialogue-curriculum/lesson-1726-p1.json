@@ -1168,7 +1168,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：急切地。語境義：急切地。形容子路回答時毫無遲疑、急切的樣子。",
+      "rule": "沿用原題準據：輕率急忙地。語境義：輕率急忙的樣子。「率爾」指輕率急忙的樣子，此處形容子路不假思索、急於作答的情態，故選C。",
       "sourcePassages": [
         "lesson-1726-p1:p1"
       ],
@@ -1500,10 +1500,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p1:vocab:lesson-1726-p1:v03",
         "canonicalUnitId": "yw:lesson-1726-p1:vocabulary:lesson-1726-p1:v03",
-        "resourceVersion": "sha256:59782c39b0ee3e17aaf33e46482be3711a2c28190864a0e111b4a770d4c9b42d",
+        "resourceVersion": "sha256:418a0b4e6ed4e5600d2cae5597e0de5f5440482d13407030e64c62120767a0cf",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1709,10 +1709,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1726-p1:vocab:lesson-1726-p1:v14",
         "canonicalUnitId": "yw:lesson-1726-p1:vocabulary:lesson-1726-p1:v14",
-        "resourceVersion": "sha256:b0d4d453771c909d4cfacabf087bd131958ea45ee053210b6920ca0e45eaed5f",
+        "resourceVersion": "sha256:ae17e7997908c667fc177199a9fb2bf2a72b67e2543728b59ff85f845c191ef4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1797,26 +1797,26 @@
       "id": "lesson-1726-p1:v03",
       "word": "率尔",
       "sourceSentence": "子路率尔 而对曰",
-      "meaning": "急切地",
-      "explanation": "形容子路回答時毫無遲疑、急切的樣子。",
+      "meaning": "輕率急忙的樣子",
+      "explanation": "「率爾」指輕率急忙的樣子，此處形容子路不假思索、急於作答的情態，故選C。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「子路率尔而对曰」中「率尔」的意思是",
       "options": [
         "率直地",
-        "草率地",
-        "急切地",
+        "審慎地",
+        "輕率急忙地",
         "隨意地"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "急切地",
+      "sourceAnswer": "輕率急忙地",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
       "version": "vocab-set-c7e983ce397c5769",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「子路率尔 而对曰」\n「子路率尔而对曰」中「率尔」的意思是\nA. 率直地\nB. 草率地\nC. 急切地\nD. 隨意地\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「子路率尔 而对曰」\n「子路率尔而对曰」中「率尔」的意思是\nA. 率直地\nB. 審慎地\nC. 輕率急忙地\nD. 隨意地\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「子路率尔 而对曰」中「率尔」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2100,7 +2100,7 @@
       "difficulty": 2,
       "question": "「安见」中「安」的意思是",
       "options": [
-        "哪裡",
+        "於是",
         "怎麼",
         "安穩",
         "安定"
@@ -2113,7 +2113,7 @@
       "version": "vocab-set-c7e983ce397c5769",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「安见 方六七十如五六十而非邦也者」\n「安见」中「安」的意思是\nA. 哪裡\nB. 怎麼\nC. 安穩\nD. 安定\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「安见 方六七十如五六十而非邦也者」\n「安见」中「安」的意思是\nA. 於是\nB. 怎麼\nC. 安穩\nD. 安定\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「安见 方六七十如五六十而非邦也者」中「安」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
@@ -2215,10 +2215,10 @@
       {
         "resourceKey": "effect:lesson-1726-p1:vocab:lesson-1726-p1:v03",
         "canonicalUnitId": "yw:lesson-1726-p1:vocabulary:lesson-1726-p1:v03",
-        "resourceVersion": "sha256:59782c39b0ee3e17aaf33e46482be3711a2c28190864a0e111b4a770d4c9b42d",
+        "resourceVersion": "sha256:418a0b4e6ed4e5600d2cae5597e0de5f5440482d13407030e64c62120767a0cf",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2325,10 +2325,10 @@
       {
         "resourceKey": "effect:lesson-1726-p1:vocab:lesson-1726-p1:v14",
         "canonicalUnitId": "yw:lesson-1726-p1:vocabulary:lesson-1726-p1:v14",
-        "resourceVersion": "sha256:b0d4d453771c909d4cfacabf087bd131958ea45ee053210b6920ca0e45eaed5f",
+        "resourceVersion": "sha256:ae17e7997908c667fc177199a9fb2bf2a72b67e2543728b59ff85f845c191ef4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2623,7 +2623,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p1:vocab:lesson-1726-p1:v03",
-        "sourceVersion": "sha256:59782c39b0ee3e17aaf33e46482be3711a2c28190864a0e111b4a770d4c9b42d",
+        "sourceVersion": "sha256:418a0b4e6ed4e5600d2cae5597e0de5f5440482d13407030e64c62120767a0cf",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2733,7 +2733,7 @@
       },
       {
         "requirementId": "effect:lesson-1726-p1:vocab:lesson-1726-p1:v14",
-        "sourceVersion": "sha256:b0d4d453771c909d4cfacabf087bd131958ea45ee053210b6920ca0e45eaed5f",
+        "sourceVersion": "sha256:ae17e7997908c667fc177199a9fb2bf2a72b67e2543728b59ff85f845c191ef4",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3199,7 +3199,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-80ae1d7f98e5df6759a0",
+  "curriculumVersion": "yw-dialogue-6dc2559c847c545ba8ed",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

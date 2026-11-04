@@ -1008,7 +1008,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：动词，牵出。語境義：牵出。此处「将」为动词，指牵出（马）或拿出（裘）。",
+      "rule": "沿用原題準據：动词，拿、取。語境義：拿、取。「将」在此作动词，意为拿、取；「将出」承接前文的「五花马，千金裘」，指牵出马、拿出裘去换美酒。",
       "sourcePassages": [
         "lesson-1499:p12"
       ],
@@ -1048,7 +1048,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：形容词作动词，使……空。語境義：使……空。空，此处是形容词作使动，意为使……空着。",
+      "rule": "沿用原題準據：副词，徒然地。語境義：徒然地、白白地。空，副词，意为「徒然地、白白地」，在句中修饰「对月」。全句意为不要让金樽白白地对着月亮，意在劝人尽情饮酒。",
       "sourcePassages": [
         "lesson-1499:p3"
       ],
@@ -1195,10 +1195,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v03",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v03",
-        "resourceVersion": "sha256:9057b631359e4fe22422b19a8cb9e9654b81375725b77899b7cb1cdc18f26185",
+        "resourceVersion": "sha256:dde1068aad97385b28edc2a0cdfa3f6d0fb3b82d4bc5c1892784a2fbe49fbe5c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1231,10 +1231,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v05",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v05",
-        "resourceVersion": "sha256:23d0e752bbff3f4829b616d2ddc8e91ac861dfb2381c7bc883ccaca6d26a443e",
+        "resourceVersion": "sha256:f8850420849f39d11bfca039ee4a7941c93bb7a5a704ccec60e2c2cb3f8aa602",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1249,10 +1249,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v06",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v06",
-        "resourceVersion": "sha256:b5992b4ec8a7a52291ba6ce0fe5cee172bfbb21252447c6eeae996f2a2ee4ca5",
+        "resourceVersion": "sha256:37abc14885b77aaa7923f74cbfe9a8ceb5e7b75c2b41e0adfd23ceb779842927",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1285,10 +1285,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v08",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v08",
-        "resourceVersion": "sha256:925c6972c2986e246d150fc58279c1f12d54ed4b0626e483cc2f2f13b0f36bc3",
+        "resourceVersion": "sha256:dfa595a29603a0ba42e8675cd26deb3f3ad8c7cb6038a670abfff823179742b5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1396,7 +1396,7 @@
       "difficulty": 1,
       "question": "「会须一饮三百杯」中「会须」可以替换为",
       "options": [
-        "一定需要",
+        "曾经需要",
         "应当",
         "能够",
         "只会"
@@ -1409,7 +1409,7 @@
       "version": "vocab-set-1e182e12ba691e77",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「会须一饮三百杯」\n「会须一饮三百杯」中「会须」可以替换为\nA. 一定需要\nB. 应当\nC. 能够\nD. 只会\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「会须一饮三百杯」\n「会须一饮三百杯」中「会须」可以替换为\nA. 曾经需要\nB. 应当\nC. 能够\nD. 只会\n請選出答案，並用自己的話說明判斷依據。",
         "請用恰當的現代說法替換「会须一饮三百杯」中的「会须」，並解釋這個替換如何保留原句的意思。"
       ]
     },
@@ -1453,7 +1453,7 @@
         "只需",
         "直接应当",
         "径直需要",
-        "必须"
+        "暂且"
       ],
       "answerIndex": 1,
       "sourceAnswer": "直接应当",
@@ -1463,7 +1463,7 @@
       "version": "vocab-set-1e182e12ba691e77",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「径须沽取对君酌」\n「径须沽取对君酌」中「径须」最恰当的解释是\nA. 只需\nB. 直接应当\nC. 径直需要\nD. 必须\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「径须沽取对君酌」\n「径须沽取对君酌」中「径须」最恰当的解释是\nA. 只需\nB. 直接应当\nC. 径直需要\nD. 暂且\n請選出答案，並用自己的話說明判斷依據。",
         "請用恰當的現代說法替換「径须沽取对君酌」中的「径须」，並解釋這個替換如何保留原句的意思。"
       ]
     },
@@ -1471,26 +1471,26 @@
       "id": "lesson-1499:v06",
       "word": "将出",
       "sourceSentence": "呼儿将出换美酒",
-      "meaning": "牵出",
-      "explanation": "此处「将」为动词，指牵出（马）或拿出（裘）。",
+      "meaning": "拿、取",
+      "explanation": "「将」在此作动词，意为拿、取；「将出」承接前文的「五花马，千金裘」，指牵出马、拿出裘去换美酒。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「呼儿将出换美酒」中「将」的用法是",
       "options": [
         "副词，将要",
-        "动词，牵出",
+        "动词，拿、取",
         "介词，把",
-        "动词，拿出"
+        "动词，率领"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "动词，牵出",
+      "sourceAnswer": "动词，拿、取",
       "sourceRefs": [
         "课文注解"
       ],
       "version": "vocab-set-1e182e12ba691e77",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「呼儿将出换美酒」\n「呼儿将出换美酒」中「将」的用法是\nA. 副词，将要\nB. 动词，牵出\nC. 介词，把\nD. 动词，拿出\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「呼儿将出换美酒」\n「呼儿将出换美酒」中「将」的用法是\nA. 副词，将要\nB. 动词，拿、取\nC. 介词，把\nD. 动词，率领\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「呼儿将出换美酒」中「将出」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1525,8 +1525,8 @@
       "id": "lesson-1499:v08",
       "word": "空",
       "sourceSentence": "莫使金樽空对月",
-      "meaning": "使……空",
-      "explanation": "空，此处是形容词作使动，意为使……空着。",
+      "meaning": "徒然地、白白地",
+      "explanation": "空，副词，意为「徒然地、白白地」，在句中修饰「对月」。全句意为不要让金樽白白地对着月亮，意在劝人尽情饮酒。",
       "type": "usage",
       "difficulty": 3,
       "question": "「莫使金樽空对月」中「空」的用法是",
@@ -1536,8 +1536,8 @@
         "形容词作动词，使……空",
         "副词，徒然地"
       ],
-      "answerIndex": 2,
-      "sourceAnswer": "形容词作动词，使……空",
+      "answerIndex": 3,
+      "sourceAnswer": "副词，徒然地",
       "sourceRefs": [
         "《古汉语常用字字典》"
       ],
@@ -1673,10 +1673,10 @@
       {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v03",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v03",
-        "resourceVersion": "sha256:9057b631359e4fe22422b19a8cb9e9654b81375725b77899b7cb1cdc18f26185",
+        "resourceVersion": "sha256:dde1068aad97385b28edc2a0cdfa3f6d0fb3b82d4bc5c1892784a2fbe49fbe5c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1691,19 +1691,19 @@
       {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v05",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v05",
-        "resourceVersion": "sha256:23d0e752bbff3f4829b616d2ddc8e91ac861dfb2381c7bc883ccaca6d26a443e",
+        "resourceVersion": "sha256:f8850420849f39d11bfca039ee4a7941c93bb7a5a704ccec60e2c2cb3f8aa602",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v06",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v06",
-        "resourceVersion": "sha256:b5992b4ec8a7a52291ba6ce0fe5cee172bfbb21252447c6eeae996f2a2ee4ca5",
+        "resourceVersion": "sha256:37abc14885b77aaa7923f74cbfe9a8ceb5e7b75c2b41e0adfd23ceb779842927",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1718,10 +1718,10 @@
       {
         "resourceKey": "effect:lesson-1499:vocab:lesson-1499:v08",
         "canonicalUnitId": "yw:lesson-1499:vocabulary:lesson-1499:v08",
-        "resourceVersion": "sha256:925c6972c2986e246d150fc58279c1f12d54ed4b0626e483cc2f2f13b0f36bc3",
+        "resourceVersion": "sha256:dfa595a29603a0ba42e8675cd26deb3f3ad8c7cb6038a670abfff823179742b5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1978,7 +1978,7 @@
       },
       {
         "requirementId": "effect:lesson-1499:vocab:lesson-1499:v03",
-        "sourceVersion": "sha256:9057b631359e4fe22422b19a8cb9e9654b81375725b77899b7cb1cdc18f26185",
+        "sourceVersion": "sha256:dde1068aad97385b28edc2a0cdfa3f6d0fb3b82d4bc5c1892784a2fbe49fbe5c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1998,7 +1998,7 @@
       },
       {
         "requirementId": "effect:lesson-1499:vocab:lesson-1499:v05",
-        "sourceVersion": "sha256:23d0e752bbff3f4829b616d2ddc8e91ac861dfb2381c7bc883ccaca6d26a443e",
+        "sourceVersion": "sha256:f8850420849f39d11bfca039ee4a7941c93bb7a5a704ccec60e2c2cb3f8aa602",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2008,7 +2008,7 @@
       },
       {
         "requirementId": "effect:lesson-1499:vocab:lesson-1499:v06",
-        "sourceVersion": "sha256:b5992b4ec8a7a52291ba6ce0fe5cee172bfbb21252447c6eeae996f2a2ee4ca5",
+        "sourceVersion": "sha256:37abc14885b77aaa7923f74cbfe9a8ceb5e7b75c2b41e0adfd23ceb779842927",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2028,7 +2028,7 @@
       },
       {
         "requirementId": "effect:lesson-1499:vocab:lesson-1499:v08",
-        "sourceVersion": "sha256:925c6972c2986e246d150fc58279c1f12d54ed4b0626e483cc2f2f13b0f36bc3",
+        "sourceVersion": "sha256:dfa595a29603a0ba42e8675cd26deb3f3ad8c7cb6038a670abfff823179742b5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2444,7 +2444,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-78350b6f5f787be7d5fd",
+  "curriculumVersion": "yw-dialogue-1e3159c413c21b55650a",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

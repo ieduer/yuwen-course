@@ -1091,7 +1091,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：行李之往来。語境義：外交使者。古义指外交使者，今义指行李物品。",
+      "rule": "沿用原題準據：行李之往来。語境義：外交使者。A项的「行李」指外交使者；B、C、D项的「行李」均指出门所带的包裹、箱子等。因此选A。",
       "sourcePassages": [
         "lesson-1727:p3"
       ],
@@ -1407,10 +1407,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1727:vocab:lesson-1727:v03",
         "canonicalUnitId": "yw:lesson-1727:vocabulary:lesson-1727:v03",
-        "resourceVersion": "sha256:c3859249f50b0536af599aa320af3957bae8b02f9706a8dfbb2c987042d8835c",
+        "resourceVersion": "sha256:dbe0ac812f77070637131802fe6d82e9bf36219fe53742f2a02554fc9d38710c",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1686,10 +1686,10 @@
       "word": "行李",
       "sourceSentence": "若舍郑以为东道主,行李之往来,共其乏困",
       "meaning": "外交使者",
-      "explanation": "古义指外交使者，今义指行李物品。",
-      "type": "gu-jin",
+      "explanation": "A项的「行李」指外交使者；B、C、D项的「行李」均指出门所带的包裹、箱子等。因此选A。",
+      "type": "contextual-choice",
       "difficulty": 1,
-      "question": "下列句中加点词语与现代汉语意思相同的一项是",
+      "question": "下列句中「行李」指外交使者的一项是",
       "options": [
         "行李之往来",
         "收拾好行李准备出发",
@@ -1704,8 +1704,8 @@
       "version": "vocab-set-95346d809a54832a",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「若舍郑以为东道主,行李之往来,共其乏困」\n下列句中加点词语与现代汉语意思相同的一项是\nA. 行李之往来\nB. 收拾好行李准备出发\nC. 行李超重需要托运\nD. 你的行李寄存在前台\n請選出答案，並用自己的話說明判斷依據。",
-        "回到「若舍郑以为东道主,行李之往来,共其乏困」：「行李」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+        "語境：「若舍郑以为东道主,行李之往来,共其乏困」\n下列句中「行李」指外交使者的一项是\nA. 行李之往来\nB. 收拾好行李准备出发\nC. 行李超重需要托运\nD. 你的行李寄存在前台\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「若舍郑以为东道主,行李之往来,共其乏困」中「行李」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -2076,10 +2076,10 @@
       {
         "resourceKey": "effect:lesson-1727:vocab:lesson-1727:v03",
         "canonicalUnitId": "yw:lesson-1727:vocabulary:lesson-1727:v03",
-        "resourceVersion": "sha256:c3859249f50b0536af599aa320af3957bae8b02f9706a8dfbb2c987042d8835c",
+        "resourceVersion": "sha256:dbe0ac812f77070637131802fe6d82e9bf36219fe53742f2a02554fc9d38710c",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2461,7 +2461,7 @@
       },
       {
         "requirementId": "effect:lesson-1727:vocab:lesson-1727:v03",
-        "sourceVersion": "sha256:c3859249f50b0536af599aa320af3957bae8b02f9706a8dfbb2c987042d8835c",
+        "sourceVersion": "sha256:dbe0ac812f77070637131802fe6d82e9bf36219fe53742f2a02554fc9d38710c",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3018,7 +3018,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-c357717d3af691d0b9ce",
+  "curriculumVersion": "yw-dialogue-56ce86ba2126f9b3dfd6",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

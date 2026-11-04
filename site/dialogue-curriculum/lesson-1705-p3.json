@@ -1984,7 +1984,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：使动用法，使……畅快。語境義：使……畅快。此处意为让弹奏者尽情弹奏，使人畅快。",
+      "rule": "沿用原題準據：形容词作状语，畅快地、尽情地。語境義：畅快地、尽情地。「使」意为让；「快」意为畅快、尽情，在此为形容词作状语，修饰「弹」。「使快弹数曲」意为让她尽情弹奏几支曲子。",
       "sourcePassages": [
         "lesson-1705-p3:p1"
       ],
@@ -2004,7 +2004,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：容貌。語境義：容貌。古汉语中颜色多指人的面容、脸色。",
+      "rule": "沿用原題準據：容貌。語境義：容貌。此处「颜色」指容貌、姿色；「颜色故」意为容颜衰老，写琵琶女年长色衰，故选C。",
       "sourcePassages": [
         "lesson-1705-p3:p1"
       ],
@@ -2199,10 +2199,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v02",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v02",
-        "resourceVersion": "sha256:9fbe94f1bd0dffbe33e7247427cf415383234190cacc39f2dfd05fc145e9a7b6",
+        "resourceVersion": "sha256:9aabdf4dc6bbc81a03d90d795351e91845d7258f8735d128dd38b8d4a7711c2b",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2218,10 +2218,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v03",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v03",
-        "resourceVersion": "sha256:583e8c993d2e6a62e03cc4e83d1cf9aab0c675f13eb10e952d99408f181c0453",
+        "resourceVersion": "sha256:9f086ad4deab57e4e57092a7e16a188c826a734cf7067bd3a15164c11cb909a3",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2237,10 +2237,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v04",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v04",
-        "resourceVersion": "sha256:7fb52b650ea2b032cd3b448a11f05908adb2e2516cb48da08bf7a2632486aa6b",
+        "resourceVersion": "sha256:88447803dbe1020d8b8476421a7431124d518fa1199640a5cb24e67570d1386e",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2294,10 +2294,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v07",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v07",
-        "resourceVersion": "sha256:f3d51ccb2d5b49aa93ae4a13680f304db6507000f3134cb8ee0933a442e0c271",
+        "resourceVersion": "sha256:f023d444934348a1cf76c6d0b942d213dcdadfa42e66c9e1ed91bc1ddef73549",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2398,7 +2398,7 @@
       "difficulty": 2,
       "question": "「委身为贾人妇」中「委身」的意思是",
       "options": [
-        "托付身心",
+        "委曲求全",
         "嫁人",
         "舍弃身体",
         "侍奉他人"
@@ -2409,7 +2409,7 @@
       "version": "vocab-set-c271a90716eeb1cd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「委身 为贾人 妇」\n「委身为贾人妇」中「委身」的意思是\nA. 托付身心\nB. 嫁人\nC. 舍弃身体\nD. 侍奉他人\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「委身 为贾人 妇」\n「委身为贾人妇」中「委身」的意思是\nA. 委曲求全\nB. 嫁人\nC. 舍弃身体\nD. 侍奉他人\n請選出答案，並用自己的話說明判斷依據。",
         "回到「委身 为贾人 妇」：「委身」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -2417,24 +2417,24 @@
       "id": "lesson-1705-p3:v03",
       "word": "快",
       "sourceSentence": "使快 弹数曲",
-      "meaning": "使……畅快",
-      "explanation": "此处意为让弹奏者尽情弹奏，使人畅快。",
+      "meaning": "畅快地、尽情地",
+      "explanation": "「使」意为让；「快」意为畅快、尽情，在此为形容词作状语，修饰「弹」。「使快弹数曲」意为让她尽情弹奏几支曲子。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「使快弹数曲」中「快」的用法是",
       "options": [
         "形容词，形容弹得很快",
         "副词，表示迅速",
-        "使动用法，使……畅快",
+        "形容词作状语，畅快地、尽情地",
         "名词，快乐的事情"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "使动用法，使……畅快",
+      "sourceAnswer": "形容词作状语，畅快地、尽情地",
       "sourceRefs": [],
       "version": "vocab-set-c271a90716eeb1cd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「使快 弹数曲」\n「使快弹数曲」中「快」的用法是\nA. 形容词，形容弹得很快\nB. 副词，表示迅速\nC. 使动用法，使……畅快\nD. 名词，快乐的事情\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「使快 弹数曲」\n「使快弹数曲」中「快」的用法是\nA. 形容词，形容弹得很快\nB. 副词，表示迅速\nC. 形容词作状语，畅快地、尽情地\nD. 名词，快乐的事情\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「使快 弹数曲」中「快」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2443,7 +2443,7 @@
       "word": "颜色",
       "sourceSentence": "暮去朝来颜色故",
       "meaning": "容貌",
-      "explanation": "古汉语中颜色多指人的面容、脸色。",
+      "explanation": "此处「颜色」指容貌、姿色；「颜色故」意为容颜衰老，写琵琶女年长色衰，故选C。",
       "type": "gu-jin",
       "difficulty": 1,
       "question": "「暮去朝来颜色故」中「颜色」的意思是",
@@ -2524,7 +2524,7 @@
       "question": "「沉吟放拨插弦中」中「沉吟」表现了弹者怎样的心理？",
       "options": [
         "急躁不安",
-        "犹豫不决",
+        "羞愤难当",
         "沉思迟疑",
         "欢快兴奋"
       ],
@@ -2534,7 +2534,7 @@
       "version": "vocab-set-c271a90716eeb1cd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「沉吟放拨插弦中」\n「沉吟放拨插弦中」中「沉吟」表现了弹者怎样的心理？\nA. 急躁不安\nB. 犹豫不决\nC. 沉思迟疑\nD. 欢快兴奋\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「沉吟放拨插弦中」\n「沉吟放拨插弦中」中「沉吟」表现了弹者怎样的心理？\nA. 急躁不安\nB. 羞愤难当\nC. 沉思迟疑\nD. 欢快兴奋\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「沉吟放拨插弦中」中「沉吟」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
@@ -2660,30 +2660,30 @@
       {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v02",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v02",
-        "resourceVersion": "sha256:9fbe94f1bd0dffbe33e7247427cf415383234190cacc39f2dfd05fc145e9a7b6",
+        "resourceVersion": "sha256:9aabdf4dc6bbc81a03d90d795351e91845d7258f8735d128dd38b8d4a7711c2b",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v03",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v03",
-        "resourceVersion": "sha256:583e8c993d2e6a62e03cc4e83d1cf9aab0c675f13eb10e952d99408f181c0453",
+        "resourceVersion": "sha256:9f086ad4deab57e4e57092a7e16a188c826a734cf7067bd3a15164c11cb909a3",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v04",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v04",
-        "resourceVersion": "sha256:7fb52b650ea2b032cd3b448a11f05908adb2e2516cb48da08bf7a2632486aa6b",
+        "resourceVersion": "sha256:88447803dbe1020d8b8476421a7431124d518fa1199640a5cb24e67570d1386e",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2710,10 +2710,10 @@
       {
         "resourceKey": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v07",
         "canonicalUnitId": "yw:lesson-1705-p3:vocabulary:lesson-1705-p3:v07",
-        "resourceVersion": "sha256:f3d51ccb2d5b49aa93ae4a13680f304db6507000f3134cb8ee0933a442e0c271",
+        "resourceVersion": "sha256:f023d444934348a1cf76c6d0b942d213dcdadfa42e66c9e1ed91bc1ddef73549",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2949,7 +2949,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v02",
-        "sourceVersion": "sha256:9fbe94f1bd0dffbe33e7247427cf415383234190cacc39f2dfd05fc145e9a7b6",
+        "sourceVersion": "sha256:9aabdf4dc6bbc81a03d90d795351e91845d7258f8735d128dd38b8d4a7711c2b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2959,7 +2959,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v03",
-        "sourceVersion": "sha256:583e8c993d2e6a62e03cc4e83d1cf9aab0c675f13eb10e952d99408f181c0453",
+        "sourceVersion": "sha256:9f086ad4deab57e4e57092a7e16a188c826a734cf7067bd3a15164c11cb909a3",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2969,7 +2969,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v04",
-        "sourceVersion": "sha256:7fb52b650ea2b032cd3b448a11f05908adb2e2516cb48da08bf7a2632486aa6b",
+        "sourceVersion": "sha256:88447803dbe1020d8b8476421a7431124d518fa1199640a5cb24e67570d1386e",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2999,7 +2999,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p3:vocab:lesson-1705-p3:v07",
-        "sourceVersion": "sha256:f3d51ccb2d5b49aa93ae4a13680f304db6507000f3134cb8ee0933a442e0c271",
+        "sourceVersion": "sha256:f023d444934348a1cf76c6d0b942d213dcdadfa42e66c9e1ed91bc1ddef73549",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3533,7 +3533,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-158a95557dae0d35894d",
+  "curriculumVersion": "yw-dialogue-bf7ad26c700b79cd37d9",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

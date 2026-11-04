@@ -557,7 +557,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：爱而不露。語境義：隐藏。古义为隐藏，今义为喜爱。",
+      "rule": "沿用原題準據：同「薆」，隐藏。語境義：隐藏。「爱」同「薆」，意为隐藏。此处属通假用法，不宜简单表述为「爱」的古义是隐藏、今义是喜爱。",
       "sourcePassages": [
         "lesson-1722-p1:p3"
       ],
@@ -831,10 +831,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p1:vocab:lesson-1722-p1:v03",
         "canonicalUnitId": "yw:lesson-1722-p1:vocabulary:lesson-1722-p1:v03",
-        "resourceVersion": "sha256:bd20aa6ccb4455ef7636e758fc4bdb572a1a58426faabff525d1d7f4a0668976",
+        "resourceVersion": "sha256:9a896a5d254c6e0edcda5e09a1657db0cb24bfcb1ca8ac1a384c1307d2827d5a",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1049,24 +1049,24 @@
       "word": "爱",
       "sourceSentence": "爱而不见",
       "meaning": "隐藏",
-      "explanation": "古义为隐藏，今义为喜爱。",
-      "type": "gu-jin",
+      "explanation": "「爱」同「薆」，意为隐藏。此处属通假用法，不宜简单表述为「爱」的古义是隐藏、今义是喜爱。",
+      "type": "contextual-choice",
       "difficulty": 2,
-      "question": "下列句中加点词与「爱而不见」中「爱」的用法相同的是",
+      "question": "下列对《静女》「爱而不见」中「爱」的解释，正确的是",
       "options": [
-        "爱之深，责之切",
-        "爱惜羽毛",
-        "爱而不露",
-        "博爱众生"
+        "疼爱",
+        "爱惜",
+        "同「薆」，隐藏",
+        "博爱"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "爱而不露",
+      "sourceAnswer": "同「薆」，隐藏",
       "sourceRefs": [],
       "version": "vocab-set-6c234aa5219a2d78",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「爱而不见」\n下列句中加点词与「爱而不见」中「爱」的用法相同的是\nA. 爱之深，责之切\nB. 爱惜羽毛\nC. 爱而不露\nD. 博爱众生\n請選出答案，並用自己的話說明判斷依據。",
-        "回到「爱而不见」：「爱」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+        "語境：「爱而不见」\n下列对《静女》「爱而不见」中「爱」的解释，正确的是\nA. 疼爱\nB. 爱惜\nC. 同「薆」，隐藏\nD. 博爱\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「爱而不见」中「爱」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1351,10 +1351,10 @@
       {
         "resourceKey": "effect:lesson-1722-p1:vocab:lesson-1722-p1:v03",
         "canonicalUnitId": "yw:lesson-1722-p1:vocabulary:lesson-1722-p1:v03",
-        "resourceVersion": "sha256:bd20aa6ccb4455ef7636e758fc4bdb572a1a58426faabff525d1d7f4a0668976",
+        "resourceVersion": "sha256:9a896a5d254c6e0edcda5e09a1657db0cb24bfcb1ca8ac1a384c1307d2827d5a",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1686,7 +1686,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p1:vocab:lesson-1722-p1:v03",
-        "sourceVersion": "sha256:bd20aa6ccb4455ef7636e758fc4bdb572a1a58426faabff525d1d7f4a0668976",
+        "sourceVersion": "sha256:9a896a5d254c6e0edcda5e09a1657db0cb24bfcb1ca8ac1a384c1307d2827d5a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2209,7 +2209,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-47087c05889559433eb4",
+  "curriculumVersion": "yw-dialogue-bdf3ecf267a305a41bc8",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

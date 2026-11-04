@@ -399,7 +399,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：不能。語境義：不能承受。不堪意为无法承受，此处指对亡国往事无法忍受回想，故选「不能」。",
+      "rule": "沿用原題準據：不能。語境義：不能承受。「不堪」意为不能承受，此处指亡国往事令人悲痛，难以承受回想，故选B「不能」。「不曾」表示未曾发生，「不愿」侧重主观意愿，「不暇」表示没有空闲，均不切合此处因痛苦而难以承受的意思。",
       "sourcePassages": [
         "lesson-1722-p3:p3"
       ],
@@ -595,10 +595,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p3:vocab:lesson-1722-p3:v04",
         "canonicalUnitId": "yw:lesson-1722-p3:vocabulary:lesson-1722-p3:v04",
-        "resourceVersion": "sha256:07ec48a4bca8d3644a8a58da95b9d4ce5209f6f9c36d67351539d54be4fbea48",
+        "resourceVersion": "sha256:622b947446ceaa53c361b040278ebe7f160b784dfcefd4873f47b60776268620",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -614,10 +614,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p3:vocab:lesson-1722-p3:v05",
         "canonicalUnitId": "yw:lesson-1722-p3:vocabulary:lesson-1722-p3:v05",
-        "resourceVersion": "sha256:fb5cb7d31aaf23b819bf133c35828253fc0bd264f082c57d325b0b2087607053",
+        "resourceVersion": "sha256:5338c4b196f8fcc9c85d9cf1babbbea5f6a79b1dacc2f4ed4580d645bbc1b390",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -772,7 +772,7 @@
         "指词人出生的地方",
         "指词人曾经统治的南唐",
         "指古代的中国",
-        "指繁华的家乡"
+        "指词人被俘后居住的北宋都城"
       ],
       "answerIndex": 1,
       "sourceAnswer": "指词人曾经统治的南唐",
@@ -780,7 +780,7 @@
       "version": "vocab-set-ee7dc0ab825a75c4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「故国 不堪回首月明中」\n「故国不堪回首月明中」一句中，「故国」指的是\nA. 指词人出生的地方\nB. 指词人曾经统治的南唐\nC. 指古代的中国\nD. 指繁华的家乡\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「故国 不堪回首月明中」\n「故国不堪回首月明中」一句中，「故国」指的是\nA. 指词人出生的地方\nB. 指词人曾经统治的南唐\nC. 指古代的中国\nD. 指词人被俘后居住的北宋都城\n請選出答案，並用自己的話說明判斷依據。",
         "「故国 不堪回首月明中」中的「故国」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -789,7 +789,7 @@
       "word": "不堪",
       "sourceSentence": "故国 不堪回首月明中",
       "meaning": "不能承受",
-      "explanation": "不堪意为无法承受，此处指对亡国往事无法忍受回想，故选「不能」。",
+      "explanation": "「不堪」意为不能承受，此处指亡国往事令人悲痛，难以承受回想，故选B「不能」。「不曾」表示未曾发生，「不愿」侧重主观意愿，「不暇」表示没有空闲，均不切合此处因痛苦而难以承受的意思。",
       "type": "substitution",
       "difficulty": 2,
       "question": "「故国不堪回首月明中」中「不堪」一词，若替换为下列词语，最恰当的一项是",
@@ -797,7 +797,7 @@
         "不曾",
         "不能",
         "不愿",
-        "不忍"
+        "不暇"
       ],
       "answerIndex": 1,
       "sourceAnswer": "不能",
@@ -805,7 +805,7 @@
       "version": "vocab-set-ee7dc0ab825a75c4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「故国 不堪回首月明中」\n「故国不堪回首月明中」中「不堪」一词，若替换为下列词语，最恰当的一项是\nA. 不曾\nB. 不能\nC. 不愿\nD. 不忍\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「故国 不堪回首月明中」\n「故国不堪回首月明中」中「不堪」一词，若替换为下列词语，最恰当的一项是\nA. 不曾\nB. 不能\nC. 不愿\nD. 不暇\n請選出答案，並用自己的話說明判斷依據。",
         "請用恰當的現代說法替換「故国 不堪回首月明中」中的「不堪」，並解釋這個替換如何保留原句的意思。"
       ]
     },
@@ -1021,20 +1021,20 @@
       {
         "resourceKey": "effect:lesson-1722-p3:vocab:lesson-1722-p3:v04",
         "canonicalUnitId": "yw:lesson-1722-p3:vocabulary:lesson-1722-p3:v04",
-        "resourceVersion": "sha256:07ec48a4bca8d3644a8a58da95b9d4ce5209f6f9c36d67351539d54be4fbea48",
+        "resourceVersion": "sha256:622b947446ceaa53c361b040278ebe7f160b784dfcefd4873f47b60776268620",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1722-p3:vocab:lesson-1722-p3:v05",
         "canonicalUnitId": "yw:lesson-1722-p3:vocabulary:lesson-1722-p3:v05",
-        "resourceVersion": "sha256:fb5cb7d31aaf23b819bf133c35828253fc0bd264f082c57d325b0b2087607053",
+        "resourceVersion": "sha256:5338c4b196f8fcc9c85d9cf1babbbea5f6a79b1dacc2f4ed4580d645bbc1b390",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1287,7 +1287,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p3:vocab:lesson-1722-p3:v04",
-        "sourceVersion": "sha256:07ec48a4bca8d3644a8a58da95b9d4ce5209f6f9c36d67351539d54be4fbea48",
+        "sourceVersion": "sha256:622b947446ceaa53c361b040278ebe7f160b784dfcefd4873f47b60776268620",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1297,7 +1297,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p3:vocab:lesson-1722-p3:v05",
-        "sourceVersion": "sha256:fb5cb7d31aaf23b819bf133c35828253fc0bd264f082c57d325b0b2087607053",
+        "sourceVersion": "sha256:5338c4b196f8fcc9c85d9cf1babbbea5f6a79b1dacc2f4ed4580d645bbc1b390",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1822,7 +1822,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-3a3cdd0caefd6ae2cbf8",
+  "curriculumVersion": "yw-dialogue-9d82f206963de79b71a6",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

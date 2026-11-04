@@ -633,7 +633,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：适应、追逐。語境義：适应、追逐。“适”在此处意为适应、迎合。句意是：年少时就没有迎合世俗的本性。",
+      "rule": "沿用原題準據：适应、迎合。語境義：适应、迎合。“适”在此处意为适应、迎合。句意是：年少时就没有迎合世俗的本性。",
       "sourcePassages": [
         "lesson-1704-p2:p1"
       ],
@@ -929,10 +929,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1704-p2:vocab:lesson-1704-p2:v01",
         "canonicalUnitId": "yw:lesson-1704-p2:vocabulary:lesson-1704-p2:v01",
-        "resourceVersion": "sha256:e3f800b40b0ffdc6301cdbb0eba8f8e4e526114f012d18f1b5a3396d00d8229a",
+        "resourceVersion": "sha256:b8f0408f047002a99c7ab7577223d6f6d6ce5d1589449f115062bcc831796f69",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1173,24 +1173,24 @@
       "id": "lesson-1704-p2:v01",
       "word": "适",
       "sourceSentence": "少无适俗 韵",
-      "meaning": "适应、追逐",
+      "meaning": "适应、迎合",
       "explanation": "“适”在此处意为适应、迎合。句意是：年少时就没有迎合世俗的本性。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "“少无适俗韵”中“适”的意思是",
       "options": [
         "舒适",
-        "适应、追逐",
+        "适应、迎合",
         "恰好",
         "往、到"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "适应、追逐",
+      "sourceAnswer": "适应、迎合",
       "sourceRefs": [],
       "version": "vocab-set-f72063b60479e710",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「少无适俗 韵」\n“少无适俗韵”中“适”的意思是\nA. 舒适\nB. 适应、追逐\nC. 恰好\nD. 往、到\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「少无适俗 韵」\n“少无适俗韵”中“适”的意思是\nA. 舒适\nB. 适应、迎合\nC. 恰好\nD. 往、到\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「少无适俗 韵」中「适」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1531,10 +1531,10 @@
       {
         "resourceKey": "effect:lesson-1704-p2:vocab:lesson-1704-p2:v01",
         "canonicalUnitId": "yw:lesson-1704-p2:vocabulary:lesson-1704-p2:v01",
-        "resourceVersion": "sha256:e3f800b40b0ffdc6301cdbb0eba8f8e4e526114f012d18f1b5a3396d00d8229a",
+        "resourceVersion": "sha256:b8f0408f047002a99c7ab7577223d6f6d6ce5d1589449f115062bcc831796f69",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1889,7 +1889,7 @@
       },
       {
         "requirementId": "effect:lesson-1704-p2:vocab:lesson-1704-p2:v01",
-        "sourceVersion": "sha256:e3f800b40b0ffdc6301cdbb0eba8f8e4e526114f012d18f1b5a3396d00d8229a",
+        "sourceVersion": "sha256:b8f0408f047002a99c7ab7577223d6f6d6ce5d1589449f115062bcc831796f69",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2500,7 +2500,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-875e81cae06f2e7e7f94",
+  "curriculumVersion": "yw-dialogue-d69a1c4e53d08680d62e",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

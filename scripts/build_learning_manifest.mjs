@@ -4,7 +4,8 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import {FORMAL_SCOPE_POLICY, ORIGINAL_FORMAL_RELEASE} from "../site/formal-scope-policy.js";
+import {FORMAL_SCOPE_POLICY, ORIGINAL_FORMAL_RELEASE, EXPANSION_FORMAL_RELEASE, FORMAL_REVISION_POLICY} from "../site/formal-scope-policy.js";
+const REVISIONS_PATH = new URL("./formal-revisions/yw-formal-revision-20261104-v1.json", import.meta.url);
 import {
   hashEligibilitySourceItem,
   isVocabItemEligible,
@@ -254,16 +255,44 @@ export function buildLearningManifest() {
     };
   });
 
-  const originalItems = items.filter(item => lessons.some(lesson => lesson.id === item.sourceId && ORIGINAL_BOOK_IDS.includes(lesson.blockId)));
+  // Owner-authorized item corrections: each revised item pins both its prior and
+  // its new resource version; reconstructing the prior versions must reproduce
+  // both accepted releases exactly, so any other content change still fails.
+  const revisionDoc = JSON.parse(readFileSync(REVISIONS_PATH, "utf8"));
+  if (revisionDoc.policyVersion !== FORMAL_REVISION_POLICY.policyVersion
+    || revisionDoc.revisions.length !== FORMAL_REVISION_POLICY.revisedItemCount) throw Error("formal revision document invalid");
+  const revisionByKey = new Map(revisionDoc.revisions.map(r => [r.resourceKey, r]));
+  if (revisionByKey.size !== revisionDoc.revisions.length) throw Error("duplicate formal revision");
+  for (const [key, revision] of revisionByKey) {
+    const item = items.find(entry => entry.resourceKey === key);
+    if (!item || item.canonicalUnitId !== revision.canonicalUnitId || item.resourceVersion !== revision.resourceVersion
+      || revision.priorResourceVersion === revision.resourceVersion) throw Error(`formal revision drift: ${key}`);
+  }
+  const priorItems = items.map(item => revisionByKey.has(item.resourceKey)
+    ? {...item, resourceVersion: revisionByKey.get(item.resourceKey).priorResourceVersion} : item);
+  const originalItems = priorItems.filter(item => lessons.some(lesson => lesson.id === item.sourceId && ORIGINAL_BOOK_IDS.includes(lesson.blockId)));
   const originalKeyHash = sha256(originalItems.map(item => item.resourceKey).sort().join("\n"));
   // The accepted elective release is immutable. New task-pool entries cannot
   // rewrite its resource identity, effective date or evidence-time admission.
   if (releaseIdForItems(originalItems) !== ORIGINAL_FORMAL_RELEASE.sourceReleaseId || originalItems.length !== 869 || originalKeyHash !== "e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca") throw Error("original elective inventory changed");
-  const priorRelease = ORIGINAL_FORMAL_RELEASE;
+  if (releaseIdForItems(priorItems) !== EXPANSION_FORMAL_RELEASE.sourceReleaseId || priorItems.length !== EXPANSION_FORMAL_RELEASE.itemCount
+    || `sha256:${keyHash}` !== EXPANSION_FORMAL_RELEASE.resourceKeyHash) throw Error("expansion release inventory changed");
+  for (const revision of revisionByKey.values()) {
+    const expectedPrior = originalItems.some(item => item.resourceKey === revision.resourceKey)
+      ? ORIGINAL_FORMAL_RELEASE.sourceReleaseId : EXPANSION_FORMAL_RELEASE.sourceReleaseId;
+    if (revision.priorSourceReleaseId !== expectedPrior) throw Error(`formal revision prior release mismatch: ${revision.resourceKey}`);
+  }
   const originalKeys = new Set(originalItems.map(item => item.resourceKey));
-  const versionedItems = items.map(item => originalKeys.has(item.resourceKey)
-    ? {...item, sourceReleaseId:priorRelease.sourceReleaseId}
-    : {...item, effectiveFrom:FORMAL_SCOPE_POLICY.effectiveFrom, formalScopePolicyVersion:FORMAL_SCOPE_POLICY.policyVersion, sourceReleaseId});
+  const versionedItems = items.map(item => {
+    const revision = revisionByKey.get(item.resourceKey);
+    const base = originalKeys.has(item.resourceKey)
+      ? {...item, sourceReleaseId: ORIGINAL_FORMAL_RELEASE.sourceReleaseId}
+      : {...item, effectiveFrom:FORMAL_SCOPE_POLICY.effectiveFrom, formalScopePolicyVersion:FORMAL_SCOPE_POLICY.policyVersion, sourceReleaseId: EXPANSION_FORMAL_RELEASE.sourceReleaseId};
+    return revision
+      ? {...base, sourceReleaseId, formalRevisionPolicyVersion: FORMAL_REVISION_POLICY.policyVersion,
+        revisionOf: {sourceReleaseId: revision.priorSourceReleaseId, resourceVersion: revision.priorResourceVersion}}
+      : base;
+  });
   return {
     schemaVersion: 1,
     siteKey: SITE_KEY,
@@ -277,7 +306,8 @@ export function buildLearningManifest() {
     completionKind: "answer_submitted",
     thresholdPercent: 90,
     formalScopeExpansion: FORMAL_SCOPE_POLICY,
-    priorReleases: [priorRelease],
+    formalRevision: FORMAL_REVISION_POLICY,
+    priorReleases: [ORIGINAL_FORMAL_RELEASE, EXPANSION_FORMAL_RELEASE],
     lessonCount: lessons.length,
     vocabEligibility: {
       policyVersion: eligibility.policyVersion,

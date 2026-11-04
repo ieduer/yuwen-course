@@ -388,7 +388,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：思念、怜惜。語境義：思念、怜惜。「念」在此表达对芍药花年年空开的怜惜与感伤。",
+      "rule": "沿用原題準據：想到、想想。語境義：想到、想想。「念」意为「想到、想想」。词人想到桥边的芍药年年开放，却不知为谁而开，借此表达对扬州昔盛今衰的感伤。",
       "sourcePassages": [
         "lesson-1562:p4"
       ],
@@ -573,10 +573,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1562:vocab:lesson-1562:v04",
         "canonicalUnitId": "yw:lesson-1562:vocabulary:lesson-1562:v04",
-        "resourceVersion": "sha256:5037b901eae9f5df2c638cb5055d9efbba33fbbbd89d65e223807d619088516b",
+        "resourceVersion": "sha256:b1f24283e336e5d624e2190a173b3e30fd454b36032fe90ae1f0d4af1fae3133",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -591,10 +591,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1562:vocab:lesson-1562:v05",
         "canonicalUnitId": "yw:lesson-1562:vocabulary:lesson-1562:v05",
-        "resourceVersion": "sha256:01d6d3ca5fee5f9bfd897d8a9c33e3373a91470f62221881334c58d55aa000e1",
+        "resourceVersion": "sha256:01db141ab4ba63891e8cdf2bd0c616d156d3ed9307ae4b99475151faa4401e1e",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -770,7 +770,7 @@
         "给予",
         "写作、抒发",
         "赋税",
-        "铺陈"
+        "征收"
       ],
       "answerIndex": 1,
       "sourceAnswer": "写作、抒发",
@@ -780,7 +780,7 @@
       "version": "vocab-set-da15e68a83c9ca07",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「难赋深情。二十四桥仍在」\n「难赋深情」中「赋」的意思是\nA. 给予\nB. 写作、抒发\nC. 赋税\nD. 铺陈\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「难赋深情。二十四桥仍在」\n「难赋深情」中「赋」的意思是\nA. 给予\nB. 写作、抒发\nC. 赋税\nD. 征收\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「难赋深情。二十四桥仍在」中「赋」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -788,26 +788,26 @@
       "id": "lesson-1562:v05",
       "word": "念",
       "sourceSentence": "念桥边红药,年年知为谁生",
-      "meaning": "思念、怜惜",
-      "explanation": "「念」在此表达对芍药花年年空开的怜惜与感伤。",
+      "meaning": "想到、想想",
+      "explanation": "「念」意为「想到、想想」。词人想到桥边的芍药年年开放，却不知为谁而开，借此表达对扬州昔盛今衰的感伤。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「念桥边红药」中「念」的意思是",
       "options": [
         "读诵",
-        "思念、怜惜",
+        "想到、想想",
         "打算",
         "告知"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "思念、怜惜",
+      "sourceAnswer": "想到、想想",
       "sourceRefs": [
         "古汉语常用字字典"
       ],
       "version": "vocab-set-da15e68a83c9ca07",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「念桥边红药,年年知为谁生」\n「念桥边红药」中「念」的意思是\nA. 读诵\nB. 思念、怜惜\nC. 打算\nD. 告知\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「念桥边红药,年年知为谁生」\n「念桥边红药」中「念」的意思是\nA. 读诵\nB. 想到、想想\nC. 打算\nD. 告知\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「念桥边红药,年年知为谁生」中「念」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -972,19 +972,19 @@
       {
         "resourceKey": "effect:lesson-1562:vocab:lesson-1562:v04",
         "canonicalUnitId": "yw:lesson-1562:vocabulary:lesson-1562:v04",
-        "resourceVersion": "sha256:5037b901eae9f5df2c638cb5055d9efbba33fbbbd89d65e223807d619088516b",
+        "resourceVersion": "sha256:b1f24283e336e5d624e2190a173b3e30fd454b36032fe90ae1f0d4af1fae3133",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1562:vocab:lesson-1562:v05",
         "canonicalUnitId": "yw:lesson-1562:vocabulary:lesson-1562:v05",
-        "resourceVersion": "sha256:01d6d3ca5fee5f9bfd897d8a9c33e3373a91470f62221881334c58d55aa000e1",
+        "resourceVersion": "sha256:01db141ab4ba63891e8cdf2bd0c616d156d3ed9307ae4b99475151faa4401e1e",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1234,7 +1234,7 @@
       },
       {
         "requirementId": "effect:lesson-1562:vocab:lesson-1562:v04",
-        "sourceVersion": "sha256:5037b901eae9f5df2c638cb5055d9efbba33fbbbd89d65e223807d619088516b",
+        "sourceVersion": "sha256:b1f24283e336e5d624e2190a173b3e30fd454b36032fe90ae1f0d4af1fae3133",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1244,7 +1244,7 @@
       },
       {
         "requirementId": "effect:lesson-1562:vocab:lesson-1562:v05",
-        "sourceVersion": "sha256:01d6d3ca5fee5f9bfd897d8a9c33e3373a91470f62221881334c58d55aa000e1",
+        "sourceVersion": "sha256:01db141ab4ba63891e8cdf2bd0c616d156d3ed9307ae4b99475151faa4401e1e",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1740,7 +1740,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-fea933b31f3e0b67fa24",
+  "curriculumVersion": "yw-dialogue-d19ae84db47b5a12daf5",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

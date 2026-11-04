@@ -1202,7 +1202,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：邹忌修八尺有余。語境義：高。“修”在“茂林修竹”中意为高；选项4中意为长（高）。选项1意为举行；选项2意为治理；选项3意为长短。",
+      "rule": "沿用原題準據：邹忌修八尺有余。語境義：高。「茂林修竹」中的「修」意为长、高。A项意为举行；B项意为治理；C项意为修建；D项意为长，指身长，与题干中的字义相同，故选D。",
       "sourcePassages": [
         "lesson-1578:p1",
         "lesson-1578:p2",
@@ -1244,7 +1244,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：师者，所以传道受业解惑也。語境義：用来……的方法。题干中“所以”意为“用来……的方法”。选项1表原因；选项2意为“用来……的”，表凭借；选项3表原因；选项4意为“用来……的方法”。",
+      "rule": "沿用原題準據：师者，所以传道受业解惑也。語境義：用来……的，表示凭借。题干中的「所以」意为「用来……的」，表示凭借。B中的「所以」同样表示凭借；A、C、D中的「所以」均表示「……的原因」，故选B。",
       "sourcePassages": [
         "lesson-1578:p3",
         "lesson-1578:p5"
@@ -1285,7 +1285,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：读作qū，通“取”，意思是取向、爱好。語境義：通“取”，取向、爱好。“趣”通“取”，在文中指人们的取向或爱好，读qū。 讀音題必須核對拼音，不能僅以詞義代替。",
+      "rule": "沿用原題準據：读作qǔ，通“取”，意思是取向、爱好。語境義：通“取”，取向、爱好。「趣」通「取」，读qǔ；「趣舍」即「取舍」，在文中指人们的取向或爱好。 讀音題必須核對拼音，不能僅以詞義代替。",
       "sourcePassages": [
         "lesson-1578:p4"
       ],
@@ -1305,7 +1305,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：动词，求得、得到。語境義：求得、得到。“所之”指所求得的事物，之作动词，意为求得。",
+      "rule": "沿用原題準據：动词，去、往。語境義：往、到达。「之」是动词，意为「往、到达」；「所之」在此指所喜爱或求得的事物。「及其所之既倦」意为等到对所喜爱或求得的事物已经感到厌倦。故选C。",
       "sourcePassages": [
         "lesson-1578:p2",
         "lesson-1578:p3",
@@ -1465,10 +1465,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v01",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v01",
-        "resourceVersion": "sha256:8f44241b075115cfca116ee77dfbcda9f01cc54347880c8bec4ddfabf90f1e59",
+        "resourceVersion": "sha256:f319bb6cd07b5da58388dd00b376e9eeec798bae2c4a511d22623ccdbf655bf9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1483,10 +1483,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v02",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v02",
-        "resourceVersion": "sha256:a712a331b3502414b9489c9957162a4548bd7c09a0309be047d6c2162b9d4fbe",
+        "resourceVersion": "sha256:3bb45a9b730c6c66f3289732569392a3433d89b6dc59f32b9f4b8b6a59c0d090",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1501,10 +1501,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v03",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v03",
-        "resourceVersion": "sha256:3e849c70d977af43eda897c4328dc4faf41461b8df552bad91ef0ab2f8617a00",
+        "resourceVersion": "sha256:aa7e475bb81d74739376453d0c725890bb5944b9dd1f59c5a89021bd227a47b3",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1537,10 +1537,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v05",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v05",
-        "resourceVersion": "sha256:1b8a4d658c6fef4ccaefb4311f891207b174cca170c9518eeb5157ee4861c6be",
+        "resourceVersion": "sha256:ccad426ea02932c768a936d6a3b6af7d8971b8fb2b3c2ba5830e459bd12dc088",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1555,10 +1555,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v06",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v06",
-        "resourceVersion": "sha256:828071120cbd44a8aed9482095af60dce70c5c16773f11eb5b044c49775d88cb",
+        "resourceVersion": "sha256:0b8ccee624207c999ec2e57d254e8d966c8a223e4b4a4b74ee13c4aab842e88a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1721,14 +1721,14 @@
       "word": "修",
       "sourceSentence": "此地有崇山峻岭,茂林修竹",
       "meaning": "高",
-      "explanation": "“修”在“茂林修竹”中意为高；选项4中意为长（高）。选项1意为举行；选项2意为治理；选项3意为长短。",
+      "explanation": "「茂林修竹」中的「修」意为长、高。A项意为举行；B项意为治理；C项意为修建；D项意为长，指身长，与题干中的字义相同，故选D。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "下列选项中“修”字的含义与“茂林修竹”中的“修”字相同的一项是",
       "options": [
         "修禊事也",
         "外结好孙权，内修政理",
-        "修短随化",
+        "乃重修岳阳楼",
         "邹忌修八尺有余"
       ],
       "answerIndex": 3,
@@ -1739,7 +1739,7 @@
       "version": "vocab-set-3108f177ed178275",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「此地有崇山峻岭,茂林修竹」\n下列选项中“修”字的含义与“茂林修竹”中的“修”字相同的一项是\nA. 修禊事也\nB. 外结好孙权，内修政理\nC. 修短随化\nD. 邹忌修八尺有余\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「此地有崇山峻岭,茂林修竹」\n下列选项中“修”字的含义与“茂林修竹”中的“修”字相同的一项是\nA. 修禊事也\nB. 外结好孙权，内修政理\nC. 乃重修岳阳楼\nD. 邹忌修八尺有余\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「此地有崇山峻岭,茂林修竹」中「修」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1755,7 +1755,7 @@
       "options": [
         "古义：旁边；今义：顺序",
         "古义：顺序；今义：质量较差",
-        "古义：旁边；今义：第二",
+        "古义：依次；今义：第二",
         "古义：驻扎；今义：顺序"
       ],
       "answerIndex": 0,
@@ -1766,7 +1766,7 @@
       "version": "vocab-set-3108f177ed178275",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「引以为流觞曲水,列坐其次」\n“列坐其次”中“次”的古今异义理解正确的一项是\nA. 古义：旁边；今义：顺序\nB. 古义：顺序；今义：质量较差\nC. 古义：旁边；今义：第二\nD. 古义：驻扎；今义：顺序\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「引以为流觞曲水,列坐其次」\n“列坐其次”中“次”的古今异义理解正确的一项是\nA. 古义：旁边；今义：顺序\nB. 古义：顺序；今义：质量较差\nC. 古义：依次；今义：第二\nD. 古义：驻扎；今义：顺序\n請選出答案，並用自己的話說明判斷依據。",
         "回到「引以为流觞曲水,列坐其次」：「次」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1774,8 +1774,8 @@
       "id": "lesson-1578:v03",
       "word": "所以",
       "sourceSentence": "所以游目骋怀,足以极视听之娱",
-      "meaning": "用来……的方法",
-      "explanation": "题干中“所以”意为“用来……的方法”。选项1表原因；选项2意为“用来……的”，表凭借；选项3表原因；选项4意为“用来……的方法”。",
+      "meaning": "用来……的，表示凭借",
+      "explanation": "题干中的「所以」意为「用来……的」，表示凭借。B中的「所以」同样表示凭借；A、C、D中的「所以」均表示「……的原因」，故选B。",
       "type": "usage",
       "difficulty": 3,
       "question": "下列句中“所以”的用法与“所以游目骋怀”相同的一项是",
@@ -1783,7 +1783,7 @@
         "此所以学者不可以不深思而慎取之也",
         "师者，所以传道受业解惑也",
         "亲贤臣，远小人，此先汉所以兴隆也",
-        "吾知所以距子矣"
+        "此后汉所以倾颓也"
       ],
       "answerIndex": 1,
       "sourceAnswer": "师者，所以传道受业解惑也",
@@ -1793,7 +1793,7 @@
       "version": "vocab-set-3108f177ed178275",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「所以游目骋怀,足以极视听之娱」\n下列句中“所以”的用法与“所以游目骋怀”相同的一项是\nA. 此所以学者不可以不深思而慎取之也\nB. 师者，所以传道受业解惑也\nC. 亲贤臣，远小人，此先汉所以兴隆也\nD. 吾知所以距子矣\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「所以游目骋怀,足以极视听之娱」\n下列句中“所以”的用法与“所以游目骋怀”相同的一项是\nA. 此所以学者不可以不深思而慎取之也\nB. 师者，所以传道受业解惑也\nC. 亲贤臣，远小人，此先汉所以兴隆也\nD. 此后汉所以倾颓也\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「所以游目骋怀,足以极视听之娱」的句意，解釋「所以」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1829,25 +1829,25 @@
       "word": "趣",
       "sourceSentence": "虽趣舍万殊,静躁不同",
       "meaning": "通“取”，取向、爱好",
-      "explanation": "“趣”通“取”，在文中指人们的取向或爱好，读qū。",
+      "explanation": "「趣」通「取」，读qǔ；「趣舍」即「取舍」，在文中指人们的取向或爱好。",
       "type": "pronunciation",
       "difficulty": 2,
       "question": "下列关于“虽趣舍万殊”中“趣”的说法，正确的一项是",
       "options": [
         "读作qù，意思是乐趣",
-        "读作qū，通“取”，意思是取向、爱好",
+        "读作qǔ，通“取”，意思是取向、爱好",
         "读作cù，意思是趋向",
         "读作qū，意思是急促"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "读作qū，通“取”，意思是取向、爱好",
+      "sourceAnswer": "读作qǔ，通“取”，意思是取向、爱好",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-3108f177ed178275",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「虽趣舍万殊,静躁不同」\n下列关于“虽趣舍万殊”中“趣”的说法，正确的一项是\nA. 读作qù，意思是乐趣\nB. 读作qū，通“取”，意思是取向、爱好\nC. 读作cù，意思是趋向\nD. 读作qū，意思是急促\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「虽趣舍万殊,静躁不同」\n下列关于“虽趣舍万殊”中“趣”的说法，正确的一项是\nA. 读作qù，意思是乐趣\nB. 读作qǔ，通“取”，意思是取向、爱好\nC. 读作cù，意思是趋向\nD. 读作qū，意思是急促\n請選出答案，並用自己的話說明判斷依據。",
         "「虽趣舍万殊,静躁不同」中的「趣」應如何讀（請寫拼音）？它在此處是甚麼意思？請說明依據。"
       ]
     },
@@ -1855,8 +1855,8 @@
       "id": "lesson-1578:v06",
       "word": "之",
       "sourceSentence": "及其所之既倦,情随事迁",
-      "meaning": "求得、得到",
-      "explanation": "“所之”指所求得的事物，之作动词，意为求得。",
+      "meaning": "往、到达",
+      "explanation": "「之」是动词，意为「往、到达」；「所之」在此指所喜爱或求得的事物。「及其所之既倦」意为等到对所喜爱或求得的事物已经感到厌倦。故选C。",
       "type": "contextual-choice",
       "difficulty": 3,
       "question": "“及其所之既倦”中“之”字的意思是",
@@ -1864,17 +1864,17 @@
         "代词，指代所遇之事",
         "助词，不译",
         "动词，去、往",
-        "动词，求得、得到"
+        "动词，停止、终止"
       ],
-      "answerIndex": 3,
-      "sourceAnswer": "动词，求得、得到",
+      "answerIndex": 2,
+      "sourceAnswer": "动词，去、往",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-3108f177ed178275",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「及其所之既倦,情随事迁」\n“及其所之既倦”中“之”字的意思是\nA. 代词，指代所遇之事\nB. 助词，不译\nC. 动词，去、往\nD. 动词，求得、得到\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「及其所之既倦,情随事迁」\n“及其所之既倦”中“之”字的意思是\nA. 代词，指代所遇之事\nB. 助词，不译\nC. 动词，去、往\nD. 动词，停止、终止\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「及其所之既倦,情随事迁」中「之」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2061,28 +2061,28 @@
       {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v01",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v01",
-        "resourceVersion": "sha256:8f44241b075115cfca116ee77dfbcda9f01cc54347880c8bec4ddfabf90f1e59",
+        "resourceVersion": "sha256:f319bb6cd07b5da58388dd00b376e9eeec798bae2c4a511d22623ccdbf655bf9",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v02",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v02",
-        "resourceVersion": "sha256:a712a331b3502414b9489c9957162a4548bd7c09a0309be047d6c2162b9d4fbe",
+        "resourceVersion": "sha256:3bb45a9b730c6c66f3289732569392a3433d89b6dc59f32b9f4b8b6a59c0d090",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v03",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v03",
-        "resourceVersion": "sha256:3e849c70d977af43eda897c4328dc4faf41461b8df552bad91ef0ab2f8617a00",
+        "resourceVersion": "sha256:aa7e475bb81d74739376453d0c725890bb5944b9dd1f59c5a89021bd227a47b3",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2097,19 +2097,19 @@
       {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v05",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v05",
-        "resourceVersion": "sha256:1b8a4d658c6fef4ccaefb4311f891207b174cca170c9518eeb5157ee4861c6be",
+        "resourceVersion": "sha256:ccad426ea02932c768a936d6a3b6af7d8971b8fb2b3c2ba5830e459bd12dc088",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1578:vocab:lesson-1578:v06",
         "canonicalUnitId": "yw:lesson-1578:vocabulary:lesson-1578:v06",
-        "resourceVersion": "sha256:828071120cbd44a8aed9482095af60dce70c5c16773f11eb5b044c49775d88cb",
+        "resourceVersion": "sha256:0b8ccee624207c999ec2e57d254e8d966c8a223e4b4a4b74ee13c4aab842e88a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2599,7 +2599,7 @@
       },
       {
         "requirementId": "effect:lesson-1578:vocab:lesson-1578:v01",
-        "sourceVersion": "sha256:8f44241b075115cfca116ee77dfbcda9f01cc54347880c8bec4ddfabf90f1e59",
+        "sourceVersion": "sha256:f319bb6cd07b5da58388dd00b376e9eeec798bae2c4a511d22623ccdbf655bf9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2609,7 +2609,7 @@
       },
       {
         "requirementId": "effect:lesson-1578:vocab:lesson-1578:v02",
-        "sourceVersion": "sha256:a712a331b3502414b9489c9957162a4548bd7c09a0309be047d6c2162b9d4fbe",
+        "sourceVersion": "sha256:3bb45a9b730c6c66f3289732569392a3433d89b6dc59f32b9f4b8b6a59c0d090",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2619,7 +2619,7 @@
       },
       {
         "requirementId": "effect:lesson-1578:vocab:lesson-1578:v03",
-        "sourceVersion": "sha256:3e849c70d977af43eda897c4328dc4faf41461b8df552bad91ef0ab2f8617a00",
+        "sourceVersion": "sha256:aa7e475bb81d74739376453d0c725890bb5944b9dd1f59c5a89021bd227a47b3",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2639,7 +2639,7 @@
       },
       {
         "requirementId": "effect:lesson-1578:vocab:lesson-1578:v05",
-        "sourceVersion": "sha256:1b8a4d658c6fef4ccaefb4311f891207b174cca170c9518eeb5157ee4861c6be",
+        "sourceVersion": "sha256:ccad426ea02932c768a936d6a3b6af7d8971b8fb2b3c2ba5830e459bd12dc088",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2649,7 +2649,7 @@
       },
       {
         "requirementId": "effect:lesson-1578:vocab:lesson-1578:v06",
-        "sourceVersion": "sha256:828071120cbd44a8aed9482095af60dce70c5c16773f11eb5b044c49775d88cb",
+        "sourceVersion": "sha256:0b8ccee624207c999ec2e57d254e8d966c8a223e4b4a4b74ee13c4aab842e88a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3269,7 +3269,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-61e80036d8ccc556822a",
+  "curriculumVersion": "yw-dialogue-eb94c7bd02911445e3a3",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

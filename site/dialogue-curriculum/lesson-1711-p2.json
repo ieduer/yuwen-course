@@ -1821,10 +1821,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
         "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v05",
-        "resourceVersion": "sha256:6b31fb4290bf4e7c008c195f9a9b1df332af82f7a8a97ec5efb6c81847addf5a",
+        "resourceVersion": "sha256:c62a59ddfbc526174221f6c08c566de42d372083b575cb6db305b15a68c81c21",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1954,10 +1954,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
         "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v12",
-        "resourceVersion": "sha256:fc4628d249ec2077c84501dbc022e7e8697af2420ca240617f7854b8bdfd9567",
+        "resourceVersion": "sha256:33ff113904ded87d618e47c05e87ab99a7bffcb4278052436edc19f1bd9f4e36",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2123,7 +2123,7 @@
       "options": [
         "大家、许多人",
         "普通人、一般人",
-        "大众、百姓",
+        "众位官员",
         "一群人"
       ],
       "answerIndex": 1,
@@ -2134,7 +2134,7 @@
       "version": "vocab-set-c54628c74a58d5d1",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「今之众人 ，其下圣人也亦远矣」\n「今之众人」中「众人」的古义是\nA. 大家、许多人\nB. 普通人、一般人\nC. 大众、百姓\nD. 一群人\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「今之众人 ，其下圣人也亦远矣」\n「今之众人」中「众人」的古义是\nA. 大家、许多人\nB. 普通人、一般人\nC. 众位官员\nD. 一群人\n請選出答案，並用自己的話說明判斷依據。",
         "回到「今之众人 ，其下圣人也亦远矣」：「众人」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -2312,7 +2312,7 @@
       "options": [
         "判断句",
         "被动句",
-        "倒装句",
+        "宾语前置句",
         "省略句"
       ],
       "answerIndex": 1,
@@ -2323,7 +2323,7 @@
       "version": "vocab-set-c54628c74a58d5d1",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「不拘于时」\n「不拘于时」的句式特点是\nA. 判断句\nB. 被动句\nC. 倒装句\nD. 省略句\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「不拘于时」\n「不拘于时」的句式特点是\nA. 判断句\nB. 被动句\nC. 宾语前置句\nD. 省略句\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「不拘于时」的句意，解釋「不拘于时」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -2472,10 +2472,10 @@
       {
         "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
         "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v05",
-        "resourceVersion": "sha256:6b31fb4290bf4e7c008c195f9a9b1df332af82f7a8a97ec5efb6c81847addf5a",
+        "resourceVersion": "sha256:c62a59ddfbc526174221f6c08c566de42d372083b575cb6db305b15a68c81c21",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2542,10 +2542,10 @@
       {
         "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
         "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v12",
-        "resourceVersion": "sha256:fc4628d249ec2077c84501dbc022e7e8697af2420ca240617f7854b8bdfd9567",
+        "resourceVersion": "sha256:33ff113904ded87d618e47c05e87ab99a7bffcb4278052436edc19f1bd9f4e36",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2857,7 +2857,7 @@
       },
       {
         "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
-        "sourceVersion": "sha256:6b31fb4290bf4e7c008c195f9a9b1df332af82f7a8a97ec5efb6c81847addf5a",
+        "sourceVersion": "sha256:c62a59ddfbc526174221f6c08c566de42d372083b575cb6db305b15a68c81c21",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2927,7 +2927,7 @@
       },
       {
         "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
-        "sourceVersion": "sha256:fc4628d249ec2077c84501dbc022e7e8697af2420ca240617f7854b8bdfd9567",
+        "sourceVersion": "sha256:33ff113904ded87d618e47c05e87ab99a7bffcb4278052436edc19f1bd9f4e36",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3392,7 +3392,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-55eb2bd7bcafb1956888",
+  "curriculumVersion": "yw-dialogue-6a432e9f007001bd4478",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

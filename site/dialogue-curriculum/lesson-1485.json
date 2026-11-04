@@ -765,7 +765,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：焉能治之（疑問副詞，怎麼）。語境義：於是，怎麼。文中「焉能治之」意為「怎麼能治理它呢」，屬於疑問副詞用法。",
+      "rule": "沿用原題準據：副詞，乃、才。語境義：乃、才。「必知亂之所自起，焉能治之」意為必須知道混亂產生的根源，才能治理它。「焉」相當於「乃」「才」，不表示疑問。",
       "sourcePassages": [
         "lesson-1485:p1"
       ],
@@ -785,7 +785,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：虽父之不慈子（古：慈愛；今：慈祥）。語境義：治療。「慈」在古今漢語中基本含義一致，均為「慈愛」，不屬於古今異義。",
+      "rule": "沿用原題準據：虽父之不慈子（古：慈愛；今：孝敬）。語境義：治療。「慈」在本句中指慈愛；現代漢語中也有和善、慈愛之義，不能解作「孝敬」，故B項的今義解釋錯誤。",
       "sourcePassages": [
         "lesson-1485:p1",
         "lesson-1485:p2",
@@ -807,7 +807,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：当察乱何自起。語境義：嘗試。文中的「当」通「尝」，意為嘗試。選項B為原文，其他選項皆為現代義「應當」或「面對」。",
+      "rule": "沿用原題準據：当察乱何自起。語境義：嘗試。題幹中的「當」同「嘗」，意為嘗試。B與題幹相同；A的「當」意為應當，C意為將要，D意為承當、承受，均與題幹不同。故選B。",
       "sourcePassages": [
         "lesson-1485:p2"
       ],
@@ -888,7 +888,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：君子恶居下流。語境義：怎麼。「恶」作疑問代詞，解作「怎麼」。選項C為「厭惡」之意。",
+      "rule": "沿用原題準據：恶有不善。語境義：怎麼。「惡施不孝」意為「怎麼會施行不孝的行為呢」，「惡」讀wū，是疑問詞，意為「怎麼」。B「惡有不善」中的「惡」用法相同；A、C、D中的「惡」均讀wù，表示厭惡。",
       "sourcePassages": [
         "lesson-1485:p3",
         "lesson-1485:p4"
@@ -1042,10 +1042,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v02",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v02",
-        "resourceVersion": "sha256:89812c68ece3e54f1b2da0d4e0f1626c5c2ba90ed39fd036d86d5b6b7c098e91",
+        "resourceVersion": "sha256:e5dfda45170424152ab2ddfdfc649a5d8a2342eba0c09dc7d9d322390028e48a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1060,10 +1060,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v03",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v03",
-        "resourceVersion": "sha256:ec96d6b03803abae6df8578392fefd8be3085519fb5a633bc3d36af7eebee3db",
+        "resourceVersion": "sha256:d62b41787130572b5dd3c5fd7e9548bdab05b1b431d15606a4be6cd047703d09",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1078,10 +1078,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v04",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v04",
-        "resourceVersion": "sha256:b084f195fcd5dde15ec8f92be39597f09ffb5b60f96599d4e053512183a9cc1b",
+        "resourceVersion": "sha256:86b3553f2632be26fc8be0133e873d1a07401303ff1727b976b2a91cd548378d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1150,10 +1150,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v08",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v08",
-        "resourceVersion": "sha256:28ee7e57f371ffcd0cdbbf6fb9f408fdbfdfe16c187e308577fcbea37f66788c",
+        "resourceVersion": "sha256:ebd643d3c3e09da08c1b0eb5c40c82def2ab9d4d020d8fd943361ee6b2ddbe9a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1434,26 +1434,26 @@
       "id": "lesson-1485:v02",
       "word": "焉",
       "sourceSentence": "必知乱之所自起,焉能治之",
-      "meaning": "於是，怎麼",
-      "explanation": "文中「焉能治之」意為「怎麼能治理它呢」，屬於疑問副詞用法。",
+      "meaning": "乃、才",
+      "explanation": "「必知亂之所自起，焉能治之」意為必須知道混亂產生的根源，才能治理它。「焉」相當於「乃」「才」，不表示疑問。",
       "type": "usage",
       "difficulty": 2,
-      "question": "對下列句中「焉」字的用法與含義判斷正確的一項是",
+      "question": "對「必知乱之所自起，焉能治之」中「焉」字的用法與含義，判斷正確的一項是",
       "options": [
-        "焉能治之（疑問副詞，怎麼）",
-        "积土成山，风雨兴焉（兼詞，於之）",
-        "寒暑易节，始一反焉（句末語氣詞）",
-        "且焉置土石（疑問代詞，哪裡）"
+        "副詞，乃、才",
+        "兼詞，於之",
+        "句末語氣詞",
+        "疑問代詞，哪裡"
       ],
       "answerIndex": 0,
-      "sourceAnswer": "焉能治之（疑問副詞，怎麼）",
+      "sourceAnswer": "副詞，乃、才",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
       "version": "vocab-set-dcc9c0e97f22f066",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「必知乱之所自起,焉能治之」\n對下列句中「焉」字的用法與含義判斷正確的一項是\nA. 焉能治之（疑問副詞，怎麼）\nB. 积土成山，风雨兴焉（兼詞，於之）\nC. 寒暑易节，始一反焉（句末語氣詞）\nD. 且焉置土石（疑問代詞，哪裡）\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「必知乱之所自起,焉能治之」\n對「必知乱之所自起，焉能治之」中「焉」字的用法與含義，判斷正確的一項是\nA. 副詞，乃、才\nB. 兼詞，於之\nC. 句末語氣詞\nD. 疑問代詞，哪裡\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「必知乱之所自起,焉能治之」的句意，解釋「焉」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1462,25 +1462,25 @@
       "word": "攻",
       "sourceSentence": "譬之如医之攻人之疾者然",
       "meaning": "治療",
-      "explanation": "「慈」在古今漢語中基本含義一致，均為「慈愛」，不屬於古今異義。",
+      "explanation": "「慈」在本句中指慈愛；現代漢語中也有和善、慈愛之義，不能解作「孝敬」，故B項的今義解釋錯誤。",
       "type": "gu-jin",
       "difficulty": 1,
       "question": "下列句中加點詞的古今義解釋不正確的一項是",
       "options": [
         "医之攻人之疾者然（古：治療；今：進攻）",
-        "虽父之不慈子（古：慈愛；今：慈祥）",
+        "虽父之不慈子（古：慈愛；今：孝敬）",
         "亏父而自利（古：使受損失；今：虧損）",
         "劝爱人（古：鼓勵；今：勸告）"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "虽父之不慈子（古：慈愛；今：慈祥）",
+      "sourceAnswer": "虽父之不慈子（古：慈愛；今：孝敬）",
       "sourceRefs": [
         "《漢語大詞典》"
       ],
       "version": "vocab-set-dcc9c0e97f22f066",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「譬之如医之攻人之疾者然」\n下列句中加點詞的古今義解釋不正確的一項是\nA. 医之攻人之疾者然（古：治療；今：進攻）\nB. 虽父之不慈子（古：慈愛；今：慈祥）\nC. 亏父而自利（古：使受損失；今：虧損）\nD. 劝爱人（古：鼓勵；今：勸告）\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「譬之如医之攻人之疾者然」\n下列句中加點詞的古今義解釋不正確的一項是\nA. 医之攻人之疾者然（古：治療；今：進攻）\nB. 虽父之不慈子（古：慈愛；今：孝敬）\nC. 亏父而自利（古：使受損失；今：虧損）\nD. 劝爱人（古：鼓勵；今：勸告）\n請選出答案，並用自己的話說明判斷依據。",
         "回到「譬之如医之攻人之疾者然」：「攻」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1489,7 +1489,7 @@
       "word": "当",
       "sourceSentence": "当察乱何自起",
       "meaning": "嘗試",
-      "explanation": "文中的「当」通「尝」，意為嘗試。選項B為原文，其他選項皆為現代義「應當」或「面對」。",
+      "explanation": "題幹中的「當」同「嘗」，意為嘗試。B與題幹相同；A的「當」意為應當，C意為將要，D意為承當、承受，均與題幹不同。故選B。",
       "type": "substitution",
       "difficulty": 2,
       "question": "文中「当察乱何自起」的「当」字，與下列哪一項的用法相同？",
@@ -1597,25 +1597,25 @@
       "word": "恶",
       "sourceSentence": "恶施不孝",
       "meaning": "怎麼",
-      "explanation": "「恶」作疑問代詞，解作「怎麼」。選項C為「厭惡」之意。",
+      "explanation": "「惡施不孝」意為「怎麼會施行不孝的行為呢」，「惡」讀wū，是疑問詞，意為「怎麼」。B「惡有不善」中的「惡」用法相同；A、C、D中的「惡」均讀wù，表示厭惡。",
       "type": "usage",
       "difficulty": 3,
       "question": "下列句子中「恶」字的用法與「恶施不孝」相同的一項是",
       "options": [
-        "恶在其无礼也",
+        "死亦我所恶",
         "恶有不善",
         "君子恶居下流",
-        "恶能无纪"
+        "羞恶之心，义之端也"
       ],
-      "answerIndex": 2,
-      "sourceAnswer": "君子恶居下流",
+      "answerIndex": 1,
+      "sourceAnswer": "恶有不善",
       "sourceRefs": [
         "王力《古漢語常用字字典》"
       ],
       "version": "vocab-set-dcc9c0e97f22f066",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「恶施不孝」\n下列句子中「恶」字的用法與「恶施不孝」相同的一項是\nA. 恶在其无礼也\nB. 恶有不善\nC. 君子恶居下流\nD. 恶能无纪\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「恶施不孝」\n下列句子中「恶」字的用法與「恶施不孝」相同的一項是\nA. 死亦我所恶\nB. 恶有不善\nC. 君子恶居下流\nD. 羞恶之心，义之端也\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「恶施不孝」的句意，解釋「恶」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1784,28 +1784,28 @@
       {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v02",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v02",
-        "resourceVersion": "sha256:89812c68ece3e54f1b2da0d4e0f1626c5c2ba90ed39fd036d86d5b6b7c098e91",
+        "resourceVersion": "sha256:e5dfda45170424152ab2ddfdfc649a5d8a2342eba0c09dc7d9d322390028e48a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v03",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v03",
-        "resourceVersion": "sha256:ec96d6b03803abae6df8578392fefd8be3085519fb5a633bc3d36af7eebee3db",
+        "resourceVersion": "sha256:d62b41787130572b5dd3c5fd7e9548bdab05b1b431d15606a4be6cd047703d09",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v04",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v04",
-        "resourceVersion": "sha256:b084f195fcd5dde15ec8f92be39597f09ffb5b60f96599d4e053512183a9cc1b",
+        "resourceVersion": "sha256:86b3553f2632be26fc8be0133e873d1a07401303ff1727b976b2a91cd548378d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1838,10 +1838,10 @@
       {
         "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v08",
         "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v08",
-        "resourceVersion": "sha256:28ee7e57f371ffcd0cdbbf6fb9f408fdbfdfe16c187e308577fcbea37f66788c",
+        "resourceVersion": "sha256:ebd643d3c3e09da08c1b0eb5c40c82def2ab9d4d020d8fd943361ee6b2ddbe9a",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2601,7 +2601,7 @@
       },
       {
         "requirementId": "effect:lesson-1485:vocab:lesson-1485:v02",
-        "sourceVersion": "sha256:89812c68ece3e54f1b2da0d4e0f1626c5c2ba90ed39fd036d86d5b6b7c098e91",
+        "sourceVersion": "sha256:e5dfda45170424152ab2ddfdfc649a5d8a2342eba0c09dc7d9d322390028e48a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2611,7 +2611,7 @@
       },
       {
         "requirementId": "effect:lesson-1485:vocab:lesson-1485:v03",
-        "sourceVersion": "sha256:ec96d6b03803abae6df8578392fefd8be3085519fb5a633bc3d36af7eebee3db",
+        "sourceVersion": "sha256:d62b41787130572b5dd3c5fd7e9548bdab05b1b431d15606a4be6cd047703d09",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2621,7 +2621,7 @@
       },
       {
         "requirementId": "effect:lesson-1485:vocab:lesson-1485:v04",
-        "sourceVersion": "sha256:b084f195fcd5dde15ec8f92be39597f09ffb5b60f96599d4e053512183a9cc1b",
+        "sourceVersion": "sha256:86b3553f2632be26fc8be0133e873d1a07401303ff1727b976b2a91cd548378d",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2661,7 +2661,7 @@
       },
       {
         "requirementId": "effect:lesson-1485:vocab:lesson-1485:v08",
-        "sourceVersion": "sha256:28ee7e57f371ffcd0cdbbf6fb9f408fdbfdfe16c187e308577fcbea37f66788c",
+        "sourceVersion": "sha256:ebd643d3c3e09da08c1b0eb5c40c82def2ab9d4d020d8fd943361ee6b2ddbe9a",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3547,7 +3547,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-7fa194f8f5aa3dd7f904",
+  "curriculumVersion": "yw-dialogue-e15e9833231158f0fef1",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

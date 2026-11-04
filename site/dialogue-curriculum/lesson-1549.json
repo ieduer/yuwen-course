@@ -799,10 +799,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1549:vocab:lesson-1549:v06",
         "canonicalUnitId": "yw:lesson-1549:vocabulary:lesson-1549:v06",
-        "resourceVersion": "sha256:ee3c998bb9e96405a7fd1071e04734ac5f44b9ae5d6e665f0be5ff542df2bb10",
+        "resourceVersion": "sha256:01de59a35884e77d27ae313140413ec3c21d812f71d20541468f859831837e30",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1019,7 +1019,7 @@
       "difficulty": 2,
       "question": "「出师一表真名世」中「名世」的准确理解是",
       "options": [
-        "名字传遍了世界",
+        "记述当世的著名人物",
         "在当时名声显赫，才华出众",
         "为了出名而写的文章",
         "名字被刻在世间的碑上"
@@ -1032,7 +1032,7 @@
       "version": "vocab-set-530f9ec3ea03d716",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「出师一表真名世」\n「出师一表真名世」中「名世」的准确理解是\nA. 名字传遍了世界\nB. 在当时名声显赫，才华出众\nC. 为了出名而写的文章\nD. 名字被刻在世间的碑上\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「出师一表真名世」\n「出师一表真名世」中「名世」的准确理解是\nA. 记述当世的著名人物\nB. 在当时名声显赫，才华出众\nC. 为了出名而写的文章\nD. 名字被刻在世间的碑上\n請選出答案，並用自己的話說明判斷依據。",
         "「出师一表真名世」中的「名世」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1240,10 +1240,10 @@
       {
         "resourceKey": "effect:lesson-1549:vocab:lesson-1549:v06",
         "canonicalUnitId": "yw:lesson-1549:vocabulary:lesson-1549:v06",
-        "resourceVersion": "sha256:ee3c998bb9e96405a7fd1071e04734ac5f44b9ae5d6e665f0be5ff542df2bb10",
+        "resourceVersion": "sha256:01de59a35884e77d27ae313140413ec3c21d812f71d20541468f859831837e30",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1548,7 +1548,7 @@
       },
       {
         "requirementId": "effect:lesson-1549:vocab:lesson-1549:v06",
-        "sourceVersion": "sha256:ee3c998bb9e96405a7fd1071e04734ac5f44b9ae5d6e665f0be5ff542df2bb10",
+        "sourceVersion": "sha256:01de59a35884e77d27ae313140413ec3c21d812f71d20541468f859831837e30",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1984,7 +1984,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-8aead27a56c4be92f9bf",
+  "curriculumVersion": "yw-dialogue-342c9067cc9d9c159a53",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

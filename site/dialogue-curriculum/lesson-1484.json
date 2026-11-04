@@ -575,7 +575,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：葫芦太大而无法盛放东西。語境義：宽大空廓的样子。瓠落，宽大空廓的样子，指因为器物太大而没有合适的容器盛放。",
+      "rule": "沿用原題準據：葫芦太大而无法盛放东西。語境義：宽大空廓的样子。瓠落，宽大空廓的样子；无所容，没有适于它容纳的东西。这句承接「剖之以为瓢」，意思是：把葫芦剖开做瓢，却因瓢过于宽大而没有适合盛放的东西。",
       "sourcePassages": [
         "lesson-1484:p1"
       ],
@@ -655,7 +655,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：古义为卖，今基本不用。語境義：卖。鬻在古文中意为卖，现代汉语中较少使用。",
+      "rule": "沿用原題準據：古今均有卖义，现代主要用于书面语及成语。語境義：卖。鬻，卖。句中「鬻技百金」指以百金的价格出售技术。现代汉语仍保留「卖」义，主要见于书面语及成语，如「卖官鬻爵」。",
       "sourcePassages": [
         "lesson-1484:p1"
       ],
@@ -675,7 +675,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：低眉信手续续弹，说尽心中无限事。語境義：劝说。选项A、C均为「悦」的通假字，B与题干均为劝说、陈述之意。",
+      "rule": "沿用原題準據：苏秦以连横说秦。語境義：劝说。A、C的「说」均同「悦」，读yuè，意为高兴；D的「说」读shuō，意为诉说；B与题干的「说」均读shuì，意为游说、劝说，故选B。",
       "sourcePassages": [
         "lesson-1484:p1"
       ],
@@ -886,10 +886,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v03",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v03",
-        "resourceVersion": "sha256:d8dc5d58d1308e8318600db441852964845b3ab38e9157eb115ece0825e34a33",
+        "resourceVersion": "sha256:04e06054bf59fd61aac2b2bc2f1d819d5d4057841991a6a8ec2f199a69b71b7f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -922,10 +922,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v05",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v05",
-        "resourceVersion": "sha256:5942cb162f60bd5b4bb6dca14aeeef034f93965b5bac8dd660ecd71c8a763c75",
+        "resourceVersion": "sha256:f1c9c2d4310977dfe2335c3bd955c7e230b3d72d44da582a03a1993639792703",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -958,10 +958,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v07",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v07",
-        "resourceVersion": "sha256:907e106f3f6bd86df8c0f9d47698eb542dcf6a85adb6658c10dc8dac85fef973",
+        "resourceVersion": "sha256:7433890a7fc91fb16f532dd7fa0bdbc2d2701cdaab3dd684c158dbab797f0249",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -976,10 +976,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v08",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v08",
-        "resourceVersion": "sha256:bf28798ef77d09e2023be1a63bec3f64dc0c661535b8096e034fb107971d2421",
+        "resourceVersion": "sha256:9e9238ddf6e5a08c0d9c0b8c18301d727647d24a74e54805cd033bbef7f69f73",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1048,10 +1048,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v12",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v12",
-        "resourceVersion": "sha256:4206a203b4cd990bc2ec7093677eb2d022b5fd973deba4829d6eb0008bdd45b6",
+        "resourceVersion": "sha256:36d3c74475267742a7a579c7368e646c7cc71a541843e4979343dc826bd37a08",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1304,7 +1304,7 @@
       "word": "瓠落",
       "sourceSentence": "则瓠落无所容",
       "meaning": "宽大空廓的样子",
-      "explanation": "瓠落，宽大空廓的样子，指因为器物太大而没有合适的容器盛放。",
+      "explanation": "瓠落，宽大空廓的样子；无所容，没有适于它容纳的东西。这句承接「剖之以为瓢」，意思是：把葫芦剖开做瓢，却因瓢过于宽大而没有适合盛放的东西。",
       "type": "interpretation",
       "difficulty": 2,
       "question": "「则瓠落无所容」的意思是",
@@ -1363,7 +1363,7 @@
       "difficulty": 2,
       "question": "「夫子固拙于用大矣」中「拙」的意思是",
       "options": [
-        "笨拙",
+        "轻视",
         "不善于",
         "简单",
         "迟钝"
@@ -1376,7 +1376,7 @@
       "version": "vocab-set-fde555655df253b1",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「夫子固拙于用大矣」\n「夫子固拙于用大矣」中「拙」的意思是\nA. 笨拙\nB. 不善于\nC. 简单\nD. 迟钝\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「夫子固拙于用大矣」\n「夫子固拙于用大矣」中「拙」的意思是\nA. 轻视\nB. 不善于\nC. 简单\nD. 迟钝\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「夫子固拙于用大矣」中「拙」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1412,25 +1412,25 @@
       "word": "鬻",
       "sourceSentence": "今一朝而鬻技百金",
       "meaning": "卖",
-      "explanation": "鬻在古文中意为卖，现代汉语中较少使用。",
+      "explanation": "鬻，卖。句中「鬻技百金」指以百金的价格出售技术。现代汉语仍保留「卖」义，主要见于书面语及成语，如「卖官鬻爵」。",
       "type": "gu-jin",
       "difficulty": 2,
       "question": "下列关于「鬻」的说法正确的是",
       "options": [
-        "古今同义",
+        "古今均指购买",
         "古义为卖，今义为买",
         "古义为买，今义为卖",
-        "古义为卖，今基本不用"
+        "古今均有卖义，现代主要用于书面语及成语"
       ],
       "answerIndex": 3,
-      "sourceAnswer": "古义为卖，今基本不用",
+      "sourceAnswer": "古今均有卖义，现代主要用于书面语及成语",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-fde555655df253b1",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「今一朝而鬻技百金」\n下列关于「鬻」的说法正确的是\nA. 古今同义\nB. 古义为卖，今义为买\nC. 古义为买，今义为卖\nD. 古义为卖，今基本不用\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「今一朝而鬻技百金」\n下列关于「鬻」的说法正确的是\nA. 古今均指购买\nB. 古义为卖，今义为买\nC. 古义为买，今义为卖\nD. 古今均有卖义，现代主要用于书面语及成语\n請選出答案，並用自己的話說明判斷依據。",
         "回到「今一朝而鬻技百金」：「鬻」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
@@ -1439,26 +1439,26 @@
       "word": "说",
       "sourceSentence": "客得之,以说吴王。",
       "meaning": "劝说",
-      "explanation": "选项A、C均为「悦」的通假字，B与题干均为劝说、陈述之意。",
+      "explanation": "A、C的「说」均同「悦」，读yuè，意为高兴；D的「说」读shuō，意为诉说；B与题干的「说」均读shuì，意为游说、劝说，故选B。",
       "type": "discrimination",
       "difficulty": 3,
       "question": "下列句子中「说」的用法与「客得之，以说吴王」相同的是",
       "options": [
         "学而时习之，不亦说乎",
-        "低眉信手续续弹，说尽心中无限事",
+        "苏秦以连横说秦",
         "公输盘不说",
-        "秦王恐其破璧，乃辞谢，固请，召有司案图，指从此以往十五都予赵"
+        "低眉信手续续弹，说尽心中无限事"
       ],
       "answerIndex": 1,
-      "sourceAnswer": "低眉信手续续弹，说尽心中无限事",
+      "sourceAnswer": "苏秦以连横说秦",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-fde555655df253b1",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「客得之,以说吴王。」\n下列句子中「说」的用法与「客得之，以说吴王」相同的是\nA. 学而时习之，不亦说乎\nB. 低眉信手续续弹，说尽心中无限事\nC. 公输盘不说\nD. 秦王恐其破璧，乃辞谢，固请，召有司案图，指从此以往十五都予赵\n請選出答案，並用自己的話說明判斷依據。",
-        "請比較以下各項在原句中的意思：\nA. 学而时习之，不亦说乎\nB. 低眉信手续续弹，说尽心中无限事\nC. 公输盘不说\nD. 秦王恐其破璧，乃辞谢，固请，召有司案图，指从此以往十五都予赵\n下列句子中「说」的用法与「客得之，以说吴王」相同的是。選出一項後逐一說明比較依據，不能只報字母。"
+        "語境：「客得之,以说吴王。」\n下列句子中「说」的用法与「客得之，以说吴王」相同的是\nA. 学而时习之，不亦说乎\nB. 苏秦以连横说秦\nC. 公输盘不说\nD. 低眉信手续续弹，说尽心中无限事\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 学而时习之，不亦说乎\nB. 苏秦以连横说秦\nC. 公输盘不说\nD. 低眉信手续续弹，说尽心中无限事\n下列句子中「说」的用法与「客得之，以说吴王」相同的是。選出一項後逐一說明比較依據，不能只報字母。"
       ]
     },
     {
@@ -1555,7 +1555,7 @@
         "考虑",
         "忧虑",
         "用绳结缀",
-        "捆绑"
+        "挖空"
       ],
       "answerIndex": 2,
       "sourceAnswer": "用绳结缀",
@@ -1565,7 +1565,7 @@
       "version": "vocab-set-fde555655df253b1",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「何不虑以为大樽而浮乎江湖」\n「何不虑以为大樽」中「虑」的准确含义是\nA. 考虑\nB. 忧虑\nC. 用绳结缀\nD. 捆绑\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「何不虑以为大樽而浮乎江湖」\n「何不虑以为大樽」中「虑」的准确含义是\nA. 考虑\nB. 忧虑\nC. 用绳结缀\nD. 挖空\n請選出答案，並用自己的話說明判斷依據。",
         "「何不虑以为大樽而浮乎江湖」中的「虑」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1689,10 +1689,10 @@
       {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v03",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v03",
-        "resourceVersion": "sha256:d8dc5d58d1308e8318600db441852964845b3ab38e9157eb115ece0825e34a33",
+        "resourceVersion": "sha256:04e06054bf59fd61aac2b2bc2f1d819d5d4057841991a6a8ec2f199a69b71b7f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1707,10 +1707,10 @@
       {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v05",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v05",
-        "resourceVersion": "sha256:5942cb162f60bd5b4bb6dca14aeeef034f93965b5bac8dd660ecd71c8a763c75",
+        "resourceVersion": "sha256:f1c9c2d4310977dfe2335c3bd955c7e230b3d72d44da582a03a1993639792703",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1725,19 +1725,19 @@
       {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v07",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v07",
-        "resourceVersion": "sha256:907e106f3f6bd86df8c0f9d47698eb542dcf6a85adb6658c10dc8dac85fef973",
+        "resourceVersion": "sha256:7433890a7fc91fb16f532dd7fa0bdbc2d2701cdaab3dd684c158dbab797f0249",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v08",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v08",
-        "resourceVersion": "sha256:bf28798ef77d09e2023be1a63bec3f64dc0c661535b8096e034fb107971d2421",
+        "resourceVersion": "sha256:9e9238ddf6e5a08c0d9c0b8c18301d727647d24a74e54805cd033bbef7f69f73",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1770,10 +1770,10 @@
       {
         "resourceKey": "effect:lesson-1484:vocab:lesson-1484:v12",
         "canonicalUnitId": "yw:lesson-1484:vocabulary:lesson-1484:v12",
-        "resourceVersion": "sha256:4206a203b4cd990bc2ec7093677eb2d022b5fd973deba4829d6eb0008bdd45b6",
+        "resourceVersion": "sha256:36d3c74475267742a7a579c7368e646c7cc71a541843e4979343dc826bd37a08",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2521,7 +2521,7 @@
       },
       {
         "requirementId": "effect:lesson-1484:vocab:lesson-1484:v03",
-        "sourceVersion": "sha256:d8dc5d58d1308e8318600db441852964845b3ab38e9157eb115ece0825e34a33",
+        "sourceVersion": "sha256:04e06054bf59fd61aac2b2bc2f1d819d5d4057841991a6a8ec2f199a69b71b7f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2541,7 +2541,7 @@
       },
       {
         "requirementId": "effect:lesson-1484:vocab:lesson-1484:v05",
-        "sourceVersion": "sha256:5942cb162f60bd5b4bb6dca14aeeef034f93965b5bac8dd660ecd71c8a763c75",
+        "sourceVersion": "sha256:f1c9c2d4310977dfe2335c3bd955c7e230b3d72d44da582a03a1993639792703",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2561,7 +2561,7 @@
       },
       {
         "requirementId": "effect:lesson-1484:vocab:lesson-1484:v07",
-        "sourceVersion": "sha256:907e106f3f6bd86df8c0f9d47698eb542dcf6a85adb6658c10dc8dac85fef973",
+        "sourceVersion": "sha256:7433890a7fc91fb16f532dd7fa0bdbc2d2701cdaab3dd684c158dbab797f0249",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2571,7 +2571,7 @@
       },
       {
         "requirementId": "effect:lesson-1484:vocab:lesson-1484:v08",
-        "sourceVersion": "sha256:bf28798ef77d09e2023be1a63bec3f64dc0c661535b8096e034fb107971d2421",
+        "sourceVersion": "sha256:9e9238ddf6e5a08c0d9c0b8c18301d727647d24a74e54805cd033bbef7f69f73",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2611,7 +2611,7 @@
       },
       {
         "requirementId": "effect:lesson-1484:vocab:lesson-1484:v12",
-        "sourceVersion": "sha256:4206a203b4cd990bc2ec7093677eb2d022b5fd973deba4829d6eb0008bdd45b6",
+        "sourceVersion": "sha256:36d3c74475267742a7a579c7368e646c7cc71a541843e4979343dc826bd37a08",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3484,7 +3484,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-29c2a3ba036f82cadd0c",
+  "curriculumVersion": "yw-dialogue-b5a19a76ae176abc0ced",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

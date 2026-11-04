@@ -1735,7 +1735,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：违背、相反。語境義：违背、相反。「反」在这里指与正确的种树之道相违背。",
+      "rule": "沿用原題準據：违背、相反。語境義：违背、相反。「反」意为与……相反；「是」指上文根拳、土易、培土过多或不足等不当做法。「苟有能反是者」意为「假如有能够反过来，不这样做的人」。正解为C。",
       "sourcePassages": [
         "lesson-1580:p3"
       ],
@@ -1864,10 +1864,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1580:vocab:lesson-1580:v04",
         "canonicalUnitId": "yw:lesson-1580:vocabulary:lesson-1580:v04",
-        "resourceVersion": "sha256:4a623f65e0ad16f6c500591526f556d4ffd146c5c7dbcf9cc77e10f7ee10a2f9",
+        "resourceVersion": "sha256:6285e4fdd1f06070090833c698d7bf8e63aad988b21c2c0a7c848289be186882",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2008,10 +2008,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1580:vocab:lesson-1580:v12",
         "canonicalUnitId": "yw:lesson-1580:vocabulary:lesson-1580:v12",
-        "resourceVersion": "sha256:e2aa1b495a096ccb7512cdcd8d59b8863a04fa9c8313c363a6ff74a7fa1e2c05",
+        "resourceVersion": "sha256:fc798f86d90d6646919874414b03b5187d8deea36fb972ee28b3900482cea252",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2179,7 +2179,7 @@
       "question": "下列句中「本」的意思与「其本欲舒」中的「本」相同的一项是",
       "options": [
         "摇其本以观其疏密",
-        "本末倒置",
+        "本性难移",
         "此乃吾之根本",
         "治本之策"
       ],
@@ -2191,7 +2191,7 @@
       "version": "vocab-set-728d0c209f7ce8f7",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「其本欲舒」\n下列句中「本」的意思与「其本欲舒」中的「本」相同的一项是\nA. 摇其本以观其疏密\nB. 本末倒置\nC. 此乃吾之根本\nD. 治本之策\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「其本欲舒」\n下列句中「本」的意思与「其本欲舒」中的「本」相同的一项是\nA. 摇其本以观其疏密\nB. 本性难移\nC. 此乃吾之根本\nD. 治本之策\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「其本欲舒」中「本」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2389,7 +2389,7 @@
       "word": "反",
       "sourceSentence": "苟有能反是者",
       "meaning": "违背、相反",
-      "explanation": "「反」在这里指与正确的种树之道相违背。",
+      "explanation": "「反」意为与……相反；「是」指上文根拳、土易、培土过多或不足等不当做法。「苟有能反是者」意为「假如有能够反过来，不这样做的人」。正解为C。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「苟有能反是者」中「反」的意思是",
@@ -2513,10 +2513,10 @@
       {
         "resourceKey": "effect:lesson-1580:vocab:lesson-1580:v04",
         "canonicalUnitId": "yw:lesson-1580:vocabulary:lesson-1580:v04",
-        "resourceVersion": "sha256:4a623f65e0ad16f6c500591526f556d4ffd146c5c7dbcf9cc77e10f7ee10a2f9",
+        "resourceVersion": "sha256:6285e4fdd1f06070090833c698d7bf8e63aad988b21c2c0a7c848289be186882",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2585,10 +2585,10 @@
       {
         "resourceKey": "effect:lesson-1580:vocab:lesson-1580:v12",
         "canonicalUnitId": "yw:lesson-1580:vocabulary:lesson-1580:v12",
-        "resourceVersion": "sha256:e2aa1b495a096ccb7512cdcd8d59b8863a04fa9c8313c363a6ff74a7fa1e2c05",
+        "resourceVersion": "sha256:fc798f86d90d6646919874414b03b5187d8deea36fb972ee28b3900482cea252",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     ],
@@ -3053,7 +3053,7 @@
       },
       {
         "requirementId": "effect:lesson-1580:vocab:lesson-1580:v04",
-        "sourceVersion": "sha256:4a623f65e0ad16f6c500591526f556d4ffd146c5c7dbcf9cc77e10f7ee10a2f9",
+        "sourceVersion": "sha256:6285e4fdd1f06070090833c698d7bf8e63aad988b21c2c0a7c848289be186882",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3133,7 +3133,7 @@
       },
       {
         "requirementId": "effect:lesson-1580:vocab:lesson-1580:v12",
-        "sourceVersion": "sha256:e2aa1b495a096ccb7512cdcd8d59b8863a04fa9c8313c363a6ff74a7fa1e2c05",
+        "sourceVersion": "sha256:fc798f86d90d6646919874414b03b5187d8deea36fb972ee28b3900482cea252",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3669,7 +3669,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-de0e29f0f70a991bfd2b",
+  "curriculumVersion": "yw-dialogue-6ab6d6db1ca5acc42848",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

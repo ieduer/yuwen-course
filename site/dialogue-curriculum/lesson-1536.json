@@ -1896,7 +1896,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：堅固，指險要的地理形勢。語境義：形容詞，堅固。此處「固」作名詞用，指險要的地理形勢，即函谷關與崤山。",
+      "rule": "沿用原題準據：堅固，指險要的地理形勢。語境義：險固的地勢（形容詞用作名詞）。此處「固」作名詞用，指險要的地理形勢，即函谷關與崤山。",
       "sourcePassages": [
         "lesson-1536:p3"
       ],
@@ -1916,7 +1916,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：控制、制服。語境義：控制、制服。此處指秦國有餘力去控制、制服六國的弱點。",
+      "rule": "沿用原題準據：控制、制服。語境義：控制、制服。「制」意為控制、制服。全句意為秦國尚有餘力，趁諸侯困敝而制服他們。「弊」指困敝、疲敝。",
       "sourcePassages": [
         "lesson-1536:p3"
       ],
@@ -2183,10 +2183,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1536:vocab:lesson-1536:v01",
         "canonicalUnitId": "yw:lesson-1536:vocabulary:lesson-1536:v01",
-        "resourceVersion": "sha256:ec731b89a12475c8c2af627d8fe86b651426030d991ac1a595e80a821bacf984",
+        "resourceVersion": "sha256:9a40950f74549d00e1d0e0a68d610ccc16f8adb6093bb7fc33427e123463418b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2201,10 +2201,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1536:vocab:lesson-1536:v02",
         "canonicalUnitId": "yw:lesson-1536:vocabulary:lesson-1536:v02",
-        "resourceVersion": "sha256:7390b347f7b95679e6afb82d22bd06ff2de83c0ab1a16f47369668cc28d952d7",
+        "resourceVersion": "sha256:6fa0467afbed57f86c62db44966770d56ce9374be03a0f46c0d2ebfe49af3f97",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2309,10 +2309,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1536:vocab:lesson-1536:v08",
         "canonicalUnitId": "yw:lesson-1536:vocabulary:lesson-1536:v08",
-        "resourceVersion": "sha256:3e88cdc1bd51ad1cdd32dc5d36c12e0a444644002a2e833fa4f89125f9f43108",
+        "resourceVersion": "sha256:cd90a1cfc9c8463b22d29689d6cbe75d7e4eab47339a0410de5007ad32320ed5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2534,7 +2534,7 @@
       "id": "lesson-1536:v01",
       "word": "固",
       "sourceSentence": "秦孝公据崤函之固",
-      "meaning": "形容詞，堅固",
+      "meaning": "險固的地勢（形容詞用作名詞）",
       "explanation": "此處「固」作名詞用，指險要的地理形勢，即函谷關與崤山。",
       "type": "contextual-choice",
       "difficulty": 2,
@@ -2562,7 +2562,7 @@
       "word": "制",
       "sourceSentence": "秦有余力而制其弊",
       "meaning": "控制、制服",
-      "explanation": "此處指秦國有餘力去控制、制服六國的弱點。",
+      "explanation": "「制」意為控制、制服。全句意為秦國尚有餘力，趁諸侯困敝而制服他們。「弊」指困敝、疲敝。",
       "type": "contextual-choice",
       "difficulty": 2,
       "question": "「秦有余力而制其弊」中「制」的意思是",
@@ -2732,7 +2732,7 @@
         "潔淨",
         "衡量",
         "巨大的",
-        "比較"
+        "捆束"
       ],
       "answerIndex": 1,
       "sourceAnswer": "衡量",
@@ -2742,7 +2742,7 @@
       "version": "vocab-set-d6bfedb46dd0ea48",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「度长絜大」\n「度长絜大」中「絜」的意思是\nA. 潔淨\nB. 衡量\nC. 巨大的\nD. 比較\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「度长絜大」\n「度长絜大」中「絜」的意思是\nA. 潔淨\nB. 衡量\nC. 巨大的\nD. 捆束\n請選出答案，並用自己的話說明判斷依據。",
         "「度长絜大」中的「絜」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -2929,19 +2929,19 @@
       {
         "resourceKey": "effect:lesson-1536:vocab:lesson-1536:v01",
         "canonicalUnitId": "yw:lesson-1536:vocabulary:lesson-1536:v01",
-        "resourceVersion": "sha256:ec731b89a12475c8c2af627d8fe86b651426030d991ac1a595e80a821bacf984",
+        "resourceVersion": "sha256:9a40950f74549d00e1d0e0a68d610ccc16f8adb6093bb7fc33427e123463418b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1536:vocab:lesson-1536:v02",
         "canonicalUnitId": "yw:lesson-1536:vocabulary:lesson-1536:v02",
-        "resourceVersion": "sha256:7390b347f7b95679e6afb82d22bd06ff2de83c0ab1a16f47369668cc28d952d7",
+        "resourceVersion": "sha256:6fa0467afbed57f86c62db44966770d56ce9374be03a0f46c0d2ebfe49af3f97",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2992,10 +2992,10 @@
       {
         "resourceKey": "effect:lesson-1536:vocab:lesson-1536:v08",
         "canonicalUnitId": "yw:lesson-1536:vocabulary:lesson-1536:v08",
-        "resourceVersion": "sha256:3e88cdc1bd51ad1cdd32dc5d36c12e0a444644002a2e833fa4f89125f9f43108",
+        "resourceVersion": "sha256:cd90a1cfc9c8463b22d29689d6cbe75d7e4eab47339a0410de5007ad32320ed5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3608,7 +3608,7 @@
       },
       {
         "requirementId": "effect:lesson-1536:vocab:lesson-1536:v01",
-        "sourceVersion": "sha256:ec731b89a12475c8c2af627d8fe86b651426030d991ac1a595e80a821bacf984",
+        "sourceVersion": "sha256:9a40950f74549d00e1d0e0a68d610ccc16f8adb6093bb7fc33427e123463418b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3618,7 +3618,7 @@
       },
       {
         "requirementId": "effect:lesson-1536:vocab:lesson-1536:v02",
-        "sourceVersion": "sha256:7390b347f7b95679e6afb82d22bd06ff2de83c0ab1a16f47369668cc28d952d7",
+        "sourceVersion": "sha256:6fa0467afbed57f86c62db44966770d56ce9374be03a0f46c0d2ebfe49af3f97",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3678,7 +3678,7 @@
       },
       {
         "requirementId": "effect:lesson-1536:vocab:lesson-1536:v08",
-        "sourceVersion": "sha256:3e88cdc1bd51ad1cdd32dc5d36c12e0a444644002a2e833fa4f89125f9f43108",
+        "sourceVersion": "sha256:cd90a1cfc9c8463b22d29689d6cbe75d7e4eab47339a0410de5007ad32320ed5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -4550,7 +4550,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-271c47ee08b3ad9249b7",
+  "curriculumVersion": "yw-dialogue-0e09e095168afd77cc83",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

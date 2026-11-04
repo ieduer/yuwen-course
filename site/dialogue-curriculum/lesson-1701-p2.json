@@ -437,7 +437,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：提防、看守。語境義：提防、看顧。此處指擔心鵝鴨毀壞秧苗，故有「提防」之意。",
+      "rule": "沿用原題準據：提防、看守。語境義：提防、看顧。秧苗根部尚未穩固，插秧也尚未完成，因此要看管好鵝鴨，防止它們損壞秧苗；此處「照管」含有提防、看管之意。",
       "sourcePassages": [
         "lesson-1701-p2:p1"
       ],
@@ -477,7 +477,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：失去勞動節奏感與技巧性。語境義：投擲。「抛」字體現了農夫插秧時熟練的技巧與連貫的動作，換作「扔」則顯得笨拙。",
+      "rule": "沿用原題準據：表現農夫與農婦配合默契、動作熟練。語境義：投擲。「拋」「接」寫出農夫拋送秧苗、農婦接取秧苗的連貫動作，表現二人配合默契、勞作熟練。",
       "sourcePassages": [
         "lesson-1701-p2:p1"
       ],
@@ -689,10 +689,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v07",
         "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v07",
-        "resourceVersion": "sha256:b1378d2dbeb065e9e2c330e0526fe8ef565cdb20adc18645e7efd709a9d00168",
+        "resourceVersion": "sha256:d12ca897f9b90df3cbaf34e9df3664c5e1b5e39c90704387de161e8d12badadc",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -727,10 +727,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v09",
         "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v09",
-        "resourceVersion": "sha256:50f597decf2c9ad37d8196170c43ea6e95722d7866f4727d10e114735446011b",
+        "resourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -920,14 +920,14 @@
     {
       "id": "lesson-1701-p2:v07",
       "word": "照管",
-      "sourceSentence": "照管 鹅儿与雏鸭",
+      "sourceSentence": "秧根未牢莳未匝 ，照管 鹅儿与雏鸭",
       "meaning": "提防、看顧",
-      "explanation": "此處指擔心鵝鴨毀壞秧苗，故有「提防」之意。",
+      "explanation": "秧苗根部尚未穩固，插秧也尚未完成，因此要看管好鵝鴨，防止它們損壞秧苗；此處「照管」含有提防、看管之意。",
       "type": "contextual-choice",
       "difficulty": 3,
       "question": "文中「照管」一詞的語境義是？",
       "options": [
-        "照顧、養育",
+        "餵食、繁育",
         "管理、規劃",
         "提防、看守",
         "觀察、研究"
@@ -938,8 +938,8 @@
       "version": "vocab-set-fe4db946769e0da6",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「照管 鹅儿与雏鸭」\n文中「照管」一詞的語境義是？\nA. 照顧、養育\nB. 管理、規劃\nC. 提防、看守\nD. 觀察、研究\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「照管 鹅儿与雏鸭」中「照管」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "語境：「秧根未牢莳未匝 ，照管 鹅儿与雏鸭」\n文中「照管」一詞的語境義是？\nA. 餵食、繁育\nB. 管理、規劃\nC. 提防、看守\nD. 觀察、研究\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「秧根未牢莳未匝 ，照管 鹅儿与雏鸭」中「照管」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -972,24 +972,24 @@
       "word": "抛",
       "sourceSentence": "田夫抛秧田妇接",
       "meaning": "投擲",
-      "explanation": "「抛」字體現了農夫插秧時熟練的技巧與連貫的動作，換作「扔」則顯得笨拙。",
-      "type": "substitution",
+      "explanation": "「拋」「接」寫出農夫拋送秧苗、農婦接取秧苗的連貫動作，表現二人配合默契、勞作熟練。",
+      "type": "interpretation",
       "difficulty": 3,
-      "question": "若將「田夫抛秧」中的「抛」換成「扔」，效果有何不同？",
+      "question": "「田夫拋秧田婦接」中，「拋」「接」兩個動詞有何表達效果？",
       "options": [
-        "更具現代感",
-        "語義更精確",
-        "失去勞動節奏感與技巧性",
-        "沒有任何區別"
+        "突出田園景色的秀美",
+        "突出秧苗生長的旺盛",
+        "表現農夫與農婦配合默契、動作熟練",
+        "表現農夫與農婦動作遲緩、配合生疏"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "失去勞動節奏感與技巧性",
+      "sourceAnswer": "表現農夫與農婦配合默契、動作熟練",
       "sourceRefs": [],
       "version": "vocab-set-fe4db946769e0da6",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「田夫抛秧田妇接」\n若將「田夫抛秧」中的「抛」換成「扔」，效果有何不同？\nA. 更具現代感\nB. 語義更精確\nC. 失去勞動節奏感與技巧性\nD. 沒有任何區別\n請選出答案，並用自己的話說明判斷依據。",
-        "請用恰當的現代說法替換「田夫抛秧田妇接」中的「抛」，並解釋這個替換如何保留原句的意思。"
+        "語境：「田夫抛秧田妇接」\n「田夫拋秧田婦接」中，「拋」「接」兩個動詞有何表達效果？\nA. 突出田園景色的秀美\nB. 突出秧苗生長的旺盛\nC. 表現農夫與農婦配合默契、動作熟練\nD. 表現農夫與農婦動作遲緩、配合生疏\n請選出答案，並用自己的話說明判斷依據。",
+        "「田夫抛秧田妇接」中的「抛」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
     {
@@ -1169,10 +1169,10 @@
       {
         "resourceKey": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v07",
         "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v07",
-        "resourceVersion": "sha256:b1378d2dbeb065e9e2c330e0526fe8ef565cdb20adc18645e7efd709a9d00168",
+        "resourceVersion": "sha256:d12ca897f9b90df3cbaf34e9df3664c5e1b5e39c90704387de161e8d12badadc",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1189,10 +1189,10 @@
       {
         "resourceKey": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v09",
         "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v09",
-        "resourceVersion": "sha256:50f597decf2c9ad37d8196170c43ea6e95722d7866f4727d10e114735446011b",
+        "resourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1481,7 +1481,7 @@
       },
       {
         "requirementId": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v07",
-        "sourceVersion": "sha256:b1378d2dbeb065e9e2c330e0526fe8ef565cdb20adc18645e7efd709a9d00168",
+        "sourceVersion": "sha256:d12ca897f9b90df3cbaf34e9df3664c5e1b5e39c90704387de161e8d12badadc",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1501,7 +1501,7 @@
       },
       {
         "requirementId": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v09",
-        "sourceVersion": "sha256:50f597decf2c9ad37d8196170c43ea6e95722d7866f4727d10e114735446011b",
+        "sourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2038,7 +2038,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-9db8687cead27972bae1",
+  "curriculumVersion": "yw-dialogue-cfa084192a627fb5842f",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

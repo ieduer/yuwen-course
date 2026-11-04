@@ -1795,10 +1795,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1719-p2:vocab:lesson-1719-p2:v10",
         "canonicalUnitId": "yw:lesson-1719-p2:vocabulary:lesson-1719-p2:v10",
-        "resourceVersion": "sha256:8e43b5faf316b02e51ca836546eb3a7bd51fcb5b94d4d12ab1dab59675b86b84",
+        "resourceVersion": "sha256:b336bbf79714db18ff0b2892c266fafe5c0009d903505b166ca231ed8da4eac8",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1871,10 +1871,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1719-p2:vocab:lesson-1719-p2:v14",
         "canonicalUnitId": "yw:lesson-1719-p2:vocabulary:lesson-1719-p2:v14",
-        "resourceVersion": "sha256:65cbb67431debc13ac32ef759953589bb538ea76fd977e8c71bcf40d5de09e91",
+        "resourceVersion": "sha256:a72106568baf82d86abbfeb045f637f7fe0c4128a1d013becd861584bdb80db0",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2174,7 +2174,7 @@
       "question": "「半山居雾若带然」中「居」的意思是",
       "options": [
         "居住",
-        "处于",
+        "担任",
         "停留",
         "占有"
       ],
@@ -2186,7 +2186,7 @@
       "version": "vocab-set-dff4479ba6b567bd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「半山居 雾若带然」\n「半山居雾若带然」中「居」的意思是\nA. 居住\nB. 处于\nC. 停留\nD. 占有\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「半山居 雾若带然」\n「半山居雾若带然」中「居」的意思是\nA. 居住\nB. 担任\nC. 停留\nD. 占有\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「半山居 雾若带然」中「居」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -2282,7 +2282,7 @@
       "question": "「绛皓驳色」中「驳」的意思是",
       "options": [
         "驳回",
-        "斑驳",
+        "驳斥，批评",
         "颜色错杂",
         "非常鲜艳"
       ],
@@ -2294,7 +2294,7 @@
       "version": "vocab-set-dff4479ba6b567bd",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「绛皓驳色」\n「绛皓驳色」中「驳」的意思是\nA. 驳回\nB. 斑驳\nC. 颜色错杂\nD. 非常鲜艳\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「绛皓驳色」\n「绛皓驳色」中「驳」的意思是\nA. 驳回\nB. 驳斥，批评\nC. 颜色错杂\nD. 非常鲜艳\n請選出答案，並用自己的話說明判斷依據。",
         "「绛皓驳色」中的「驳」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -2493,10 +2493,10 @@
       {
         "resourceKey": "effect:lesson-1719-p2:vocab:lesson-1719-p2:v10",
         "canonicalUnitId": "yw:lesson-1719-p2:vocabulary:lesson-1719-p2:v10",
-        "resourceVersion": "sha256:8e43b5faf316b02e51ca836546eb3a7bd51fcb5b94d4d12ab1dab59675b86b84",
+        "resourceVersion": "sha256:b336bbf79714db18ff0b2892c266fafe5c0009d903505b166ca231ed8da4eac8",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2533,10 +2533,10 @@
       {
         "resourceKey": "effect:lesson-1719-p2:vocab:lesson-1719-p2:v14",
         "canonicalUnitId": "yw:lesson-1719-p2:vocabulary:lesson-1719-p2:v14",
-        "resourceVersion": "sha256:65cbb67431debc13ac32ef759953589bb538ea76fd977e8c71bcf40d5de09e91",
+        "resourceVersion": "sha256:a72106568baf82d86abbfeb045f637f7fe0c4128a1d013becd861584bdb80db0",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2924,7 +2924,7 @@
       },
       {
         "requirementId": "effect:lesson-1719-p2:vocab:lesson-1719-p2:v10",
-        "sourceVersion": "sha256:8e43b5faf316b02e51ca836546eb3a7bd51fcb5b94d4d12ab1dab59675b86b84",
+        "sourceVersion": "sha256:b336bbf79714db18ff0b2892c266fafe5c0009d903505b166ca231ed8da4eac8",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2964,7 +2964,7 @@
       },
       {
         "requirementId": "effect:lesson-1719-p2:vocab:lesson-1719-p2:v14",
-        "sourceVersion": "sha256:65cbb67431debc13ac32ef759953589bb538ea76fd977e8c71bcf40d5de09e91",
+        "sourceVersion": "sha256:a72106568baf82d86abbfeb045f637f7fe0c4128a1d013becd861584bdb80db0",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3450,7 +3450,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-ebfd5d81b4645bac2251",
+  "curriculumVersion": "yw-dialogue-42d0166d61ee95eecca3",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

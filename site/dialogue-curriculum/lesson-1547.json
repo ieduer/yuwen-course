@@ -1480,10 +1480,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1547:vocab:lesson-1547:v06",
         "canonicalUnitId": "yw:lesson-1547:vocabulary:lesson-1547:v06",
-        "resourceVersion": "sha256:f5b5b0304f3138ac22df66467bd66b74d2316ab63f911ef22685f4788be4227f",
+        "resourceVersion": "sha256:58f6bf1ba5fa56fae1b044d43e51f4731c2998029323314851eebf19aefee925",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1709,7 +1709,7 @@
         "战士们为了军功才去拼命",
         "战士们死守气节，本就不是为了个人的功勋",
         "战士们因为怕死，所以不顾功勋",
-        "战士们为了国家的荣誉而战，不在乎死亡"
+        "战士们认为只有立下功勋，为国牺牲才有价值"
       ],
       "answerIndex": 1,
       "sourceAnswer": "战士们死守气节，本就不是为了个人的功勋",
@@ -1719,7 +1719,7 @@
       "version": "vocab-set-80cf3321a192cd6f",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「相看白刃血纷纷,死节从来岂顾勋! 」\n「死节从来岂顾勋」一句表达了诗人怎样的观点？\nA. 战士们为了军功才去拼命\nB. 战士们死守气节，本就不是为了个人的功勋\nC. 战士们因为怕死，所以不顾功勋\nD. 战士们为了国家的荣誉而战，不在乎死亡\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「相看白刃血纷纷,死节从来岂顾勋! 」\n「死节从来岂顾勋」一句表达了诗人怎样的观点？\nA. 战士们为了军功才去拼命\nB. 战士们死守气节，本就不是为了个人的功勋\nC. 战士们因为怕死，所以不顾功勋\nD. 战士们认为只有立下功勋，为国牺牲才有价值\n請選出答案，並用自己的話說明判斷依據。",
         "「相看白刃血纷纷,死节从来岂顾勋! 」中的「死节」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -1902,10 +1902,10 @@
       {
         "resourceKey": "effect:lesson-1547:vocab:lesson-1547:v06",
         "canonicalUnitId": "yw:lesson-1547:vocabulary:lesson-1547:v06",
-        "resourceVersion": "sha256:f5b5b0304f3138ac22df66467bd66b74d2316ab63f911ef22685f4788be4227f",
+        "resourceVersion": "sha256:58f6bf1ba5fa56fae1b044d43e51f4731c2998029323314851eebf19aefee925",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2188,7 +2188,7 @@
       },
       {
         "requirementId": "effect:lesson-1547:vocab:lesson-1547:v06",
-        "sourceVersion": "sha256:f5b5b0304f3138ac22df66467bd66b74d2316ab63f911ef22685f4788be4227f",
+        "sourceVersion": "sha256:58f6bf1ba5fa56fae1b044d43e51f4731c2998029323314851eebf19aefee925",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2694,7 +2694,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-230a8f43812a22709347",
+  "curriculumVersion": "yw-dialogue-bcf0006aee1168b5c1cf",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

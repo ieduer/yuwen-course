@@ -564,7 +564,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：对着。語境義：对着。此处意为对着酒，引申为饮酒时。",
+      "rule": "沿用原題準據：对着。語境義：对着。依统编教材《短歌行》的注释，「当」意为「对着」；「对酒当歌」是说一边喝酒，一边唱歌。",
       "sourcePassages": [
         "lesson-1704-p1:p1"
       ],
@@ -878,10 +878,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v01",
         "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v01",
-        "resourceVersion": "sha256:1e7b48bda38f120e878329d2f1cb15de048da09566ab1094976e36cfd4da285d",
+        "resourceVersion": "sha256:c8bc192896110d084f75b6d007a9bdda9d219e6685510157f973b4a36312d5b4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -897,10 +897,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v02",
         "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v02",
-        "resourceVersion": "sha256:5a47cfc360fc31a1dee53880ff0a31a032881c867651d2a0728880a74e6b2382",
+        "resourceVersion": "sha256:f8b2249da3fdb5edf16a2897f164cabef642a7263ee4d2a200d5475684833567",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -935,10 +935,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v05",
         "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v05",
-        "resourceVersion": "sha256:32f1d832ab928dbd7dbe94e8fcd3fd78ea9e66cbe7d14da8ed9f038cff2de6dd",
+        "resourceVersion": "sha256:e6775459b7a6b582c4bb076fabc0bcc4f3d775cd56576ab5a1753d33e4fb6fb4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1122,12 +1122,12 @@
       "word": "当",
       "sourceSentence": "对酒当歌",
       "meaning": "对着",
-      "explanation": "此处意为对着酒，引申为饮酒时。",
+      "explanation": "依统编教材《短歌行》的注释，「当」意为「对着」；「对酒当歌」是说一边喝酒，一边唱歌。",
       "type": "contextual-choice",
       "difficulty": 1,
       "question": "「对酒当歌」中「当」的意思是",
       "options": [
-        "应当",
+        "担任",
         "对着",
         "阻挡",
         "充当"
@@ -1138,7 +1138,7 @@
       "version": "vocab-set-da52b061dfc41ac2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「对酒当歌」\n「对酒当歌」中「当」的意思是\nA. 应当\nB. 对着\nC. 阻挡\nD. 充当\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「对酒当歌」\n「对酒当歌」中「当」的意思是\nA. 担任\nB. 对着\nC. 阻挡\nD. 充当\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「对酒当歌」中「当」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -1148,9 +1148,9 @@
       "sourceSentence": "慨当以慷",
       "meaning": "情绪激昂",
       "explanation": "文中指宴会上歌声激越，情绪激昂。",
-      "type": "gu-jin",
+      "type": "contextual-choice",
       "difficulty": 2,
-      "question": "文中「慨当以慷」的「慷慨」与现代汉语词义不同，其义为",
+      "question": "文中「慨当以慷」的「慷慨」，在此处的意思是",
       "options": [
         "大方、不吝啬",
         "充满正义感",
@@ -1163,8 +1163,8 @@
       "version": "vocab-set-da52b061dfc41ac2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「慨当以慷」\n文中「慨当以慷」的「慷慨」与现代汉语词义不同，其义为\nA. 大方、不吝啬\nB. 充满正义感\nC. 情绪激昂\nD. 悲伤忧愁\n請選出答案，並用自己的話說明判斷依據。",
-        "回到「慨当以慷」：「慷慨」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+        "語境：「慨当以慷」\n文中「慨当以慷」的「慷慨」，在此处的意思是\nA. 大方、不吝啬\nB. 充满正义感\nC. 情绪激昂\nD. 悲伤忧愁\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「慨当以慷」中「慷慨」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1206,7 +1206,7 @@
       "options": [
         "停止",
         "摘取",
-        "获得",
+        "赠送",
         "遇见"
       ],
       "answerIndex": 1,
@@ -1215,7 +1215,7 @@
       "version": "vocab-set-da52b061dfc41ac2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「何时可掇」\n「何时可掇」中「掇」字的意思是\nA. 停止\nB. 摘取\nC. 获得\nD. 遇见\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「何时可掇」\n「何时可掇」中「掇」字的意思是\nA. 停止\nB. 摘取\nC. 赠送\nD. 遇见\n請選出答案，並用自己的話說明判斷依據。",
         "請用恰當的現代說法替換「何时可掇」中的「掇」，並解釋這個替換如何保留原句的意思。"
       ]
     },
@@ -1508,20 +1508,20 @@
       {
         "resourceKey": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v01",
         "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v01",
-        "resourceVersion": "sha256:1e7b48bda38f120e878329d2f1cb15de048da09566ab1094976e36cfd4da285d",
+        "resourceVersion": "sha256:c8bc192896110d084f75b6d007a9bdda9d219e6685510157f973b4a36312d5b4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v02",
         "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v02",
-        "resourceVersion": "sha256:5a47cfc360fc31a1dee53880ff0a31a032881c867651d2a0728880a74e6b2382",
+        "resourceVersion": "sha256:f8b2249da3fdb5edf16a2897f164cabef642a7263ee4d2a200d5475684833567",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1538,10 +1538,10 @@
       {
         "resourceKey": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v05",
         "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v05",
-        "resourceVersion": "sha256:32f1d832ab928dbd7dbe94e8fcd3fd78ea9e66cbe7d14da8ed9f038cff2de6dd",
+        "resourceVersion": "sha256:e6775459b7a6b582c4bb076fabc0bcc4f3d775cd56576ab5a1753d33e4fb6fb4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1889,7 +1889,7 @@
       },
       {
         "requirementId": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v01",
-        "sourceVersion": "sha256:1e7b48bda38f120e878329d2f1cb15de048da09566ab1094976e36cfd4da285d",
+        "sourceVersion": "sha256:c8bc192896110d084f75b6d007a9bdda9d219e6685510157f973b4a36312d5b4",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1899,7 +1899,7 @@
       },
       {
         "requirementId": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v02",
-        "sourceVersion": "sha256:5a47cfc360fc31a1dee53880ff0a31a032881c867651d2a0728880a74e6b2382",
+        "sourceVersion": "sha256:f8b2249da3fdb5edf16a2897f164cabef642a7263ee4d2a200d5475684833567",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1919,7 +1919,7 @@
       },
       {
         "requirementId": "effect:lesson-1704-p1:vocab:lesson-1704-p1:v05",
-        "sourceVersion": "sha256:32f1d832ab928dbd7dbe94e8fcd3fd78ea9e66cbe7d14da8ed9f038cff2de6dd",
+        "sourceVersion": "sha256:e6775459b7a6b582c4bb076fabc0bcc4f3d775cd56576ab5a1753d33e4fb6fb4",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2438,7 +2438,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-73fc5871668b6e67c5a4",
+  "curriculumVersion": "yw-dialogue-0a0324421f424a30a19b",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

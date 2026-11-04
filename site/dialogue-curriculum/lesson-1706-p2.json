@@ -515,7 +515,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：败逃时向北方回头张望。語境義：败逃中回头北望（指回望被敌占领的故土）。结合词中「仓皇」二字，可知「北顾」是指战败后狼狈逃窜时回头看北方，含有悔恨与悲凉之意。",
+      "rule": "沿用原題準據：败逃时向北方回头张望。語境義：败退时回头向北张望，写北伐失败后的惊慌情状。。此句承接「元嘉草草，封狼居胥」，用宋文帝刘义隆草率北伐、遭北魏反攻的典故。「北顾」指回头向北张望，「仓皇」突出北伐失败后的惊慌狼狈。",
       "sourcePassages": [
         "lesson-1706-p2:p1"
       ],
@@ -575,7 +575,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：不堪设想。語境義：能够，受得住。「可堪」意为「能够忍受」，与「堪当」中的「堪」同为「能够」义。",
+      "rule": "沿用原題準據：不堪回首。語境義：忍受、承受。「可堪回首」意为「哪堪回首、怎能忍受回顾」，其中「堪」指忍受、承受。C项「不堪回首」的「堪」同样指忍受、承受，故选C。A项「不堪设想」的「堪」意为可、能，B项「堪当重任」的「堪」指能够，D项「堪称一绝」的「堪」指可以，均不同于题句。",
       "sourcePassages": [
         "lesson-1706-p2:p1"
       ],
@@ -711,10 +711,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v02",
         "canonicalUnitId": "yw:lesson-1706-p2:vocabulary:lesson-1706-p2:v02",
-        "resourceVersion": "sha256:47c824ac3217909f37228fb64d04ddca01b255e5fe89f9117045508f7f2e2ce5",
+        "resourceVersion": "sha256:ca0a5abe0bee80df6e1fd422f5b6f0b4709490d657aa45e027798b6a94cb2ff4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -730,10 +730,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v03",
         "canonicalUnitId": "yw:lesson-1706-p2:vocabulary:lesson-1706-p2:v03",
-        "resourceVersion": "sha256:5eef2701d05339723822ccd96c69cf16f3ad210a55943dc3d853faec5248c36c",
+        "resourceVersion": "sha256:007f4fc40c467c18a7bf805e4b95e21e769d36d77e230a05e982e2a0f42da62d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -787,10 +787,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v06",
         "canonicalUnitId": "yw:lesson-1706-p2:vocabulary:lesson-1706-p2:v06",
-        "resourceVersion": "sha256:0c9a9af744682a0f8e147ce8867f473d404f673b5498657e7791401149f246ae",
+        "resourceVersion": "sha256:41c2a2d29c59ab877072ba49ca5bc4bb6569a279b2379ea458d6b129f59ce66f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -867,7 +867,7 @@
       "options": [
         "忧愁的样子",
         "轻率、草率",
-        "匆忙的样子",
+        "疲惫的样子",
         "杂乱的样子"
       ],
       "answerIndex": 1,
@@ -876,7 +876,7 @@
       "version": "vocab-set-afbf4d933d7f53f2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「元嘉草草」\n「元嘉草草」中「草草」一词在文中的意思是\nA. 忧愁的样子\nB. 轻率、草率\nC. 匆忙的样子\nD. 杂乱的样子\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「元嘉草草」\n「元嘉草草」中「草草」一词在文中的意思是\nA. 忧愁的样子\nB. 轻率、草率\nC. 疲惫的样子\nD. 杂乱的样子\n請選出答案，並用自己的話說明判斷依據。",
         "請解釋「元嘉草草」中「元嘉草草」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
@@ -884,13 +884,13 @@
       "id": "lesson-1706-p2:v03",
       "word": "北顾",
       "sourceSentence": "赢得仓皇北顾",
-      "meaning": "败逃中回头北望（指回望被敌占领的故土）",
-      "explanation": "结合词中「仓皇」二字，可知「北顾」是指战败后狼狈逃窜时回头看北方，含有悔恨与悲凉之意。",
+      "meaning": "败退时回头向北张望，写北伐失败后的惊慌情状。",
+      "explanation": "此句承接「元嘉草草，封狼居胥」，用宋文帝刘义隆草率北伐、遭北魏反攻的典故。「北顾」指回头向北张望，「仓皇」突出北伐失败后的惊慌狼狈。",
       "type": "interpretation",
       "difficulty": 2,
       "question": "「赢得仓皇北顾」中的「北顾」是指",
       "options": [
-        "向北方看去",
+        "向北方进军",
         "北方的顾虑",
         "败逃时向北方回头张望",
         "关照北方的情况"
@@ -901,7 +901,7 @@
       "version": "vocab-set-afbf4d933d7f53f2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「赢得仓皇北顾」\n「赢得仓皇北顾」中的「北顾」是指\nA. 向北方看去\nB. 北方的顾虑\nC. 败逃时向北方回头张望\nD. 关照北方的情况\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「赢得仓皇北顾」\n「赢得仓皇北顾」中的「北顾」是指\nA. 向北方进军\nB. 北方的顾虑\nC. 败逃时向北方回头张望\nD. 关照北方的情况\n請選出答案，並用自己的話說明判斷依據。",
         "「赢得仓皇北顾」中的「北顾」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
@@ -959,24 +959,24 @@
       "id": "lesson-1706-p2:v06",
       "word": "堪",
       "sourceSentence": "可堪回首，佛狸祠 下",
-      "meaning": "能够，受得住",
-      "explanation": "「可堪」意为「能够忍受」，与「堪当」中的「堪」同为「能够」义。",
+      "meaning": "忍受、承受",
+      "explanation": "「可堪回首」意为「哪堪回首、怎能忍受回顾」，其中「堪」指忍受、承受。C项「不堪回首」的「堪」同样指忍受、承受，故选C。A项「不堪设想」的「堪」意为可、能，B项「堪当重任」的「堪」指能够，D项「堪称一绝」的「堪」指可以，均不同于题句。",
       "type": "usage",
       "difficulty": 2,
       "question": "下列句中加点词的含义与「可堪回首」中的「堪」相同的是",
       "options": [
-        "不可一世",
-        "堪当重任",
         "不堪设想",
+        "堪当重任",
+        "不堪回首",
         "堪称一绝"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "不堪设想",
+      "sourceAnswer": "不堪回首",
       "sourceRefs": [],
       "version": "vocab-set-afbf4d933d7f53f2",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「可堪回首，佛狸祠 下」\n下列句中加点词的含义与「可堪回首」中的「堪」相同的是\nA. 不可一世\nB. 堪当重任\nC. 不堪设想\nD. 堪称一绝\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「可堪回首，佛狸祠 下」\n下列句中加点词的含义与「可堪回首」中的「堪」相同的是\nA. 不堪设想\nB. 堪当重任\nC. 不堪回首\nD. 堪称一绝\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「可堪回首，佛狸祠 下」的句意，解釋「堪」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1117,20 +1117,20 @@
       {
         "resourceKey": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v02",
         "canonicalUnitId": "yw:lesson-1706-p2:vocabulary:lesson-1706-p2:v02",
-        "resourceVersion": "sha256:47c824ac3217909f37228fb64d04ddca01b255e5fe89f9117045508f7f2e2ce5",
+        "resourceVersion": "sha256:ca0a5abe0bee80df6e1fd422f5b6f0b4709490d657aa45e027798b6a94cb2ff4",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
       {
         "resourceKey": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v03",
         "canonicalUnitId": "yw:lesson-1706-p2:vocabulary:lesson-1706-p2:v03",
-        "resourceVersion": "sha256:5eef2701d05339723822ccd96c69cf16f3ad210a55943dc3d853faec5248c36c",
+        "resourceVersion": "sha256:007f4fc40c467c18a7bf805e4b95e21e769d36d77e230a05e982e2a0f42da62d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1157,10 +1157,10 @@
       {
         "resourceKey": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v06",
         "canonicalUnitId": "yw:lesson-1706-p2:vocabulary:lesson-1706-p2:v06",
-        "resourceVersion": "sha256:0c9a9af744682a0f8e147ce8867f473d404f673b5498657e7791401149f246ae",
+        "resourceVersion": "sha256:41c2a2d29c59ab877072ba49ca5bc4bb6569a279b2379ea458d6b129f59ce66f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1383,7 +1383,7 @@
       },
       {
         "requirementId": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v02",
-        "sourceVersion": "sha256:47c824ac3217909f37228fb64d04ddca01b255e5fe89f9117045508f7f2e2ce5",
+        "sourceVersion": "sha256:ca0a5abe0bee80df6e1fd422f5b6f0b4709490d657aa45e027798b6a94cb2ff4",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1393,7 +1393,7 @@
       },
       {
         "requirementId": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v03",
-        "sourceVersion": "sha256:5eef2701d05339723822ccd96c69cf16f3ad210a55943dc3d853faec5248c36c",
+        "sourceVersion": "sha256:007f4fc40c467c18a7bf805e4b95e21e769d36d77e230a05e982e2a0f42da62d",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1423,7 +1423,7 @@
       },
       {
         "requirementId": "effect:lesson-1706-p2:vocab:lesson-1706-p2:v06",
-        "sourceVersion": "sha256:0c9a9af744682a0f8e147ce8867f473d404f673b5498657e7791401149f246ae",
+        "sourceVersion": "sha256:41c2a2d29c59ab877072ba49ca5bc4bb6569a279b2379ea458d6b129f59ce66f",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1827,7 +1827,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-9a05f7caa7f0f480495f",
+  "curriculumVersion": "yw-dialogue-35c9c51c85abad322bbb",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

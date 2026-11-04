@@ -388,7 +388,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：燕雀安知鸿鹄之志。語境義：怎么能。「安能」与「安知」均表示反问，意为怎么能。",
+      "rule": "沿用原題準據：燕雀安知鸿鹄之志。語境義：怎么能。题干「安能」意为「怎么能」；D项「安知」意为「怎么知道」。两处「安」均作状语，意为「怎么」，用于反问。A项「安之」的「安」意为使……安定，B、C项的「安」意为安稳、安定，均不同。",
       "sourcePassages": [
         "lesson-1588:p1"
       ],
@@ -635,10 +635,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1588:vocab:lesson-1588:v04",
         "canonicalUnitId": "yw:lesson-1588:vocabulary:lesson-1588:v04",
-        "resourceVersion": "sha256:64d202194e6cbc74890c24b1e5e87ca66291cb67e5727ab61f02a75240d606c2",
+        "resourceVersion": "sha256:a75bc9145c2f973b478a6ab4c94c279bb8d88a08b57f4ec19a029a823a0ac37b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -831,12 +831,12 @@
       "word": "安能",
       "sourceSentence": "人生亦有命,安能行叹复坐愁",
       "meaning": "怎么能",
-      "explanation": "「安能」与「安知」均表示反问，意为怎么能。",
+      "explanation": "题干「安能」意为「怎么能」；D项「安知」意为「怎么知道」。两处「安」均作状语，意为「怎么」，用于反问。A项「安之」的「安」意为使……安定，B、C项的「安」意为安稳、安定，均不同。",
       "type": "usage",
       "difficulty": 2,
       "question": "「安能行叹复坐愁」中「安能」的用法与下列哪项相同",
       "options": [
-        "安得广厦千万间",
+        "既来之，则安之",
         "安步当车",
         "安如泰山",
         "燕雀安知鸿鹄之志"
@@ -849,7 +849,7 @@
       "version": "vocab-set-2c79ecc83d640bb6",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「人生亦有命,安能行叹复坐愁」\n「安能行叹复坐愁」中「安能」的用法与下列哪项相同\nA. 安得广厦千万间\nB. 安步当车\nC. 安如泰山\nD. 燕雀安知鸿鹄之志\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「人生亦有命,安能行叹复坐愁」\n「安能行叹复坐愁」中「安能」的用法与下列哪项相同\nA. 既来之，则安之\nB. 安步当车\nC. 安如泰山\nD. 燕雀安知鸿鹄之志\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「人生亦有命,安能行叹复坐愁」的句意，解釋「安能」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -1113,10 +1113,10 @@
       {
         "resourceKey": "effect:lesson-1588:vocab:lesson-1588:v04",
         "canonicalUnitId": "yw:lesson-1588:vocabulary:lesson-1588:v04",
-        "resourceVersion": "sha256:64d202194e6cbc74890c24b1e5e87ca66291cb67e5727ab61f02a75240d606c2",
+        "resourceVersion": "sha256:a75bc9145c2f973b478a6ab4c94c279bb8d88a08b57f4ec19a029a823a0ac37b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "sourceReleaseId": "yw-release-d3801a553a0391d0",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1418,7 +1418,7 @@
       },
       {
         "requirementId": "effect:lesson-1588:vocab:lesson-1588:v04",
-        "sourceVersion": "sha256:64d202194e6cbc74890c24b1e5e87ca66291cb67e5727ab61f02a75240d606c2",
+        "sourceVersion": "sha256:a75bc9145c2f973b478a6ab4c94c279bb8d88a08b57f4ec19a029a823a0ac37b",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1901,7 +1901,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-5b74403db17f4df535b1",
+  "curriculumVersion": "yw-dialogue-ae874ff6de17d8f90211",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
