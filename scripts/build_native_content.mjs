@@ -15,6 +15,7 @@ import {
   writeImmutableFile,
 } from "./native_content_release_contract.mjs";
 import { createUrlSanitizer } from "./native_content_url_sanitizer.mjs";
+import { stripAnswerFields } from "./answer_free_artifact.mjs";
 import { validateVocabEligibility } from "./vocab_eligibility.mjs";
 import {
   buildLessonCompetencyManifest,
@@ -220,6 +221,19 @@ assert(serialize(studyGuideCatalog) === serialize(buildStudyGuideCatalog()),
   "study-guide catalog differs from its curated source");
 assert(serialize(lessonCompetencyManifest) === serialize(buildLessonCompetencyManifest(studyGuideCatalog)),
   "lesson competency manifest differs from its source contracts");
+// The App receives the same answer-free study guide the public Web serves
+// (stripAnswerFields: reference answers and their explanations withheld; owner
+// 2026-11-04 「折衷 A」). Vocabulary answer keys stay for on-device grading.
+const STUDY_GUIDE_ANSWER_PROJECTION = "withheld-v1";
+const nativeStudyGuideCatalog = canonicalize({
+  ...stripAnswerFields(studyGuideCatalog),
+  answerProjection: STUDY_GUIDE_ANSWER_PROJECTION,
+});
+assert(!JSON.stringify(nativeStudyGuideCatalog).includes('"referenceAnswer"'),
+  "native study-guide catalog still carries reference answers");
+assert(nativeStudyGuideCatalog.itemCount === studyGuideCatalog.itemCount
+  && nativeStudyGuideCatalog.activeItemCount === studyGuideCatalog.activeItemCount,
+  "answer-free study-guide projection changed item counts");
 for (const [label, projection] of [
   ["study-guide catalog", studyGuideCatalog],
   ["lesson competency manifest", lessonCompetencyManifest],
@@ -786,7 +800,7 @@ const semanticCoreBase = canonicalize({
   media: normalizedMediaBase,
   tombstones: normalizedTombstones,
   learningManifest,
-  studyGuideCatalog,
+  studyGuideCatalog: nativeStudyGuideCatalog,
   lessonCompetencyManifest,
   interactionDefinitions,
 });
@@ -867,7 +881,7 @@ addObject("catalog", "catalog", "catalog.json", versionedCatalog);
 addObject("media", "media", "media.json", versionedMedia);
 addObject("tombstones", "tombstones", "tombstones.json", normalizedTombstones);
 addObject("learning-manifest", "learning-manifest", "learning-manifest.json", learningManifest);
-addObject("study-guide-catalog", "study-guide-catalog", "study-guide-catalog.json", studyGuideCatalog);
+addObject("study-guide-catalog", "study-guide-catalog", "study-guide-catalog.json", nativeStudyGuideCatalog);
 addObject("lesson-competency-manifest", "lesson-competency-manifest", "lesson-competency-manifest.json", lessonCompetencyManifest);
 addObject("interaction-definitions", "interaction-definitions", "interaction-definitions.json", interactionDefinitions);
 addObject("vocab-eligibility", "vocab-eligibility", "vocab-eligibility.json", vocabEligibility);

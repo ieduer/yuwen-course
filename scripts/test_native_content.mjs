@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { stripAnswerFields } from "./answer_free_artifact.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
@@ -971,24 +972,31 @@ test("classical first-read projection is exact and receipt-bound", () => {
   );
 });
 
-test("study-guide and formative projections preserve every source field and receipt", () => {
+test("study-guide projection is the public answer-free catalog; formative projection preserves every source field", () => {
   for (const [kind, key, file] of [
     ["study-guide-catalog", "studyGuideCatalog", "study-guide-catalog.json"],
     ["lesson-competency-manifest", "lessonCompetencyManifest", "lesson-competency-manifest.json"],
   ]) {
     const sourceBytes = readFileSync(path.join(SITE_ROOT, "data", file));
     const source = JSON.parse(sourceBytes);
+    // Owner 2026-11-04 「折衷 A」: the App gets the same answer-free study guide the
+    // public Web serves; vocabulary answer keys stay. Formative data is unchanged.
+    const expected = kind === "study-guide-catalog"
+      ? JSON.parse(serialize({ ...stripAnswerFields(source), answerProjection: "withheld-v1" }))
+      : source;
     const receipts = manifest.objects.filter((receipt) => receipt.kind === kind);
     assert.equal(receipts.length, 1, `${kind}: exactly one required projection`);
     const projectedBytes = readFileSync(path.join(releaseRoot, receipts[0].path));
-    assert.deepEqual(core[key], source, `${kind}: no source fields may disappear`);
-    assert.equal(projectedBytes.toString(), serialize(source));
+    assert.deepEqual(core[key], expected, `${kind}: projection differs from its contract`);
+    assert.equal(projectedBytes.toString(), serialize(expected));
     assert.equal(receipts[0].sha256, sha256(projectedBytes));
     assert.equal(receipts[0].bytes, projectedBytes.length);
     assert.equal(manifest.sourceProvenance[key].sha256, sha256(sourceBytes));
     const lessonIds = new Set(core.catalog.lessons.map((lesson) => lesson.id));
     assert.ok(source.lessons.every((lesson) => lessonIds.has(lesson.lessonId)));
   }
+  assert.ok(!JSON.stringify(core).includes('"referenceAnswer"'), "App graph must not carry study-guide reference answers");
+  assert.ok(core.studyGuideCatalog.lessons.flatMap((lesson) => lesson.items).every((item) => !("explanation" in item)));
   assert.equal(core.studyGuideCatalog.itemCount, 241);
   assert.equal(core.studyGuideCatalog.activeItemCount, 193);
   assert.equal(core.lessonCompetencyManifest.itemCount, 1697);
