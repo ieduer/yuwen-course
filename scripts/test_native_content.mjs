@@ -31,7 +31,10 @@ const OUTPUT_ROOT = mkdtempSync(path.join(os.tmpdir(), "yw-native-content-tests-
 const MAX_CORE_BYTES = 25 * 1024 * 1024;
 const MAX_PAGES_FILES = 20_000;
 const RIGHTS_PROVENANCE = "user-authorized-for-bdfz-yw-app-2026-07-29";
-const FOUNDATION_WAVE_APP_POINTER_SHA256 = "a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7";
+// The App content pointer may only change in a reviewed App content release.
+// 2026-08-13 foundation wave: a5ccd441… (yw-3e77f0f7). 2026-11-04 r44 (owner
+// 「折衷 A」, 「准，重簽 r44」): yw-46504685 answer-free App graph.
+const FOUNDATION_WAVE_APP_POINTER_SHA256 = "6729e48d5fd361f27fceb22dcc7ada6ba1abef9fc661c1d1ff19e7d53d20e91a";
 const SENSITIVE_QUERY_KEY = /(^|[_-])(access|api|auth|authorization|cookie|credential|jwt|key|password|refresh|secret|session|sig|signature|token)([_-]|$)|^(chksm|continue|dsh|followup|ifkv|osid|sn|state)$/i;
 const FORBIDDEN_AUTH_QUERY = /[?&](?:continue|dsh|followup|ifkv|osid)=/i;
 const PRIVATE_NOTEBOOK_PATH = /notebooklm\.google\.com\/notebook\/[^"'\\/\s?#]+/i;
@@ -1434,7 +1437,7 @@ test("formal artifact gates cannot restore checkout production entrypoints", () 
   assert.equal(
     sha256(readFileSync(path.join(SITE_ROOT, "app-content", "latest-stable.json"))),
     FOUNDATION_WAVE_APP_POINTER_SHA256,
-    "foundation wave must preserve the live and Android-compatible App pointer",
+    "Web releases must preserve the reviewed live and Android-compatible App pointer",
   );
 });
 
