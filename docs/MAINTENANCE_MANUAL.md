@@ -1,3 +1,20 @@
+## Current 2026-11-04 — r44: App content pushed (accepted)
+
+**Accepted:** source `2017437`, Pages deployment `9a9cdb73`, effective 2026-11-04T07:56:33Z; rollback to r43 `568999e1` (artifact copy digest `be41d33f`; its pointer is `yw-3e77f0f7`, which App code 6 also accepts). Only `site/app-content/` changed; Web pages, Functions and the User Center are unchanged.
+
+**What changed.**
+- `latest-stable` = `yw-465046852ef13beebd2e18ae` (receipt `sha256-7d799da0…`, pointer sha256 `6729e48d…`), bound to the r43 production deployment `568999e1`.
+- `build_native_content.mjs` gives the App the public answer-free study guide (`stripAnswerFields`, `answerProjection: "withheld-v1"`); vocabulary keys stay for on-device grading. Owner 「折衷 A」, native audit re-signed 「准，重簽 r44」.
+- `scripts/legacy-answer-exceptions.json` grant `yw-native-app-r44-20261104`: the 78 App files with vocabulary keys by exact SHA-256; the 10 keys corrected since July are listed item by item. Any new App graph needs a new grant.
+- `test_native_content.mjs`: the App pointer guard now pins the reviewed r44 pointer; the study-guide projection test checks the answer-free contract.
+
+**Rules from now on.**
+- `npm run check:native-content:deploy-sync` runs in its default (compatible-and-synced) mode while `latest-stable` equals the current graph. A Web release that changes the native graph must either move the App pointer in a reviewed App content release or use the Web-only mode with its hub receipt.
+- The formal artifact keeps only the stable release's `app-content`; the July objects are no longer served. Rolling back the Pages deployment restores them with the old pointer.
+- Do not run tests in the release worktree after `build:release-site` (tests rebuild `.release/site` as a preview); rebuild the formal artifact and `--check` the manifest before register.
+
+**Acceptance.** Production readback 12/12 including pointer, manifest and core bundle; health 200/200; 20 browser checks. Emulator API 34 (owner waiver): staged sync from preview `6409cebe` and unmodified production sync both activated `yw-46504685`.
+
 ## Current 2026-11-04 — r43: leaked forum bold ** removed from the reading text (accepted)
 
 **Accepted:** source `a307f20`, Pages deployment `568999e1`, effective 2026-11-04T06:18:56Z; rollback to r42 `73ebf3f0` (artifact `/private/tmp/cf-task-yw-bankfix-20261104/r42-artifact/site`, digest `590dcab9` = registered). Web-only; the User Center is unchanged.
