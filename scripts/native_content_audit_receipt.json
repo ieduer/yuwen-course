@@ -2,9 +2,9 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "suen-20261104-direct「准，重簽 r42」-relayed-local_3f2657f3 (re-sign for bank-fix-yw-20261104 r42: lesson-1722-p2:v05 redesign, revision batch v2 release yw-release-83caa75b6f61afb7; prior approval 「准，重簽」 for adaa1a93)",
-  "reviewedAt": "2026-11-04T05:23:28.765219Z",
-  "semanticDigest": "sha256:8b73c9332ce49f9e693000cb385deef0257fbc1a38e1eb26876eb31dee698404",
+  "reviewAuthority": "suen-20261104-direct「准，重簽 r43」-relayed-local_3f2657f3 (re-sign for bank-fix-yw-20261104 r43: leaked forum bold ** removed from 8 lessons' reading text, owner 「修」; every reader document re-bound to the re-collected media receipt ledger; prior approval 「准，重簽 r42」 for 8b73c933)",
+  "reviewedAt": "2026-11-04T06:13:33.143850Z",
+  "semanticDigest": "sha256:95c472be5b2478375cab701c2cfe5abee3bf259d8bfa52a102f3b3ac4d5c22be",
   "counts": {
     "activeStudyGuideItems": 193,
     "annotations": 2932,
