@@ -139,7 +139,7 @@ try {
 
   // 2. Next entry, book link, part jump.
   await page.click("#next");
-  await page.waitForFunction(() => location.hash === "#junior-g7-shang-03");
+  await page.waitForFunction(() => document.getElementById("title")?.textContent === "济南的冬天");
   s = await page.evaluate(state);
   check("next link opens 济南的冬天", s.title === "济南的冬天" && s.figures > 0, JSON.stringify({ hash: s.hash, title: s.title }));
   await open(page, `${baseUrl}/junior#g9-xia`, () => location.hash === "#junior-g9-xia-01");
@@ -188,14 +188,18 @@ try {
   check("390×844 catalog starts closed with no sideways scroll", s.catalogHidden === true && s.overflow <= 0, JSON.stringify({ hidden: s.catalogHidden, overflow: s.overflow }));
   await mobile.click("#catalog-toggle");
   await mobile.click(".book-lessons a[href='#junior-g8-shang-04']");
-  await mobile.waitForFunction(() => location.hash === "#junior-g8-shang-04");
+  await mobile.waitForFunction(() => document.getElementById("title")?.textContent === "中国人首次进入自己的空间站"); // the hashchange handler runs after the hash moves
   s = await mobile.evaluate(state);
   check("390×844 a catalog link opens the entry and closes the catalog", s.catalogHidden === true && s.title === "中国人首次进入自己的空间站" && s.overflow <= 0, JSON.stringify({ hidden: s.catalogHidden, title: s.title, overflow: s.overflow }));
   const mobileContrast = await mobile.evaluate(contrast);
 
   const juniorRequests = [...new Set(requests)];
-  const juniorBlocked = [...blocked];
-  check("the junior page sent nothing to the yw API or to any origin but sun.bdfz.net", !juniorRequests.some((p) => p.startsWith("/api/")) && juniorBlocked.length === 0, JSON.stringify({ requests: juniorRequests.filter((p) => !p.startsWith("/assets/")), blocked: juniorBlocked.slice(0, 5) }));
+  // The production zone injects Cloudflare Web Analytics / Zaraz into every yw page (not the page's code);
+  // they are listed, blocked, and do not fail the check.  Anything else off-origin, any yw API call or My fails it.
+  const EDGE = (u) => /^https:\/\/static\.cloudflareinsights\.com\//.test(u);
+  const edgeInjected = [...new Set([...blocked.filter(EDGE).map((u) => new URL(u).host), ...juniorRequests.filter((p) => p.startsWith("/cdn-cgi/"))])];
+  const juniorBlocked = blocked.filter((u) => !EDGE(u));
+  check("the junior page sent nothing to the yw API, My or any origin but sun.bdfz.net (zone analytics aside)", !juniorRequests.some((p) => p.startsWith("/api/")) && juniorBlocked.length === 0, JSON.stringify({ requests: juniorRequests.filter((p) => !p.startsWith("/assets/")), blocked: juniorBlocked.slice(0, 5), edgeInjected }));
 
   // 5. The senior entry links the six junior books and carries no persona notice.
   const dialogue = `${baseUrl}/dialogue`;
@@ -211,7 +215,7 @@ try {
 
   check("no page error", errors.length === 0, errors.slice(0, 3).join(" | "));
   const failed = checks.filter((c) => !c.pass);
-  console.log(JSON.stringify({ baseUrl, siteRoot: REQUESTED_BASE_URL ? null : SITE_ROOT, plateRequests: plates.length, blockedRequests: blocked.length, contrast: { desktop: contrastRows, phone: mobileContrast, senior: seniorContrast }, juniorRequests, checks, ok: failed.length === 0 }, null, 2));
+  console.log(JSON.stringify({ baseUrl, siteRoot: REQUESTED_BASE_URL ? null : SITE_ROOT, plateRequests: plates.length, blockedRequests: blocked.length, contrast: { desktop: contrastRows, phone: mobileContrast, senior: seniorContrast }, juniorRequests, edgeInjected, checks, ok: failed.length === 0 }, null, 2));
   process.exitCode = failed.length ? 1 : 0;
 } catch (error) {
   console.error(error?.stack || String(error));
