@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1524,
-  "totalBytes": 209401325,
-  "aggregateSha256": "eeea3cea0f66a928106f756b0727c4c8b7e7eadc7699fa6d93047ff53ee0c10d",
+  "fileCount": 1528,
+  "totalBytes": 209562628,
+  "aggregateSha256": "cffd03dcc48b1541ec2ba72b79fd93c5e7f068905d9f24f2858cdd3f9471f306",
   "files": [
     {
       "path": "_headers",
@@ -383,7 +383,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 50003,
-      "sha256": "56e01bd08f03898a2fdfc8f64b53f18e8b4fe38eec94ba45c806b1a47ef10b5b"
+      "sha256": "5f42c23452040cbf8727748d9a84eda4d883d9bfee3fe40bc87bc82e8f0ed082"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1982,13 +1982,23 @@
     },
     {
       "path": "assets/dialogue.css",
-      "bytes": 33635,
-      "sha256": "e36aeb2cdeb6c359e873ab11ebb165df94bb278b64434091468d8caed4a8edf9"
+      "bytes": 34062,
+      "sha256": "52034415aa6de647f1f125172042f49c132723e3d6581f98493505db5e0aad1d"
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 113770,
-      "sha256": "472e9489f915a9bdf84f93641579f4930474b5377cc82a786c00f16482930430"
+      "bytes": 113427,
+      "sha256": "8793b69e62ce6fa3e843412120c814d4b15e76b5744f4ee394454da06279b163"
+    },
+    {
+      "path": "assets/junior.css",
+      "bytes": 2853,
+      "sha256": "827af6076cdfc06cbeb49b67d72f3a0787d151bb4bbfbfcafb1d30000261b6dd"
+    },
+    {
+      "path": "assets/junior.js",
+      "bytes": 11179,
+      "sha256": "72c56392e0bae25e46f6cde2cc20e843a54d22a0a0d6f72591bc5c349e220f9c"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -3849,6 +3859,11 @@
       "path": "data/interaction-definitions.json",
       "bytes": 10164,
       "sha256": "74d6124f0808b86da946addea0ab083c59389649795e23fc21f6d132486f18d6"
+    },
+    {
+      "path": "data/junior-textbook-pages.v1.json",
+      "bytes": 144321,
+      "sha256": "70ff80a95d618f627e9c99a3ab568f5a9af3f4fc5b78b2befff124a2e5f19e59"
     },
     {
       "path": "data/learning-manifest.json",
@@ -7547,8 +7562,8 @@
     },
     {
       "path": "dialogue.html",
-      "bytes": 9950,
-      "sha256": "96e11b88b097418994c561b9efcc79ad43ebb2f5b4a4137d9fea4062228da747"
+      "bytes": 10285,
+      "sha256": "45cf7848d17143e9cfcbd13c960f7664f3f5edb880eeda4bbdf6896571130a1a"
     },
     {
       "path": "evaluation-scheduler.js",
@@ -7564,6 +7579,11 @@
       "path": "index.html",
       "bytes": 11886,
       "sha256": "12d932b2b7986f9021d7382f05614bc2b21e1da12ff4d171939344aef597ff9f"
+    },
+    {
+      "path": "junior.html",
+      "bytes": 2531,
+      "sha256": "b93a4456ea7c5b5eede90ee3b6f3ec2283db54bc46b27c630700cbf683916c5a"
     },
     {
       "path": "lesson-blueprint-rules.js",
