@@ -25,7 +25,7 @@
     "test:vocab-policy": "node --test scripts/test_vocab_eligibility.mjs",
     "test:vocab-progress": "node --test scripts/test_vocab_progress.mjs",
     "test:static-asset-cache": "node --test scripts/test_static_asset_cache_authority.mjs",
-    "test:junior": "node --test scripts/test_junior_textbook_pages.mjs",
+    "test:junior": "node --test scripts/test_junior_textbook_pages.mjs scripts/test_junior_dialogue.mjs",
     "verify:vocab": "node scripts/validate_vocab_bank.mjs && npm run check:vocab-policy && npm run test:vocab-policy",
     "verify:vocab:release": "node scripts/validate_vocab_bank.mjs --strict-coverage && npm run check:vocab-policy && npm run test:vocab-policy",
     "build:lesson-media": "node scripts/build_lesson_media_manifest.mjs",

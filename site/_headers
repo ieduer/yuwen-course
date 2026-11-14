@@ -21,3 +21,6 @@
 
 /data/textbook-pages.v1.json
   Cache-Control: public, max-age=300
+
+/data/junior-reading/*
+  Cache-Control: public, max-age=3600

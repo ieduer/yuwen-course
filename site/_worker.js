@@ -3,6 +3,7 @@ import {fetchAssessmentAsset} from './assessment-assets.js';
 import { releaseAdmissionResponse, dialogueAcceptanceScope, dialogueAdmissionAllowed, dialogueAcceptanceRejection } from './release-admission.js';
 import { handleDialogue,loadDialogueCurriculum } from './dialogue-source.js';
 import { sanitizeDialogueCurriculum } from './dialogue-public-curriculum.js';
+import { handleJuniorDialogue } from './junior-dialogue.js';
 import { acceptanceContext, acceptanceAllowsIdentity } from './dialogue-acceptance.js';
 import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation, formalRubric } from './dialogue-formal.js';
 import { readSharedHistory } from './dialogue-history.js';
@@ -147,6 +148,20 @@ export default {
         formalAction:(formal,turnId,evaluate,commit)=>handleDialogueFormal(request,env,student,formal,turnId,evaluate,commit),
         originalAction:(formal,turnId,commit)=>handleDialogueOriginal(request,env,student,formal,turnId,commit),
       });
+    }
+
+    // 初中細讀對話: the dialogue's own sign-in, admission and AI budget, and no learning evidence (junior-dialogue.js).
+    if (url.pathname === '/api/junior/dialogue') {
+      if (env.YW_DIALOGUE_ENABLED !== 'true') return new Response('Not found', {status:404});
+      if (request.method === 'POST') {
+        const rejected = authenticatedMutationRequestRejection(request, env);
+        if (rejected) return rejected;
+      }
+      const scope=dialogueAcceptanceScope(env);
+      if(scope && (!scope.valid || env.READING_TEST_SLUG))return dialogueAcceptanceRejection({YW_DIALOGUE_ACCEPTANCE_USER_ID:''});
+      const student = await authenticatedReadingStudent(request, env, {dialogue: true});
+      if (student?.error) return student.error;
+      return handleJuniorDialogue(request, env, student, ctx);
     }
 
     if (url.pathname === '/api/learning/recorder-events' && request.method === 'GET') {

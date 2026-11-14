@@ -1,16 +1,19 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>初中 · 尚友</title><meta name="robots" content="noindex"><link rel="stylesheet" href="/assets/dialogue.css?v=52034415aa6de647"><link rel="stylesheet" href="/assets/junior.css?v=827af6076cdfc06c">
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>初中 · 尚友</title><meta name="robots" content="noindex"><link rel="stylesheet" href="/assets/dialogue.css?v=52034415aa6de647"><link rel="stylesheet" href="/assets/junior.css?v=3a7e409de36fd81d">
 <link rel="preload" as="fetch" href="/data/junior-textbook-pages.v1.json" crossorigin="anonymous">
 <link rel="modulepreload" href="/assets/dialogue-palettes.js?v=a846366df3f1c133">
 <link rel="modulepreload" href="/assets/textbook-pages.js?v=91556289be7d3930">
+<link rel="modulepreload" href="/assets/dialogue-events.js?v=a7e6a9d3cf526331">
 </head>
-<body id="junior-root"><a class="skip" href="#junior-reading">跳到正文</a>
-<header class="bar"><button id="catalog-toggle" type="button" aria-label="顯示或隱藏目錄" aria-controls="catalog" aria-expanded="true">☰</button><a class="brand" href="/">尚友</a><span class="junior-tag">初中 · 七至九年級教材</span><button id="theme-cycle" type="button" title="切換閱讀配色"><span aria-hidden="true">◐</span> <span id="theme-name"></span></button></header>
+<body id="junior-root" data-dialogue-flow="conversation"><a class="skip" href="#reading">跳到正文</a>
+<header class="bar"><button id="catalog-toggle" type="button" aria-label="顯示或隱藏目錄" aria-controls="catalog" aria-expanded="true">☰</button><a class="brand" href="/">尚友</a><span class="junior-tag">初中 · 七至九年級</span><button id="theme-cycle" type="button" title="切換閱讀配色"><span aria-hidden="true">◐</span> <span id="theme-name"></span></button><nav class="account-actions" aria-label="帳戶"><a id="account-login" href="https://my.bdfz.net/">登入</a><button id="account-logout" type="button" hidden>登出</button></nav></header>
 <div class="page-shell"><aside id="catalog" aria-label="初中教材目錄"><div class="catalog-body"><input id="lesson-search" aria-label="搜尋篇名" type="search" placeholder="篇名、作者、冊別" autocomplete="off"><p id="catalog-count" role="status"></p><div id="catalog-results"></div></div></aside>
-<main id="junior-reading" tabindex="-1"><section class="intro"><p id="crumb" class="junior-crumb"></p><h1 class="work-heading"><span id="title" tabindex="-1">正在打開初中篇目</span> <span id="author"></span></h1><p id="lesson-meta" role="status"></p></section>
-<nav id="parts" aria-label="本課篇目" hidden></nav>
-<div id="pages" aria-label="教材圖頁"></div>
-<nav class="junior-pager" aria-label="上下篇"><a id="previous" hidden></a><a id="next" hidden></a></nav>
-<section class="junior-source" aria-label="教材來源"><p id="edition"></p><p>圖頁、頁碼與整冊 PDF 均直接取自 sun.bdfz.net 保存的同一份教材，本站不另存教材副本。</p><p>初中篇目只供閱讀原書：不需登入，不保存作答，也不計入 My 的學習紀錄與評價。</p><a id="open-first" target="_blank" rel="noopener noreferrer">在 sun.bdfz.net 開啟本項</a><a id="download" target="_blank" rel="noopener noreferrer" hidden>下載整冊 PDF（sun.bdfz.net）</a></section>
+<main id="junior-reading"><section class="intro"><p id="crumb" class="junior-crumb"></p><h1 class="work-heading"><span id="title" tabindex="-1">正在打開初中篇目</span><span id="title-notes"></span> <span id="author"></span></h1><p id="lesson-meta" role="status"></p></section>
+<nav class="views" aria-label="閱讀視圖"><button id="text-tab" type="button" aria-pressed="true">原文</button><button id="conversation-tab" type="button" aria-pressed="false">對話</button></nav>
+<div class="workspace" data-view="text"><article id="reading" tabindex="-1" aria-label="課文原文"><button id="notes-toggle" type="button" aria-pressed="false" hidden>展開全部註釋</button><nav id="parts" aria-label="本課篇目" hidden></nav><section id="prep" class="jr-prep" aria-label="預習" hidden></section><div id="passages"></div><div id="after-text"></div>
+<section id="plates" class="jr-plates" aria-labelledby="plates-title"><div class="jr-plates-head"><h2 id="plates-title">教材圖版</h2><button id="plates-all" type="button">全屏閱讀</button><a id="open-pdf" target="_blank" rel="noopener noreferrer">PDF</a><a id="download" target="_blank" rel="noopener noreferrer" hidden>整冊 PDF</a></div><div id="plates-list"></div></section>
+<nav class="junior-pager" aria-label="上下篇"><a id="previous" hidden></a><a id="next-entry" hidden></a></nav></article>
+<section class="conversation" aria-label="細讀對話"><div id="thread" class="thread" tabindex="0" aria-label="對話內容"><div id="next" class="next">先讀一段，說說你的印象或困惑。</div><div id="turns" aria-label="已保存的對話"></div></div><div class="status-dock"><p id="status" role="status"></p><a id="login" href="https://my.bdfz.net/" hidden>登入 My 後對話</a></div><form id="compose"><div class="composer-box"><textarea aria-label="對作者說" id="answer" rows="1" maxlength="1500" placeholder="哪一句讓你停下來？" disabled></textarea><button id="stop" type="button" aria-label="停止等待" hidden>取消</button><button id="send" type="submit" aria-label="送出（Enter）" title="Enter 送出，Shift+Enter 換行" disabled>送出</button></div></form></section></div>
 </main></div>
-<script type="module" src="/assets/junior.js?v=72c56392e0bae25e"></script></body></html>
+<dialog id="plate-viewer" aria-label="教材圖版"><div class="viewer-bar"><button id="viewer-prev" type="button" aria-label="上一頁">‹</button><span id="viewer-label"></span><button id="viewer-next" type="button" aria-label="下一頁">›</button><a id="viewer-pdf" target="_blank" rel="noopener noreferrer">PDF 此頁</a><button id="viewer-close" type="button">關閉</button></div><img id="viewer-image" alt=""></dialog>
+<script type="module" src="/assets/junior.js?v=e1ad9142c1eb8b76"></script></body></html>

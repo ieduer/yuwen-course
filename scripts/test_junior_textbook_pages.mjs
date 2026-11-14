@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-// 初中（七至九年級）教材閱讀: the data stays a page index into sun.bdfz.net, the page
-// never talks to the yw API or My, and nothing in the senior learning system names it.
+// 初中（七至九年級）教材閱讀: the page index points into sun.bdfz.net, the text is read from the same
+// sun PDFs (data/junior-reading), the only yw API the page calls is the junior dialogue (no learning
+// evidence), and nothing in the senior learning system or My names a junior entry.
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 import { parseHTML } from "linkedom";
 import { validTextbookPages, lessonPlates, plateUrl, TEXTBOOK_IMAGE_ORIGIN } from "../site/assets/textbook-pages.js";
-import { validJuniorData, entryTitle, pageSpan } from "../site/assets/junior.js";
+import { validJuniorData, validReading, entryTitle, pageSpan } from "../site/assets/junior.js";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 const data = JSON.parse(read("site/data/junior-textbook-pages.v1.json"));
@@ -95,25 +96,71 @@ test("the junior track stays outside the senior learning system and My", () => {
     read("site/data/learning-manifest.json"),
     read("site/data/lesson-competency-manifest.json"),
     read("site/app-content/latest-stable.json"),
-    read("site/_worker.js"),
   ].join("\n");
   assert.ok(!senior.includes("junior-"), "senior learning data names a junior entry");
   assert.ok(ids.every((id) => !id.startsWith("lesson-")));
+  const worker = read("site/_worker.js");
+  assert.ok(!/junior-g[789]/.test(worker) && worker.includes("'/api/junior/dialogue'"), "the worker only routes the junior dialogue");
   const code = read("site/assets/junior.js");
-  assert.ok(!/\/api\//.test(code), "junior page calls the yw API");
-  assert.ok(!/my\.bdfz\.net|learning-evidence|sendBeacon|credentials/.test(code), "junior page touches My or evidence");
-  assert.deepEqual([...code.matchAll(/fetch\(([^,)]+)/g)].map((m) => m[1]), ["DATA_URL"]);
+  assert.ok([...code.matchAll(/fetch\(([^,)]+)/g)].every((m) => ["DATA_URL", "READING_URL(id", "DIALOGUE_URL(currentId", "DIALOGUE_URL(id", "LOGIN_URL+'api/logout'"].includes(m[1])), "junior page fetches only its data, its text, the junior dialogue and My logout");
+  assert.ok(code.includes("const DIALOGUE_URL=id=>`/api/junior/dialogue?entryId="));
+  assert.ok(!/learning-evidence|learning-recorder|sendBeacon|\/api\/(?!junior\/dialogue)/.test(code), "junior page touches learning evidence or another yw API");
+  const dialogue = read("site/junior-dialogue.js");
+  assert.ok(!/evidence_outbox|learning_evaluation|learning_interactions|dialogue_assessments|INSERT INTO learning/.test(dialogue), "junior dialogue writes learning evidence");
   const html = read("site/junior.html");
   assert.deepEqual([...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map((m) => m[1].split("?")[0]), ["/assets/junior.js"]);
 });
 
+test("the notices the owner removed are gone from both pages", () => {
+  const junior = read("site/junior.html") + read("site/assets/junior.js");
+  for (const text of ["教材原書閱讀", "取自 sun.bdfz.net", "不計入 My", "本站不另存教材副本", "只供閱讀原書", "在 sun.bdfz.net 開啟本項", "下載整冊 PDF（sun.bdfz.net）", "junior-source"]) {
+    assert.ok(!junior.includes(text), `junior page still says ${text}`);
+  }
+  const senior = read("site/dialogue.html");
+  assert.ok(!senior.includes("不計入 My") && !senior.includes("取自 sun.bdfz.net"));
+});
+
+test("every entry has its text from the same sun PDF, with resolved notes", () => {
+  const index = JSON.parse(read("site/data/junior-reading/index.json"));
+  assert.equal(Object.keys(index.entries).length, data.counts.entries);
+  let notes = 0, chars = 0;
+  for (const id of Object.keys(data.lessons)) {
+    const entry = data.lessons[id], book = data.books[entry.book];
+    const value = JSON.parse(read(`site/data/junior-reading/${id}.json`));
+    assert.ok(validReading(value, id), id);
+    assert.equal(value.book, entry.book);
+    assert.deepEqual(value.pages, entry.pages.map((p) => p.pdf));
+    assert.equal(value.source.pdfSha256, book.pdfSha256);
+    assert.equal(value.source.editionId, book.editionId);
+    const ids = new Set(value.notes.map((n) => n.id));
+    const blocks = [...value.prep, ...value.blocks, ...value.sections.flatMap((s) => s.blocks)];
+    const refs = blocks.flatMap((b) => [...(b.runs || []), ...(b.side || []).flat()]).filter((r) => r.n).map((r) => r.n);
+    for (const ref of refs) assert.ok(ids.has(ref), `${id} ref ${ref}`);
+    for (const b of blocks.filter((b) => b.type === "figure")) {
+      assert.ok(value.pages.includes(b.page), `${id} figure outside its pages`);
+      assert.ok(b.box.every((v) => v >= 0 && v <= 1) && b.box[2] > b.box[0] && b.box[3] > b.box[1], `${id} figure box`);
+    }
+    const text = blocks.map((b) => (b.runs || []).map((r) => r.t ?? r.e ?? "").join("")).join("");
+    if (entry.kind === "lesson") assert.ok(text.length > 80, `${id} has little text`);
+    assert.ok(!text.includes("仅供个人学习使用"), `${id} keeps the watermark`);
+    notes += value.notes.length; chars += text.length;
+  }
+  assert.ok(notes > 2500, `notes ${notes}`);
+  assert.ok(chars > 400000, `chars ${chars}`);
+  const spring = JSON.parse(read("site/data/junior-reading/junior-g7-shang-02.json"));
+  const springText = spring.blocks.map((b) => (b.runs || []).map((r) => r.t ?? r.e ?? "").join("")).join("\n");
+  assert.ok(springText.includes("盼望着，盼望着，东风来了，春天的脚步近了。"));
+  assert.equal(spring.notes.length, 12);
+  assert.match(spring.notes[1].runs.map((r) => r.t).join(""), /^〔朗润〕明亮滋润/);
+});
+
 test("junior page assets and imports use their current content hashes", () => {
   const html = read("site/junior.html");
-  for (const path of ["assets/dialogue.css", "assets/junior.css", "assets/junior.js", "assets/dialogue-palettes.js", "assets/textbook-pages.js"]) {
+  for (const path of ["assets/dialogue.css", "assets/junior.css", "assets/junior.js", "assets/dialogue-palettes.js", "assets/textbook-pages.js", "assets/dialogue-events.js"]) {
     assert.ok(html.includes(`/${path}?v=${version(path)}`), `${path} version`);
   }
   const code = read("site/assets/junior.js");
-  for (const [specifier, path] of [["./dialogue-palettes.js", "assets/dialogue-palettes.js"], ["./textbook-pages.js", "assets/textbook-pages.js"]]) {
+  for (const [specifier, path] of [["./dialogue-palettes.js", "assets/dialogue-palettes.js"], ["./textbook-pages.js", "assets/textbook-pages.js"], ["./dialogue-events.js", "assets/dialogue-events.js"]]) {
     assert.ok(code.includes(`${specifier}?v=${version(path)}`), `${path} import version`);
   }
 });
@@ -142,25 +189,38 @@ async function render(hash, { width = 1280 } = {}) {
   window.HTMLElement.prototype.focus = () => {};
   window.HTMLElement.prototype.scrollIntoView = () => {};
   globalThis.location = window.location;
-  globalThis.fetch = async (url) => { calls.push(String(url)); return Response.json(data); };
+  globalThis.fetch = async (url) => {
+    calls.push(String(url));
+    const target = String(url);
+    if (target.startsWith("/data/junior-reading/")) return new Response(read(`site${target}`), { headers: { "content-type": "application/json" } });
+    if (target.startsWith("/api/junior/dialogue")) return Response.json({ code: "authentication_required" }, { status: 401 });
+    return Response.json(data);
+  };
   await import(`../site/assets/junior.js?render=${Math.random()}`);
   for (let i = 0; i < 10; i += 1) await new Promise((resolve) => setImmediate(resolve));
   return { document, window, calls };
 }
 
-test("the page shows a lesson from sun's pages and fetches nothing else", async () => {
+test("the page shows the text above sun's pages; signed out, the dialogue asks for My", async () => {
   const { document, calls } = await render("#junior-g7-shang-05");
-  assert.deepEqual(calls, ["/data/junior-textbook-pages.v1.json"]);
+  assert.deepEqual(calls, ["/data/junior-textbook-pages.v1.json", "/data/junior-reading/junior-g7-shang-05.json", "/api/junior/dialogue?entryId=junior-g7-shang-05"]);
   assert.equal(document.getElementById("title").textContent, "古代诗歌四首");
-  assert.equal(document.querySelectorAll("#pages figure").length, 3);
+  const text = document.getElementById("passages").textContent;
+  assert.ok(text.includes("东临") && text.includes("以观沧海。"), "the poem text is shown");
+  assert.ok(document.querySelectorAll("#passages .annotation-toggle").length >= 20, "notes are toggles in the text");
+  assert.equal(document.querySelectorAll("#plates-list figure").length, 3);
   assert.equal(document.querySelectorAll("#parts button").length, 4);
-  const images = [...document.querySelectorAll("#pages img")];
+  assert.ok(!document.getElementById("prep").hidden);
+  assert.ok(document.querySelectorAll("#after-text .jr-section").length >= 1);
+  const images = [...document.querySelectorAll("#plates-list img")];
   assert.ok(images.every((img) => img.getAttribute("src").startsWith("https://sun.bdfz.net/files/page/")));
   assert.ok(images.every((img) => img.getAttribute("srcset").split(",").every((c) => c.trim().startsWith("https://sun.bdfz.net/files/page/"))));
   assert.match(document.getElementById("download").getAttribute("href"), /^https:\/\/sun\.bdfz\.net\/files\/pdf\//);
+  assert.match(document.getElementById("open-pdf").getAttribute("href"), /^https:\/\/sun\.bdfz\.net\//);
   assert.equal(document.querySelectorAll("#catalog-results .catalog-book").length, 6);
   assert.equal(document.querySelector("#catalog-results [aria-current]").getAttribute("href"), "#junior-g7-shang-05");
-  assert.match(document.querySelector(".junior-source").textContent, /不計入 My/);
+  assert.ok(!document.getElementById("login").hidden, "signed out: the login link is shown");
+  assert.ok(document.getElementById("answer").disabled);
   const button = document.getElementById("theme-cycle"), first = document.getElementById("theme-name").textContent;
   button.onclick();
   assert.notEqual(document.getElementById("theme-name").textContent, first);

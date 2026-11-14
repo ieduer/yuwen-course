@@ -884,10 +884,12 @@ $('sessions-load').onclick=async()=>{
   if(older)$('sessions-status').textContent='清單超過可讀取頁數，請用「匯出本帳戶全部對話紀錄」取得完整紀錄。';
   const lines=[];
   for(const s of sessions){
-   const title=lessonIndex?.lessons.find(l=>l.lessonId===s.lessonId)?.title||s.lessonId;
-   lines.push(`${title}｜${s.turnCount} 則｜${s.lastTurnAt||'—'}｜${location.origin||''}/dialogue#${s.lessonId}`);
+   // Junior (grades 7-9) conversations live on /junior under 'junior:<entry>'.
+   const junior=/^junior:(junior-[a-z0-9-]{4,40})$/.exec(s.lessonId)?.[1]||null;
+   const title=junior?`初中 · ${junior}`:lessonIndex?.lessons.find(l=>l.lessonId===s.lessonId)?.title||s.lessonId;
+   lines.push(`${title}｜${s.turnCount} 則｜${s.lastTurnAt||'—'}｜${location.origin||''}${junior?'/junior#'+junior:'/dialogue#'+s.lessonId}`);
    const li=node('li'),open=node('button',s.lessonId===curriculum?.lessonId?'目前篇目':'開啟');open.type='button';open.disabled=s.lessonId===curriculum?.lessonId;
-   open.onclick=()=>{if(switchLesson(s.lessonId)){$('materials').close();lastFocus?.focus();}};
+   open.onclick=()=>{if(junior){location.href='/junior#'+junior;return;}if(switchLesson(s.lessonId)){$('materials').close();lastFocus?.focus();}};
    const when=s.lastTurnAt?new Date(s.lastTurnAt).toLocaleString([],{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
    li.append(node('span',title),node('small',`${s.turnCount} 則${when?' · '+when:''}`),open);list.append(li);
   }

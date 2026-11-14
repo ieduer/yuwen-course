@@ -6,8 +6,8 @@
 //
 // Read-only and signed out.  Every request to another origin is blocked except
 // sun.bdfz.net's page images, so no identity, analytics or learning record is
-// touched; a few plates are fetched for real.  The check fails on any request
-// from the junior page to the yw API or to My.
+// touched; a few plates are fetched for real.  The only yw API the page may call
+// is the junior dialogue (signed out: 401); any other API or My request fails.
 
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
@@ -25,6 +25,7 @@ const DEFAULT_EXECUTABLE = "/Applications/Brave Browser.app/Contents/MacOS/Brave
 const executablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH
   || (existsSync(DEFAULT_EXECUTABLE) ? DEFAULT_EXECUTABLE : undefined);
 const PLATE = /^https:\/\/sun\.bdfz\.net\/files\/page\/cn-[0-9a-f-]{36}-[0-9a-f]{12}\/[0-9a-f]{12}\/\d+\.webp\?w=(960|1440)$/;
+const PLATE_LARGE = /^https:\/\/sun\.bdfz\.net\/files\/page\/cn-[0-9a-f-]{36}-[0-9a-f]{12}\/[0-9a-f]{12}\/\d+\.webp\?w=1440$/;
 const MIME = new Map([
   [".css", "text/css; charset=utf-8"], [".html", "text/html; charset=utf-8"],
   [".js", "text/javascript; charset=utf-8"], [".json", "application/json; charset=utf-8"],
@@ -37,6 +38,8 @@ function startStaticServer() {
   const server = createServer(async (request, response) => {
     try {
       const url = new URL(request.url || "/", "http://127.0.0.1");
+      // The Pages Function is not served locally: answer the junior dialogue as the Worker does when signed out.
+      if (url.pathname === "/api/junior/dialogue") return void response.writeHead(401, { "content-type": "application/json" }).end('{"code":"authentication_required"}');
       let relative = url.pathname === "/" ? "index.html" : decodeURIComponent(url.pathname).replace(/^\/+/, "");
       if (["junior", "dialogue"].includes(relative)) relative += ".html"; // Pages serves *.html at the clean path
       const file = path.resolve(SITE_ROOT, relative);
@@ -65,16 +68,21 @@ const state = () => ({
   title: document.getElementById("title")?.textContent,
   author: document.getElementById("author")?.textContent,
   meta: document.getElementById("lesson-meta")?.textContent,
-  figures: document.querySelectorAll("#pages figure").length,
-  sources: [...document.querySelectorAll("#pages img")].map((img) => [img.getAttribute("src"), ...(img.getAttribute("srcset") || "").split(",").map((c) => c.trim().split(" ")[0]).filter(Boolean)]).flat(),
-  firstLoaded: (() => { const img = document.querySelector("#pages img"); return Boolean(img?.complete && img.naturalWidth > 0); })(),
+  text: document.getElementById("passages")?.textContent || "",
+  toggles: document.querySelectorAll("#passages .annotation-toggle, #title-notes .annotation-toggle").length,
+  crops: document.querySelectorAll("#passages .jr-figure, #after-text .jr-figure").length,
+  figures: document.querySelectorAll("#plates-list figure").length,
+  sources: [...document.querySelectorAll("#plates-list img, .jr-crop img")].map((img) => [img.getAttribute("src"), ...(img.getAttribute("srcset") || "").split(",").map((c) => c.trim().split(" ")[0]).filter(Boolean)]).flat(),
+  firstLoaded: (() => { const img = document.querySelector("#plates-list img"); return Boolean(img?.complete && img.naturalWidth > 0); })(),
   books: document.querySelectorAll("#catalog-results .catalog-book").length,
   count: document.getElementById("catalog-count")?.textContent,
   current: document.querySelector("#catalog-results [aria-current]")?.getAttribute("href"),
   download: document.getElementById("download")?.getAttribute("href"),
   catalogHidden: document.getElementById("catalog")?.hidden,
   overflow: document.documentElement.scrollWidth - window.innerWidth,
-  note: document.querySelector(".junior-source")?.textContent || "",
+  login: !document.getElementById("login")?.hidden,
+  answerDisabled: document.getElementById("answer")?.disabled,
+  page: document.body.textContent,
 });
 
 // WCAG contrast of every visible text node container against its effective background.
@@ -124,21 +132,34 @@ try {
   });
   const page = await context.newPage();
   const errors = [];
+  // Production answers the junior dialogue 401 signed out; a preview without YW_DIALOGUE_ENABLED answers 404.
+  const dialogueStatus = [];
+  page.on("response", (response) => { if (new URL(response.url()).pathname === "/api/junior/dialogue") dialogueStatus.push(response.status()); });
   page.on("pageerror", (error) => errors.push(String(error)));
 
-  // 1. A lesson opens on sun's own pages.
-  await open(page, `${baseUrl}/junior#junior-g7-shang-02`, () => document.querySelectorAll("#pages figure").length > 0);
-  await page.waitForFunction(() => { const img = document.querySelector("#pages img"); return img?.complete && img.naturalWidth > 0; }, null, { timeout: 45000 }).catch(() => {});
+  // 1. A lesson opens with its text above sun's own pages.
+  await open(page, `${baseUrl}/junior#junior-g7-shang-02`, () => document.querySelectorAll("#plates-list figure").length > 0 && document.querySelectorAll("#passages .jp").length > 0);
+  await page.waitForFunction(() => { const img = document.querySelector("#plates-list img"); return img?.complete && img.naturalWidth > 0; }, null, { timeout: 45000 }).catch(() => {});
   let s = await page.evaluate(state);
-  check("junior-g7-shang-02 opens 春 / 朱自清 with its four textbook pages", s.title === "春" && s.author === "朱自清" && s.figures === 4 && /教材第 2–5 頁/.test(s.meta), JSON.stringify(s));
-  check("every page address is a sun.bdfz.net page file", s.sources.length >= 4 && s.sources.every((u) => PLATE.test(u)), JSON.stringify(s.sources.slice(0, 4)));
+  check("junior-g7-shang-02 opens 春 / 朱自清: text with 12 note toggles above its four textbook pages", s.title === "春" && s.author === "朱自清" && s.figures === 4 && /教材第 2–5 頁/.test(s.meta) && s.text.includes("盼望着，盼望着，东风来了，春天的脚步近了。") && s.toggles === 12, JSON.stringify({ title: s.title, figures: s.figures, toggles: s.toggles, text: s.text.slice(0, 40) }));
+  check("every page and picture address is a sun.bdfz.net page file", s.sources.length >= 6 && s.sources.every((u) => PLATE.test(u)), JSON.stringify(s.sources.slice(0, 4)));
   check("the first page image really loads from sun.bdfz.net", s.firstLoaded, JSON.stringify(s.sources[0]));
   check("catalog lists six books and all entries", s.books === 6 && /^初中 \d+ \/ \d+ 項$/.test(s.count) && s.current === "#junior-g7-shang-02", `${s.books} ${s.count} ${s.current}`);
   check("whole-book PDF link is sun's held file", /^https:\/\/sun\.bdfz\.net\/files\/pdf\/cn-8b9c7052-add4-4744-ab04-69d6c180d5d9-83735d49f455\/83735d49f455\//.test(s.download || ""), s.download);
-  check("source note says no My record", /不計入 My/.test(s.note) && /sun\.bdfz\.net/.test(s.note), s.note.slice(0, 200));
+  check("the removed notices are gone", !/不計入 My|取自 sun\.bdfz\.net|本站不另存|只供閱讀原書|在 sun\.bdfz\.net 開啟本項/.test(s.page), "");
+  const dialogueGate = dialogueStatus.at(-1);
+  const statusText = await page.evaluate(() => document.getElementById("status").textContent);
+  check("signed out, reading is complete and the dialogue asks for My (or is off where the feature is not enabled)", s.answerDisabled && (dialogueGate === 401 ? s.login : dialogueGate === 404 && !s.login && statusText.length > 0), JSON.stringify({ api: dialogueGate, login: s.login, disabled: s.answerDisabled, statusText }));
+  await page.click("#passages .annotation-toggle");
+  const noteOpen = await page.evaluate(() => { const n = document.querySelector("#passages .inline-note"); return n && !n.hidden ? n.textContent : ""; });
+  check("a note toggle opens the textbook note in place", /^〔朗润〕明亮滋润/.test(noteOpen), noteOpen.slice(0, 40));
+  await page.click("#plates-list .plate-open");
+  const viewer = await page.evaluate(() => ({ open: document.getElementById("plate-viewer").open, src: document.getElementById("viewer-image").getAttribute("src"), label: document.getElementById("viewer-label").textContent }));
+  check("a page image opens the full-screen viewer with its PDF link", viewer.open && PLATE_LARGE.test(viewer.src || "") && /1 \/ 4/.test(viewer.label), JSON.stringify(viewer));
+  await page.keyboard.press("Escape");
 
   // 2. Next entry, book link, part jump.
-  await page.click("#next");
+  await page.click("#next-entry");
   await page.waitForFunction(() => document.getElementById("title")?.textContent === "济南的冬天");
   s = await page.evaluate(state);
   check("next link opens 济南的冬天", s.title === "济南的冬天" && s.figures > 0, JSON.stringify({ hash: s.hash, title: s.title }));
@@ -148,8 +169,8 @@ try {
   await open(page, `${baseUrl}/junior#junior-g7-shang-05`, () => document.querySelectorAll("#parts button").length === 4);
   await page.click("#parts button:last-child");
   await page.waitForTimeout(1200);
-  const top = await page.evaluate(() => Math.round(document.getElementById("page-24").getBoundingClientRect().top));
-  check("a part button scrolls to that part's page", Math.abs(top) < 40, `top=${top}`);
+  const top = await page.evaluate(() => Math.round([...document.querySelectorAll("#passages .jh")].find((h) => h.dataset.plain?.startsWith("天净沙"))?.getBoundingClientRect().top ?? 9999));
+  check("a part button scrolls to that poem in the text", Math.abs(top) < 60, `top=${top}`);
 
   // 3. Theme button cycles the shared palettes; contrast of every visible text in every palette.
   const palettes = await page.evaluate(async () => {
@@ -183,7 +204,7 @@ try {
   });
   const mobile = await phone.newPage();
   mobile.on("pageerror", (error) => errors.push(String(error)));
-  await open(mobile, `${baseUrl}/junior#junior-g8-shang-03`, () => document.querySelectorAll("#pages figure").length > 0);
+  await open(mobile, `${baseUrl}/junior#junior-g8-shang-03`, () => document.querySelectorAll("#plates-list figure").length > 0 && document.querySelectorAll("#passages .jp").length > 0);
   s = await mobile.evaluate(state);
   check("390×844 catalog starts closed with no sideways scroll", s.catalogHidden === true && s.overflow <= 0, JSON.stringify({ hidden: s.catalogHidden, overflow: s.overflow }));
   await mobile.click("#catalog-toggle");
@@ -191,6 +212,10 @@ try {
   await mobile.waitForFunction(() => document.getElementById("title")?.textContent === "中国人首次进入自己的空间站"); // the hashchange handler runs after the hash moves
   s = await mobile.evaluate(state);
   check("390×844 a catalog link opens the entry and closes the catalog", s.catalogHidden === true && s.title === "中国人首次进入自己的空间站" && s.overflow <= 0, JSON.stringify({ hidden: s.catalogHidden, title: s.title, overflow: s.overflow }));
+  await mobile.click("#conversation-tab");
+  const talk = await mobile.evaluate(() => ({ view: document.querySelector(".workspace").dataset.view, login: !document.getElementById("login").hidden, overflow: document.documentElement.scrollWidth - window.innerWidth }));
+  check("390×844 the 對話 tab shows the conversation (My sign-in where the dialogue is enabled)", talk.view === "conversation" && (talk.login || dialogueGate === 404) && talk.overflow <= 0, JSON.stringify(talk));
+  await mobile.click("#text-tab");
   const mobileContrast = await mobile.evaluate(contrast);
 
   const juniorRequests = [...new Set(requests)];
@@ -199,7 +224,7 @@ try {
   const EDGE = (u) => /^https:\/\/static\.cloudflareinsights\.com\//.test(u);
   const edgeInjected = [...new Set([...blocked.filter(EDGE).map((u) => new URL(u).host), ...juniorRequests.filter((p) => p.startsWith("/cdn-cgi/"))])];
   const juniorBlocked = blocked.filter((u) => !EDGE(u));
-  check("the junior page sent nothing to the yw API, My or any origin but sun.bdfz.net (zone analytics aside)", !juniorRequests.some((p) => p.startsWith("/api/")) && juniorBlocked.length === 0, JSON.stringify({ requests: juniorRequests.filter((p) => !p.startsWith("/assets/")), blocked: juniorBlocked.slice(0, 5), edgeInjected }));
+  check("the junior page called only the junior dialogue, nothing in My and no origin but sun.bdfz.net (zone analytics aside)", juniorRequests.filter((p) => p.startsWith("/api/")).every((p) => p === "/api/junior/dialogue") && juniorBlocked.length === 0, JSON.stringify({ requests: juniorRequests.filter((p) => !p.startsWith("/assets/") && !p.startsWith("/data/junior-reading/")), blocked: juniorBlocked.slice(0, 5), edgeInjected }));
 
   // 5. The senior entry links the six junior books and carries no persona notice.
   const dialogue = `${baseUrl}/dialogue`;
@@ -208,9 +233,10 @@ try {
     links: [...document.querySelectorAll(".catalog-junior a")].map((a) => a.getAttribute("href")),
     persona: Boolean(document.getElementById("persona-label")),
     notice: document.body.textContent.includes("不是作者本人"),
+    removed: /不計入 My|取自 sun\.bdfz\.net/.test(document.body.textContent),
   }));
   check("senior catalog links the six junior books", JSON.stringify(senior.links) === JSON.stringify(["/junior#g7-shang", "/junior#g7-xia", "/junior#g8-shang", "/junior#g8-xia", "/junior#g9-shang", "/junior#g9-xia"]), JSON.stringify(senior.links));
-  check("lesson heading carries no 「不是作者本人」 notice", !senior.persona && !senior.notice, JSON.stringify(senior));
+  check("lesson heading carries no 「不是作者本人」 notice and the junior links no 不計入 My note", !senior.persona && !senior.notice && !senior.removed, JSON.stringify(senior));
   const seniorContrast = await page.evaluate(contrast);
 
   check("no page error", errors.length === 0, errors.slice(0, 3).join(" | "));
