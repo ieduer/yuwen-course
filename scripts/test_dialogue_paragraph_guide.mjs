@@ -86,7 +86,7 @@ test('vocabulary points arrive word by word; the full weight still needs every o
 });
 
 test('the author is told what the classical reading gate means and how to read paragraph by paragraph',()=>{
- assert.equal(POLICY_VERSION,'yw-dialogue-policy-v23');
+ assert.equal(POLICY_VERSION,'yw-dialogue-policy-v24');assert.doesNotMatch(POLICY,/介面已標示/);assert.match(POLICY,/不反覆聲明「我不是作者本人」或「這是模擬」。學生若直接問你是不是真人、是不是作者本人或是不是 AI，如實說明：這是依作者作品與可靠來源重構的教學對話，不是作者本人。/);
  assert.match(POLICY,/initial_reading 時，學生還沒有完成無注疏初讀/);
  assert.match(POLICY,/不提交 formalAssessments、originalEvidence 或字詞 demonstrated/);
  assert.match(POLICY,/paragraphGuide 存在時是文言細讀/);

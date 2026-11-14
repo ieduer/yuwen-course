@@ -110,7 +110,7 @@ test('the author grades under the original evaluator\'s rubric lines; the evalua
 });
 
 test('policy v23 raises study-guide items in the reading, answer first, and names rubric items still open',()=>{
- assert.equal(POLICY_VERSION,'yw-dialogue-policy-v23');
+ assert.equal(POLICY_VERSION,'yw-dialogue-policy-v24');
  assert.match(POLICY,/先答後看：paragraphGuide\.studyGuide 的 referenceAnswer 與 explanation 只供你判斷/);
  assert.match(POLICY,/studyGuideAnswers:\[\{objectiveId,turnId,score,verdict,strength,gap,nextQuestion\}\]/);
  assert.match(POLICY,/講明之後這一題本次對話不再記錄/);assert.match(POLICY,/formalStillOpen 列出對話裡已經讀懂/);

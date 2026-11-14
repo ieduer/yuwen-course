@@ -31,7 +31,7 @@ const require=createRequire(import.meta.url);
 // (v23, r40, 2026-11-01, owner 「做，其他我沒想到但可以優化的一併部署」) three added paragraphs after the paragraph-guide one:
 // study-guide items raised in close reading answer-first (studyGuideAnswers, graded by the original rubric lines), and
 // formalStillOpen; every earlier paragraph, language criterion, evidence rule and verdict is byte-identical to v22.
-const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'f5dbe9f00294fca2b6508592bac161646b035c56ed9fd1e5d8c29df40d182cb1'};
+const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'66638c6d16ff609d910d85bcbbbe3e95f84451bb82317b0f55ac9fb5969afb75'}; // r46: policy v24 drops 「；介面已標示這是依作者作品的教學重構」 (r40 value f5dbe9f0…)
 
 export async function historicalCalibrationSource(commit){
  assert(/^[a-f0-9]{40}$/.test(commit||''),'exact historical commit required');
