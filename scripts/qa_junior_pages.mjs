@@ -140,6 +140,8 @@ try {
   // 1. A lesson opens with its text above sun's own pages.
   await open(page, `${baseUrl}/junior#junior-g7-shang-02`, () => document.querySelectorAll("#plates-list figure").length > 0 && document.querySelectorAll("#passages .jp").length > 0);
   await page.waitForFunction(() => { const img = document.querySelector("#plates-list img"); return img?.complete && img.naturalWidth > 0; }, null, { timeout: 45000 }).catch(() => {});
+  // The dialogue's sign-in check answers over the network after the text: wait for it to settle.
+  await page.waitForFunction(() => !document.getElementById("login").hidden || document.getElementById("status").textContent.length > 0 || !document.getElementById("answer").disabled, null, { timeout: 20000 }).catch(() => {});
   let s = await page.evaluate(state);
   check("junior-g7-shang-02 opens 春 / 朱自清: text with 12 note toggles above its four textbook pages", s.title === "春" && s.author === "朱自清" && s.figures === 4 && /教材第 2–5 頁/.test(s.meta) && s.text.includes("盼望着，盼望着，东风来了，春天的脚步近了。") && s.toggles === 12, JSON.stringify({ title: s.title, figures: s.figures, toggles: s.toggles, text: s.text.slice(0, 40) }));
   check("every page and picture address is a sun.bdfz.net page file", s.sources.length >= 6 && s.sources.every((u) => PLATE.test(u)), JSON.stringify(s.sources.slice(0, 4)));
@@ -212,6 +214,7 @@ try {
   await mobile.waitForFunction(() => document.getElementById("title")?.textContent === "中国人首次进入自己的空间站"); // the hashchange handler runs after the hash moves
   s = await mobile.evaluate(state);
   check("390×844 a catalog link opens the entry and closes the catalog", s.catalogHidden === true && s.title === "中国人首次进入自己的空间站" && s.overflow <= 0, JSON.stringify({ hidden: s.catalogHidden, title: s.title, overflow: s.overflow }));
+  await mobile.waitForFunction(() => !document.getElementById("login").hidden || document.getElementById("status").textContent.length > 0 || !document.getElementById("answer").disabled, null, { timeout: 20000 }).catch(() => {});
   await mobile.click("#conversation-tab");
   const talk = await mobile.evaluate(() => ({ view: document.querySelector(".workspace").dataset.view, login: !document.getElementById("login").hidden, overflow: document.documentElement.scrollWidth - window.innerWidth }));
   check("390×844 the 對話 tab shows the conversation (My sign-in where the dialogue is enabled)", talk.view === "conversation" && (talk.login || dialogueGate === 404) && talk.overflow <= 0, JSON.stringify(talk));
