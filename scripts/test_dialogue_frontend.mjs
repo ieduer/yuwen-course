@@ -685,11 +685,11 @@ test('opening carries a source-grounded author introduction built from curriculu
  const frontMatter=[{type:'quote',blocks:[{type:'paragraph',runs:[{type:'text',text:'（一九二七年七月）朱自清\n\n选自《朱自清全集》第一卷（江苏教育出版社1988年版）。'}]}]}];
  const f=await fixture({conversation:true,curriculumOverrides:{author:'朱自清',title:'荷塘月色',persona:{kind:'author-simulation'},frontMatter}});
  const next=f.document.getElementById('next').textContent;
- assert.match(next,/我是朱自清/);assert.match(next,/是教學對話，不是作者本人/);assert.match(next,/教材出處：选自《朱自清全集》第一卷/);
+ assert.match(next,/我是朱自清/);assert.doesNotMatch(next,/不是作者本人|教學對話/);assert.match(next,/教材出處：选自《朱自清全集》第一卷/);assert.equal(f.document.getElementById('persona-label'),null);
  assert.equal(f.document.querySelectorAll('#next .author-intro').length,1);
  const guide=await fixture({conversation:true,curriculumOverrides:{author:'教材學習引導',title:'單元導讀',persona:{kind:'curriculum-guide'}}});
  assert.equal(guide.document.querySelectorAll('#next .author-intro').length,0);
- assert.equal(guide.document.getElementById('persona-label').hidden,true);
+ assert.equal(guide.document.getElementById('persona-label'),null);
 });
 
 test('conversation panel shows no evaluation machinery: no rule text, raw objective keys, counters or rubric block',async()=>{

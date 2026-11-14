@@ -1,0 +1,8277 @@
+{
+ "schema": "yw-textbook-pages-v1",
+ "track": "junior",
+ "scoring": "none",
+ "catalogContract": "sun-catalog-v1",
+ "catalogRelease": "20261011T015939Z-24b58ca8",
+ "pageMapVersion": "page-map-v4",
+ "resolution": "each entry of the PDF's own contents pages, at the PDF page whose verified printed label is the entry's page number and whose text layer carries its title; unnumbered unit pages by their heading line; ends at the next entry. Titles and page numbers only, never page text.",
+ "imageHost": "sun.bdfz.net",
+ "widths": {
+  "thumb": 240,
+  "full": 960,
+  "large": 1440
+ },
+ "counts": {
+  "books": 6,
+  "entries": 295,
+  "kinds": {
+   "activity": 11,
+   "lesson": 150,
+   "oral": 1,
+   "poems": 12,
+   "practice": 25,
+   "task": 18,
+   "unit": 36,
+   "wholebook": 12,
+   "writing": 30
+  },
+  "pages": 960
+ },
+ "books": {
+  "g7-shang": {
+   "label": "七年級上冊",
+   "grade": 7,
+   "term": "上",
+   "title": "（根据2022年版课程标准修订）义务教育教科书·语文七年级上册",
+   "editionLabel": "统编版",
+   "publisher": "人民教育出版社",
+   "editionId": "cn-8b9c7052-add4-4744-ab04-69d6c180d5d9-83735d49f455",
+   "pdfSha256": "83735d49f4559baf7ff55a38ffbfb2e5d99d428adf0683a0e119524dae1deeea",
+   "pdfSha12": "83735d49f455",
+   "pdfPages": 166,
+   "pagePoints": [
+    521.6,
+    737.0
+   ],
+   "pdfDownload": "/files/pdf/cn-8b9c7052-add4-4744-ab04-69d6c180d5d9-83735d49f455/83735d49f455/%EF%BC%88%E6%A0%B9%E6%8D%AE2022%E5%B9%B4%E7%89%88%E8%AF%BE%E7%A8%8B%E6%A0%87%E5%87%86%E4%BF%AE%E8%AE%A2%EF%BC%89%E4%B9%89%E5%8A%A1%E6%95%99%E8%82%B2%E6%95%99%E7%A7%91%E4%B9%A6%C2%B7%E8%AF%AD%E6%96%87%E4%B8%83%E5%B9%B4%E7%BA%A7%E4%B8%8A%E5%86%8C%EF%BC%88%E7%BB%9F%E7%BC%96%E7%89%88%EF%BC%89.pdf?download=1"
+  },
+  "g7-xia": {
+   "label": "七年級下冊",
+   "grade": 7,
+   "term": "下",
+   "title": "（根据2022年版课程标准修订）义务教育教科书·语文七年级下册",
+   "editionLabel": "统编版",
+   "publisher": "人民教育出版社",
+   "editionId": "cn-6b3ec445-9f7b-430c-a246-fc1903ca38b2-302ffb9346de",
+   "pdfSha256": "302ffb9346de6f76c7eca1a8a00ea67795aa5ab8f6811e8cf3033ee2c24ac1bd",
+   "pdfSha12": "302ffb9346de",
+   "pdfPages": 186,
+   "pagePoints": [
+    521.6,
+    737.0
+   ],
+   "pdfDownload": "/files/pdf/cn-6b3ec445-9f7b-430c-a246-fc1903ca38b2-302ffb9346de/302ffb9346de/%EF%BC%88%E6%A0%B9%E6%8D%AE2022%E5%B9%B4%E7%89%88%E8%AF%BE%E7%A8%8B%E6%A0%87%E5%87%86%E4%BF%AE%E8%AE%A2%EF%BC%89%E4%B9%89%E5%8A%A1%E6%95%99%E8%82%B2%E6%95%99%E7%A7%91%E4%B9%A6%C2%B7%E8%AF%AD%E6%96%87%E4%B8%83%E5%B9%B4%E7%BA%A7%E4%B8%8B%E5%86%8C%EF%BC%88%E7%BB%9F%E7%BC%96%E7%89%88%EF%BC%89.pdf?download=1"
+  },
+  "g8-shang": {
+   "label": "八年級上冊",
+   "grade": 8,
+   "term": "上",
+   "title": "（根据2022年版课程标准修订）义务教育教科书·语文八年级上册",
+   "editionLabel": "统编版",
+   "publisher": "人民教育出版社",
+   "editionId": "cn-4f64356a-8df7-4579-9400-e32c9a7f6718-818068db3c20",
+   "pdfSha256": "818068db3c20fa339232fef21d2f6db3fc999f52aa5a09424d106e730e6c1e5d",
+   "pdfSha12": "818068db3c20",
+   "pdfPages": 174,
+   "pagePoints": [
+    521.6,
+    737.0
+   ],
+   "pdfDownload": "/files/pdf/cn-4f64356a-8df7-4579-9400-e32c9a7f6718-818068db3c20/818068db3c20/%EF%BC%88%E6%A0%B9%E6%8D%AE2022%E5%B9%B4%E7%89%88%E8%AF%BE%E7%A8%8B%E6%A0%87%E5%87%86%E4%BF%AE%E8%AE%A2%EF%BC%89%E4%B9%89%E5%8A%A1%E6%95%99%E8%82%B2%E6%95%99%E7%A7%91%E4%B9%A6%C2%B7%E8%AF%AD%E6%96%87%E5%85%AB%E5%B9%B4%E7%BA%A7%E4%B8%8A%E5%86%8C%EF%BC%88%E7%BB%9F%E7%BC%96%E7%89%88%EF%BC%89.pdf?download=1"
+  },
+  "g8-xia": {
+   "label": "八年級下冊",
+   "grade": 8,
+   "term": "下",
+   "title": "（根据2022年版课程标准修订）义务教育教科书·语文八年级下册",
+   "editionLabel": "统编版",
+   "publisher": "人民教育出版社",
+   "editionId": "cn-8f907d12-14b5-44ba-b042-0ffbc46e085b-b03a898b410b",
+   "pdfSha256": "b03a898b410bd3a2b54489b12d746186ce06a2657b3da2167f03cbfb1018c2ca",
+   "pdfSha12": "b03a898b410b",
+   "pdfPages": 167,
+   "pagePoints": [
+    521.6,
+    737.0
+   ],
+   "pdfDownload": "/files/pdf/cn-8f907d12-14b5-44ba-b042-0ffbc46e085b-b03a898b410b/b03a898b410b/%EF%BC%88%E6%A0%B9%E6%8D%AE2022%E5%B9%B4%E7%89%88%E8%AF%BE%E7%A8%8B%E6%A0%87%E5%87%86%E4%BF%AE%E8%AE%A2%EF%BC%89%E4%B9%89%E5%8A%A1%E6%95%99%E8%82%B2%E6%95%99%E7%A7%91%E4%B9%A6%C2%B7%E8%AF%AD%E6%96%87%E5%85%AB%E5%B9%B4%E7%BA%A7%E4%B8%8B%E5%86%8C%EF%BC%88%E7%BB%9F%E7%BC%96%E7%89%88%EF%BC%89.pdf?download=1"
+  },
+  "g9-shang": {
+   "label": "九年級上冊",
+   "grade": 9,
+   "term": "上",
+   "title": "（根据2022年版课程标准修订）义务教育教科书·语文九年级上册",
+   "editionLabel": "统编版",
+   "publisher": "人民教育出版社",
+   "editionId": "cn-a8b13ab7-7eef-4dc7-a3c7-8009ba65ce11-2771da91d637",
+   "pdfSha256": "2771da91d6373811a7f7307fa122b258f18e4a759b937e68e1e295da9cbde09f",
+   "pdfSha12": "2771da91d637",
+   "pdfPages": 170,
+   "pagePoints": [
+    521.6,
+    737.0
+   ],
+   "pdfDownload": "/files/pdf/cn-a8b13ab7-7eef-4dc7-a3c7-8009ba65ce11-2771da91d637/2771da91d637/%EF%BC%88%E6%A0%B9%E6%8D%AE2022%E5%B9%B4%E7%89%88%E8%AF%BE%E7%A8%8B%E6%A0%87%E5%87%86%E4%BF%AE%E8%AE%A2%EF%BC%89%E4%B9%89%E5%8A%A1%E6%95%99%E8%82%B2%E6%95%99%E7%A7%91%E4%B9%A6%C2%B7%E8%AF%AD%E6%96%87%E4%B9%9D%E5%B9%B4%E7%BA%A7%E4%B8%8A%E5%86%8C%EF%BC%88%E7%BB%9F%E7%BC%96%E7%89%88%EF%BC%89.pdf?download=1"
+  },
+  "g9-xia": {
+   "label": "九年級下冊",
+   "grade": 9,
+   "term": "下",
+   "title": "义务教育教科书·语文九年级下册",
+   "editionLabel": "统编版",
+   "publisher": "人民教育出版社",
+   "editionId": "cn-a45516ee-78ed-46f0-b88b-671174f2a2fe-22ca8f2e5c82",
+   "pdfSha256": "22ca8f2e5c82e98f5960f4598412c47eefe16d0dc0f1a743fff4a4911e33c5e6",
+   "pdfSha12": "22ca8f2e5c82",
+   "pdfPages": 158,
+   "pagePoints": [
+    521.6,
+    737.0
+   ],
+   "pdfDownload": "/files/pdf/cn-a45516ee-78ed-46f0-b88b-671174f2a2fe-22ca8f2e5c82/22ca8f2e5c82/%E4%B9%89%E5%8A%A1%E6%95%99%E8%82%B2%E6%95%99%E7%A7%91%E4%B9%A6%C2%B7%E8%AF%AD%E6%96%87%E4%B9%9D%E5%B9%B4%E7%BA%A7%E4%B8%8B%E5%86%8C%EF%BC%88%E7%BB%9F%E7%BC%96%E7%89%88%EF%BC%89.pdf?download=1"
+  }
+ },
+ "order": [
+  "g7-shang",
+  "g7-xia",
+  "g8-shang",
+  "g8-xia",
+  "g9-shang",
+  "g9-xia"
+ ],
+ "catalog": {
+  "g7-shang": [
+   "junior-g7-shang-01",
+   "junior-g7-shang-02",
+   "junior-g7-shang-03",
+   "junior-g7-shang-04",
+   "junior-g7-shang-05",
+   "junior-g7-shang-06",
+   "junior-g7-shang-07",
+   "junior-g7-shang-08",
+   "junior-g7-shang-09",
+   "junior-g7-shang-10",
+   "junior-g7-shang-11",
+   "junior-g7-shang-12",
+   "junior-g7-shang-13",
+   "junior-g7-shang-14",
+   "junior-g7-shang-15",
+   "junior-g7-shang-16",
+   "junior-g7-shang-17",
+   "junior-g7-shang-18",
+   "junior-g7-shang-19",
+   "junior-g7-shang-20",
+   "junior-g7-shang-21",
+   "junior-g7-shang-22",
+   "junior-g7-shang-23",
+   "junior-g7-shang-24",
+   "junior-g7-shang-25",
+   "junior-g7-shang-26",
+   "junior-g7-shang-27",
+   "junior-g7-shang-28",
+   "junior-g7-shang-29",
+   "junior-g7-shang-30",
+   "junior-g7-shang-31",
+   "junior-g7-shang-32",
+   "junior-g7-shang-33",
+   "junior-g7-shang-34",
+   "junior-g7-shang-35",
+   "junior-g7-shang-36",
+   "junior-g7-shang-37",
+   "junior-g7-shang-38",
+   "junior-g7-shang-39",
+   "junior-g7-shang-40",
+   "junior-g7-shang-41",
+   "junior-g7-shang-42",
+   "junior-g7-shang-43",
+   "junior-g7-shang-44",
+   "junior-g7-shang-45",
+   "junior-g7-shang-46",
+   "junior-g7-shang-47",
+   "junior-g7-shang-48",
+   "junior-g7-shang-49"
+  ],
+  "g7-xia": [
+   "junior-g7-xia-01",
+   "junior-g7-xia-02",
+   "junior-g7-xia-03",
+   "junior-g7-xia-04",
+   "junior-g7-xia-05",
+   "junior-g7-xia-06",
+   "junior-g7-xia-07",
+   "junior-g7-xia-08",
+   "junior-g7-xia-09",
+   "junior-g7-xia-10",
+   "junior-g7-xia-11",
+   "junior-g7-xia-12",
+   "junior-g7-xia-13",
+   "junior-g7-xia-14",
+   "junior-g7-xia-15",
+   "junior-g7-xia-16",
+   "junior-g7-xia-17",
+   "junior-g7-xia-18",
+   "junior-g7-xia-19",
+   "junior-g7-xia-20",
+   "junior-g7-xia-21",
+   "junior-g7-xia-22",
+   "junior-g7-xia-23",
+   "junior-g7-xia-24",
+   "junior-g7-xia-25",
+   "junior-g7-xia-26",
+   "junior-g7-xia-27",
+   "junior-g7-xia-28",
+   "junior-g7-xia-29",
+   "junior-g7-xia-30",
+   "junior-g7-xia-31",
+   "junior-g7-xia-32",
+   "junior-g7-xia-33",
+   "junior-g7-xia-34",
+   "junior-g7-xia-35",
+   "junior-g7-xia-36",
+   "junior-g7-xia-37",
+   "junior-g7-xia-38",
+   "junior-g7-xia-39",
+   "junior-g7-xia-40",
+   "junior-g7-xia-41",
+   "junior-g7-xia-42",
+   "junior-g7-xia-43",
+   "junior-g7-xia-44",
+   "junior-g7-xia-45",
+   "junior-g7-xia-46",
+   "junior-g7-xia-47",
+   "junior-g7-xia-48",
+   "junior-g7-xia-49",
+   "junior-g7-xia-50"
+  ],
+  "g8-shang": [
+   "junior-g8-shang-01",
+   "junior-g8-shang-02",
+   "junior-g8-shang-03",
+   "junior-g8-shang-04",
+   "junior-g8-shang-05",
+   "junior-g8-shang-06",
+   "junior-g8-shang-07",
+   "junior-g8-shang-08",
+   "junior-g8-shang-09",
+   "junior-g8-shang-10",
+   "junior-g8-shang-11",
+   "junior-g8-shang-12",
+   "junior-g8-shang-13",
+   "junior-g8-shang-14",
+   "junior-g8-shang-15",
+   "junior-g8-shang-16",
+   "junior-g8-shang-17",
+   "junior-g8-shang-18",
+   "junior-g8-shang-19",
+   "junior-g8-shang-20",
+   "junior-g8-shang-21",
+   "junior-g8-shang-22",
+   "junior-g8-shang-23",
+   "junior-g8-shang-24",
+   "junior-g8-shang-25",
+   "junior-g8-shang-26",
+   "junior-g8-shang-27",
+   "junior-g8-shang-28",
+   "junior-g8-shang-29",
+   "junior-g8-shang-30",
+   "junior-g8-shang-31",
+   "junior-g8-shang-32",
+   "junior-g8-shang-33",
+   "junior-g8-shang-34",
+   "junior-g8-shang-35",
+   "junior-g8-shang-36",
+   "junior-g8-shang-37",
+   "junior-g8-shang-38",
+   "junior-g8-shang-39",
+   "junior-g8-shang-40",
+   "junior-g8-shang-41",
+   "junior-g8-shang-42",
+   "junior-g8-shang-43",
+   "junior-g8-shang-44",
+   "junior-g8-shang-45",
+   "junior-g8-shang-46",
+   "junior-g8-shang-47",
+   "junior-g8-shang-48",
+   "junior-g8-shang-49",
+   "junior-g8-shang-50",
+   "junior-g8-shang-51"
+  ],
+  "g8-xia": [
+   "junior-g8-xia-01",
+   "junior-g8-xia-02",
+   "junior-g8-xia-03",
+   "junior-g8-xia-04",
+   "junior-g8-xia-05",
+   "junior-g8-xia-06",
+   "junior-g8-xia-07",
+   "junior-g8-xia-08",
+   "junior-g8-xia-09",
+   "junior-g8-xia-10",
+   "junior-g8-xia-11",
+   "junior-g8-xia-12",
+   "junior-g8-xia-13",
+   "junior-g8-xia-14",
+   "junior-g8-xia-15",
+   "junior-g8-xia-16",
+   "junior-g8-xia-17",
+   "junior-g8-xia-18",
+   "junior-g8-xia-19",
+   "junior-g8-xia-20",
+   "junior-g8-xia-21",
+   "junior-g8-xia-22",
+   "junior-g8-xia-23",
+   "junior-g8-xia-24",
+   "junior-g8-xia-25",
+   "junior-g8-xia-26",
+   "junior-g8-xia-27",
+   "junior-g8-xia-28",
+   "junior-g8-xia-29",
+   "junior-g8-xia-30",
+   "junior-g8-xia-31",
+   "junior-g8-xia-32",
+   "junior-g8-xia-33",
+   "junior-g8-xia-34",
+   "junior-g8-xia-35",
+   "junior-g8-xia-36",
+   "junior-g8-xia-37",
+   "junior-g8-xia-38",
+   "junior-g8-xia-39",
+   "junior-g8-xia-40",
+   "junior-g8-xia-41",
+   "junior-g8-xia-42",
+   "junior-g8-xia-43",
+   "junior-g8-xia-44",
+   "junior-g8-xia-45",
+   "junior-g8-xia-46",
+   "junior-g8-xia-47",
+   "junior-g8-xia-48",
+   "junior-g8-xia-49"
+  ],
+  "g9-shang": [
+   "junior-g9-shang-01",
+   "junior-g9-shang-02",
+   "junior-g9-shang-03",
+   "junior-g9-shang-04",
+   "junior-g9-shang-05",
+   "junior-g9-shang-06",
+   "junior-g9-shang-07",
+   "junior-g9-shang-08",
+   "junior-g9-shang-09",
+   "junior-g9-shang-10",
+   "junior-g9-shang-11",
+   "junior-g9-shang-12",
+   "junior-g9-shang-13",
+   "junior-g9-shang-14",
+   "junior-g9-shang-15",
+   "junior-g9-shang-16",
+   "junior-g9-shang-17",
+   "junior-g9-shang-18",
+   "junior-g9-shang-19",
+   "junior-g9-shang-20",
+   "junior-g9-shang-21",
+   "junior-g9-shang-22",
+   "junior-g9-shang-23",
+   "junior-g9-shang-24",
+   "junior-g9-shang-25",
+   "junior-g9-shang-26",
+   "junior-g9-shang-27",
+   "junior-g9-shang-28",
+   "junior-g9-shang-29",
+   "junior-g9-shang-30",
+   "junior-g9-shang-31",
+   "junior-g9-shang-32",
+   "junior-g9-shang-33",
+   "junior-g9-shang-34",
+   "junior-g9-shang-35",
+   "junior-g9-shang-36",
+   "junior-g9-shang-37",
+   "junior-g9-shang-38",
+   "junior-g9-shang-39",
+   "junior-g9-shang-40",
+   "junior-g9-shang-41",
+   "junior-g9-shang-42",
+   "junior-g9-shang-43",
+   "junior-g9-shang-44",
+   "junior-g9-shang-45",
+   "junior-g9-shang-46",
+   "junior-g9-shang-47",
+   "junior-g9-shang-48",
+   "junior-g9-shang-49",
+   "junior-g9-shang-50",
+   "junior-g9-shang-51",
+   "junior-g9-shang-52"
+  ],
+  "g9-xia": [
+   "junior-g9-xia-01",
+   "junior-g9-xia-02",
+   "junior-g9-xia-03",
+   "junior-g9-xia-04",
+   "junior-g9-xia-05",
+   "junior-g9-xia-06",
+   "junior-g9-xia-07",
+   "junior-g9-xia-08",
+   "junior-g9-xia-09",
+   "junior-g9-xia-10",
+   "junior-g9-xia-11",
+   "junior-g9-xia-12",
+   "junior-g9-xia-13",
+   "junior-g9-xia-14",
+   "junior-g9-xia-15",
+   "junior-g9-xia-16",
+   "junior-g9-xia-17",
+   "junior-g9-xia-18",
+   "junior-g9-xia-19",
+   "junior-g9-xia-20",
+   "junior-g9-xia-21",
+   "junior-g9-xia-22",
+   "junior-g9-xia-23",
+   "junior-g9-xia-24",
+   "junior-g9-xia-25",
+   "junior-g9-xia-26",
+   "junior-g9-xia-27",
+   "junior-g9-xia-28",
+   "junior-g9-xia-29",
+   "junior-g9-xia-30",
+   "junior-g9-xia-31",
+   "junior-g9-xia-32",
+   "junior-g9-xia-33",
+   "junior-g9-xia-34",
+   "junior-g9-xia-35",
+   "junior-g9-xia-36",
+   "junior-g9-xia-37",
+   "junior-g9-xia-38",
+   "junior-g9-xia-39",
+   "junior-g9-xia-40",
+   "junior-g9-xia-41",
+   "junior-g9-xia-42",
+   "junior-g9-xia-43",
+   "junior-g9-xia-44"
+  ]
+ },
+ "lessons": {
+  "junior-g7-shang-01": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第一单元",
+   "title": "第一单元",
+   "pages": [
+    {
+     "pdf": 8
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-shang-02": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "春",
+   "pages": [
+    {
+     "pdf": 9,
+     "printed": "2"
+    },
+    {
+     "pdf": 10,
+     "printed": "3"
+    },
+    {
+     "pdf": 11,
+     "printed": "4"
+    },
+    {
+     "pdf": 12,
+     "printed": "5"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 1,
+   "author": "朱自清"
+  },
+  "junior-g7-shang-03": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "济南的冬天",
+   "pages": [
+    {
+     "pdf": 13,
+     "printed": "6"
+    },
+    {
+     "pdf": 14,
+     "printed": "7"
+    },
+    {
+     "pdf": 15,
+     "printed": "8"
+    },
+    {
+     "pdf": 16,
+     "printed": "9"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 2,
+   "author": "老舍"
+  },
+  "junior-g7-shang-04": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "雨的四季",
+   "pages": [
+    {
+     "pdf": 17,
+     "printed": "10"
+    },
+    {
+     "pdf": 18,
+     "printed": "11"
+    },
+    {
+     "pdf": 19,
+     "printed": "12"
+    },
+    {
+     "pdf": 20,
+     "printed": "13"
+    },
+    {
+     "pdf": 21,
+     "printed": "14"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 3,
+   "selfRead": true,
+   "author": "刘湛秋"
+  },
+  "junior-g7-shang-05": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "古代诗歌四首",
+   "pages": [
+    {
+     "pdf": 22,
+     "printed": "15"
+    },
+    {
+     "pdf": 23,
+     "printed": "16"
+    },
+    {
+     "pdf": 24,
+     "printed": "17"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 4,
+   "parts": [
+    {
+     "title": "观沧海",
+     "author": "曹操",
+     "pdf": 22
+    },
+    {
+     "title": "次北固山下",
+     "author": "王湾",
+     "pdf": 23
+    },
+    {
+     "title": "闻王昌龄左迁龙标遥有此寄",
+     "author": "李白",
+     "pdf": 23
+    },
+    {
+     "title": "天净沙·秋思",
+     "author": "马致远",
+     "pdf": 24
+    }
+   ]
+  },
+  "junior-g7-shang-06": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第一单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 25,
+     "printed": "18"
+    },
+    {
+     "pdf": 26,
+     "printed": "19"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-shang-07": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第一单元",
+   "title": "热爱写作，学会观察",
+   "pages": [
+    {
+     "pdf": 27,
+     "printed": "20"
+    },
+    {
+     "pdf": 28,
+     "printed": "21"
+    },
+    {
+     "pdf": 29,
+     "printed": "22"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-shang-08": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第二单元",
+   "title": "第二单元",
+   "pages": [
+    {
+     "pdf": 30
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-shang-09": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "秋天的怀念",
+   "pages": [
+    {
+     "pdf": 31,
+     "printed": "24"
+    },
+    {
+     "pdf": 32,
+     "printed": "25"
+    },
+    {
+     "pdf": 33,
+     "printed": "26"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 5,
+   "author": "史铁生"
+  },
+  "junior-g7-shang-10": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "散步",
+   "pages": [
+    {
+     "pdf": 34,
+     "printed": "27"
+    },
+    {
+     "pdf": 35,
+     "printed": "28"
+    },
+    {
+     "pdf": 36,
+     "printed": "29"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 6,
+   "author": "莫怀戚"
+  },
+  "junior-g7-shang-11": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "散文诗二首",
+   "pages": [
+    {
+     "pdf": 37,
+     "printed": "30"
+    },
+    {
+     "pdf": 38,
+     "printed": "31"
+    },
+    {
+     "pdf": 39,
+     "printed": "32"
+    },
+    {
+     "pdf": 40,
+     "printed": "33"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 7,
+   "selfRead": true,
+   "parts": [
+    {
+     "title": "金色花",
+     "author": "泰戈尔",
+     "pdf": 37
+    },
+    {
+     "title": "荷叶·母亲",
+     "author": "冰心",
+     "pdf": 38
+    }
+   ]
+  },
+  "junior-g7-shang-12": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "《世说新语》二则",
+   "pages": [
+    {
+     "pdf": 41,
+     "printed": "34"
+    },
+    {
+     "pdf": 42,
+     "printed": "35"
+    },
+    {
+     "pdf": 43,
+     "printed": "36"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 8,
+   "parts": [
+    {
+     "title": "咏雪",
+     "pdf": 41
+    },
+    {
+     "title": "陈太丘与友期行",
+     "pdf": 42
+    }
+   ]
+  },
+  "junior-g7-shang-13": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第二单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 44,
+     "printed": "37"
+    },
+    {
+     "pdf": 45,
+     "printed": "38"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-shang-14": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第二单元",
+   "title": "学会记事",
+   "pages": [
+    {
+     "pdf": 46,
+     "printed": "39"
+    },
+    {
+     "pdf": 47,
+     "printed": "40"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-shang-15": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第二单元",
+   "title": "有朋自远方来",
+   "pages": [
+    {
+     "pdf": 48,
+     "printed": "41"
+    },
+    {
+     "pdf": 49,
+     "printed": "42"
+    },
+    {
+     "pdf": 50,
+     "printed": "43"
+    },
+    {
+     "pdf": 51,
+     "printed": "44"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g7-shang-16": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第三单元",
+   "title": "第三单元",
+   "pages": [
+    {
+     "pdf": 52
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-shang-17": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "从百草园到三味书屋",
+   "pages": [
+    {
+     "pdf": 53,
+     "printed": "46"
+    },
+    {
+     "pdf": 54,
+     "printed": "47"
+    },
+    {
+     "pdf": 55,
+     "printed": "48"
+    },
+    {
+     "pdf": 56,
+     "printed": "49"
+    },
+    {
+     "pdf": 57,
+     "printed": "50"
+    },
+    {
+     "pdf": 58,
+     "printed": "51"
+    },
+    {
+     "pdf": 59,
+     "printed": "52"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 9,
+   "author": "鲁迅"
+  },
+  "junior-g7-shang-18": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "往事依依",
+   "pages": [
+    {
+     "pdf": 60,
+     "printed": "53"
+    },
+    {
+     "pdf": 61,
+     "printed": "54"
+    },
+    {
+     "pdf": 62,
+     "printed": "55"
+    },
+    {
+     "pdf": 63,
+     "printed": "56"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 10,
+   "author": "于漪"
+  },
+  "junior-g7-shang-19": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "再塑生命的人",
+   "pages": [
+    {
+     "pdf": 64,
+     "printed": "57"
+    },
+    {
+     "pdf": 65,
+     "printed": "58"
+    },
+    {
+     "pdf": 66,
+     "printed": "59"
+    },
+    {
+     "pdf": 67,
+     "printed": "60"
+    },
+    {
+     "pdf": 68,
+     "printed": "61"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 11,
+   "selfRead": true,
+   "author": "海伦·凯勒"
+  },
+  "junior-g7-shang-20": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "《论语》十二章",
+   "pages": [
+    {
+     "pdf": 69,
+     "printed": "62"
+    },
+    {
+     "pdf": 70,
+     "printed": "63"
+    },
+    {
+     "pdf": 71,
+     "printed": "64"
+    },
+    {
+     "pdf": 72,
+     "printed": "65"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 12
+  },
+  "junior-g7-shang-21": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第三单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 73,
+     "printed": "66"
+    },
+    {
+     "pdf": 74,
+     "printed": "67"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-shang-22": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第三单元",
+   "title": "如何突出中心",
+   "pages": [
+    {
+     "pdf": 75,
+     "printed": "68"
+    },
+    {
+     "pdf": 76,
+     "printed": "69"
+    },
+    {
+     "pdf": 77,
+     "printed": "70"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-shang-23": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第三单元",
+   "title": "《朝花夕拾》 精读、略读、浏览",
+   "pages": [
+    {
+     "pdf": 78,
+     "printed": "71"
+    },
+    {
+     "pdf": 79,
+     "printed": "72"
+    },
+    {
+     "pdf": 80,
+     "printed": "73"
+    },
+    {
+     "pdf": 81,
+     "printed": "74"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g7-shang-24": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第三单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 82,
+     "printed": "75"
+    },
+    {
+     "pdf": 83,
+     "printed": "76"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "峨眉山月歌",
+     "author": "李白",
+     "pdf": 82
+    },
+    {
+     "title": "江南逢李龟年",
+     "author": "杜甫",
+     "pdf": 82
+    },
+    {
+     "title": "行军九日思长安故园",
+     "author": "岑参",
+     "pdf": 83
+    },
+    {
+     "title": "夜上受降城闻笛",
+     "author": "李益",
+     "pdf": 83
+    }
+   ]
+  },
+  "junior-g7-shang-25": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第四单元",
+   "title": "第四单元",
+   "pages": [
+    {
+     "pdf": 84
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-shang-26": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "纪念白求恩",
+   "pages": [
+    {
+     "pdf": 85,
+     "printed": "78"
+    },
+    {
+     "pdf": 86,
+     "printed": "79"
+    },
+    {
+     "pdf": 87,
+     "printed": "80"
+    },
+    {
+     "pdf": 88,
+     "printed": "81"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 13,
+   "author": "毛泽东"
+  },
+  "junior-g7-shang-27": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "回忆我的母亲",
+   "pages": [
+    {
+     "pdf": 89,
+     "printed": "82"
+    },
+    {
+     "pdf": 90,
+     "printed": "83"
+    },
+    {
+     "pdf": 91,
+     "printed": "84"
+    },
+    {
+     "pdf": 92,
+     "printed": "85"
+    },
+    {
+     "pdf": 93,
+     "printed": "86"
+    },
+    {
+     "pdf": 94,
+     "printed": "87"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 14,
+   "author": "朱德"
+  },
+  "junior-g7-shang-28": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "梅岭三章",
+   "pages": [
+    {
+     "pdf": 95,
+     "printed": "88"
+    },
+    {
+     "pdf": 96,
+     "printed": "89"
+    },
+    {
+     "pdf": 97,
+     "printed": "90"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 15,
+   "selfRead": true,
+   "author": "陈毅"
+  },
+  "junior-g7-shang-29": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "诫子书",
+   "pages": [
+    {
+     "pdf": 98,
+     "printed": "91"
+    },
+    {
+     "pdf": 99,
+     "printed": "92"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 16,
+   "author": "诸葛亮"
+  },
+  "junior-g7-shang-30": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第四单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 100,
+     "printed": "93"
+    },
+    {
+     "pdf": 101,
+     "printed": "94"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-shang-31": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第四单元",
+   "title": "思路要清晰",
+   "pages": [
+    {
+     "pdf": 102,
+     "printed": "95"
+    },
+    {
+     "pdf": 103,
+     "printed": "96"
+    },
+    {
+     "pdf": 104,
+     "printed": "97"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-shang-32": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第四单元",
+   "title": "少年正是读书时",
+   "pages": [
+    {
+     "pdf": 105,
+     "printed": "98"
+    },
+    {
+     "pdf": 106,
+     "printed": "99"
+    },
+    {
+     "pdf": 107,
+     "printed": "100"
+    },
+    {
+     "pdf": 108,
+     "printed": "101"
+    },
+    {
+     "pdf": 109,
+     "printed": "102"
+    },
+    {
+     "pdf": 110,
+     "printed": "103"
+    },
+    {
+     "pdf": 111,
+     "printed": "104"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g7-shang-33": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第五单元",
+   "title": "第五单元",
+   "pages": [
+    {
+     "pdf": 112
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-shang-34": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第五单元",
+   "title": "体会人与动物的关系",
+   "pages": [
+    {
+     "pdf": 113,
+     "printed": "106"
+    },
+    {
+     "pdf": 114,
+     "printed": "107"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务一"
+  },
+  "junior-g7-shang-35": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "猫",
+   "pages": [
+    {
+     "pdf": 115,
+     "printed": "108"
+    },
+    {
+     "pdf": 116,
+     "printed": "109"
+    },
+    {
+     "pdf": 117,
+     "printed": "110"
+    },
+    {
+     "pdf": 118,
+     "printed": "111"
+    },
+    {
+     "pdf": 119,
+     "printed": "112"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 17,
+   "author": "郑振铎"
+  },
+  "junior-g7-shang-36": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "我的白鸽",
+   "pages": [
+    {
+     "pdf": 120,
+     "printed": "113"
+    },
+    {
+     "pdf": 121,
+     "printed": "114"
+    },
+    {
+     "pdf": 122,
+     "printed": "115"
+    },
+    {
+     "pdf": 123,
+     "printed": "116"
+    },
+    {
+     "pdf": 124,
+     "printed": "117"
+    },
+    {
+     "pdf": 125,
+     "printed": "118"
+    },
+    {
+     "pdf": 126,
+     "printed": "119"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 18,
+   "author": "陈忠实"
+  },
+  "junior-g7-shang-37": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "大雁归来",
+   "pages": [
+    {
+     "pdf": 127,
+     "printed": "120"
+    },
+    {
+     "pdf": 128,
+     "printed": "121"
+    },
+    {
+     "pdf": 129,
+     "printed": "122"
+    },
+    {
+     "pdf": 130,
+     "printed": "123"
+    },
+    {
+     "pdf": 131,
+     "printed": "124"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 19,
+   "author": "利奥波德"
+  },
+  "junior-g7-shang-38": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "狼",
+   "pages": [
+    {
+     "pdf": 132,
+     "printed": "125"
+    },
+    {
+     "pdf": 133,
+     "printed": "126"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 20,
+   "author": "蒲松龄"
+  },
+  "junior-g7-shang-39": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第五单元",
+   "title": "亲近动物，丰富生命体验",
+   "pages": [
+    {
+     "pdf": 134,
+     "printed": "127"
+    },
+    {
+     "pdf": 135,
+     "printed": "128"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务二"
+  },
+  "junior-g7-shang-40": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第五单元",
+   "title": "记叙与动物的相处",
+   "pages": [
+    {
+     "pdf": 136,
+     "printed": "129"
+    },
+    {
+     "pdf": 137,
+     "printed": "130"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务三"
+  },
+  "junior-g7-shang-41": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第六单元",
+   "title": "第六单元",
+   "pages": [
+    {
+     "pdf": 138
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-shang-42": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "小圣施威降大圣",
+   "pages": [
+    {
+     "pdf": 139,
+     "printed": "132"
+    },
+    {
+     "pdf": 140,
+     "printed": "133"
+    },
+    {
+     "pdf": 141,
+     "printed": "134"
+    },
+    {
+     "pdf": 142,
+     "printed": "135"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 21,
+   "author": "吴承恩"
+  },
+  "junior-g7-shang-43": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "皇帝的新装",
+   "pages": [
+    {
+     "pdf": 143,
+     "printed": "136"
+    },
+    {
+     "pdf": 144,
+     "printed": "137"
+    },
+    {
+     "pdf": 145,
+     "printed": "138"
+    },
+    {
+     "pdf": 146,
+     "printed": "139"
+    },
+    {
+     "pdf": 147,
+     "printed": "140"
+    },
+    {
+     "pdf": 148,
+     "printed": "141"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 22,
+   "author": "安徒生"
+  },
+  "junior-g7-shang-44": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "女娲造人",
+   "pages": [
+    {
+     "pdf": 149,
+     "printed": "142"
+    },
+    {
+     "pdf": 150,
+     "printed": "143"
+    },
+    {
+     "pdf": 151,
+     "printed": "144"
+    },
+    {
+     "pdf": 152,
+     "printed": "145"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 23,
+   "selfRead": true,
+   "author": "袁珂"
+  },
+  "junior-g7-shang-45": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "寓言四则",
+   "pages": [
+    {
+     "pdf": 153,
+     "printed": "146"
+    },
+    {
+     "pdf": 154,
+     "printed": "147"
+    },
+    {
+     "pdf": 155,
+     "printed": "148"
+    },
+    {
+     "pdf": 156,
+     "printed": "149"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 24,
+   "parts": [
+    {
+     "title": "赫耳墨斯和雕像者",
+     "author": "《伊索寓言》",
+     "pdf": 153
+    },
+    {
+     "title": "蚊子和狮子",
+     "author": "《伊索寓言》",
+     "pdf": 154
+    },
+    {
+     "title": "穿井得一人",
+     "author": "《吕氏春秋》",
+     "pdf": 154
+    },
+    {
+     "title": "杞人忧天",
+     "author": "《列子》",
+     "pdf": 155
+    }
+   ]
+  },
+  "junior-g7-shang-46": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第六单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 157,
+     "printed": "150"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-shang-47": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第六单元",
+   "title": "发挥联想和想象",
+   "pages": [
+    {
+     "pdf": 158,
+     "printed": "151"
+    },
+    {
+     "pdf": 159,
+     "printed": "152"
+    },
+    {
+     "pdf": 160,
+     "printed": "153"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-shang-48": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第六单元",
+   "title": "《西游记》",
+   "pages": [
+    {
+     "pdf": 161,
+     "printed": "154"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g7-shang-49": {
+   "book": "g7-shang",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第六单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 162,
+     "printed": "155"
+    },
+    {
+     "pdf": 163,
+     "printed": "156"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "秋词（其一）",
+     "author": "刘禹锡",
+     "pdf": 162
+    },
+    {
+     "title": "夜雨寄北",
+     "author": "李商隐",
+     "pdf": 162
+    },
+    {
+     "title": "十一月四日风雨大作（其二）",
+     "author": "陆游",
+     "pdf": 163
+    },
+    {
+     "title": "潼关",
+     "author": "谭嗣同",
+     "pdf": 163
+    }
+   ]
+  },
+  "junior-g7-xia-01": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第一单元",
+   "title": "第一单元",
+   "pages": [
+    {
+     "pdf": 8
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-xia-02": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "邓稼先",
+   "pages": [
+    {
+     "pdf": 9,
+     "printed": "2"
+    },
+    {
+     "pdf": 10,
+     "printed": "3"
+    },
+    {
+     "pdf": 11,
+     "printed": "4"
+    },
+    {
+     "pdf": 12,
+     "printed": "5"
+    },
+    {
+     "pdf": 13,
+     "printed": "6"
+    },
+    {
+     "pdf": 14,
+     "printed": "7"
+    },
+    {
+     "pdf": 15,
+     "printed": "8"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 1,
+   "author": "杨振宁"
+  },
+  "junior-g7-xia-03": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "说和做",
+   "pages": [
+    {
+     "pdf": 16,
+     "printed": "9"
+    },
+    {
+     "pdf": 17,
+     "printed": "10"
+    },
+    {
+     "pdf": 18,
+     "printed": "11"
+    },
+    {
+     "pdf": 19,
+     "printed": "12"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 2,
+   "author": "臧克家",
+   "subtitle": "——记闻一多先生言行片段"
+  },
+  "junior-g7-xia-04": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "列夫·托尔斯泰",
+   "pages": [
+    {
+     "pdf": 20,
+     "printed": "13"
+    },
+    {
+     "pdf": 21,
+     "printed": "14"
+    },
+    {
+     "pdf": 22,
+     "printed": "15"
+    },
+    {
+     "pdf": 23,
+     "printed": "16"
+    },
+    {
+     "pdf": 24,
+     "printed": "17"
+    },
+    {
+     "pdf": 25,
+     "printed": "18"
+    },
+    {
+     "pdf": 26,
+     "printed": "19"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 3,
+   "selfRead": true,
+   "author": "茨威格"
+  },
+  "junior-g7-xia-05": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "孙权劝学",
+   "pages": [
+    {
+     "pdf": 27,
+     "printed": "20"
+    },
+    {
+     "pdf": 28,
+     "printed": "21"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 4,
+   "author": "《资治通鉴》"
+  },
+  "junior-g7-xia-06": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第一单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 29,
+     "printed": "22"
+    },
+    {
+     "pdf": 30,
+     "printed": "23"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-xia-07": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第一单元",
+   "title": "写出人物特点",
+   "pages": [
+    {
+     "pdf": 31,
+     "printed": "24"
+    },
+    {
+     "pdf": 32,
+     "printed": "25"
+    },
+    {
+     "pdf": 33,
+     "printed": "26"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-xia-08": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第二单元",
+   "title": "第二单元",
+   "pages": [
+    {
+     "pdf": 34
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-xia-09": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "黄河颂",
+   "pages": [
+    {
+     "pdf": 35,
+     "printed": "28"
+    },
+    {
+     "pdf": 36,
+     "printed": "29"
+    },
+    {
+     "pdf": 37,
+     "printed": "30"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 5,
+   "author": "光未然"
+  },
+  "junior-g7-xia-10": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "老山界",
+   "pages": [
+    {
+     "pdf": 38,
+     "printed": "31"
+    },
+    {
+     "pdf": 39,
+     "printed": "32"
+    },
+    {
+     "pdf": 40,
+     "printed": "33"
+    },
+    {
+     "pdf": 41,
+     "printed": "34"
+    },
+    {
+     "pdf": 42,
+     "printed": "35"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 6,
+   "author": "陆定一"
+  },
+  "junior-g7-xia-11": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "谁是最可爱的人",
+   "pages": [
+    {
+     "pdf": 43,
+     "printed": "36"
+    },
+    {
+     "pdf": 44,
+     "printed": "37"
+    },
+    {
+     "pdf": 45,
+     "printed": "38"
+    },
+    {
+     "pdf": 46,
+     "printed": "39"
+    },
+    {
+     "pdf": 47,
+     "printed": "40"
+    },
+    {
+     "pdf": 48,
+     "printed": "41"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 7,
+   "author": "魏巍"
+  },
+  "junior-g7-xia-12": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "土地的誓言",
+   "pages": [
+    {
+     "pdf": 49,
+     "printed": "42"
+    },
+    {
+     "pdf": 50,
+     "printed": "43"
+    },
+    {
+     "pdf": 51,
+     "printed": "44"
+    },
+    {
+     "pdf": 52,
+     "printed": "45"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 8,
+   "selfRead": true,
+   "author": "端木蕻良"
+  },
+  "junior-g7-xia-13": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "木兰诗",
+   "pages": [
+    {
+     "pdf": 53,
+     "printed": "46"
+    },
+    {
+     "pdf": 54,
+     "printed": "47"
+    },
+    {
+     "pdf": 55,
+     "printed": "48"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 9
+  },
+  "junior-g7-xia-14": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第二单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 56,
+     "printed": "49"
+    },
+    {
+     "pdf": 57,
+     "printed": "50"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-xia-15": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第二单元",
+   "title": "学习抒情",
+   "pages": [
+    {
+     "pdf": 58,
+     "printed": "51"
+    },
+    {
+     "pdf": 59,
+     "printed": "52"
+    },
+    {
+     "pdf": 60,
+     "printed": "53"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-xia-16": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第二单元",
+   "title": "我的语文生活",
+   "pages": [
+    {
+     "pdf": 61,
+     "printed": "54"
+    },
+    {
+     "pdf": 62,
+     "printed": "55"
+    },
+    {
+     "pdf": 63,
+     "printed": "56"
+    },
+    {
+     "pdf": 64,
+     "printed": "57"
+    },
+    {
+     "pdf": 65,
+     "printed": "58"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g7-xia-17": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第三单元",
+   "title": "第三单元",
+   "pages": [
+    {
+     "pdf": 66
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-xia-18": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "阿长与《山海经》",
+   "pages": [
+    {
+     "pdf": 67,
+     "printed": "60"
+    },
+    {
+     "pdf": 68,
+     "printed": "61"
+    },
+    {
+     "pdf": 69,
+     "printed": "62"
+    },
+    {
+     "pdf": 70,
+     "printed": "63"
+    },
+    {
+     "pdf": 71,
+     "printed": "64"
+    },
+    {
+     "pdf": 72,
+     "printed": "65"
+    },
+    {
+     "pdf": 73,
+     "printed": "66"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 10,
+   "author": "鲁迅"
+  },
+  "junior-g7-xia-19": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "山地回忆",
+   "pages": [
+    {
+     "pdf": 74,
+     "printed": "67"
+    },
+    {
+     "pdf": 75,
+     "printed": "68"
+    },
+    {
+     "pdf": 76,
+     "printed": "69"
+    },
+    {
+     "pdf": 77,
+     "printed": "70"
+    },
+    {
+     "pdf": 78,
+     "printed": "71"
+    },
+    {
+     "pdf": 79,
+     "printed": "72"
+    },
+    {
+     "pdf": 80,
+     "printed": "73"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 11,
+   "author": "孙犁"
+  },
+  "junior-g7-xia-20": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "台阶",
+   "pages": [
+    {
+     "pdf": 81,
+     "printed": "74"
+    },
+    {
+     "pdf": 82,
+     "printed": "75"
+    },
+    {
+     "pdf": 83,
+     "printed": "76"
+    },
+    {
+     "pdf": 84,
+     "printed": "77"
+    },
+    {
+     "pdf": 85,
+     "printed": "78"
+    },
+    {
+     "pdf": 86,
+     "printed": "79"
+    },
+    {
+     "pdf": 87,
+     "printed": "80"
+    },
+    {
+     "pdf": 88,
+     "printed": "81"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 12,
+   "selfRead": true,
+   "author": "李森祥"
+  },
+  "junior-g7-xia-21": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "卖油翁",
+   "pages": [
+    {
+     "pdf": 89,
+     "printed": "82"
+    },
+    {
+     "pdf": 90,
+     "printed": "83"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 13,
+   "author": "欧阳修"
+  },
+  "junior-g7-xia-22": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第三单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 91,
+     "printed": "84"
+    },
+    {
+     "pdf": 92,
+     "printed": "85"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-xia-23": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第三单元",
+   "title": "抓住细节",
+   "pages": [
+    {
+     "pdf": 93,
+     "printed": "86"
+    },
+    {
+     "pdf": 94,
+     "printed": "87"
+    },
+    {
+     "pdf": 95,
+     "printed": "88"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-xia-24": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第三单元",
+   "title": "《骆驼祥子》 圈点、批注、做笔记",
+   "pages": [
+    {
+     "pdf": 96,
+     "printed": "89"
+    },
+    {
+     "pdf": 97,
+     "printed": "90"
+    },
+    {
+     "pdf": 98,
+     "printed": "91"
+    },
+    {
+     "pdf": 99,
+     "printed": "92"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g7-xia-25": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第三单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 100,
+     "printed": "93"
+    },
+    {
+     "pdf": 101,
+     "printed": "94"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "竹里馆",
+     "author": "王维",
+     "pdf": 100
+    },
+    {
+     "title": "春夜洛城闻笛",
+     "author": "李白",
+     "pdf": 100
+    },
+    {
+     "title": "逢入京使",
+     "author": "岑参",
+     "pdf": 101
+    },
+    {
+     "title": "晚春",
+     "author": "韩愈",
+     "pdf": 101
+    }
+   ]
+  },
+  "junior-g7-xia-26": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第四单元",
+   "title": "第四单元",
+   "pages": [
+    {
+     "pdf": 102
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-xia-27": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "驿路梨花",
+   "pages": [
+    {
+     "pdf": 103,
+     "printed": "96"
+    },
+    {
+     "pdf": 104,
+     "printed": "97"
+    },
+    {
+     "pdf": 105,
+     "printed": "98"
+    },
+    {
+     "pdf": 106,
+     "printed": "99"
+    },
+    {
+     "pdf": 107,
+     "printed": "100"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 14,
+   "author": "彭荆风"
+  },
+  "junior-g7-xia-28": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "青春之光",
+   "pages": [
+    {
+     "pdf": 108,
+     "printed": "101"
+    },
+    {
+     "pdf": 109,
+     "printed": "102"
+    },
+    {
+     "pdf": 110,
+     "printed": "103"
+    },
+    {
+     "pdf": 111,
+     "printed": "104"
+    },
+    {
+     "pdf": 112,
+     "printed": "105"
+    },
+    {
+     "pdf": 113,
+     "printed": "106"
+    },
+    {
+     "pdf": 114,
+     "printed": "107"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 15,
+   "author": "祝红蕾"
+  },
+  "junior-g7-xia-29": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "有为有不为",
+   "pages": [
+    {
+     "pdf": 115,
+     "printed": "108"
+    },
+    {
+     "pdf": 116,
+     "printed": "109"
+    },
+    {
+     "pdf": 117,
+     "printed": "110"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 16,
+   "selfRead": true,
+   "author": "季羡林"
+  },
+  "junior-g7-xia-30": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "短文两篇",
+   "pages": [
+    {
+     "pdf": 118,
+     "printed": "111"
+    },
+    {
+     "pdf": 119,
+     "printed": "112"
+    },
+    {
+     "pdf": 120,
+     "printed": "113"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 17,
+   "parts": [
+    {
+     "title": "陋室铭",
+     "author": "刘禹锡",
+     "pdf": 118
+    },
+    {
+     "title": "爱莲说",
+     "author": "周敦颐",
+     "pdf": 119
+    }
+   ]
+  },
+  "junior-g7-xia-31": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第四单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 121,
+     "printed": "114"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-xia-32": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第四单元",
+   "title": "怎样选材",
+   "pages": [
+    {
+     "pdf": 122,
+     "printed": "115"
+    },
+    {
+     "pdf": 123,
+     "printed": "116"
+    },
+    {
+     "pdf": 124,
+     "printed": "117"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-xia-33": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第四单元",
+   "title": "孝亲敬老，传承家风",
+   "pages": [
+    {
+     "pdf": 125,
+     "printed": "118"
+    },
+    {
+     "pdf": 126,
+     "printed": "119"
+    },
+    {
+     "pdf": 127,
+     "printed": "120"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g7-xia-34": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第五单元",
+   "title": "第五单元",
+   "pages": [
+    {
+     "pdf": 128
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-xia-35": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "井冈翠竹",
+   "pages": [
+    {
+     "pdf": 129,
+     "printed": "122"
+    },
+    {
+     "pdf": 130,
+     "printed": "123"
+    },
+    {
+     "pdf": 131,
+     "printed": "124"
+    },
+    {
+     "pdf": 132,
+     "printed": "125"
+    },
+    {
+     "pdf": 133,
+     "printed": "126"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 18,
+   "author": "袁鹰"
+  },
+  "junior-g7-xia-36": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "紫藤萝瀑布",
+   "pages": [
+    {
+     "pdf": 134,
+     "printed": "127"
+    },
+    {
+     "pdf": 135,
+     "printed": "128"
+    },
+    {
+     "pdf": 136,
+     "printed": "129"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 19,
+   "author": "宗璞"
+  },
+  "junior-g7-xia-37": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "外国诗二首",
+   "pages": [
+    {
+     "pdf": 137,
+     "printed": "130"
+    },
+    {
+     "pdf": 138,
+     "printed": "131"
+    },
+    {
+     "pdf": 139,
+     "printed": "132"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 20,
+   "selfRead": true,
+   "parts": [
+    {
+     "title": "假如生活欺骗了你",
+     "author": "普希金",
+     "pdf": 137
+    },
+    {
+     "title": "未选择的路",
+     "author": "弗罗斯特",
+     "pdf": 137
+    }
+   ]
+  },
+  "junior-g7-xia-38": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "古代诗歌五首",
+   "pages": [
+    {
+     "pdf": 140,
+     "printed": "133"
+    },
+    {
+     "pdf": 141,
+     "printed": "134"
+    },
+    {
+     "pdf": 142,
+     "printed": "135"
+    },
+    {
+     "pdf": 143,
+     "printed": "136"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 21,
+   "parts": [
+    {
+     "title": "登幽州台歌",
+     "author": "陈子昂",
+     "pdf": 140
+    },
+    {
+     "title": "望岳",
+     "author": "杜甫",
+     "pdf": 141
+    },
+    {
+     "title": "登飞来峰",
+     "author": "王安石",
+     "pdf": 141
+    },
+    {
+     "title": "游山西村",
+     "author": "陆游",
+     "pdf": 142
+    },
+    {
+     "title": "己亥杂诗（其五）",
+     "author": "龚自珍",
+     "pdf": 142
+    }
+   ]
+  },
+  "junior-g7-xia-39": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第五单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 144,
+     "printed": "137"
+    },
+    {
+     "pdf": 145,
+     "printed": "138"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g7-xia-40": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第五单元",
+   "title": "语言要简明",
+   "pages": [
+    {
+     "pdf": 146,
+     "printed": "139"
+    },
+    {
+     "pdf": 147,
+     "printed": "140"
+    },
+    {
+     "pdf": 148,
+     "printed": "141"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g7-xia-41": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第五单元",
+   "title": "《钢铁是怎样炼成的》",
+   "pages": [
+    {
+     "pdf": 149,
+     "printed": "142"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g7-xia-42": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第六单元",
+   "title": "第六单元",
+   "pages": [
+    {
+     "pdf": 150
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g7-xia-43": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第六单元",
+   "title": "阅读与探讨",
+   "pages": [
+    {
+     "pdf": 151,
+     "printed": "144"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务一"
+  },
+  "junior-g7-xia-44": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "太空一日",
+   "pages": [
+    {
+     "pdf": 152,
+     "printed": "145"
+    },
+    {
+     "pdf": 153,
+     "printed": "146"
+    },
+    {
+     "pdf": 154,
+     "printed": "147"
+    },
+    {
+     "pdf": 155,
+     "printed": "148"
+    },
+    {
+     "pdf": 156,
+     "printed": "149"
+    },
+    {
+     "pdf": 157,
+     "printed": "150"
+    },
+    {
+     "pdf": 158,
+     "printed": "151"
+    },
+    {
+     "pdf": 159,
+     "printed": "152"
+    },
+    {
+     "pdf": 160,
+     "printed": "153"
+    },
+    {
+     "pdf": 161,
+     "printed": "154"
+    },
+    {
+     "pdf": 162,
+     "printed": "155"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 22,
+   "author": "杨利伟"
+  },
+  "junior-g7-xia-45": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "“蛟龙”探海",
+   "pages": [
+    {
+     "pdf": 163,
+     "printed": "156"
+    },
+    {
+     "pdf": 164,
+     "printed": "157"
+    },
+    {
+     "pdf": 165,
+     "printed": "158"
+    },
+    {
+     "pdf": 166,
+     "printed": "159"
+    },
+    {
+     "pdf": 167,
+     "printed": "160"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 23,
+   "author": "许晨"
+  },
+  "junior-g7-xia-46": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "带上她的眼睛",
+   "pages": [
+    {
+     "pdf": 168,
+     "printed": "161"
+    },
+    {
+     "pdf": 169,
+     "printed": "162"
+    },
+    {
+     "pdf": 170,
+     "printed": "163"
+    },
+    {
+     "pdf": 171,
+     "printed": "164"
+    },
+    {
+     "pdf": 172,
+     "printed": "165"
+    },
+    {
+     "pdf": 173,
+     "printed": "166"
+    },
+    {
+     "pdf": 174,
+     "printed": "167"
+    },
+    {
+     "pdf": 175,
+     "printed": "168"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 24,
+   "author": "刘慈欣"
+  },
+  "junior-g7-xia-47": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "活板",
+   "pages": [
+    {
+     "pdf": 176,
+     "printed": "169"
+    },
+    {
+     "pdf": 177,
+     "printed": "170"
+    },
+    {
+     "pdf": 178,
+     "printed": "171"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 25,
+   "author": "沈括"
+  },
+  "junior-g7-xia-48": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第六单元",
+   "title": "搜集与整理",
+   "pages": [
+    {
+     "pdf": 179,
+     "printed": "172"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务二"
+  },
+  "junior-g7-xia-49": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第六单元",
+   "title": "表达与呈现",
+   "pages": [
+    {
+     "pdf": 180,
+     "printed": "173"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务三"
+  },
+  "junior-g7-xia-50": {
+   "book": "g7-xia",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第六单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 181,
+     "printed": "174"
+    },
+    {
+     "pdf": 182,
+     "printed": "175"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "泊秦淮",
+     "author": "杜牧",
+     "pdf": 181
+    },
+    {
+     "title": "贾生",
+     "author": "李商隐",
+     "pdf": 181
+    },
+    {
+     "title": "过松源晨炊漆公店（其五）",
+     "author": "杨万里",
+     "pdf": 182
+    },
+    {
+     "title": "约客",
+     "author": "赵师秀",
+     "pdf": 182
+    }
+   ]
+  },
+  "junior-g8-shang-01": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第一单元",
+   "title": "第一单元",
+   "pages": [
+    {
+     "pdf": 8
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-shang-02": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第一单元",
+   "title": "新闻阅读",
+   "pages": [
+    {
+     "pdf": 9,
+     "printed": "2"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务一"
+  },
+  "junior-g8-shang-03": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "消息二则",
+   "pages": [
+    {
+     "pdf": 10,
+     "printed": "3"
+    },
+    {
+     "pdf": 11,
+     "printed": "4"
+    },
+    {
+     "pdf": 12,
+     "printed": "5"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 1,
+   "author": "毛泽东",
+   "parts": [
+    {
+     "title": "我三十万大军胜利南渡长江",
+     "pdf": 10
+    },
+    {
+     "title": "人民解放军百万大军横渡长江",
+     "pdf": 11
+    }
+   ]
+  },
+  "junior-g8-shang-04": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "中国人首次进入自己的空间站",
+   "pages": [
+    {
+     "pdf": 13,
+     "printed": "6"
+    },
+    {
+     "pdf": 14,
+     "printed": "7"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 2,
+   "author": "余建斌 吴月辉 刘诗瑶"
+  },
+  "junior-g8-shang-05": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "首届诺贝尔奖颁发",
+   "pages": [
+    {
+     "pdf": 15,
+     "printed": "8"
+    },
+    {
+     "pdf": 16,
+     "printed": "9"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 3
+  },
+  "junior-g8-shang-06": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "“飞天”凌空",
+   "pages": [
+    {
+     "pdf": 17,
+     "printed": "10"
+    },
+    {
+     "pdf": 18,
+     "printed": "11"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 4,
+   "author": "夏浩然 樊云芳",
+   "subtitle": "——跳水姑娘吕伟夺魁记"
+  },
+  "junior-g8-shang-07": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "一着惊海天",
+   "pages": [
+    {
+     "pdf": 19,
+     "printed": "12"
+    },
+    {
+     "pdf": 20,
+     "printed": "13"
+    },
+    {
+     "pdf": 21,
+     "printed": "14"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 5,
+   "author": "蔡年迟 蒲海洋",
+   "subtitle": "——目击我国航母舰载战斗机首架次成功着舰"
+  },
+  "junior-g8-shang-08": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "国行公祭，为佑世界和平",
+   "pages": [
+    {
+     "pdf": 22,
+     "printed": "15"
+    },
+    {
+     "pdf": 23,
+     "printed": "16"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 6,
+   "author": "钟声"
+  },
+  "junior-g8-shang-09": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第一单元",
+   "title": "新闻采访",
+   "pages": [
+    {
+     "pdf": 24,
+     "printed": "17"
+    },
+    {
+     "pdf": 25,
+     "printed": "18"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务二"
+  },
+  "junior-g8-shang-10": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第一单元",
+   "title": "新闻写作",
+   "pages": [
+    {
+     "pdf": 26,
+     "printed": "19"
+    },
+    {
+     "pdf": 27,
+     "printed": "20"
+    },
+    {
+     "pdf": 28,
+     "printed": "21"
+    },
+    {
+     "pdf": 29,
+     "printed": "22"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务三"
+  },
+  "junior-g8-shang-11": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第二单元",
+   "title": "第二单元",
+   "pages": [
+    {
+     "pdf": 30
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-shang-12": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "藤野先生",
+   "pages": [
+    {
+     "pdf": 31,
+     "printed": "24"
+    },
+    {
+     "pdf": 32,
+     "printed": "25"
+    },
+    {
+     "pdf": 33,
+     "printed": "26"
+    },
+    {
+     "pdf": 34,
+     "printed": "27"
+    },
+    {
+     "pdf": 35,
+     "printed": "28"
+    },
+    {
+     "pdf": 36,
+     "printed": "29"
+    },
+    {
+     "pdf": 37,
+     "printed": "30"
+    },
+    {
+     "pdf": 38,
+     "printed": "31"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 7,
+   "author": "鲁迅"
+  },
+  "junior-g8-shang-13": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "回忆鲁迅先生（节选）",
+   "pages": [
+    {
+     "pdf": 39,
+     "printed": "32"
+    },
+    {
+     "pdf": 40,
+     "printed": "33"
+    },
+    {
+     "pdf": 41,
+     "printed": "34"
+    },
+    {
+     "pdf": 42,
+     "printed": "35"
+    },
+    {
+     "pdf": 43,
+     "printed": "36"
+    },
+    {
+     "pdf": 44,
+     "printed": "37"
+    },
+    {
+     "pdf": 45,
+     "printed": "38"
+    },
+    {
+     "pdf": 46,
+     "printed": "39"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 8,
+   "author": "萧红"
+  },
+  "junior-g8-shang-14": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "天上有颗“南仁东星”",
+   "pages": [
+    {
+     "pdf": 47,
+     "printed": "40"
+    },
+    {
+     "pdf": 48,
+     "printed": "41"
+    },
+    {
+     "pdf": 49,
+     "printed": "42"
+    },
+    {
+     "pdf": 50,
+     "printed": "43"
+    },
+    {
+     "pdf": 51,
+     "printed": "44"
+    },
+    {
+     "pdf": 52,
+     "printed": "45"
+    },
+    {
+     "pdf": 53,
+     "printed": "46"
+    },
+    {
+     "pdf": 54,
+     "printed": "47"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 9,
+   "selfRead": true,
+   "author": "王宏甲"
+  },
+  "junior-g8-shang-15": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "美丽的颜色",
+   "pages": [
+    {
+     "pdf": 55,
+     "printed": "48"
+    },
+    {
+     "pdf": 56,
+     "printed": "49"
+    },
+    {
+     "pdf": 57,
+     "printed": "50"
+    },
+    {
+     "pdf": 58,
+     "printed": "51"
+    },
+    {
+     "pdf": 59,
+     "printed": "52"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 10,
+   "selfRead": true,
+   "author": "艾芙·居里"
+  },
+  "junior-g8-shang-16": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第二单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 60,
+     "printed": "53"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-shang-17": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第二单元",
+   "title": "学写传记",
+   "pages": [
+    {
+     "pdf": 61,
+     "printed": "54"
+    },
+    {
+     "pdf": 62,
+     "printed": "55"
+    },
+    {
+     "pdf": 63,
+     "printed": "56"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-shang-18": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第二单元",
+   "title": "《红星照耀中国》 怎样读红色经典作品",
+   "pages": [
+    {
+     "pdf": 64,
+     "printed": "57"
+    },
+    {
+     "pdf": 65,
+     "printed": "58"
+    },
+    {
+     "pdf": 66,
+     "printed": "59"
+    },
+    {
+     "pdf": 67,
+     "printed": "60"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g8-shang-19": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第三单元",
+   "title": "第三单元",
+   "pages": [
+    {
+     "pdf": 68
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-shang-20": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "三峡",
+   "pages": [
+    {
+     "pdf": 69,
+     "printed": "62"
+    },
+    {
+     "pdf": 70,
+     "printed": "63"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 11,
+   "author": "郦道元"
+  },
+  "junior-g8-shang-21": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "短文二篇",
+   "pages": [
+    {
+     "pdf": 71,
+     "printed": "64"
+    },
+    {
+     "pdf": 72,
+     "printed": "65"
+    },
+    {
+     "pdf": 73,
+     "printed": "66"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 12,
+   "parts": [
+    {
+     "title": "答谢中书书",
+     "author": "陶弘景",
+     "pdf": 71
+    },
+    {
+     "title": "记承天寺夜游",
+     "author": "苏轼",
+     "pdf": 72
+    }
+   ]
+  },
+  "junior-g8-shang-22": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "与朱元思书",
+   "pages": [
+    {
+     "pdf": 74,
+     "printed": "67"
+    },
+    {
+     "pdf": 75,
+     "printed": "68"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 13,
+   "selfRead": true,
+   "author": "吴均"
+  },
+  "junior-g8-shang-23": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "唐诗五首",
+   "pages": [
+    {
+     "pdf": 76,
+     "printed": "69"
+    },
+    {
+     "pdf": 77,
+     "printed": "70"
+    },
+    {
+     "pdf": 78,
+     "printed": "71"
+    },
+    {
+     "pdf": 79,
+     "printed": "72"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 14,
+   "parts": [
+    {
+     "title": "野望",
+     "author": "王绩",
+     "pdf": 76
+    },
+    {
+     "title": "黄鹤楼",
+     "author": "崔颢",
+     "pdf": 77
+    },
+    {
+     "title": "使至塞上",
+     "author": "王维",
+     "pdf": 77
+    },
+    {
+     "title": "渡荆门送别",
+     "author": "李白",
+     "pdf": 78
+    },
+    {
+     "title": "钱塘湖春行",
+     "author": "白居易",
+     "pdf": 78
+    }
+   ]
+  },
+  "junior-g8-shang-24": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第三单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 80,
+     "printed": "73"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-shang-25": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第三单元",
+   "title": "学习描写景物",
+   "pages": [
+    {
+     "pdf": 81,
+     "printed": "74"
+    },
+    {
+     "pdf": 82,
+     "printed": "75"
+    },
+    {
+     "pdf": 83,
+     "printed": "76"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-shang-26": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第三单元",
+   "title": "人无信不立",
+   "pages": [
+    {
+     "pdf": 84,
+     "printed": "77"
+    },
+    {
+     "pdf": 85,
+     "printed": "78"
+    },
+    {
+     "pdf": 86,
+     "printed": "79"
+    },
+    {
+     "pdf": 87,
+     "printed": "80"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g8-shang-27": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第三单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 88,
+     "printed": "81"
+    },
+    {
+     "pdf": 89,
+     "printed": "82"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "庭中有奇树",
+     "author": "《古诗十九首》",
+     "pdf": 88
+    },
+    {
+     "title": "龟虽寿",
+     "author": "曹操",
+     "pdf": 88
+    },
+    {
+     "title": "赠从弟（其二）",
+     "author": "刘桢",
+     "pdf": 89
+    },
+    {
+     "title": "梁甫行",
+     "author": "曹植",
+     "pdf": 89
+    }
+   ]
+  },
+  "junior-g8-shang-28": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第四单元",
+   "title": "第四单元",
+   "pages": [
+    {
+     "pdf": 90
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-shang-29": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "背影",
+   "pages": [
+    {
+     "pdf": 91,
+     "printed": "84"
+    },
+    {
+     "pdf": 92,
+     "printed": "85"
+    },
+    {
+     "pdf": 93,
+     "printed": "86"
+    },
+    {
+     "pdf": 94,
+     "printed": "87"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 15,
+   "author": "朱自清"
+  },
+  "junior-g8-shang-30": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "白杨礼赞",
+   "pages": [
+    {
+     "pdf": 95,
+     "printed": "88"
+    },
+    {
+     "pdf": 96,
+     "printed": "89"
+    },
+    {
+     "pdf": 97,
+     "printed": "90"
+    },
+    {
+     "pdf": 98,
+     "printed": "91"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 16,
+   "author": "茅盾"
+  },
+  "junior-g8-shang-31": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "散文二篇",
+   "pages": [
+    {
+     "pdf": 99,
+     "printed": "92"
+    },
+    {
+     "pdf": 100,
+     "printed": "93"
+    },
+    {
+     "pdf": 101,
+     "printed": "94"
+    },
+    {
+     "pdf": 102,
+     "printed": "95"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 17,
+   "selfRead": true,
+   "parts": [
+    {
+     "title": "永久的生命",
+     "author": "严文井",
+     "pdf": 99
+    },
+    {
+     "title": "我为什么而活着",
+     "author": "罗素",
+     "pdf": 100
+    }
+   ]
+  },
+  "junior-g8-shang-32": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "昆明的雨",
+   "pages": [
+    {
+     "pdf": 103,
+     "printed": "96"
+    },
+    {
+     "pdf": 104,
+     "printed": "97"
+    },
+    {
+     "pdf": 105,
+     "printed": "98"
+    },
+    {
+     "pdf": 106,
+     "printed": "99"
+    },
+    {
+     "pdf": 107,
+     "printed": "100"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 18,
+   "selfRead": true,
+   "author": "汪曾祺"
+  },
+  "junior-g8-shang-33": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第四单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 108,
+     "printed": "101"
+    },
+    {
+     "pdf": 109,
+     "printed": "102"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-shang-34": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第四单元",
+   "title": "语言要连贯",
+   "pages": [
+    {
+     "pdf": 110,
+     "printed": "103"
+    },
+    {
+     "pdf": 111,
+     "printed": "104"
+    },
+    {
+     "pdf": 112,
+     "printed": "105"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-shang-35": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第四单元",
+   "title": "《红岩》",
+   "pages": [
+    {
+     "pdf": 113,
+     "printed": "106"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g8-shang-36": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第五单元",
+   "title": "第五单元",
+   "pages": [
+    {
+     "pdf": 114
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-shang-37": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "中国石拱桥",
+   "pages": [
+    {
+     "pdf": 115,
+     "printed": "108"
+    },
+    {
+     "pdf": 116,
+     "printed": "109"
+    },
+    {
+     "pdf": 117,
+     "printed": "110"
+    },
+    {
+     "pdf": 118,
+     "printed": "111"
+    },
+    {
+     "pdf": 119,
+     "printed": "112"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 19,
+   "author": "茅以昇"
+  },
+  "junior-g8-shang-38": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "苏州园林",
+   "pages": [
+    {
+     "pdf": 120,
+     "printed": "113"
+    },
+    {
+     "pdf": 121,
+     "printed": "114"
+    },
+    {
+     "pdf": 122,
+     "printed": "115"
+    },
+    {
+     "pdf": 123,
+     "printed": "116"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 20,
+   "author": "叶圣陶"
+  },
+  "junior-g8-shang-39": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "人民英雄永垂不朽",
+   "pages": [
+    {
+     "pdf": 124,
+     "printed": "117"
+    },
+    {
+     "pdf": 125,
+     "printed": "118"
+    },
+    {
+     "pdf": 126,
+     "printed": "119"
+    },
+    {
+     "pdf": 127,
+     "printed": "120"
+    },
+    {
+     "pdf": 128,
+     "printed": "121"
+    },
+    {
+     "pdf": 129,
+     "printed": "122"
+    },
+    {
+     "pdf": 130,
+     "printed": "123"
+    },
+    {
+     "pdf": 131,
+     "printed": "124"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 21,
+   "selfRead": true,
+   "author": "周定舫",
+   "subtitle": "——瞻仰首都人民英雄纪念碑"
+  },
+  "junior-g8-shang-40": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "梦回繁华",
+   "pages": [
+    {
+     "pdf": 132,
+     "printed": "125"
+    },
+    {
+     "pdf": 133,
+     "printed": "126"
+    },
+    {
+     "pdf": 134,
+     "printed": "127"
+    },
+    {
+     "pdf": 135,
+     "printed": "128"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 22,
+   "selfRead": true,
+   "author": "毛宁"
+  },
+  "junior-g8-shang-41": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第五单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 136,
+     "printed": "129"
+    },
+    {
+     "pdf": 137,
+     "printed": "130"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-shang-42": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第五单元",
+   "title": "说明事物要抓住特征",
+   "pages": [
+    {
+     "pdf": 138,
+     "printed": "131"
+    },
+    {
+     "pdf": 139,
+     "printed": "132"
+    },
+    {
+     "pdf": 140,
+     "printed": "133"
+    },
+    {
+     "pdf": 141,
+     "printed": "134"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-shang-43": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第五单元",
+   "title": "身边的文化遗产",
+   "pages": [
+    {
+     "pdf": 142,
+     "printed": "135"
+    },
+    {
+     "pdf": 143,
+     "printed": "136"
+    },
+    {
+     "pdf": 144,
+     "printed": "137"
+    },
+    {
+     "pdf": 145,
+     "printed": "138"
+    },
+    {
+     "pdf": 146,
+     "printed": "139"
+    },
+    {
+     "pdf": 147,
+     "printed": "140"
+    },
+    {
+     "pdf": 148,
+     "printed": "141"
+    },
+    {
+     "pdf": 149,
+     "printed": "142"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g8-shang-44": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第六单元",
+   "title": "第六单元",
+   "pages": [
+    {
+     "pdf": 150,
+     "printed": "143"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-shang-45": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "《孟子》三章",
+   "pages": [
+    {
+     "pdf": 151,
+     "printed": "144"
+    },
+    {
+     "pdf": 152,
+     "printed": "145"
+    },
+    {
+     "pdf": 153,
+     "printed": "146"
+    },
+    {
+     "pdf": 154,
+     "printed": "147"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 23,
+   "parts": [
+    {
+     "title": "得道多助，失道寡助",
+     "pdf": 151
+    },
+    {
+     "title": "富贵不能淫",
+     "pdf": 152
+    },
+    {
+     "title": "生于忧患，死于安乐",
+     "pdf": 153
+    }
+   ]
+  },
+  "junior-g8-shang-46": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "愚公移山",
+   "pages": [
+    {
+     "pdf": 155,
+     "printed": "148"
+    },
+    {
+     "pdf": 156,
+     "printed": "149"
+    },
+    {
+     "pdf": 157,
+     "printed": "150"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 24,
+   "author": "《列子》"
+  },
+  "junior-g8-shang-47": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "周亚夫军细柳",
+   "pages": [
+    {
+     "pdf": 158,
+     "printed": "151"
+    },
+    {
+     "pdf": 159,
+     "printed": "152"
+    },
+    {
+     "pdf": 160,
+     "printed": "153"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 25,
+   "selfRead": true,
+   "author": "司马迁"
+  },
+  "junior-g8-shang-48": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "诗词五首",
+   "pages": [
+    {
+     "pdf": 161,
+     "printed": "154"
+    },
+    {
+     "pdf": 162,
+     "printed": "155"
+    },
+    {
+     "pdf": 163,
+     "printed": "156"
+    },
+    {
+     "pdf": 164,
+     "printed": "157"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 26,
+   "parts": [
+    {
+     "title": "饮酒（其五）",
+     "author": "陶渊明",
+     "pdf": 161
+    },
+    {
+     "title": "春望",
+     "author": "杜甫",
+     "pdf": 162
+    },
+    {
+     "title": "雁门太守行",
+     "author": "李贺",
+     "pdf": 162
+    },
+    {
+     "title": "赤壁",
+     "author": "杜牧",
+     "pdf": 163
+    },
+    {
+     "title": "渔家傲（天接云涛连晓雾）",
+     "author": "李清照",
+     "pdf": 163
+    }
+   ]
+  },
+  "junior-g8-shang-49": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第六单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 165,
+     "printed": "158"
+    },
+    {
+     "pdf": 166,
+     "printed": "159"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-shang-50": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第六单元",
+   "title": "表达要得体",
+   "pages": [
+    {
+     "pdf": 167,
+     "printed": "160"
+    },
+    {
+     "pdf": 168,
+     "printed": "161"
+    },
+    {
+     "pdf": 169,
+     "printed": "162"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-shang-51": {
+   "book": "g8-shang",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第六单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 170,
+     "printed": "163"
+    },
+    {
+     "pdf": 171,
+     "printed": "164"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "浣溪沙（一曲新词酒一杯）",
+     "author": "晏殊",
+     "pdf": 170
+    },
+    {
+     "title": "采桑子（轻舟短棹西湖好）",
+     "author": "欧阳修",
+     "pdf": 170
+    },
+    {
+     "title": "相见欢（金陵城上西楼）",
+     "author": "朱敦儒",
+     "pdf": 171
+    },
+    {
+     "title": "如梦令（常记溪亭日暮）",
+     "author": "李清照",
+     "pdf": 171
+    }
+   ]
+  },
+  "junior-g8-xia-01": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第一单元",
+   "title": "第一单元",
+   "pages": [
+    {
+     "pdf": 8
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-xia-02": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "社戏",
+   "pages": [
+    {
+     "pdf": 9,
+     "printed": "2"
+    },
+    {
+     "pdf": 10,
+     "printed": "3"
+    },
+    {
+     "pdf": 11,
+     "printed": "4"
+    },
+    {
+     "pdf": 12,
+     "printed": "5"
+    },
+    {
+     "pdf": 13,
+     "printed": "6"
+    },
+    {
+     "pdf": 14,
+     "printed": "7"
+    },
+    {
+     "pdf": 15,
+     "printed": "8"
+    },
+    {
+     "pdf": 16,
+     "printed": "9"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 1,
+   "author": "鲁迅"
+  },
+  "junior-g8-xia-03": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "回延安",
+   "pages": [
+    {
+     "pdf": 17,
+     "printed": "10"
+    },
+    {
+     "pdf": 18,
+     "printed": "11"
+    },
+    {
+     "pdf": 19,
+     "printed": "12"
+    },
+    {
+     "pdf": 20,
+     "printed": "13"
+    },
+    {
+     "pdf": 21,
+     "printed": "14"
+    },
+    {
+     "pdf": 22,
+     "printed": "15"
+    },
+    {
+     "pdf": 23,
+     "printed": "16"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 2,
+   "author": "贺敬之"
+  },
+  "junior-g8-xia-04": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "安塞腰鼓",
+   "pages": [
+    {
+     "pdf": 24,
+     "printed": "17"
+    },
+    {
+     "pdf": 25,
+     "printed": "18"
+    },
+    {
+     "pdf": 26,
+     "printed": "19"
+    },
+    {
+     "pdf": 27,
+     "printed": "20"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 3,
+   "selfRead": true,
+   "author": "刘成章"
+  },
+  "junior-g8-xia-05": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "灯笼",
+   "pages": [
+    {
+     "pdf": 28,
+     "printed": "21"
+    },
+    {
+     "pdf": 29,
+     "printed": "22"
+    },
+    {
+     "pdf": 30,
+     "printed": "23"
+    },
+    {
+     "pdf": 31,
+     "printed": "24"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 4,
+   "selfRead": true,
+   "author": "吴伯箫"
+  },
+  "junior-g8-xia-06": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第一单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 32,
+     "printed": "25"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-xia-07": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第一单元",
+   "title": "考虑目的和对象",
+   "pages": [
+    {
+     "pdf": 33,
+     "printed": "26"
+    },
+    {
+     "pdf": 34,
+     "printed": "27"
+    },
+    {
+     "pdf": 35,
+     "printed": "28"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-xia-08": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第二单元",
+   "title": "第二单元",
+   "pages": [
+    {
+     "pdf": 36
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-xia-09": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "大自然的语言",
+   "pages": [
+    {
+     "pdf": 37,
+     "printed": "30"
+    },
+    {
+     "pdf": 38,
+     "printed": "31"
+    },
+    {
+     "pdf": 39,
+     "printed": "32"
+    },
+    {
+     "pdf": 40,
+     "printed": "33"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 5,
+   "author": "竺可桢 宛敏渭"
+  },
+  "junior-g8-xia-10": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "阿西莫夫短文两篇",
+   "pages": [
+    {
+     "pdf": 41,
+     "printed": "34"
+    },
+    {
+     "pdf": 42,
+     "printed": "35"
+    },
+    {
+     "pdf": 43,
+     "printed": "36"
+    },
+    {
+     "pdf": 44,
+     "printed": "37"
+    },
+    {
+     "pdf": 45,
+     "printed": "38"
+    },
+    {
+     "pdf": 46,
+     "printed": "39"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 6,
+   "parts": [
+    {
+     "title": "恐龙无处不有",
+     "pdf": 41
+    },
+    {
+     "title": "被压扁的沙子",
+     "pdf": 43
+    }
+   ]
+  },
+  "junior-g8-xia-11": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "月亮是从哪里来的",
+   "pages": [
+    {
+     "pdf": 47,
+     "printed": "40"
+    },
+    {
+     "pdf": 48,
+     "printed": "41"
+    },
+    {
+     "pdf": 49,
+     "printed": "42"
+    },
+    {
+     "pdf": 50,
+     "printed": "43"
+    },
+    {
+     "pdf": 51,
+     "printed": "44"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 7,
+   "selfRead": true,
+   "author": "卞毓麟"
+  },
+  "junior-g8-xia-12": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "时间的脚印",
+   "pages": [
+    {
+     "pdf": 52,
+     "printed": "45"
+    },
+    {
+     "pdf": 53,
+     "printed": "46"
+    },
+    {
+     "pdf": 54,
+     "printed": "47"
+    },
+    {
+     "pdf": 55,
+     "printed": "48"
+    },
+    {
+     "pdf": 56,
+     "printed": "49"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 8,
+   "selfRead": true,
+   "author": "陶世龙"
+  },
+  "junior-g8-xia-13": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第二单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 57,
+     "printed": "50"
+    },
+    {
+     "pdf": 58,
+     "printed": "51"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-xia-14": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第二单元",
+   "title": "说明的顺序",
+   "pages": [
+    {
+     "pdf": 59,
+     "printed": "52"
+    },
+    {
+     "pdf": 60,
+     "printed": "53"
+    },
+    {
+     "pdf": 61,
+     "printed": "54"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-xia-15": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第二单元",
+   "title": "绿水青山，低碳生活",
+   "pages": [
+    {
+     "pdf": 62,
+     "printed": "55"
+    },
+    {
+     "pdf": 63,
+     "printed": "56"
+    },
+    {
+     "pdf": 64,
+     "printed": "57"
+    },
+    {
+     "pdf": 65,
+     "printed": "58"
+    },
+    {
+     "pdf": 66,
+     "printed": "59"
+    },
+    {
+     "pdf": 67,
+     "printed": "60"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g8-xia-16": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第三单元",
+   "title": "第三单元",
+   "pages": [
+    {
+     "pdf": 68
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-xia-17": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "桃花源记",
+   "pages": [
+    {
+     "pdf": 69,
+     "printed": "62"
+    },
+    {
+     "pdf": 70,
+     "printed": "63"
+    },
+    {
+     "pdf": 71,
+     "printed": "64"
+    },
+    {
+     "pdf": 72,
+     "printed": "65"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 9,
+   "author": "陶渊明"
+  },
+  "junior-g8-xia-18": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "小石潭记",
+   "pages": [
+    {
+     "pdf": 73,
+     "printed": "66"
+    },
+    {
+     "pdf": 74,
+     "printed": "67"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 10,
+   "author": "柳宗元"
+  },
+  "junior-g8-xia-19": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "核舟记",
+   "pages": [
+    {
+     "pdf": 75,
+     "printed": "68"
+    },
+    {
+     "pdf": 76,
+     "printed": "69"
+    },
+    {
+     "pdf": 77,
+     "printed": "70"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 11,
+   "selfRead": true,
+   "author": "魏学洢"
+  },
+  "junior-g8-xia-20": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "《诗经》二首",
+   "pages": [
+    {
+     "pdf": 78,
+     "printed": "71"
+    },
+    {
+     "pdf": 79,
+     "printed": "72"
+    },
+    {
+     "pdf": 80,
+     "printed": "73"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 12,
+   "parts": [
+    {
+     "title": "关雎",
+     "pdf": 78
+    },
+    {
+     "title": "蒹葭",
+     "pdf": 79
+    }
+   ]
+  },
+  "junior-g8-xia-21": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第三单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 81,
+     "printed": "74"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-xia-22": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第三单元",
+   "title": "学写读后感",
+   "pages": [
+    {
+     "pdf": 82,
+     "printed": "75"
+    },
+    {
+     "pdf": 83,
+     "printed": "76"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-xia-23": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第三单元",
+   "title": "《经典常谈》 怎样读知识性作品",
+   "pages": [
+    {
+     "pdf": 84,
+     "printed": "77"
+    },
+    {
+     "pdf": 85,
+     "printed": "78"
+    },
+    {
+     "pdf": 86,
+     "printed": "79"
+    },
+    {
+     "pdf": 87,
+     "printed": "80"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g8-xia-24": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第三单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 88,
+     "printed": "81"
+    },
+    {
+     "pdf": 89,
+     "printed": "82"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "式微",
+     "author": "《诗经·邶风》",
+     "pdf": 88
+    },
+    {
+     "title": "子衿",
+     "author": "《诗经·郑风》",
+     "pdf": 88
+    },
+    {
+     "title": "送杜少府之任蜀州",
+     "author": "王勃",
+     "pdf": 89
+    },
+    {
+     "title": "望洞庭湖上张丞相",
+     "author": "孟浩然",
+     "pdf": 89
+    }
+   ]
+  },
+  "junior-g8-xia-25": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第四单元",
+   "title": "第四单元",
+   "pages": [
+    {
+     "pdf": 90
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-xia-26": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第四单元",
+   "title": "学习演讲词",
+   "pages": [
+    {
+     "pdf": 91,
+     "printed": "84"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务一"
+  },
+  "junior-g8-xia-27": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "最后一次讲演",
+   "pages": [
+    {
+     "pdf": 92,
+     "printed": "85"
+    },
+    {
+     "pdf": 93,
+     "printed": "86"
+    },
+    {
+     "pdf": 94,
+     "printed": "87"
+    },
+    {
+     "pdf": 95,
+     "printed": "88"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 13,
+   "author": "闻一多"
+  },
+  "junior-g8-xia-28": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "敬业与乐业",
+   "pages": [
+    {
+     "pdf": 96,
+     "printed": "89"
+    },
+    {
+     "pdf": 97,
+     "printed": "90"
+    },
+    {
+     "pdf": 98,
+     "printed": "91"
+    },
+    {
+     "pdf": 99,
+     "printed": "92"
+    },
+    {
+     "pdf": 100,
+     "printed": "93"
+    },
+    {
+     "pdf": 101,
+     "printed": "94"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 14,
+   "author": "梁启超"
+  },
+  "junior-g8-xia-29": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "应有格物致知精神",
+   "pages": [
+    {
+     "pdf": 102,
+     "printed": "95"
+    },
+    {
+     "pdf": 103,
+     "printed": "96"
+    },
+    {
+     "pdf": 104,
+     "printed": "97"
+    },
+    {
+     "pdf": 105,
+     "printed": "98"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 15,
+   "author": "丁肇中"
+  },
+  "junior-g8-xia-30": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "我一生中的重要抉择",
+   "pages": [
+    {
+     "pdf": 106,
+     "printed": "99"
+    },
+    {
+     "pdf": 107,
+     "printed": "100"
+    },
+    {
+     "pdf": 108,
+     "printed": "101"
+    },
+    {
+     "pdf": 109,
+     "printed": "102"
+    },
+    {
+     "pdf": 110,
+     "printed": "103"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 16,
+   "author": "王选"
+  },
+  "junior-g8-xia-31": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第四单元",
+   "title": "撰写演讲稿",
+   "pages": [
+    {
+     "pdf": 111,
+     "printed": "104"
+    },
+    {
+     "pdf": 112,
+     "printed": "105"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务二"
+  },
+  "junior-g8-xia-32": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第四单元",
+   "title": "举办演讲比赛",
+   "pages": [
+    {
+     "pdf": 113,
+     "printed": "106"
+    },
+    {
+     "pdf": 114,
+     "printed": "107"
+    },
+    {
+     "pdf": 115,
+     "printed": "108"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务三"
+  },
+  "junior-g8-xia-33": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第五单元",
+   "title": "第五单元",
+   "pages": [
+    {
+     "pdf": 116
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g8-xia-34": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "壶口瀑布",
+   "pages": [
+    {
+     "pdf": 117,
+     "printed": "110"
+    },
+    {
+     "pdf": 118,
+     "printed": "111"
+    },
+    {
+     "pdf": 119,
+     "printed": "112"
+    },
+    {
+     "pdf": 120,
+     "printed": "113"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 17,
+   "author": "梁衡"
+  },
+  "junior-g8-xia-35": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "在长江源头各拉丹冬",
+   "pages": [
+    {
+     "pdf": 121,
+     "printed": "114"
+    },
+    {
+     "pdf": 122,
+     "printed": "115"
+    },
+    {
+     "pdf": 123,
+     "printed": "116"
+    },
+    {
+     "pdf": 124,
+     "printed": "117"
+    },
+    {
+     "pdf": 125,
+     "printed": "118"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 18,
+   "author": "马丽华"
+  },
+  "junior-g8-xia-36": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "登勃朗峰",
+   "pages": [
+    {
+     "pdf": 126,
+     "printed": "119"
+    },
+    {
+     "pdf": 127,
+     "printed": "120"
+    },
+    {
+     "pdf": 128,
+     "printed": "121"
+    },
+    {
+     "pdf": 129,
+     "printed": "122"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 19,
+   "selfRead": true,
+   "author": "马克·吐温"
+  },
+  "junior-g8-xia-37": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "一滴水经过丽江",
+   "pages": [
+    {
+     "pdf": 130,
+     "printed": "123"
+    },
+    {
+     "pdf": 131,
+     "printed": "124"
+    },
+    {
+     "pdf": 132,
+     "printed": "125"
+    },
+    {
+     "pdf": 133,
+     "printed": "126"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 20,
+   "selfRead": true,
+   "author": "阿来"
+  },
+  "junior-g8-xia-38": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第五单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 134,
+     "printed": "127"
+    },
+    {
+     "pdf": 135,
+     "printed": "128"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-xia-39": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第五单元",
+   "title": "学写游记",
+   "pages": [
+    {
+     "pdf": 136,
+     "printed": "129"
+    },
+    {
+     "pdf": 137,
+     "printed": "130"
+    },
+    {
+     "pdf": 138,
+     "printed": "131"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-xia-40": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第五单元",
+   "title": "《昆虫记》",
+   "pages": [
+    {
+     "pdf": 139,
+     "printed": "132"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g8-xia-41": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第六单元",
+   "title": "第六单元",
+   "pages": [
+    {
+     "pdf": 140,
+     "printed": "133"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-xia-42": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "《庄子》二则",
+   "pages": [
+    {
+     "pdf": 141,
+     "printed": "134"
+    },
+    {
+     "pdf": 142,
+     "printed": "135"
+    },
+    {
+     "pdf": 143,
+     "printed": "136"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 21,
+   "parts": [
+    {
+     "title": "北冥有鱼",
+     "pdf": 141
+    },
+    {
+     "title": "庄子与惠子游于濠梁之上",
+     "pdf": 142
+    }
+   ]
+  },
+  "junior-g8-xia-43": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "《礼记》二则",
+   "pages": [
+    {
+     "pdf": 144,
+     "printed": "137"
+    },
+    {
+     "pdf": 145,
+     "printed": "138"
+    },
+    {
+     "pdf": 146,
+     "printed": "139"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 22,
+   "parts": [
+    {
+     "title": "虽有嘉肴",
+     "pdf": 144
+    },
+    {
+     "title": "大道之行也",
+     "pdf": 145
+    }
+   ]
+  },
+  "junior-g8-xia-44": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "马说",
+   "pages": [
+    {
+     "pdf": 147,
+     "printed": "140"
+    },
+    {
+     "pdf": 148,
+     "printed": "141"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 23,
+   "selfRead": true,
+   "author": "韩愈"
+  },
+  "junior-g8-xia-45": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "唐诗三首",
+   "pages": [
+    {
+     "pdf": 149,
+     "printed": "142"
+    },
+    {
+     "pdf": 150,
+     "printed": "143"
+    },
+    {
+     "pdf": 151,
+     "printed": "144"
+    },
+    {
+     "pdf": 152,
+     "printed": "145"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 24,
+   "parts": [
+    {
+     "title": "石壕吏",
+     "author": "杜甫",
+     "pdf": 149
+    },
+    {
+     "title": "茅屋为秋风所破歌",
+     "author": "杜甫",
+     "pdf": 150
+    },
+    {
+     "title": "卖炭翁",
+     "author": "白居易",
+     "pdf": 151
+    }
+   ]
+  },
+  "junior-g8-xia-46": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第六单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 153,
+     "printed": "146"
+    },
+    {
+     "pdf": 154,
+     "printed": "147"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g8-xia-47": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第六单元",
+   "title": "负责任地表达",
+   "pages": [
+    {
+     "pdf": 155,
+     "printed": "148"
+    },
+    {
+     "pdf": 156,
+     "printed": "149"
+    },
+    {
+     "pdf": 157,
+     "printed": "150"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g8-xia-48": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第六单元",
+   "title": "以和为贵",
+   "pages": [
+    {
+     "pdf": 158,
+     "printed": "151"
+    },
+    {
+     "pdf": 159,
+     "printed": "152"
+    },
+    {
+     "pdf": 160,
+     "printed": "153"
+    },
+    {
+     "pdf": 161,
+     "printed": "154"
+    },
+    {
+     "pdf": 162,
+     "printed": "155"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g8-xia-49": {
+   "book": "g8-xia",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第六单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 163,
+     "printed": "156"
+    },
+    {
+     "pdf": 164,
+     "printed": "157"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "题破山寺后禅院",
+     "author": "常建",
+     "pdf": 163
+    },
+    {
+     "title": "送友人",
+     "author": "李白",
+     "pdf": 163
+    },
+    {
+     "title": "卜算子·黄州定慧院寓居作",
+     "author": "苏轼",
+     "pdf": 164
+    },
+    {
+     "title": "卜算子·咏梅",
+     "author": "陆游",
+     "pdf": 164
+    }
+   ]
+  },
+  "junior-g9-shang-01": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第一单元",
+   "title": "第一单元",
+   "pages": [
+    {
+     "pdf": 8
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-shang-02": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第一单元",
+   "title": "学习鉴赏",
+   "pages": [
+    {
+     "pdf": 9,
+     "printed": "2"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务一"
+  },
+  "junior-g9-shang-03": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "沁园春·雪",
+   "pages": [
+    {
+     "pdf": 10,
+     "printed": "3"
+    },
+    {
+     "pdf": 11,
+     "printed": "4"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 1,
+   "author": "毛泽东"
+  },
+  "junior-g9-shang-04": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "周总理，你在哪里",
+   "pages": [
+    {
+     "pdf": 12,
+     "printed": "5"
+    },
+    {
+     "pdf": 13,
+     "printed": "6"
+    },
+    {
+     "pdf": 14,
+     "printed": "7"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 2,
+   "author": "柯岩"
+  },
+  "junior-g9-shang-05": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "我爱这土地",
+   "pages": [
+    {
+     "pdf": 15,
+     "printed": "8"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 3,
+   "author": "艾青"
+  },
+  "junior-g9-shang-06": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "乡愁",
+   "pages": [
+    {
+     "pdf": 16,
+     "printed": "9"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 4,
+   "author": "余光中"
+  },
+  "junior-g9-shang-07": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "你是人间的四月天",
+   "pages": [
+    {
+     "pdf": 17,
+     "printed": "10"
+    },
+    {
+     "pdf": 18,
+     "printed": "11"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 5,
+   "author": "林徽因",
+   "subtitle": "——一句爱的赞颂"
+  },
+  "junior-g9-shang-08": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "我看",
+   "pages": [
+    {
+     "pdf": 19,
+     "printed": "12"
+    },
+    {
+     "pdf": 20,
+     "printed": "13"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 6,
+   "author": "穆旦"
+  },
+  "junior-g9-shang-09": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第一单元",
+   "title": "诗歌朗诵",
+   "pages": [
+    {
+     "pdf": 21,
+     "printed": "14"
+    },
+    {
+     "pdf": 22,
+     "printed": "15"
+    },
+    {
+     "pdf": 23,
+     "printed": "16"
+    },
+    {
+     "pdf": 24,
+     "printed": "17"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务二"
+  },
+  "junior-g9-shang-10": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第一单元",
+   "title": "尝试创作",
+   "pages": [
+    {
+     "pdf": 25,
+     "printed": "18"
+    },
+    {
+     "pdf": 26,
+     "printed": "19"
+    },
+    {
+     "pdf": 27,
+     "printed": "20"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务三"
+  },
+  "junior-g9-shang-11": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第二单元",
+   "title": "第二单元",
+   "pages": [
+    {
+     "pdf": 28
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-shang-12": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "培养德智体美劳全面发展的社会主义建设者和接班人",
+   "pages": [
+    {
+     "pdf": 29,
+     "printed": "22"
+    },
+    {
+     "pdf": 30,
+     "printed": "23"
+    },
+    {
+     "pdf": 31,
+     "printed": "24"
+    },
+    {
+     "pdf": 32,
+     "printed": "25"
+    },
+    {
+     "pdf": 33,
+     "printed": "26"
+    },
+    {
+     "pdf": 34,
+     "printed": "27"
+    },
+    {
+     "pdf": 35,
+     "printed": "28"
+    },
+    {
+     "pdf": 36,
+     "printed": "29"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 7,
+   "author": "习近平"
+  },
+  "junior-g9-shang-13": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "中国人失掉自信力了吗",
+   "pages": [
+    {
+     "pdf": 37,
+     "printed": "30"
+    },
+    {
+     "pdf": 38,
+     "printed": "31"
+    },
+    {
+     "pdf": 39,
+     "printed": "32"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 8,
+   "author": "鲁迅"
+  },
+  "junior-g9-shang-14": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "谈骨气",
+   "pages": [
+    {
+     "pdf": 40,
+     "printed": "33"
+    },
+    {
+     "pdf": 41,
+     "printed": "34"
+    },
+    {
+     "pdf": 42,
+     "printed": "35"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 9,
+   "selfRead": true,
+   "author": "吴晗"
+  },
+  "junior-g9-shang-15": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "创造宣言",
+   "pages": [
+    {
+     "pdf": 43,
+     "printed": "36"
+    },
+    {
+     "pdf": 44,
+     "printed": "37"
+    },
+    {
+     "pdf": 45,
+     "printed": "38"
+    },
+    {
+     "pdf": 46,
+     "printed": "39"
+    },
+    {
+     "pdf": 47,
+     "printed": "40"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 10,
+   "selfRead": true,
+   "author": "陶行知"
+  },
+  "junior-g9-shang-16": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第二单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 48,
+     "printed": "41"
+    },
+    {
+     "pdf": 49,
+     "printed": "42"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-17": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第二单元",
+   "title": "观点要明确",
+   "pages": [
+    {
+     "pdf": 50,
+     "printed": "43"
+    },
+    {
+     "pdf": 51,
+     "printed": "44"
+    },
+    {
+     "pdf": 52,
+     "printed": "45"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-shang-18": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第二单元",
+   "title": "君子自强不息",
+   "pages": [
+    {
+     "pdf": 53,
+     "printed": "46"
+    },
+    {
+     "pdf": 54,
+     "printed": "47"
+    },
+    {
+     "pdf": 55,
+     "printed": "48"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g9-shang-19": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第三单元",
+   "title": "第三单元",
+   "pages": [
+    {
+     "pdf": 56
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-shang-20": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "岳阳楼记",
+   "pages": [
+    {
+     "pdf": 57,
+     "printed": "50"
+    },
+    {
+     "pdf": 58,
+     "printed": "51"
+    },
+    {
+     "pdf": 59,
+     "printed": "52"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 11,
+   "author": "范仲淹"
+  },
+  "junior-g9-shang-21": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "醉翁亭记",
+   "pages": [
+    {
+     "pdf": 60,
+     "printed": "53"
+    },
+    {
+     "pdf": 61,
+     "printed": "54"
+    },
+    {
+     "pdf": 62,
+     "printed": "55"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 12,
+   "author": "欧阳修"
+  },
+  "junior-g9-shang-22": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "湖心亭看雪",
+   "pages": [
+    {
+     "pdf": 63,
+     "printed": "56"
+    },
+    {
+     "pdf": 64,
+     "printed": "57"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 13,
+   "selfRead": true,
+   "author": "张岱"
+  },
+  "junior-g9-shang-23": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "诗词三首",
+   "pages": [
+    {
+     "pdf": 65,
+     "printed": "58"
+    },
+    {
+     "pdf": 66,
+     "printed": "59"
+    },
+    {
+     "pdf": 67,
+     "printed": "60"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 14,
+   "parts": [
+    {
+     "title": "行路难（其一）",
+     "author": "李白",
+     "pdf": 65
+    },
+    {
+     "title": "酬乐天扬州初逢席上见赠",
+     "author": "刘禹锡",
+     "pdf": 66
+    },
+    {
+     "title": "水调歌头（明月几时有）",
+     "author": "苏轼",
+     "pdf": 67
+    }
+   ]
+  },
+  "junior-g9-shang-24": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第三单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 68,
+     "printed": "61"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-25": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第三单元",
+   "title": "议论要言之有据",
+   "pages": [
+    {
+     "pdf": 69,
+     "printed": "62"
+    },
+    {
+     "pdf": 70,
+     "printed": "63"
+    },
+    {
+     "pdf": 71,
+     "printed": "64"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-shang-26": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第三单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 72,
+     "printed": "65"
+    },
+    {
+     "pdf": 73,
+     "printed": "66"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "月夜忆舍弟",
+     "author": "杜甫",
+     "pdf": 72
+    },
+    {
+     "title": "长沙过贾谊宅",
+     "author": "刘长卿",
+     "pdf": 72
+    },
+    {
+     "title": "左迁至蓝关示侄孙湘",
+     "author": "韩愈",
+     "pdf": 73
+    },
+    {
+     "title": "商山早行",
+     "author": "温庭筠",
+     "pdf": 73
+    }
+   ]
+  },
+  "junior-g9-shang-27": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第四单元",
+   "title": "第四单元",
+   "pages": [
+    {
+     "pdf": 74
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-shang-28": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "故乡",
+   "pages": [
+    {
+     "pdf": 75,
+     "printed": "68"
+    },
+    {
+     "pdf": 76,
+     "printed": "69"
+    },
+    {
+     "pdf": 77,
+     "printed": "70"
+    },
+    {
+     "pdf": 78,
+     "printed": "71"
+    },
+    {
+     "pdf": 79,
+     "printed": "72"
+    },
+    {
+     "pdf": 80,
+     "printed": "73"
+    },
+    {
+     "pdf": 81,
+     "printed": "74"
+    },
+    {
+     "pdf": 82,
+     "printed": "75"
+    },
+    {
+     "pdf": 83,
+     "printed": "76"
+    },
+    {
+     "pdf": 84,
+     "printed": "77"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 15,
+   "author": "鲁迅"
+  },
+  "junior-g9-shang-29": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "我的叔叔于勒",
+   "pages": [
+    {
+     "pdf": 85,
+     "printed": "78"
+    },
+    {
+     "pdf": 86,
+     "printed": "79"
+    },
+    {
+     "pdf": 87,
+     "printed": "80"
+    },
+    {
+     "pdf": 88,
+     "printed": "81"
+    },
+    {
+     "pdf": 89,
+     "printed": "82"
+    },
+    {
+     "pdf": 90,
+     "printed": "83"
+    },
+    {
+     "pdf": 91,
+     "printed": "84"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 16,
+   "author": "莫泊桑"
+  },
+  "junior-g9-shang-30": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "孤独之旅",
+   "pages": [
+    {
+     "pdf": 92,
+     "printed": "85"
+    },
+    {
+     "pdf": 93,
+     "printed": "86"
+    },
+    {
+     "pdf": 94,
+     "printed": "87"
+    },
+    {
+     "pdf": 95,
+     "printed": "88"
+    },
+    {
+     "pdf": 96,
+     "printed": "89"
+    },
+    {
+     "pdf": 97,
+     "printed": "90"
+    },
+    {
+     "pdf": 98,
+     "printed": "91"
+    },
+    {
+     "pdf": 99,
+     "printed": "92"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 17,
+   "selfRead": true,
+   "author": "曹文轩"
+  },
+  "junior-g9-shang-31": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "蒲柳人家（节选）",
+   "pages": [
+    {
+     "pdf": 100,
+     "printed": "93"
+    },
+    {
+     "pdf": 101,
+     "printed": "94"
+    },
+    {
+     "pdf": 102,
+     "printed": "95"
+    },
+    {
+     "pdf": 103,
+     "printed": "96"
+    },
+    {
+     "pdf": 104,
+     "printed": "97"
+    },
+    {
+     "pdf": 105,
+     "printed": "98"
+    },
+    {
+     "pdf": 106,
+     "printed": "99"
+    },
+    {
+     "pdf": 107,
+     "printed": "100"
+    },
+    {
+     "pdf": 108,
+     "printed": "101"
+    },
+    {
+     "pdf": 109,
+     "printed": "102"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 18,
+   "selfRead": true,
+   "author": "刘绍棠"
+  },
+  "junior-g9-shang-32": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第四单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 110,
+     "printed": "103"
+    },
+    {
+     "pdf": 111,
+     "printed": "104"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-33": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第四单元",
+   "title": "学写小小说",
+   "pages": [
+    {
+     "pdf": 112,
+     "printed": "105"
+    },
+    {
+     "pdf": 113,
+     "printed": "106"
+    },
+    {
+     "pdf": 114,
+     "printed": "107"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-shang-34": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第四单元",
+   "title": "《简·爱》 怎样读外国小说",
+   "pages": [
+    {
+     "pdf": 115,
+     "printed": "108"
+    },
+    {
+     "pdf": 116,
+     "printed": "109"
+    },
+    {
+     "pdf": 117,
+     "printed": "110"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g9-shang-35": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第五单元",
+   "title": "第五单元",
+   "pages": [
+    {
+     "pdf": 118,
+     "printed": "111"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-36": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "想和做",
+   "pages": [
+    {
+     "pdf": 119,
+     "printed": "112"
+    },
+    {
+     "pdf": 120,
+     "printed": "113"
+    },
+    {
+     "pdf": 121,
+     "printed": "114"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 19,
+   "author": "胡绳"
+  },
+  "junior-g9-shang-37": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "怀疑与学问",
+   "pages": [
+    {
+     "pdf": 122,
+     "printed": "115"
+    },
+    {
+     "pdf": 123,
+     "printed": "116"
+    },
+    {
+     "pdf": 124,
+     "printed": "117"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 20,
+   "author": "顾颉刚"
+  },
+  "junior-g9-shang-38": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "就英法联军远征中国致巴特勒上尉的信",
+   "pages": [
+    {
+     "pdf": 125,
+     "printed": "118"
+    },
+    {
+     "pdf": 126,
+     "printed": "119"
+    },
+    {
+     "pdf": 127,
+     "printed": "120"
+    },
+    {
+     "pdf": 128,
+     "printed": "121"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 21,
+   "selfRead": true,
+   "author": "雨果"
+  },
+  "junior-g9-shang-39": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "精神的三间小屋",
+   "pages": [
+    {
+     "pdf": 129,
+     "printed": "122"
+    },
+    {
+     "pdf": 130,
+     "printed": "123"
+    },
+    {
+     "pdf": 131,
+     "printed": "124"
+    },
+    {
+     "pdf": 132,
+     "printed": "125"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 22,
+   "selfRead": true,
+   "author": "毕淑敏"
+  },
+  "junior-g9-shang-40": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第五单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 133,
+     "printed": "126"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-41": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第五单元",
+   "title": "论证要合理",
+   "pages": [
+    {
+     "pdf": 134,
+     "printed": "127"
+    },
+    {
+     "pdf": 135,
+     "printed": "128"
+    },
+    {
+     "pdf": 136,
+     "printed": "129"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-shang-42": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第五单元",
+   "title": "我们的数字时代",
+   "pages": [
+    {
+     "pdf": 137,
+     "printed": "130"
+    },
+    {
+     "pdf": 138,
+     "printed": "131"
+    },
+    {
+     "pdf": 139,
+     "printed": "132"
+    },
+    {
+     "pdf": 140,
+     "printed": "133"
+    },
+    {
+     "pdf": 141,
+     "printed": "134"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "专题学习活动"
+  },
+  "junior-g9-shang-43": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第六单元",
+   "title": "第六单元",
+   "pages": [
+    {
+     "pdf": 142,
+     "printed": "135"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-44": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "曹刿论战",
+   "pages": [
+    {
+     "pdf": 143,
+     "printed": "136"
+    },
+    {
+     "pdf": 144,
+     "printed": "137"
+    },
+    {
+     "pdf": 145,
+     "printed": "138"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 23,
+   "author": "《左传》"
+  },
+  "junior-g9-shang-45": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "邹忌讽齐王纳谏",
+   "pages": [
+    {
+     "pdf": 146,
+     "printed": "139"
+    },
+    {
+     "pdf": 147,
+     "printed": "140"
+    },
+    {
+     "pdf": 148,
+     "printed": "141"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 24,
+   "selfRead": true,
+   "author": "《战国策》"
+  },
+  "junior-g9-shang-46": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "陈涉世家",
+   "pages": [
+    {
+     "pdf": 149,
+     "printed": "142"
+    },
+    {
+     "pdf": 150,
+     "printed": "143"
+    },
+    {
+     "pdf": 151,
+     "printed": "144"
+    },
+    {
+     "pdf": 152,
+     "printed": "145"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 25,
+   "selfRead": true,
+   "author": "司马迁"
+  },
+  "junior-g9-shang-47": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "出师表",
+   "pages": [
+    {
+     "pdf": 153,
+     "printed": "146"
+    },
+    {
+     "pdf": 154,
+     "printed": "147"
+    },
+    {
+     "pdf": 155,
+     "printed": "148"
+    },
+    {
+     "pdf": 156,
+     "printed": "149"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 26,
+   "author": "诸葛亮"
+  },
+  "junior-g9-shang-48": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "诗词曲五首",
+   "pages": [
+    {
+     "pdf": 157,
+     "printed": "150"
+    },
+    {
+     "pdf": 158,
+     "printed": "151"
+    },
+    {
+     "pdf": 159,
+     "printed": "152"
+    },
+    {
+     "pdf": 160,
+     "printed": "153"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 27,
+   "parts": [
+    {
+     "title": "十五从军征",
+     "pdf": 157
+    },
+    {
+     "title": "白雪歌送武判官归京",
+     "author": "岑参",
+     "pdf": 158
+    },
+    {
+     "title": "南乡子·登京口北固亭有怀",
+     "author": "辛弃疾",
+     "pdf": 158
+    },
+    {
+     "title": "过零丁洋",
+     "author": "文天祥",
+     "pdf": 159
+    },
+    {
+     "title": "山坡羊·潼关怀古",
+     "author": "张养浩",
+     "pdf": 160
+    }
+   ]
+  },
+  "junior-g9-shang-49": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "practice",
+   "unit": "第六单元",
+   "title": "阅读综合实践",
+   "pages": [
+    {
+     "pdf": 161,
+     "printed": "154"
+    }
+   ],
+   "basis": "contents-printed-page"
+  },
+  "junior-g9-shang-50": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第六单元",
+   "title": "学会深入思考",
+   "pages": [
+    {
+     "pdf": 162,
+     "printed": "155"
+    },
+    {
+     "pdf": 163,
+     "printed": "156"
+    },
+    {
+     "pdf": 164,
+     "printed": "157"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-shang-51": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第六单元",
+   "title": "《唐诗三百首》",
+   "pages": [
+    {
+     "pdf": 165,
+     "printed": "158"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "整本书阅读"
+  },
+  "junior-g9-shang-52": {
+   "book": "g9-shang",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第六单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 166,
+     "printed": "159"
+    },
+    {
+     "pdf": 167,
+     "printed": "160"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "咸阳城东楼",
+     "author": "许浑",
+     "pdf": 166
+    },
+    {
+     "title": "无题",
+     "author": "李商隐",
+     "pdf": 166
+    },
+    {
+     "title": "浣溪沙（漠漠轻寒上小楼）",
+     "author": "秦观",
+     "pdf": 167
+    },
+    {
+     "title": "丑奴儿·书博山道中壁",
+     "author": "辛弃疾",
+     "pdf": 167
+    }
+   ]
+  },
+  "junior-g9-xia-01": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第一单元",
+   "title": "第一单元",
+   "pages": [
+    {
+     "pdf": 8
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-xia-02": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "祖国啊，我亲爱的祖国",
+   "pages": [
+    {
+     "pdf": 9,
+     "printed": "2"
+    },
+    {
+     "pdf": 10,
+     "printed": "3"
+    },
+    {
+     "pdf": 11,
+     "printed": "4"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 1,
+   "author": "舒婷"
+  },
+  "junior-g9-xia-03": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "梅岭三章",
+   "pages": [
+    {
+     "pdf": 12,
+     "printed": "5"
+    },
+    {
+     "pdf": 13,
+     "printed": "6"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 2,
+   "selfRead": true,
+   "author": "陈毅"
+  },
+  "junior-g9-xia-04": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "短诗五首",
+   "pages": [
+    {
+     "pdf": 14,
+     "printed": "7"
+    },
+    {
+     "pdf": 15,
+     "printed": "8"
+    },
+    {
+     "pdf": 16,
+     "printed": "9"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 3,
+   "selfRead": true,
+   "parts": [
+    {
+     "title": "月夜",
+     "author": "沈尹默",
+     "pdf": 14
+    },
+    {
+     "title": "萧红墓畔口占",
+     "author": "戴望舒",
+     "pdf": 14
+    },
+    {
+     "title": "断章",
+     "author": "卞之琳",
+     "pdf": 15
+    },
+    {
+     "title": "风雨吟",
+     "author": "芦荻",
+     "pdf": 15
+    },
+    {
+     "title": "统一",
+     "author": "聂鲁达",
+     "pdf": 16
+    }
+   ]
+  },
+  "junior-g9-xia-05": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第一单元",
+   "title": "海燕",
+   "pages": [
+    {
+     "pdf": 17,
+     "printed": "10"
+    },
+    {
+     "pdf": 18,
+     "printed": "11"
+    },
+    {
+     "pdf": 19,
+     "printed": "12"
+    },
+    {
+     "pdf": 20,
+     "printed": "13"
+    },
+    {
+     "pdf": 21,
+     "printed": "14"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 4,
+   "author": "高尔基"
+  },
+  "junior-g9-xia-06": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第一单元",
+   "title": "学习扩写",
+   "pages": [
+    {
+     "pdf": 22,
+     "printed": "15"
+    },
+    {
+     "pdf": 23,
+     "printed": "16"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-xia-07": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第二单元",
+   "title": "第二单元",
+   "pages": [
+    {
+     "pdf": 24
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-xia-08": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "孔乙己",
+   "pages": [
+    {
+     "pdf": 25,
+     "printed": "18"
+    },
+    {
+     "pdf": 26,
+     "printed": "19"
+    },
+    {
+     "pdf": 27,
+     "printed": "20"
+    },
+    {
+     "pdf": 28,
+     "printed": "21"
+    },
+    {
+     "pdf": 29,
+     "printed": "22"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 5,
+   "author": "鲁迅"
+  },
+  "junior-g9-xia-09": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "变色龙",
+   "pages": [
+    {
+     "pdf": 30,
+     "printed": "23"
+    },
+    {
+     "pdf": 31,
+     "printed": "24"
+    },
+    {
+     "pdf": 32,
+     "printed": "25"
+    },
+    {
+     "pdf": 33,
+     "printed": "26"
+    },
+    {
+     "pdf": 34,
+     "printed": "27"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 6,
+   "author": "契诃夫"
+  },
+  "junior-g9-xia-10": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "溜索",
+   "pages": [
+    {
+     "pdf": 35,
+     "printed": "28"
+    },
+    {
+     "pdf": 36,
+     "printed": "29"
+    },
+    {
+     "pdf": 37,
+     "printed": "30"
+    },
+    {
+     "pdf": 38,
+     "printed": "31"
+    },
+    {
+     "pdf": 39,
+     "printed": "32"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 7,
+   "selfRead": true,
+   "author": "阿城"
+  },
+  "junior-g9-xia-11": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第二单元",
+   "title": "蒲柳人家（节选）",
+   "pages": [
+    {
+     "pdf": 40,
+     "printed": "33"
+    },
+    {
+     "pdf": 41,
+     "printed": "34"
+    },
+    {
+     "pdf": 42,
+     "printed": "35"
+    },
+    {
+     "pdf": 43,
+     "printed": "36"
+    },
+    {
+     "pdf": 44,
+     "printed": "37"
+    },
+    {
+     "pdf": 45,
+     "printed": "38"
+    },
+    {
+     "pdf": 46,
+     "printed": "39"
+    },
+    {
+     "pdf": 47,
+     "printed": "40"
+    },
+    {
+     "pdf": 48,
+     "printed": "41"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 8,
+   "selfRead": true,
+   "author": "刘绍棠"
+  },
+  "junior-g9-xia-12": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第二单元",
+   "title": "审题立意",
+   "pages": [
+    {
+     "pdf": 49,
+     "printed": "42"
+    },
+    {
+     "pdf": 50,
+     "printed": "43"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-xia-13": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "activity",
+   "unit": "第二单元",
+   "title": "岁月如歌——我们的初中生活",
+   "pages": [
+    {
+     "pdf": 51,
+     "printed": "44"
+    },
+    {
+     "pdf": 52,
+     "printed": "45"
+    },
+    {
+     "pdf": 53,
+     "printed": "46"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "综合性学习"
+  },
+  "junior-g9-xia-14": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第三单元",
+   "title": "第三单元",
+   "pages": [
+    {
+     "pdf": 54
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-xia-15": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "鱼我所欲也",
+   "pages": [
+    {
+     "pdf": 55,
+     "printed": "48"
+    },
+    {
+     "pdf": 56,
+     "printed": "49"
+    },
+    {
+     "pdf": 57,
+     "printed": "50"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 9,
+   "author": "《孟子》"
+  },
+  "junior-g9-xia-16": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "唐雎不辱使命",
+   "pages": [
+    {
+     "pdf": 58,
+     "printed": "51"
+    },
+    {
+     "pdf": 59,
+     "printed": "52"
+    },
+    {
+     "pdf": 60,
+     "printed": "53"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 10,
+   "selfRead": true,
+   "author": "《战国策》"
+  },
+  "junior-g9-xia-17": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "送东阳马生序",
+   "pages": [
+    {
+     "pdf": 61,
+     "printed": "54"
+    },
+    {
+     "pdf": 62,
+     "printed": "55"
+    },
+    {
+     "pdf": 63,
+     "printed": "56"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 11,
+   "author": "宋濂"
+  },
+  "junior-g9-xia-18": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第三单元",
+   "title": "词四首",
+   "pages": [
+    {
+     "pdf": 64,
+     "printed": "57"
+    },
+    {
+     "pdf": 65,
+     "printed": "58"
+    },
+    {
+     "pdf": 66,
+     "printed": "59"
+    },
+    {
+     "pdf": 67,
+     "printed": "60"
+    },
+    {
+     "pdf": 68,
+     "printed": "61"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 12,
+   "parts": [
+    {
+     "title": "渔家傲·秋思",
+     "author": "范仲淹",
+     "pdf": 64
+    },
+    {
+     "title": "江城子·密州出猎",
+     "author": "苏轼",
+     "pdf": 65
+    },
+    {
+     "title": "破阵子·为陈同甫赋壮词以寄之",
+     "author": "辛弃疾",
+     "pdf": 66
+    },
+    {
+     "title": "满江红（小住京华）",
+     "author": "秋瑾",
+     "pdf": 67
+    }
+   ]
+  },
+  "junior-g9-xia-19": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第三单元",
+   "title": "布局谋篇",
+   "pages": [
+    {
+     "pdf": 69,
+     "printed": "62"
+    },
+    {
+     "pdf": 70,
+     "printed": "63"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-xia-20": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第三单元",
+   "title": "《儒林外史》 讽刺作品的阅读",
+   "pages": [
+    {
+     "pdf": 71,
+     "printed": "64"
+    },
+    {
+     "pdf": 72,
+     "printed": "65"
+    },
+    {
+     "pdf": 73,
+     "printed": "66"
+    },
+    {
+     "pdf": 74,
+     "printed": "67"
+    },
+    {
+     "pdf": 75,
+     "printed": "68"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "名著导读"
+  },
+  "junior-g9-xia-21": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第三单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 76,
+     "printed": "69"
+    },
+    {
+     "pdf": 77,
+     "printed": "70"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "定风波（莫听穿林打叶声）",
+     "author": "苏轼",
+     "pdf": 76
+    },
+    {
+     "title": "临江仙·夜登小阁，忆洛中旧游",
+     "author": "陈与义",
+     "pdf": 76
+    },
+    {
+     "title": "太常引·建康中秋夜为吕叔潜赋",
+     "author": "辛弃疾",
+     "pdf": 77
+    },
+    {
+     "title": "浣溪沙（身向云山那畔行）",
+     "author": "纳兰性德",
+     "pdf": 77
+    }
+   ]
+  },
+  "junior-g9-xia-22": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第四单元",
+   "title": "第四单元",
+   "pages": [
+    {
+     "pdf": 78
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-xia-23": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "短文两篇",
+   "pages": [
+    {
+     "pdf": 79,
+     "printed": "72"
+    },
+    {
+     "pdf": 80,
+     "printed": "73"
+    },
+    {
+     "pdf": 81,
+     "printed": "74"
+    },
+    {
+     "pdf": 82,
+     "printed": "75"
+    },
+    {
+     "pdf": 83,
+     "printed": "76"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 13,
+   "parts": [
+    {
+     "title": "谈读书",
+     "author": "弗朗西斯·培根",
+     "pdf": 79
+    },
+    {
+     "title": "不求甚解",
+     "author": "马南邨",
+     "pdf": 80
+    }
+   ]
+  },
+  "junior-g9-xia-24": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "山水画的意境",
+   "pages": [
+    {
+     "pdf": 84,
+     "printed": "77"
+    },
+    {
+     "pdf": 85,
+     "printed": "78"
+    },
+    {
+     "pdf": 86,
+     "printed": "79"
+    },
+    {
+     "pdf": 87,
+     "printed": "80"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 14,
+   "author": "李可染"
+  },
+  "junior-g9-xia-25": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "无言之美",
+   "pages": [
+    {
+     "pdf": 88,
+     "printed": "81"
+    },
+    {
+     "pdf": 89,
+     "printed": "82"
+    },
+    {
+     "pdf": 90,
+     "printed": "83"
+    },
+    {
+     "pdf": 91,
+     "printed": "84"
+    },
+    {
+     "pdf": 92,
+     "printed": "85"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 15,
+   "selfRead": true,
+   "author": "朱光潜"
+  },
+  "junior-g9-xia-26": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第四单元",
+   "title": "驱遣我们的想象",
+   "pages": [
+    {
+     "pdf": 93,
+     "printed": "86"
+    },
+    {
+     "pdf": 94,
+     "printed": "87"
+    },
+    {
+     "pdf": 95,
+     "printed": "88"
+    },
+    {
+     "pdf": 96,
+     "printed": "89"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 16,
+   "selfRead": true,
+   "author": "叶圣陶"
+  },
+  "junior-g9-xia-27": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第四单元",
+   "title": "修改润色",
+   "pages": [
+    {
+     "pdf": 97,
+     "printed": "90"
+    },
+    {
+     "pdf": 98,
+     "printed": "91"
+    },
+    {
+     "pdf": 99,
+     "printed": "92"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-xia-28": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "oral",
+   "unit": "第四单元",
+   "title": "辩论",
+   "pages": [
+    {
+     "pdf": 100,
+     "printed": "93"
+    },
+    {
+     "pdf": 101,
+     "printed": "94"
+    },
+    {
+     "pdf": 102,
+     "printed": "95"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "口语交际"
+  },
+  "junior-g9-xia-29": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第五单元",
+   "title": "第五单元",
+   "pages": [
+    {
+     "pdf": 103
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-xia-30": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第五单元",
+   "title": "阅读与思考",
+   "pages": [
+    {
+     "pdf": 104,
+     "printed": "97"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务一"
+  },
+  "junior-g9-xia-31": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "屈原（节选）",
+   "pages": [
+    {
+     "pdf": 105,
+     "printed": "98"
+    },
+    {
+     "pdf": 106,
+     "printed": "99"
+    },
+    {
+     "pdf": 107,
+     "printed": "100"
+    },
+    {
+     "pdf": 108,
+     "printed": "101"
+    },
+    {
+     "pdf": 109,
+     "printed": "102"
+    },
+    {
+     "pdf": 110,
+     "printed": "103"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 17,
+   "author": "郭沫若"
+  },
+  "junior-g9-xia-32": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "天下第一楼（节选）",
+   "pages": [
+    {
+     "pdf": 111,
+     "printed": "104"
+    },
+    {
+     "pdf": 112,
+     "printed": "105"
+    },
+    {
+     "pdf": 113,
+     "printed": "106"
+    },
+    {
+     "pdf": 114,
+     "printed": "107"
+    },
+    {
+     "pdf": 115,
+     "printed": "108"
+    },
+    {
+     "pdf": 116,
+     "printed": "109"
+    },
+    {
+     "pdf": 117,
+     "printed": "110"
+    },
+    {
+     "pdf": 118,
+     "printed": "111"
+    },
+    {
+     "pdf": 119,
+     "printed": "112"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 18,
+   "author": "何冀平"
+  },
+  "junior-g9-xia-33": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第五单元",
+   "title": "枣儿",
+   "pages": [
+    {
+     "pdf": 120,
+     "printed": "113"
+    },
+    {
+     "pdf": 121,
+     "printed": "114"
+    },
+    {
+     "pdf": 122,
+     "printed": "115"
+    },
+    {
+     "pdf": 123,
+     "printed": "116"
+    },
+    {
+     "pdf": 124,
+     "printed": "117"
+    },
+    {
+     "pdf": 125,
+     "printed": "118"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 19,
+   "author": "孙鸿"
+  },
+  "junior-g9-xia-34": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第五单元",
+   "title": "准备与排练",
+   "pages": [
+    {
+     "pdf": 126,
+     "printed": "119"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务二"
+  },
+  "junior-g9-xia-35": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "task",
+   "unit": "第五单元",
+   "title": "演出与评议",
+   "pages": [
+    {
+     "pdf": 127,
+     "printed": "120"
+    },
+    {
+     "pdf": 128,
+     "printed": "121"
+    },
+    {
+     "pdf": 129,
+     "printed": "122"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "label": "任务三"
+  },
+  "junior-g9-xia-36": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "unit",
+   "unit": "第六单元",
+   "title": "第六单元",
+   "pages": [
+    {
+     "pdf": 130
+    }
+   ],
+   "basis": "unit-heading-unnumbered-page"
+  },
+  "junior-g9-xia-37": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "曹刿论战",
+   "pages": [
+    {
+     "pdf": 131,
+     "printed": "124"
+    },
+    {
+     "pdf": 132,
+     "printed": "125"
+    },
+    {
+     "pdf": 133,
+     "printed": "126"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 20,
+   "author": "《左传》"
+  },
+  "junior-g9-xia-38": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "邹忌讽齐王纳谏",
+   "pages": [
+    {
+     "pdf": 134,
+     "printed": "127"
+    },
+    {
+     "pdf": 135,
+     "printed": "128"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 21,
+   "selfRead": true,
+   "author": "《战国策》"
+  },
+  "junior-g9-xia-39": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "陈涉世家",
+   "pages": [
+    {
+     "pdf": 136,
+     "printed": "129"
+    },
+    {
+     "pdf": 137,
+     "printed": "130"
+    },
+    {
+     "pdf": 138,
+     "printed": "131"
+    },
+    {
+     "pdf": 139,
+     "printed": "132"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 22,
+   "selfRead": true,
+   "author": "司马迁"
+  },
+  "junior-g9-xia-40": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "出师表",
+   "pages": [
+    {
+     "pdf": 140,
+     "printed": "133"
+    },
+    {
+     "pdf": 141,
+     "printed": "134"
+    },
+    {
+     "pdf": 142,
+     "printed": "135"
+    },
+    {
+     "pdf": 143,
+     "printed": "136"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 23,
+   "author": "诸葛亮"
+  },
+  "junior-g9-xia-41": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "lesson",
+   "unit": "第六单元",
+   "title": "诗词曲五首",
+   "pages": [
+    {
+     "pdf": 144,
+     "printed": "137"
+    },
+    {
+     "pdf": 145,
+     "printed": "138"
+    },
+    {
+     "pdf": 146,
+     "printed": "139"
+    },
+    {
+     "pdf": 147,
+     "printed": "140"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "number": 24,
+   "parts": [
+    {
+     "title": "十五从军征",
+     "pdf": 144
+    },
+    {
+     "title": "白雪歌送武判官归京",
+     "author": "岑参",
+     "pdf": 145
+    },
+    {
+     "title": "南乡子·登京口北固亭有怀",
+     "author": "辛弃疾",
+     "pdf": 145
+    },
+    {
+     "title": "过零丁洋",
+     "author": "文天祥",
+     "pdf": 146
+    },
+    {
+     "title": "山坡羊·潼关怀古",
+     "author": "张养浩",
+     "pdf": 147
+    }
+   ]
+  },
+  "junior-g9-xia-42": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "writing",
+   "unit": "第六单元",
+   "title": "有创意地表达",
+   "pages": [
+    {
+     "pdf": 148,
+     "printed": "141"
+    },
+    {
+     "pdf": 149,
+     "printed": "142"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "写作"
+  },
+  "junior-g9-xia-43": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "wholebook",
+   "unit": "第六单元",
+   "title": "《简·爱》 外国小说的阅读",
+   "pages": [
+    {
+     "pdf": 150,
+     "printed": "143"
+    },
+    {
+     "pdf": 151,
+     "printed": "144"
+    },
+    {
+     "pdf": 152,
+     "printed": "145"
+    },
+    {
+     "pdf": 153,
+     "printed": "146"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "section": "名著导读"
+  },
+  "junior-g9-xia-44": {
+   "book": "g9-xia",
+   "status": "mapped",
+   "kind": "poems",
+   "unit": "第六单元",
+   "title": "课外古诗词诵读",
+   "pages": [
+    {
+     "pdf": 154,
+     "printed": "147"
+    },
+    {
+     "pdf": 155,
+     "printed": "148"
+    }
+   ],
+   "basis": "contents-printed-page",
+   "parts": [
+    {
+     "title": "南安军",
+     "author": "文天祥",
+     "pdf": 154
+    },
+    {
+     "title": "别云间",
+     "author": "夏完淳",
+     "pdf": 154
+    },
+    {
+     "title": "山坡羊·骊山怀古",
+     "author": "张养浩",
+     "pdf": 155
+    },
+    {
+     "title": "朝天子·咏喇叭",
+     "author": "王磐",
+     "pdf": 155
+    }
+   ]
+  }
+ }
+}
