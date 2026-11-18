@@ -1,3 +1,23 @@
+## Current 2026-11-18 — r48: dialogue policy without an end date; open shared pool; fallback model gemini-3.6-flash (accepted)
+
+**Accepted:** source `d95642e` (code `ba245c4` + artifact manifest), Pages deployment `9a318d31`, effective 2026-11-18T05:28:49Z; rollback to r47 `12d13252` (Pages rollback; file hashes in `_meta/reports/operations/yw-junior-text-20261113/yw-r47/receipt-r47.json`). Server side only (`_worker.js/dialogue-budget.js`, `dialogue-pacing.js`, `dialogue-recovery.js`) plus the production var; no page, D1 migration, binding, secret, App pointer (`yw-46504685`) or User Center change. Owner 2026-11-18: 「不要設置額度結束期和對話到期，我會續，兩個額度都是$200每月」 (APPROVAL-r48.json). Status `20261118-yw-dialogue-no-expiry`. Report: `/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-r48-20261118/REPORT.md`.
+
+**What changed.**
+- `YW_DIALOGUE_BUDGET_JSON` v7 (`yw-claude-primary-open-pool-20261118-v7`). v6 would have stopped every dialogue at 2026-11-22T23:00Z (`validUntil` and the pool's `endsAt`).
+- `validUntil: null` = prices without an end date. A date still expires (`budget_price_expired`); a missing field is refused, so an end date cannot be dropped by accident.
+- Open shared pool (`site/dialogue-pacing.js`): `endsAt: null` with `monthlyMicros` and `monthlyFrom`. No end and no pace line; the ceiling of the moment is the declared `ceilingMicros` plus `monthlyMicros` for every UTC month start after `monthlyFrom`; unused allowance stays. Production: pool `claude-promo-yw-20261021` (same id and start, so spending since 2026-10-21 counts; US$29.04 used at release), declared US$105, US$150 more at every month start from 2026-12-01. The validated pool carries `open: true`, `baseCeilingMicros`, the ceiling of the moment and `endsAt` = `OPEN_POOL_END` (2100-01-01, a marker). A dated pool behaves as before.
+- An exhausted open pool is refused as `shared_budget_exhausted` with `resetsAt` = the UTC month start that reopens it (「本月共用 AI 額度已用完…下月初恢復」).
+- Fallback model `gemini-3.8-flash` -> `gemini-3.6-flash` (the provider no longer serves 3.8; the gateway's retry list and `requestDialogueBudget` accept only these two).
+- Unchanged: Claude first with one attempt per dispatch and the learner-visible retry (r36), prices, token bounds, reserve 141,440, concurrency 12, 20 turns per 10 minutes, `YW_DIALOGUE_PROVIDER_ATTEMPTS=3`.
+
+**Rules from now on.**
+- Do not put an end date back into the production policy. To change the monthly amount, edit `monthlyMicros` (config-only release; `wrangler.toml` is a guard file and needs its reviewed reason). The gateway's `claude_credit` ceiling and the provider's prepaid balance are the hard stops outside YW.
+- `scripts/test_dialogue_claude_primary.mjs` pins the production policy read from `wrangler.toml`; update it with every policy change. Open-pool arithmetic: `scripts/test_dialogue_shared_pool.mjs`.
+- The release readback now compares the deployed `YW_DIALOGUE_BUDGET_JSON` (Pages deployment `env_vars`) with the reviewed `wrangler.toml` value (driver `yw-release-r48.mjs`).
+- Since 2026-11-18T04:49Z the gateway sends Claude and OpenAI requests from its own servers (apis-egress-20261118); a provider refusal no longer depends on where the learner is. YW passes no learner origin to the gateway and must not start to.
+- Next (owner 2026-11-18): Claude -> OpenAI -> Gemini inside one dialogue call. It needs the OpenAI tier in the gateway's dialogue stream and YW accounting for an OpenAI attempt; until then a failed Claude attempt ends the dispatch and the retry goes to Claude again.
+- Not verified: a real signed-in turn under v7 (read `dialogue_calls.budget_policy_json` of the next turn).
+
 ## Current 2026-11-14 — r47: /junior text from the sun PDFs above the page images; junior AI dialogue without My (accepted)
 
 **Accepted:** source `890a64e` (code `69a521f` + artifact manifest), Pages deployment `12d13252`, effective 2026-11-14T04:42:45Z; rollback to r46 `0073c9c2` (Pages rollback; file hashes in `_meta/reports/operations/yw-policy-r46-20261114/yw-r46/receipt-r46.json`). No D1 migration, binding, var, App pointer (`yw-46504685`) or User Center change. Owner request 2026-11-13 (APPROVAL-r47.json). Status `20261114-yw-junior-text`. Report: `/Users/ylsuen/CF/_meta/reports/operations/yw-junior-text-20261113/REPORT.md`.
