@@ -13,9 +13,11 @@ export function dialogueBudget(env,at=Date.now()){
  const primaryModel=policyName==='yw-claude-primary-gemini-fallback-v1'?p.primaryModel:null;
  if(primaryModel!==null){if(!/^claude-[-\w.]+$/.test(primaryModel||''))throw Error('invalid_budget_policy');for(const key of ['primaryInputMicrosPerMillion','primaryOutputMicrosPerMillion'])if(!Number.isSafeInteger(p[key])||p[key]<0||p[key]>1000000000000)throw Error('invalid_budget_policy');}
  else if(p.primaryModel!==undefined||p.primaryInputMicrosPerMillion!==undefined||p.primaryOutputMicrosPerMillion!==undefined)throw Error('invalid_budget_policy');
- if(!Number.isFinite(at)||!Number.isFinite(Date.parse(p.validUntil))||at>=Date.parse(p.validUntil))throw Error('budget_price_expired');
+ // `validUntil: null` declares prices without an end date (suen, 2026-11-18: no dialogue expiry; the credit is renewed every
+ // month). A date still expires as before; a missing field is refused, so an end date is never dropped by accident.
+ if(!Number.isFinite(at)||(p.validUntil!==null&&(!Number.isFinite(Date.parse(p.validUntil))||at>=Date.parse(p.validUntil))))throw Error('budget_price_expired');
  // A shared pool (yw-shared-pool-v1) supersedes the fixed daily/lesson money caps: they may not be declared next to it.
- const sharedPool=p.sharedPool===undefined?null:validSharedPool(p.sharedPool),capKeys=['globalDailyMicros','userDailyMicros','lessonLifetimeMicros'];
+ const sharedPool=p.sharedPool===undefined?null:validSharedPool(p.sharedPool,at),capKeys=['globalDailyMicros','userDailyMicros','lessonLifetimeMicros'];
  if(sharedPool&&capKeys.some(key=>p[key]!==undefined))throw Error('invalid_budget_policy');
  for(const key of [...(sharedPool?[]:capKeys),'reserveMicros','inputMicrosPerMillion','outputMicrosPerMillion']){
   if(!Number.isSafeInteger(p[key])||p[key]<(key.endsWith('MicrosPerMillion')?0:1)||p[key]>1000000000000)throw Error('invalid_budget_policy');

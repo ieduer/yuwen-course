@@ -161,17 +161,22 @@ test('recovery disposition: a truncated Claude attempt has no learner-visible ou
  assert.equal(continuationDisposition(legacyCall,{stage:'provider_request',providerAccounting:accounting([attempt(1,GEMINI,'TIMEOUT',{outputStarted:true})],'yw-same-model-sequential-v1')},false,{noOutput:true}).code,'partial_output_present');
 });
 
-test('the production policy var (wrangler.toml) is the v6 shared-pool policy: 6,144 output bound, a reserve covering a fully cache-written prompt, unchanged pool and caps (r31)',async()=>{
+test('the production policy var (wrangler.toml) is the v7 open-pool policy: no end date, the pool grows every UTC month, a fallback model the free pool still serves (r48); 6,144 output bound and reserve as in v6',async()=>{
  const {readFileSync}=await import('node:fs');
  const toml=readFileSync(new URL('../wrangler.toml',import.meta.url),'utf8');
  const line=/^YW_DIALOGUE_BUDGET_JSON = '(\{.*\})'$/m.exec(toml.slice(toml.indexOf('[env.production.vars]')));assert.ok(line,'production budget policy var');
  const production=JSON.parse(line[1]);
- assert.equal(production.version,'yw-claude-primary-shared-pool-20261023-v6');assert.equal(production.policy,'yw-claude-primary-gemini-fallback-v1');
- assert.deepEqual([production.primaryModel,production.model,production.maxInputTokens,production.maxOutputTokens],['claude-sonnet-5-5','gemini-3.8-flash',32000,6144]);
+ assert.equal(production.version,'yw-claude-primary-open-pool-20261118-v7');assert.equal(production.policy,'yw-claude-primary-gemini-fallback-v1');
+ assert.deepEqual([production.primaryModel,production.model,production.maxInputTokens,production.maxOutputTokens],['claude-sonnet-5-5','gemini-3.6-flash',32000,6144]);
+ assert.equal(production.validUntil,null,'prices without an end date (owner 2026-11-18)');
  // 32,000 prompt tokens all cache-written (2.5 µ$ each, the 5-minute write price) plus 6,144 output tokens (10 µ$ each).
  assert.equal(production.reserveMicros,32000*2.5+6144*10);
- assert.deepEqual([production.sharedPool.poolId,production.sharedPool.ceilingMicros,production.sharedPool.burstMicros,production.sharedPool.endsAt],['claude-promo-yw-20261021',105000000,25000000,'2026-11-22T23:00:00Z']);
+ // The same pool (id and start) as v6, so what was spent since 2026-10-21 still counts; no end; US$150 more at every UTC month start.
+ assert.deepEqual([production.sharedPool.poolId,production.sharedPool.startsAt,production.sharedPool.ceilingMicros,production.sharedPool.endsAt,production.sharedPool.monthlyMicros,production.sharedPool.monthlyFrom],['claude-promo-yw-20261021','2026-10-21T10:00:00Z',105000000,null,150000000,'2026-11-18T00:00:00Z']);
  const budget=dialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1],YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},at);
+ assert.equal(budget.sharedPool.open,true);assert.equal(budget.sharedPool.ceilingMicros,105000000);
+ for(const [when,ceiling] of [['2026-11-30T23:59:59Z',105000000],['2026-12-01T00:00:00Z',255000000],['2027-01-01T00:00:00Z',405000000],['2030-06-15T12:00:00Z',105000000+150000000*43]])
+  assert.equal(dialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1]},Date.parse(when)).sharedPool.ceilingMicros,ceiling,when);
  assert.equal(budget.maxOutputTokens,6144);assert.equal(budget.reserveMicros,141440);assert.equal(budget.fallbackReserveMicros,0);
  assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...production,maxOutputTokens:8193})},at),/invalid_budget_policy/);
 });

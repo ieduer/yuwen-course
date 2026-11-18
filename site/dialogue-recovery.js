@@ -101,7 +101,9 @@ export async function budgetDenial(db,session,student,budget,limits,day,at=new D
   const phase=poolPhase(pool,at);
   if(phase!=='active')return shared(phase==='ended'?'shared_budget_period_ended':'shared_budget_not_started','exhausted',phase==='before',phase==='before'?pool.startsAt:null,phase);
   const used=await q('SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) n FROM dialogue_calls WHERE created_at>=? AND created_at<?',pool.startsAt,pool.endsAt);
-  if(used+budget.reserveMicros>pool.ceilingMicros)return shared('shared_budget_exhausted','exhausted',false,null);
+  // An open pool has no pace line: when the ceiling of the moment is used up, the next UTC month start that covers the request is given.
+  if(pool.open){if(used+budget.reserveMicros>pacedAllowance(pool,at))return shared('shared_budget_exhausted','exhausted',false,allowanceReachedAt(pool,used+budget.reserveMicros,at),'monthly');}
+  else if(used+budget.reserveMicros>pool.ceilingMicros)return shared('shared_budget_exhausted','exhausted',false,null);
   const burst=!budget.isolatedAdmission;
   if(used+budget.reserveMicros>pacedAllowance(pool,at,{burst})){const retryAt=allowanceReachedAt(pool,used+budget.reserveMicros,at,{burst});return retryAt?shared('shared_budget_paced','paced',true,retryAt):shared('shared_budget_exhausted','exhausted',false,null);}
   if(await q("SELECT COUNT(*) n FROM dialogue_calls WHERE state IN ('reserved','finishing')")>=pool.concurrency)return shared('dialogue_concurrency_busy','concurrency',true,new Date(Date.parse(at)+30000).toISOString());

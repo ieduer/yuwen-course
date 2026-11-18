@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue} from '../site/dialogue-source.js';
 import {dialogueBudget} from '../site/dialogue-budget.js';
-import {pacedAllowance,allowanceReachedAt,poolPhase,validSharedPool} from '../site/dialogue-pacing.js';
+import {pacedAllowance,allowanceReachedAt,poolPhase,validSharedPool,monthStartsBetween,sharedPoolAdmission,OPEN_POOL_END} from '../site/dialogue-pacing.js';
 const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1717-p2.json'));
 const student={id:1,ucUserId:700001},other={id:2,ucUserId:700002};
 const iso=ms=>new Date(ms).toISOString(),NOW=Date.now();
@@ -110,3 +110,57 @@ test('an unsent draft of an older revision is kept in the record but never offer
  const read=await(await handleDialogue(req(),f.env,student)).json();assert.equal(read.draft,null,'the older draft is not put back into the composer');assert.equal(read.revision,2);
  assert.deepEqual(f.sql.prepare('SELECT mutation_id,revision,submitted_turn_id FROM dialogue_drafts').all().map(r=>[r.mutation_id,r.revision,r.submitted_turn_id]),[['synthetic-g-0001',1,null]],'the draft row is preserved, not deleted or marked submitted');
 }finally{f.close();}});
+
+// ---- r48 (owner 2026-11-18): no end date. `endsAt: null` + monthlyMicros/monthlyFrom = an open pool; `validUntil: null` = prices without an end.
+const openPool=(over={})=>pool({endsAt:null,monthlyMicros:400000,monthlyFrom:'2026-11-18T00:00:00Z',startsAt:'2026-10-21T10:00:00Z',burstMicros:0,releaseFraction:0,...over});
+test('month starts are counted in UTC, strictly after the start and up to now',()=>{
+ const ms=t=>Date.parse(t);
+ assert.equal(monthStartsBetween(ms('2026-11-18T00:00:00Z'),ms('2026-11-30T23:59:59.999Z')),0);
+ assert.equal(monthStartsBetween(ms('2026-11-18T00:00:00Z'),ms('2026-12-01T00:00:00Z')),1);
+ assert.equal(monthStartsBetween(ms('2026-11-18T00:00:00Z'),ms('2027-02-01T00:00:00Z')),3);
+ assert.equal(monthStartsBetween(ms('2026-12-01T00:00:00Z'),ms('2026-12-31T00:00:00Z')),0,'the start itself is not after the start');
+ assert.equal(monthStartsBetween(ms('2026-12-01T00:00:00Z'),ms('2027-01-01T00:00:00Z')),1);
+ assert.equal(monthStartsBetween(ms('2026-12-05T00:00:00Z'),ms('2026-11-20T00:00:00Z')),0);assert.equal(monthStartsBetween(NaN,1),0);
+});
+
+test('an open pool has no end and no pace line: its ceiling grows at every UTC month start and unused allowance stays',()=>{
+ const p=validSharedPool(openPool(),Date.parse('2026-11-20T00:00:00Z'));
+ assert.deepEqual([p.open,p.endsAt,p.baseCeilingMicros,p.ceilingMicros,p.monthlyFrom],[true,OPEN_POOL_END,1000000,1000000,'2026-11-18T00:00:00.000Z']);
+ assert.equal(poolPhase(p,'2026-10-21T09:59:59Z'),'before');assert.equal(pacedAllowance(p,'2026-10-21T09:59:59Z'),0);
+ assert.equal(poolPhase(p,'2026-11-20T00:00:00Z'),'active');assert.equal(poolPhase(p,'2099-12-31T00:00:00Z'),'active','never ended');
+ assert.equal(pacedAllowance(p,'2026-11-20T00:00:00Z'),1000000,'the whole ceiling at once');assert.equal(pacedAllowance(p,'2026-11-20T00:00:00Z',{burst:false}),1000000);
+ assert.equal(pacedAllowance(p,'2026-12-01T00:00:00Z'),1400000);assert.equal(pacedAllowance(p,'2027-03-10T00:00:00Z'),1000000+400000*4);
+ assert.equal(validSharedPool(openPool(),Date.parse('2027-03-10T00:00:00Z')).ceilingMicros,2600000,'validated at a later moment: the ceiling of that moment');
+ assert.equal(allowanceReachedAt(p,900000,'2026-11-20T00:00:00Z'),'2026-11-20T00:00:00.000Z','already covered: now');
+ assert.equal(allowanceReachedAt(p,1000001,'2026-11-20T00:00:00Z'),'2026-12-01T00:00:00.000Z','the next month start');
+ assert.equal(allowanceReachedAt(p,1900000,'2026-11-20T00:00:00Z'),'2027-02-01T00:00:00.000Z','three month starts ahead');
+ const admission=sharedPoolAdmission(p,1100,'2026-12-02T00:00:00Z');assert.deepEqual(admission.args,[p.startsAt,OPEN_POOL_END,1100,1400000]);
+ // A validated open pool stored with a call reads back as the same pool.
+ const again=validSharedPool(JSON.parse(JSON.stringify(p)),Date.parse('2026-12-02T00:00:00Z'));assert.deepEqual([again.open,again.baseCeilingMicros,again.ceilingMicros,again.endsAt],[true,1000000,1400000,OPEN_POOL_END]);
+});
+
+test('open-pool and no-end policies are validated: the monthly fields belong to an open pool only, and an end date is never dropped by accident',()=>{
+ const at=Date.parse('2026-11-20T00:00:00Z');
+ const ok=dialogueBudget({YW_DIALOGUE_BUDGET_JSON:policy({validUntil:null},{endsAt:null,monthlyMicros:400000,monthlyFrom:'2026-11-18T00:00:00Z',startsAt:'2026-10-21T10:00:00Z'})},at);
+ assert.equal(ok.validUntil,null);assert.equal(ok.sharedPool.open,true);
+ assert.doesNotThrow(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:policy({validUntil:null},{endsAt:null,monthlyMicros:400000,monthlyFrom:'2026-11-18T00:00:00Z',startsAt:'2026-10-21T10:00:00Z'})},Date.parse('2099-06-01T00:00:00Z')),'no expiry');
+ const withoutField=JSON.parse(policy());delete withoutField.validUntil;
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(withoutField)},at),/budget_price_expired/,'a missing validUntil is not "no end"');
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:policy({validUntil:'2026-11-19T00:00:00Z'})},at),/budget_price_expired/,'a date still expires');
+ for(const bad of [{monthlyMicros:0},{monthlyMicros:1.5},{monthlyMicros:2000000000},{monthlyFrom:'nope'},{monthlyFrom:'2026-10-01T00:00:00Z'},{monthlyMicros:undefined},{ceilingMicros:0},{burstMicros:2000000}])
+  assert.throws(()=>validSharedPool(openPool(bad),at),/invalid_shared_pool/,JSON.stringify(bad));
+ for(const stray of [{monthlyMicros:400000},{monthlyFrom:'2026-11-18T00:00:00Z'},{open:true},{baseCeilingMicros:5}])
+  assert.throws(()=>validSharedPool(pool(stray),at),/invalid_shared_pool/,'a dated pool may not carry '+Object.keys(stray)[0]);
+});
+
+test('an open pool admits while the ceiling of the moment has room and refuses as exhausted with the month start that reopens it',async()=>{
+ const open={endsAt:null,monthlyMicros:2200,monthlyFrom:iso(NOW-86400000),startsAt:iso(NOW-2*86400000),ceilingMicros:2200,burstMicros:0,releaseFraction:0};
+ const f=fixture(policy({validUntil:null},open));try{
+  assert.equal((await send(f,body(0,'synthetic-open-0001'))).status,200);assert.equal((await send(f,body(0,'synthetic-open-0002'),other)).status,200);
+  const refused=await send(f,body(1,'synthetic-open-0003'));
+  assert.equal(refused.status,429);assert.equal(refused.value.code,'shared_budget_exhausted');assert.equal(refused.value.scope,'exhausted');assert.equal(refused.value.retryable,false);
+  assert.match(refused.value.message,/本月共用 AI 額度已用完/);
+  const next=new Date(NOW);assert.equal(refused.value.resetsAt,new Date(Date.UTC(next.getUTCFullYear(),next.getUTCMonth()+1,1)).toISOString(),'the next UTC month start');
+  assert.ok(used(f)<=2200,'never above the ceiling of the moment');
+ }finally{f.close();}
+});
