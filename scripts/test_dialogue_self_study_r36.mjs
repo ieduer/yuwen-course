@@ -10,12 +10,15 @@ const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`,
 const row=(objectiveId,outcome,policyVersion='yw-dialogue-policy-v21')=>({objectiveId,outcome,evidence:[],rationale:'t',ruleVersion:'t',policyVersion});
 const budgetJson=fs.readFileSync('wrangler.toml','utf8').match(/YW_DIALOGUE_BUDGET_JSON\s*=\s*'([^']+)'/)?.[1];
 
-test('Claude first: each dispatch asks for one attempt, the turn keeps three, the reserve is unchanged',()=>{
+test('Claude first: each dispatch asks for Claude and one fallback attempt (r49), the turn keeps three, the reserve formula is unchanged',()=>{
  assert.ok(budgetJson,'the production budget policy is read from wrangler.toml');
  const b=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:budgetJson,YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1578');
  assert.ok(b.primaryModel,'the production policy is Claude-primary');
- assert.equal(b.providerAttemptLimit,1,'no free-pool attempt after a failed Claude attempt in the same call');
- assert.equal(b.logicalProviderAttemptLimit,3,'the learner-visible retry still has room, and goes to Claude again');
+ // Owner 2026-11-18: a failure moves to the next tier by itself. A failed Claude attempt is followed by the fallback model in the
+ // same call (the gateway serves it from the paid Gemini key first), which replaces the 2026-10-24 rule of one attempt per dispatch.
+ assert.equal(b.providerAttemptLimit,2,'Claude, then one fallback attempt in the same call');
+ assert.equal(b.model,'gemini-4-hydrogen','the fallback model of the production policy');
+ assert.equal(b.logicalProviderAttemptLimit,3,'the learner-visible retry still has room, and starts with Claude again');
  assert.equal(b.reserveMicros,b.perAttemptReserveMicros+b.fallbackReserveMicros*2,'the turn reserve formula is unchanged');
 });
 

@@ -7,20 +7,24 @@ import {poolPhase,pacedAllowance,allowanceReachedAt,SHARED_POOL_MESSAGES} from '
 
 // Activation is explicit. Calibration passes its own one-attempt budget and
 // never uses this wrapper. One logical learner turn reserves all three slots.
+// Attempts one dispatch may use under the Claude-first policy: the Claude attempt and one fallback attempt.
+export const CLAUDE_FIRST_DISPATCH_ATTEMPTS=2;
 export function requestDialogueBudget(env,student,lessonId){
  const policy=dialogueBudget(env),limit=env.YW_DIALOGUE_PROVIDER_ATTEMPTS==='3'?3:1;
  // One primary attempt at the declared reserve plus (limit-1) fallback attempts at the fallback reserve (0 for the free pool).
  const reserveMicros=policy.reserveMicros+(policy.fallbackReserveMicros??policy.reserveMicros)*(limit-1);
  if(reserveMicros>(policy.sharedPool?policy.sharedPool.ceilingMicros:Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros)))throw Error('retry_reserve_exceeds_budget');
- // Claude first (owner, 2026-10-24): each dispatch asks the gateway for one attempt, so a failed Claude attempt is not followed
- // by the free pool in the same call; the learner-visible retry re-dispatches to Claude. The gateway skips Claude only when its
- // credit is exhausted or unavailable, and then that one attempt goes to the free pool. The logical turn keeps `limit` attempts.
- const dispatch=policy.primaryModel?1:limit;
+ // Claude first, then the Gemini fallback in the same call (owner, 2026-11-18: a failure moves to the next tier by itself;
+ // this replaces the 2026-10-24 rule of one Claude attempt per dispatch). Each dispatch asks the gateway for up to two
+ // attempts: Claude, and when Claude leaves no answer the fallback model, which the gateway serves from the paid Gemini key
+ // first and from the free pool when that key's monthly budget is used up. The logical turn keeps `limit` attempts; a
+ // learner-visible retry re-dispatches with what is left.
+ const dispatch=policy.primaryModel?Math.min(CLAUDE_FIRST_DISPATCH_ATTEMPTS,limit):limit;
  const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,fallbackReserveMicros:policy.fallbackReserveMicros??policy.reserveMicros,providerAttemptLimit:dispatch,logicalProviderAttemptLimit:limit,reserveMicros};
  // The price policy cannot mint operation admission, even in server config.
  delete budget.isolatedAdmission;
  const admission=isolatedDialogueAdmission(env,student,lessonId,budget);
- if(limit>1&&!['gemini-3.6-flash','gemini-3.8-flash'].includes(policy.model)&&!(admission&&policy.model==='gemini-3.5-flash-lite'&&policy.version==='yw-dialogue-smoke-model35lite-20261013-v1'))throw Error('retry_model_mismatch');
+ if(limit>1&&!['gemini-4-hydrogen','gemini-3.6-flash','gemini-3.8-flash'].includes(policy.model)&&!(admission&&policy.model==='gemini-3.5-flash-lite'&&policy.version==='yw-dialogue-smoke-model35lite-20261013-v1'))throw Error('retry_model_mismatch');
  return admission?{...budget,isolatedAdmission:admission}:budget;
 }
 

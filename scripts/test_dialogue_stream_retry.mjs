@@ -175,7 +175,8 @@ test('a no-output failure on the last reserved attempt offers no retry',async()=
 
 // Claude first, free Gemini fallback (2026-10-20 finding): a structured reply truncated at the output bound is a paid, failed
 // Claude attempt the gateway never relays; the saved turn must offer the explicit retry instead of an unclassified denial.
-// r36 (owner, 2026-10-24): each dispatch is one Claude attempt; the free pool only serves when the gateway skips Claude.
+// r49 (owner, 2026-11-18): each dispatch asks for Claude and one fallback attempt; here the gateway reports only the Claude
+// attempt (it stopped after it), and the explicit retry re-dispatches with the two attempts that are left.
 test('Claude-primary: a truncated Claude attempt reserves the policy output bound and offers one explicit retry to Claude',async()=>{
  const f=fixture();try{
   const CLAUDE='claude-sonnet-5-5',GEMINI='gemini-3.8-flash';
@@ -186,7 +187,7 @@ test('Claude-primary: a truncated Claude attempt reserves the policy output boun
   let sentBudget=null;
   const truncated=async(_e,_p,_id,_reply,budget)=>{sentBudget=budget;const error=Error('gateway_stream_unconfirmed');error.gatewayFailure={providerAccounting:v2accounting([{ordinal:1,model:CLAUDE,outcome:'CLAUDE_TRUNCATED',brokerCompleted:true,outputStarted:true,usage:truncatedUsage}],1)};throw error;};
   const first=await firstFailure(f,truncated);
-  assert.equal(sentBudget.maxOutputTokens,8192);assert.equal(sentBudget.providerAttemptLimit,1);assert.equal(sentBudget.logicalProviderAttemptLimit,3);assert.equal(sentBudget.reserveMicros,145920);
+  assert.equal(sentBudget.maxOutputTokens,8192);assert.equal(sentBudget.providerAttemptLimit,2);assert.equal(sentBudget.logicalProviderAttemptLimit,3);assert.equal(sentBudget.reserveMicros,145920);
   const call=f.sql.prepare('SELECT * FROM dialogue_calls').get();assert.equal(call.state,'review');assert.equal(call.reserved_tokens,8192);assert.equal(call.reserved_micros,145920);
   // r36: the only attempt is the paid truncated one with known usage, so its cost is settled exactly: 15,600×2 + 8,192×10.
   assert.equal(call.accounted_micros,15600*2+8192*10);
@@ -194,11 +195,11 @@ test('Claude-primary: a truncated Claude attempt reserves the policy output boun
   assert.equal(first.replyRetry?.allowed,true);assert.equal(first.replyRetry.code,'explicit_retry_available');assert.equal(first.replyRetry.remainingProviderAttempts,2);assert.equal(first.replyRetry.providerAttemptsUsed,1);assert.equal(first.replyRetry.stage,'provider_request');assert.equal(first.replyRetry.code_detail,'gateway_stream_unconfirmed');
   const failure=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='response_unconfirmed'").get().details_json);
   assert.deepEqual(failure.providerAccounting.attempts.map(a=>a.outcome),['CLAUDE_TRUNCATED']);assert.deepEqual(failure.providerAccounting.attempts[0].usage,truncatedUsage);
-  // The explicit retry re-dispatches the saved turn with the one remaining slot (Claude first again); no new student turn, no silent retry.
+  // The explicit retry re-dispatches the saved turn with the two remaining slots (Claude first again, then the fallback); no new student turn, no silent retry.
   const fresh='先說說你在意的那一句吧。',okUsage={promptTokenCount:15600,candidatesTokenCount:1200,totalTokenCount:16800};let limit=null,prompt=null;
   const retryModel=async(_e,p,_id,_reply,budget)=>{prompt=p;limit=budget.providerAttemptLimit;return {value:{reply:fresh,assessments:[]},model:CLAUDE,usage:okUsage,providerAccounting:v2accounting([{ordinal:1,model:CLAUDE,outcome:'OK',brokerCompleted:true,outputStarted:true,usage:okUsage}],1)};};
   const after=await(await handleDialogue(req({action:'continue',turnId:first.turns[0].id,partialDigest:'',revision:first.revision,mutationId:'stream-retry-trunc-0001'}),f.env,student,null,{callModel:retryModel})).json();
-  assert.equal(limit,1);assert.doesNotMatch(prompt,/續答|重新生成/);
+  assert.equal(limit,2);assert.doesNotMatch(prompt,/續答|重新生成/);
   assert.deepEqual(after.turns.map(t=>t.role),['student','teacher']);assert.equal(after.turns[1].content,fresh);assert.equal(after.replyRetry,null);assert.equal(after.partial,null);
   assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='student'").get().n,1);
   const settled=f.sql.prepare('SELECT * FROM dialogue_calls').get();assert.equal(settled.state,'finished');

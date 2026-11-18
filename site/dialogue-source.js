@@ -20,7 +20,7 @@ import {STUDY_GUIDE_DIALOGUE_GRADING_RULE} from './study-guide-assessment.js';
 import {promptParts} from './dialogue-policy.js';
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
-import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
+import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial,CLAUDE_FIRST_DISPATCH_ATTEMPTS} from './dialogue-recovery.js';
 import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,originalVocabularyTasks,questionVocabularyTask,prepareOriginalInput,revealFollowupDraft,sourceDraftReady,studyGuideReferenceText,studyGuideReferenceShown,validateStudyGuideAnswer,FORMAL_FIELDS,FIELD_LABELS,FORMAL_LABELS} from './dialogue-formal.js';
 import {learningTurn,collectedFormal} from './dialogue-learning-turn.js';
 import {lessonCallLimit} from './dialogue-lesson-limits.js';
@@ -709,7 +709,7 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
   if(JSON.stringify(stored.isolatedAdmission)!==JSON.stringify(current.isolatedAdmission))throw Error('operation_changed');
   for(const key of ['version','model','inputMicrosPerMillion','outputMicrosPerMillion','reserveMicros','providerAttemptLimit'])if(stored[key]!==current[key])throw Error('policy_changed');
   if(call.day!==now().slice(0,10))throw Error('day_changed');
-  budget={...stored,providerAttemptLimit:stored.primaryModel?1:disposition.remainingProviderAttempts};
+  budget={...stored,providerAttemptLimit:stored.primaryModel?Math.min(CLAUDE_FIRST_DISPATCH_ATTEMPTS,disposition.remainingProviderAttempts):disposition.remainingProviderAttempts};
  }catch{return json({code:'continuation_budget_revalidation_required',canExport:true,canReview:true},409);}
  const failed=await db.prepare("SELECT details_json FROM dialogue_events WHERE turn_id=? AND session_id=? AND event_type='response_unconfirmed' ORDER BY created_at DESC,id DESC LIMIT 1").bind(turn.id,session.id).first();
  const priorAttempts=JSON.parse(failed.details_json).providerAccounting.attempts.map(a=>a.outcome==='OK'?{...a,outcome:'OK_REJECTED'}:a);

@@ -32,8 +32,8 @@ test('cost follows the model that produced the usage: Claude priced, free Gemini
  assert.equal(reconciledCost(b,geminiUsage,null),0);
  const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
- // r36: one Claude attempt per dispatch (the free pool only when the gateway skips Claude); the logical turn keeps three.
- assert.equal(budget.primaryModel,CLAUDE);assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,3);
+ // r49: a dispatch asks for Claude and one fallback attempt; the logical turn keeps three.
+ assert.equal(budget.primaryModel,CLAUDE);assert.equal(budget.providerAttemptLimit,2);assert.equal(budget.logicalProviderAttemptLimit,3);
  // The call reserves one Claude attempt plus two free fallback attempts: 88,000 + 0 + 0.
  assert.equal(budget.reserveMicros,88000);assert.equal(budget.fallbackReserveMicros,0);
  const legacyBudget=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(legacy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2');assert.equal(legacyBudget.reserveMicros,252000);
@@ -78,7 +78,7 @@ test('gateway stream consumer accepts a Claude-served done event and the worker 
  let sent=null;const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3',APIS_CALLER_TOKEN:'synthetic',APIS:{fetch:async req=>{sent=JSON.parse(await req.text());return response();}}};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
  const out=await callDialogueModel(env,'提示',crypto.randomUUID(),async()=>{},budget);
- assert.equal(sent.tier,'claude-primary');assert.equal(sent.model,GEMINI);assert.equal(sent.providerAttemptLimit,1);assert.equal(out.model,CLAUDE);
+ assert.equal(sent.tier,'claude-primary');assert.equal(sent.model,GEMINI);assert.equal(sent.providerAttemptLimit,2);assert.equal(out.model,CLAUDE);
  const legacyEnv={...env,YW_DIALOGUE_BUDGET_JSON:JSON.stringify(legacy)};sent=null;
  const geminiBody=[['delta',{text:answer,requestId:'r2'}],['done',{requestId:'r2',answer,model:GEMINI,modelVersion:null,usage:geminiUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,GEMINI,'OK')],'yw-same-model-sequential-v1',1),firstTokenMs:900,totalDurationMs:950}]].map(([e,d],i)=>`id: ${i+1}\nevent: ${e}\ndata: ${JSON.stringify(d)}\n\n`).join('');
  legacyEnv.APIS={fetch:async req=>{sent=JSON.parse(await req.text());return new Response(geminiBody,{headers:{'content-type':'text/event-stream'}});}};
@@ -111,7 +111,7 @@ test('v2 reservation bound: one primary attempt at the output bound plus two fre
  const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(v2),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
  // reserve = primary + fallback × (limit − 1) = 145,920 + 0 × 2
- assert.equal(budget.reserveMicros,145920);assert.equal(budget.perAttemptReserveMicros,145920);assert.equal(budget.fallbackReserveMicros,0);assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,3);assert.equal(budget.maxOutputTokens,8192);
+ assert.equal(budget.reserveMicros,145920);assert.equal(budget.perAttemptReserveMicros,145920);assert.equal(budget.fallbackReserveMicros,0);assert.equal(budget.providerAttemptLimit,2);assert.equal(budget.logicalProviderAttemptLimit,3);assert.equal(budget.maxOutputTokens,8192);
  assert.equal(budget.userDailyMicros,2000000);assert.equal(budget.lessonLifetimeMicros,4000000);assert.ok(budget.reserveMicros<=Math.min(budget.globalDailyMicros,budget.userDailyMicros,budget.lessonLifetimeMicros));
  // The reservation may equal a cap but never exceed it.
  assert.equal(requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...v2,userDailyMicros:145920,lessonLifetimeMicros:145920}),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2').reserveMicros,145920);
@@ -161,13 +161,15 @@ test('recovery disposition: a truncated Claude attempt has no learner-visible ou
  assert.equal(continuationDisposition(legacyCall,{stage:'provider_request',providerAccounting:accounting([attempt(1,GEMINI,'TIMEOUT',{outputStarted:true})],'yw-same-model-sequential-v1')},false,{noOutput:true}).code,'partial_output_present');
 });
 
-test('the production policy var (wrangler.toml) is the v7 open-pool policy: no end date, the pool grows every UTC month, a fallback model the free pool still serves (r48); 6,144 output bound and reserve as in v6',async()=>{
+test('the production policy var (wrangler.toml) is the v8 policy: the fallback is gemini-4-hydrogen at its paid price, a dispatch asks for Claude and one fallback attempt (r49); no end date, the open pool, 6,144 output bound and the primary reserve as in v7',async()=>{
  const {readFileSync}=await import('node:fs');
  const toml=readFileSync(new URL('../wrangler.toml',import.meta.url),'utf8');
  const line=/^YW_DIALOGUE_BUDGET_JSON = '(\{.*\})'$/m.exec(toml.slice(toml.indexOf('[env.production.vars]')));assert.ok(line,'production budget policy var');
  const production=JSON.parse(line[1]);
- assert.equal(production.version,'yw-claude-primary-open-pool-20261118-v7');assert.equal(production.policy,'yw-claude-primary-gemini-fallback-v1');
- assert.deepEqual([production.primaryModel,production.model,production.maxInputTokens,production.maxOutputTokens],['claude-sonnet-5-5','gemini-3.6-flash',32000,6144]);
+ assert.equal(production.version,'yw-claude-primary-paid-gemini-20261118-v8');assert.equal(production.policy,'yw-claude-primary-gemini-fallback-v1');
+ assert.deepEqual([production.primaryModel,production.model,production.maxInputTokens,production.maxOutputTokens],['claude-sonnet-5-5','gemini-4-hydrogen',32000,6144]);
+ // The fallback attempt is priced at the paid Gemini rate (US$1.50 / US$7.50 per million tokens), whichever key answers it.
+ assert.deepEqual([production.inputMicrosPerMillion,production.outputMicrosPerMillion],[1500000,7500000]);
  assert.equal(production.validUntil,null,'prices without an end date (owner 2026-11-18)');
  // 32,000 prompt tokens all cache-written (2.5 µ$ each, the 5-minute write price) plus 6,144 output tokens (10 µ$ each).
  assert.equal(production.reserveMicros,32000*2.5+6144*10);
@@ -177,6 +179,16 @@ test('the production policy var (wrangler.toml) is the v7 open-pool policy: no e
  assert.equal(budget.sharedPool.open,true);assert.equal(budget.sharedPool.ceilingMicros,105000000);
  for(const [when,ceiling] of [['2026-11-30T23:59:59Z',105000000],['2026-12-01T00:00:00Z',255000000],['2027-01-01T00:00:00Z',405000000],['2030-06-15T12:00:00Z',105000000+150000000*43]])
   assert.equal(dialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1]},Date.parse(when)).sharedPool.ceilingMicros,ceiling,when);
- assert.equal(budget.maxOutputTokens,6144);assert.equal(budget.reserveMicros,141440);assert.equal(budget.fallbackReserveMicros,0);
+ assert.equal(budget.maxOutputTokens,6144);assert.equal(budget.reserveMicros,141440);
+ // One fallback attempt at its bound: 32,000 prompt tokens at 1.5 µ$ plus 6,144 output tokens at 7.5 µ$.
+ assert.equal(budget.fallbackReserveMicros,32000*1.5+6144*7.5);
  assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...production,maxOutputTokens:8193})},at),/invalid_budget_policy/);
+ // A dispatch under the production policy: Claude and one fallback attempt; the logical turn keeps three; the call reserves
+ // the Claude attempt plus two fallback attempts.
+ const call=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1],YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2');
+ assert.deepEqual([call.providerAttemptLimit,call.logicalProviderAttemptLimit,call.model,call.reserveMicros],[2,3,'gemini-4-hydrogen',141440+94080*2]);
+ // Accounting of a call where Claude failed without usage and the fallback answered: the Claude reserve is kept, the fallback is priced.
+ const fallbackUsage={promptTokenCount:12000,candidatesTokenCount:500,thoughtsTokenCount:200,totalTokenCount:12700};
+ assert.equal(reconciledCost(call,fallbackUsage,'gemini-4-hydrogen'),12000*1.5+700*7.5);
+ assert.equal(operatorCost(call,{model:'gemini-4-hydrogen',usage:fallbackUsage},{attempts:[{ordinal:1,model:'claude-sonnet-5-5',outcome:'CLAUDE_HTTP_529',brokerCompleted:true,outputStarted:false,usage:null},{ordinal:2,model:'gemini-4-hydrogen',outcome:'OK',brokerCompleted:true,outputStarted:true,usage:fallbackUsage}]}),141440+12000*1.5+700*7.5);
 });
