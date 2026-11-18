@@ -34,7 +34,9 @@ test('the gateway-priced cost of a Claude attempt is used when it is within that
  assert.equal(reconciledCost(policy,{...usage,costMicros:-1},'claude-sonnet-5-5'),null);
  const {costMicros,...plain}=usage;
  assert.equal(reconciledCost(policy,plain,'claude-sonnet-5-5'),18000*2+2000*10,'without the gateway cost the old price formula applies');
- assert.equal(reconciledCost(policy,{...usage,costMicros:5},'gemini-3.8-flash'),0,'the fallback model keeps its own (free) price');
+ // r49: the fallback attempt keeps its own price, the paid Gemini rate of policy v8 (18,000 × 1.5 + 2,000 × 7.5), and never the
+ // gateway cost field, which belongs to the primary attempt.
+ assert.equal(reconciledCost(policy,{...usage,costMicros:5},policy.model),18000*1.5+2000*7.5,'the fallback model keeps its own price');
 });
 
 test('a rejected proposal part is retained privately and bounded, never credited',()=>{
