@@ -1,3 +1,19 @@
+## Current 2026-11-20 — D1 0014: partial index for the receipt reconciliation (accepted; database only)
+
+**Accepted:** source `4a6b613` on `main` (migration `migrations/0014_evidence_outbox_reconcile_due_index.sql`, sha256 `f6296eb2…8eb4`, plus `scripts/test_outbox_reconcile_index.mjs`), applied to `yuwen-reading-db` at 2026-11-20T01:54:25Z by one request; registry data target `yw-reading-db-data` verified 01:54:46Z (0001–0014). No Pages or scheduler release: Pages stays r49 `d492dd1a` (section below), the scheduler stays version `222dca64` (source `f06c022a`, still not in `main`). Status `20261120-yw-database-index-maintenance`. Owner 2026-11-20: 「Apply now」. Report and evidence: `/Users/ylsuen/CF/_meta/reports/operations/yw-outbox-reconcile-index-20261120/`.
+
+**What changed.** The minute reconciliation statement (`OUTBOX_RECONCILE_SELECTION_SQL`, identical in Pages and the scheduler) was served by `idx_evidence_outbox_pending_id (delivery_status)`; `delivery_status` stays `enqueued` after central acceptance, so every idle pass read the whole table. `idx_evidence_outbox_reconcile_due` is a partial index over rows without a final central decision, keyed by envelope schema, contract version, delivery status and the statement's order key. No code changed; the statement, ordering, LIMIT, 15-minute receipt lease, CAS claims, retry windows, minute alarm, cron watchdog and heartbeat are as before.
+
+**Measured on production.** Plan: `SEARCH evidence_outbox USING INDEX idx_evidence_outbox_reconcile_due (<expr>=? AND <expr>=? AND delivery_status=?)`. One idle pass: 6,159 → 2 rows read. Database totals per minute: 6,174 → 17 rows read; 3 rows written, 11 read queries and 3 writes a minute as before. Rows in `evidence_outbox` unchanged (6,158; 0 with invalid JSON). `/api/reading/health` 200 before and after.
+
+**Operations notes.**
+- Restore anchor: the Time Travel bookmark read immediately before the write (recorded in the registry and in the report). No export was taken, by owner decision: a running D1 export blocks other requests to the database (84.8 MB at the time, school hours). This is a recorded exception for this one additive index, not a change of the backup rule.
+- The index has expression keys (`json_extract(envelope_json, …)`). A write of an `envelope_json` that is not valid JSON is now rejected at write time for rows still open; before, such a row would have been stored and then failed the reconciliation query every minute. The code always writes this column with `JSON.stringify`.
+- Each evidence row costs about three more index-entry writes over its life (13 → 16).
+- Rollback: `DROP INDEX IF EXISTS idx_evidence_outbox_reconcile_due` and delete the `0014…` row from `d1_migrations`; no data change, no deployment.
+- Not yet observed at closeout: the first new evidence row after the change (expected to be receipted within a minute as before).
+- The two quarantined receipts and the 279 legacy v1 rows were not replayed, rewritten or claimed.
+
 ## Current 2026-11-18 — r49: dialogue fallback gemini-4-hydrogen (paid key first); Claude then the fallback in one call (accepted)
 
 **Accepted:** source `488d057` (code `1af5b39` + artifact manifest `4273256` + one test assertion), Pages deployment `d492dd1a`, effective 2026-11-18T09:16:29Z; rollback to r48 `9a318d31` (Pages rollback; file hashes in `_meta/reports/operations/yw-dialogue-r48-20261118/yw-r48/receipt-r48.json`). Server side only (`_worker.js/dialogue-recovery.js`, `dialogue-source.js`) plus the production var; no page, D1 migration, binding, secret, App pointer (`yw-46504685`) or User Center change. Owner 2026-11-18: 「後備模型不要使用gemini-3.6-flash檢索最新Gemini內適合的模型，我加入一個付費api到cloudflare作為兜底」「GEMINI_PAID_API_KEY已寫入，同意付費 Gemini 兜底用 gemini-4-hydrogen、每月上限 US$10」 (APPROVAL-r49.json). Status `20261118-yw-dialogue-fallback`. Report: `/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-r49-20261118/REPORT.md`.
