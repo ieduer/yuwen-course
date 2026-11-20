@@ -397,6 +397,7 @@ function initializeLearningContractDb(db) {
     "migrations/0006_learning_evaluator_call_ledger.sql",
     "migrations/0007_learning_pending_submissions.sql",
     "migrations/0009_durable_evaluation_jobs.sql",
+    "migrations/0014_evidence_outbox_reconcile_due_index.sql",
   ]) {
     db.exec(readFileSync(resolve(ROOT, migration), "utf8"));
   }
